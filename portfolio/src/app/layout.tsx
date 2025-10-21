@@ -18,6 +18,11 @@ export const metadata: Metadata = {
   keywords: ["developer", "portfolio", "react", "nextjs", "typescript", "web development", "tobias hammer"],
   authors: [{ name: "Tobias Hammer" }],
   creator: "Tobias Hammer",
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
