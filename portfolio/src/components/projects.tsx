@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { ExternalLink, Github } from "lucide-react"
+import { ExternalLink, Github, Code, BookOpen, Star } from "lucide-react"
 
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState("all")
@@ -13,6 +13,7 @@ const Projects = () => {
     { id: "web", label: "Web Apps" },
     { id: "mobile", label: "Mobile" },
     { id: "fullstack", label: "Full Stack" },
+    { id: "java", label: "Java Projects" },
   ]
 
   const projects = [
@@ -39,15 +40,44 @@ const Projects = () => {
     {
       id: 3,
       title: "Blackjack Game",
-      description: "Blackjack game built with Java. Simple and easy to use. First project in Java.",
+      description: "Interactive Blackjack game with web interface. Play directly in your browser! Features card dealing, player betting, and game logic with proper error handling. Converted from console to web application using Spring Boot.",
       image: "/api/placeholder/600/400",
-      tags: ["Java"],
-      category: "mobile",
-      github: "https://github.com",
-      live: "https://example.com",
+      tags: ["Java", "Spring Boot", "Web App", "REST API"],
+      category: "java",
+      github: "https://github.com/tobiasrogerhammer/blackjack-java",
+      live: "https://blackjack-web.onrender.com", // Update with your actual deployment URL
+      complexity: "Intermediate",
+      concepts: ["Spring Boot", "REST API", "Web Development", "Java", "Object-Oriented Programming"],
+      learningOutcome: "Learned web application development with Spring Boot and REST API design"
     },
     {
       id: 4,
+      title: "Student Management System",
+      description: "A comprehensive student management system with GUI interface. Features include adding/removing students, grade tracking, and data persistence using file I/O.",
+      image: "/api/placeholder/600/400",
+      tags: ["Java", "Swing", "File I/O", "GUI"],
+      category: "java",
+      github: "https://github.com",
+      live: "https://example.com",
+      complexity: "Intermediate",
+      concepts: ["Swing GUI", "File I/O", "Data Structures", "Event Handling"],
+      learningOutcome: "Learned GUI development and data persistence in Java"
+    },
+    {
+      id: 5,
+      title: "Bank Account Simulator",
+      description: "A multi-threaded banking application simulating concurrent transactions. Implements thread safety, synchronization, and demonstrates advanced Java concurrency concepts.",
+      image: "/api/placeholder/600/400",
+      tags: ["Java", "Multithreading", "Synchronization", "Concurrency"],
+      category: "java",
+      github: "https://github.com",
+      live: "https://example.com",
+      complexity: "Advanced",
+      concepts: ["Threading", "Synchronization", "Deadlock Prevention", "Atomic Operations"],
+      learningOutcome: "Mastered Java concurrency and thread safety patterns"
+    },
+    {
+      id: 6,
       title: "Portfolio Website",
       description: "A modern, responsive portfolio website showcasing projects and skills. Built with Next.js and Tailwind CSS.",
       image: "/api/placeholder/600/400",
@@ -57,7 +87,7 @@ const Projects = () => {
       live: "https://example.com",
     },
     {
-      id: 5,
+      id: 7,
       title: "Social Media Dashboard",
       description: "A comprehensive dashboard for managing social media accounts with analytics and scheduling features.",
       image: "/api/placeholder/600/400",
@@ -67,7 +97,7 @@ const Projects = () => {
       live: "https://example.com",
     },
     {
-      id: 6,
+      id: 8,
       title: "Weather App",
       description: "A beautiful weather application with location-based forecasts and interactive maps.",
       image: "/api/placeholder/600/400",
@@ -132,9 +162,20 @@ const Projects = () => {
               "bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20",
               "bg-gradient-to-br from-cyan-50 to-teal-50 dark:from-cyan-900/20 dark:to-teal-900/20"
             ]
+            
+            // Java-specific colors
+            const javaCardColors = [
+              "bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20",
+              "bg-gradient-to-br from-red-50 to-pink-50 dark:from-red-900/20 dark:to-pink-900/20",
+              "bg-gradient-to-br from-pink-50 to-purple-50 dark:from-pink-900/20 dark:to-purple-900/20"
+            ]
+            
+            const isJavaProject = project.category === "java"
+            const currentCardColors = isJavaProject ? javaCardColors : cardColors
+            
             return (
               <Card key={project.id} className="group hover:shadow-xl transition-all duration-300 hover:scale-105 overflow-hidden border-0 bg-white/90 dark:bg-gray-900/95 backdrop-blur-sm hover:bg-white dark:hover:bg-gray-900 dark:text-white">
-                <div className={`aspect-video ${cardColors[index % cardColors.length]} flex items-center justify-center relative overflow-hidden`}>
+                <div className={`aspect-video ${currentCardColors[index % currentCardColors.length]} flex items-center justify-center relative overflow-hidden`}>
                   {project.image && project.image !== "/api/placeholder/600/400" ? (
                     <img 
                       src={project.image} 
@@ -147,10 +188,14 @@ const Projects = () => {
                       }}
                     />
                   ) : null}
-                  <div className={`absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-cyan-500/10 flex items-center justify-center ${project.image && project.image !== "/api/placeholder/600/400" ? 'hidden' : 'flex'}`}>
+                  <div className={`absolute inset-0 ${isJavaProject ? 'bg-gradient-to-br from-orange-500/10 to-red-500/10' : 'bg-gradient-to-br from-indigo-500/10 to-cyan-500/10'} flex items-center justify-center ${project.image && project.image !== "/api/placeholder/600/400" ? 'hidden' : 'flex'}`}>
                     <div className="text-center relative z-10">
-                      <div className="w-20 h-20 bg-gradient-to-r from-indigo-500 to-cyan-500 rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300">
-                        <span className="text-3xl font-bold text-white">P</span>
+                      <div className={`w-20 h-20 ${isJavaProject ? 'bg-gradient-to-r from-orange-500 to-red-500' : 'bg-gradient-to-r from-indigo-500 to-cyan-500'} rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300`}>
+                        {isJavaProject ? (
+                          <Code className="h-8 w-8 text-white" />
+                        ) : (
+                          <span className="text-3xl font-bold text-white">P</span>
+                        )}
                       </div>
                       <p className="text-sm text-muted-foreground font-medium">Project Image</p>
                     </div>
@@ -158,16 +203,63 @@ const Projects = () => {
                 </div>
                 
                 <CardHeader className="pb-4">
-                  <CardTitle className="bg-gradient-to-r from-indigo-600 to-cyan-600 bg-clip-text text-transparent text-xl font-semibold">
+                  <CardTitle className={`${isJavaProject ? 'bg-gradient-to-r from-orange-600 to-red-600' : 'bg-gradient-to-r from-indigo-600 to-cyan-600'} bg-clip-text text-transparent text-xl font-semibold`}>
                     {project.title}
                   </CardTitle>
                   <CardDescription className="leading-relaxed">{project.description}</CardDescription>
                 </CardHeader>
                 
                 <CardContent>
+                  {/* Java-specific information */}
+                  {isJavaProject && project.complexity && (
+                    <div className="mb-4 p-3 bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 rounded-lg border border-orange-200 dark:border-orange-800">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Star className="h-4 w-4 text-orange-600" />
+                        <span className="text-sm font-semibold text-orange-800 dark:text-orange-200">
+                          {project.complexity} Level
+                        </span>
+                      </div>
+                      {project.concepts && (
+                        <div className="mb-2">
+                          <div className="flex items-center gap-1 mb-1">
+                            <BookOpen className="h-3 w-3 text-orange-600" />
+                            <span className="text-xs font-medium text-orange-700 dark:text-orange-300">Concepts:</span>
+                          </div>
+                          <div className="flex flex-wrap gap-1">
+                            {project.concepts.map((concept, conceptIndex) => (
+                              <span
+                                key={concept}
+                                className="px-2 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 text-xs rounded-md"
+                              >
+                                {concept}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                      {project.learningOutcome && (
+                        <p className="text-xs text-orange-700 dark:text-orange-300 italic mb-2">
+                          💡 {project.learningOutcome}
+                        </p>
+                      )}
+                      <div className="mt-2 p-2 bg-orange-100 dark:bg-orange-900/30 rounded border-l-2 border-orange-400">
+                        <p className="text-xs text-orange-800 dark:text-orange-200 font-medium">
+                          📁 <strong>How to access the code:</strong>
+                        </p>
+                        <p className="text-xs text-orange-700 dark:text-orange-300 mt-1">
+                          Click "View Code" to open the GitHub repository. You can download the ZIP file or clone the repository to run the code locally.
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                  
                   <div className="flex flex-wrap gap-2 mb-6">
                     {project.tags.map((tag, tagIndex) => {
-                      const tagColors = [
+                      const tagColors = isJavaProject ? [
+                        "bg-gradient-to-r from-orange-500 to-red-500 text-white",
+                        "bg-gradient-to-r from-red-500 to-pink-500 text-white",
+                        "bg-gradient-to-r from-pink-500 to-purple-500 text-white"
+                      ] : [
                         "bg-gradient-to-r from-indigo-500 to-blue-500 text-white",
                         "bg-gradient-to-r from-blue-500 to-cyan-500 text-white",
                         "bg-gradient-to-r from-cyan-500 to-teal-500 text-white"
@@ -187,13 +279,13 @@ const Projects = () => {
                     <Button asChild size="sm" variant="outline" className="flex-1 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-cyan-50 hover:border-indigo-300 transition-all duration-200">
                       <a href={project.github} target="_blank" rel="noopener noreferrer">
                         <Github className="h-4 w-4 mr-2" />
-                        Code
+                        {isJavaProject ? "View Code" : "Code"}
                       </a>
                     </Button>
-                    <Button asChild size="sm" className="flex-1 bg-gradient-to-r from-indigo-500 to-cyan-500 hover:from-indigo-600 hover:to-cyan-600 text-white shadow-lg hover:shadow-xl transition-all duration-200">
+                    <Button asChild size="sm" className={`flex-1 ${isJavaProject ? 'bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600' : 'bg-gradient-to-r from-indigo-500 to-cyan-500 hover:from-indigo-600 hover:to-cyan-600'} text-white shadow-lg hover:shadow-xl transition-all duration-200`}>
                       <a href={project.live} target="_blank" rel="noopener noreferrer">
                         <ExternalLink className="h-4 w-4 mr-2" />
-                        Live
+                        {isJavaProject ? "GitHub" : "Live"}
                       </a>
                     </Button>
                   </div>

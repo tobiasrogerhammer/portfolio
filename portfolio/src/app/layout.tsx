@@ -19,10 +19,17 @@ export const metadata: Metadata = {
   authors: [{ name: "Tobias Hammer" }],
   creator: "Tobias Hammer",
   icons: {
-    icon: "/favicon.svg",
+    icon: [
+      { url: "/favicon.svg", sizes: "any" },
+      { url: "/favicon.svg", sizes: "32x32", type: "image/svg+xml" },
+      { url: "/favicon.svg", sizes: "16x16", type: "image/svg+xml" },
+    ],
     shortcut: "/favicon.svg",
-    apple: "/favicon.svg",
+    apple: [
+      { url: "/favicon.svg", sizes: "180x180" },
+    ],
   },
+  manifest: "/site.webmanifest",
   openGraph: {
     type: "website",
     locale: "en_US",

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackjack Game - Live Demo</title>
+    <style>
+        /* Portfolio-themed Blackjack Game Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #1a202c;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.2em;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .game-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .money-display, .bet-display {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .game-area {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .dealer-section, .player-section {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .dealer-section h3, .player-section h3 {
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .hand {
+            min-height: 140px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-weight: 600;
+            box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+            min-width: 70px;
+            text-align: center;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .card.red {
+            background: linear-gradient(135deg, #f56565 0%, #e53e3e 100%);
+            box-shadow: 0 4px 8px rgba(245, 101, 101, 0.3);
+        }
+
+        .card.red:hover {
+            box-shadow: 0 6px 12px rgba(245, 101, 101, 0.4);
+        }
+
+        .hand-value {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #667eea;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .controls {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .controls > div {
+            margin-bottom: 20px;
+        }
+
+        .controls input {
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            margin: 0 10px;
+            font-size: 1em;
+            background: white;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .controls input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .controls button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 0 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+        }
+
+        .controls button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .controls button:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: 0 2px 4px rgba(148, 163, 184, 0.3);
+        }
+
+        #hit-btn {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            box-shadow: 0 4px 8px rgba(245, 158, 11, 0.3);
+        }
+
+        #hit-btn:hover {
+            box-shadow: 0 6px 12px rgba(245, 158, 11, 0.4);
+        }
+
+        #stand-btn {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            box-shadow: 0 4px 8px rgba(239, 68, 68, 0.3);
+        }
+
+        #stand-btn:hover {
+            box-shadow: 0 6px 12px rgba(239, 68, 68, 0.4);
+        }
+
+        #new-game-btn {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            box-shadow: 0 4px 8px rgba(16, 185, 129, 0.3);
+        }
+
+        #new-game-btn:hover {
+            box-shadow: 0 6px 12px rgba(16, 185, 129, 0.4);
+        }
+
+        .status {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 16px;
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #1e293b;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .status.win {
+            background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+            color: #059669;
+            border-color: #86efac;
+        }
+
+        .status.lose {
+            background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+            color: #dc2626;
+            border-color: #fca5a5;
+        }
+
+        .status.push {
+            background: linear-gradient(135deg, #fefce8 0%, #fef3c7 100%);
+            color: #d97706;
+            border-color: #fcd34d;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 24px;
+                margin: 10px;
+                border-radius: 16px;
+            }
+            
+            header h1 {
+                font-size: 2.2em;
+            }
+            
+            .game-area {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            
+            .game-info {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+                padding: 16px;
+            }
+            
+            .controls button {
+                display: block;
+                width: 100%;
+                margin: 8px 0;
+                padding: 16px 24px;
+            }
+            
+            .controls input {
+                width: 100%;
+                margin: 8px 0;
+                padding: 16px;
+            }
+            
+            .dealer-section, .player-section {
+                padding: 20px;
+            }
+            
+            .hand {
+                min-height: 120px;
+                padding: 16px;
+            }
+            
+            .card {
+                min-width: 60px;
+                padding: 10px 14px;
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🃏 Blackjack</h1>
+            <p>Live Java Demo - Play instantly in your browser</p>
+        </header>
+
+        <div class="game-info">
+            <div class="money-display">
+                <span>💰 Money: $<span id="money">100</span></span>
+            </div>
+            <div class="bet-display">
+                <span>🎯 Bet: $<span id="current-bet">0</span></span>
+            </div>
+        </div>
+
+        <div class="game-area">
+            <div class="dealer-section">
+                <h3>Dealer</h3>
+                <div class="hand" id="dealer-hand">
+                    <p>Cards will appear here...</p>
+                </div>
+                <div class="hand-value" id="dealer-value">Value: 0</div>
+            </div>
+
+            <div class="player-section">
+                <h3>You</h3>
+                <div class="hand" id="player-hand">
+                    <p>Cards will appear here...</p>
+                </div>
+                <div class="hand-value" id="player-value">Value: 0</div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="bet-controls" id="bet-controls">
+                <label for="bet-amount">Place your bet:</label>
+                <input type="number" id="bet-amount" min="1" max="100" value="10" placeholder="Enter amount">
+                <button id="place-bet-btn">Start Game</button>
+            </div>
+
+            <div class="game-controls" id="game-controls" style="display: none;">
+                <button id="hit-btn">Hit</button>
+                <button id="stand-btn">Stand</button>
+            </div>
+
+            <div class="new-game-controls" id="new-game-controls" style="display: none;">
+                <button id="new-game-btn">Play Again</button>
+            </div>
+        </div>
+
+        <div class="status" id="game-status">
+            <p>Welcome! This is a demo of the Java Blackjack game. The full interactive version will be available once deployed.</p>
+        </div>
+    </div>
+
+    <script>
+        // Simple demo functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const placeBetBtn = document.getElementById('place-bet-btn');
+            const hitBtn = document.getElementById('hit-btn');
+            const standBtn = document.getElementById('stand-btn');
+            const newGameBtn = document.getElementById('new-game-btn');
+            const betControls = document.getElementById('bet-controls');
+            const gameControls = document.getElementById('game-controls');
+            const newGameControls = document.getElementById('new-game-controls');
+            const status = document.getElementById('game-status');
+
+            placeBetBtn.addEventListener('click', function() {
+                const betAmount = document.getElementById('bet-amount').value;
+                document.getElementById('current-bet').textContent = betAmount;
+                document.getElementById('money').textContent = 100 - betAmount;
+                
+                betControls.style.display = 'none';
+                gameControls.style.display = 'block';
+                status.textContent = 'Game started! Hit or Stand.';
+                status.className = 'status';
+            });
+
+            hitBtn.addEventListener('click', function() {
+                status.textContent = 'You hit! (Demo mode - full functionality coming soon)';
+                status.className = 'status';
+            });
+
+            standBtn.addEventListener('click', function() {
+                gameControls.style.display = 'none';
+                newGameControls.style.display = 'block';
+                status.textContent = 'You stand! Dealer plays... (Demo mode)';
+                status.className = 'status';
+            });
+
+            newGameBtn.addEventListener('click', function() {
+                newGameControls.style.display = 'none';
+                betControls.style.display = 'block';
+                document.getElementById('current-bet').textContent = '0';
+                document.getElementById('money').textContent = '100';
+                document.getElementById('bet-amount').value = '10';
+                status.textContent = 'New game ready! Place a bet to start.';
+                status.className = 'status';
+            });
+        });
+    </script>
+</body>
+</html>

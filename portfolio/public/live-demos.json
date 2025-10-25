@@ -1,0 +1,30 @@
+{
+  "liveDemos": {
+    "blackjack-java": {
+      "name": "Blackjack Game",
+      "replitUrl": "https://replit.com/@tobiasrogerhammer/blackjack-java",
+      "githubUrl": "https://github.com/tobiasrogerhammer/blackjack-java",
+      "description": "Console-based Blackjack game with OOP principles",
+      "setupInstructions": [
+        "1. Go to replit.com and sign up",
+        "2. Create a new Java project",
+        "3. Name it 'blackjack-java'",
+        "4. Copy your Java code from GitHub",
+        "5. Test that it runs correctly",
+        "6. Make the project public",
+        "7. Copy the shareable URL"
+      ]
+    }
+  },
+  "setup": {
+    "platform": "Replit",
+    "status": "Ready to configure",
+    "instructions": "Follow the setup guide to create live demos"
+  },
+  "benefits": [
+    "Instant code execution",
+    "No setup required for visitors",
+    "Interactive learning experience",
+    "Professional portfolio presentation"
+  ]
+}
