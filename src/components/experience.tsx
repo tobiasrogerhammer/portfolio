@@ -37,8 +37,8 @@ const Experience = () => {
       position: "Intern",
       location: "Oslo, Norway",
       duration: "2021 - 2022",
-      description: "Completed internship at Huddly AS, gaining valuable industry experience and learning about professional software development practices.",
-      technologies: ["Internship", "Learning", "Professional Development", "Technology"],
+      description: "Completed internship at Huddly AS, gaining valuable industry experience and learning about professional product and software development practices.",
+      technologies: ["Internship", "Technology standards", "Learning", "Product development"],
       logo: "huddly-svg",
     },
     {
@@ -53,30 +53,30 @@ const Experience = () => {
   ]
 
   return (
-    <section id="experience" className="py-20 relative overflow-hidden">
+    <section id="experience" className="py-12 sm:py-16 lg:py-20 relative overflow-hidden px-4 sm:px-6 lg:px-8">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-purple-50/50 via-pink-50/30 to-orange-50/50 dark:from-purple-950/10 dark:via-pink-950/10 dark:to-orange-950/10" />
       
-      {/* Animated background elements */}
+      {/* Animated background elements - optimized for mobile */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-24 right-32 w-40 h-40 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full blur-2xl animate-pulse" />
-        <div className="absolute bottom-24 left-32 w-32 h-32 bg-gradient-to-r from-orange-400/20 to-red-400/20 rounded-full blur-2xl animate-pulse delay-1000" />
+        <div className="absolute top-12 right-16 sm:top-24 sm:right-32 w-24 h-24 sm:w-40 sm:h-40 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full blur-2xl animate-pulse" />
+        <div className="absolute bottom-12 left-16 sm:bottom-24 sm:left-32 w-20 h-20 sm:w-32 sm:h-32 bg-gradient-to-r from-orange-400/20 to-red-400/20 rounded-full blur-2xl animate-pulse delay-1000" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-16">
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="text-center mb-12 sm:mb-16">
           <div className="inline-block">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4 bg-gradient-to-r from-purple-600 via-pink-600 to-orange-600 bg-clip-text text-transparent">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 bg-gradient-to-r from-purple-600 via-pink-600 to-orange-600 bg-clip-text text-transparent">
               Work Experience
             </h2>
-            <div className="h-1 w-24 bg-gradient-to-r from-purple-500 to-orange-500 mx-auto rounded-full"></div>
+            <div className="h-1 w-16 sm:w-24 bg-gradient-to-r from-purple-500 to-orange-500 mx-auto rounded-full"></div>
           </div>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mt-6">
+          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto mt-4 sm:mt-6 px-4 sm:px-0">
             My professional journey in software development and the companies I&apos;ve had the privilege to work with.
           </p>
         </div>
 
-        <div className="space-y-8">
+        <div className="space-y-6 sm:space-y-8">
           {experiences.map((exp, index) => {
             const colors = [
               "border-l-4 border-l-blue-500",
@@ -94,12 +94,12 @@ const Experience = () => {
             ]
             return (
                    <Card key={index} className={`group hover:shadow-xl transition-all duration-300 hover:scale-[1.02] border-0 bg-white/90 dark:bg-gray-900/95 backdrop-blur-sm hover:bg-white dark:hover:bg-gray-900 dark:text-white ${colors[index % colors.length]}`}>
-              <CardHeader>
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                  <div className="flex items-center gap-4">
-                    <div className={`w-16 h-16 flex items-center justify-center ${cardColors[index % cardColors.length]} rounded-xl shadow-lg group-hover:shadow-xl transition-shadow duration-300`}>
+              <CardHeader className="pb-3 sm:pb-4">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
+                  <div className="flex items-center gap-3 sm:gap-4">
+                    <div className={`w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center ${cardColors[index % cardColors.length]} rounded-lg sm:rounded-xl shadow-lg group-hover:shadow-xl transition-shadow duration-300`}>
                       {exp.logo === "huddly-svg" ? (
-                        <svg width="32" height="32" viewBox="0 0 16 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg width="24" height="24" className="sm:w-8 sm:h-8" viewBox="0 0 16 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <title>Huddly Square Logo</title>
                           <path d="M11.6923 21.7692H16V17.4615H11.6923V21.7692ZM4.30769 0.23077H0V4.53846H4.30769V0.23077ZM0 21.7692H4.30769V17.4615H0V21.7692ZM0 8.84616V13.1538H14.7077H16V8.84616H14.7077H0ZM11.6923 0.23077V4.53846H16V0.23077H11.6923Z" fill="currentColor" />
                         </svg>
@@ -107,60 +107,62 @@ const Experience = () => {
                         <Image
                           src={exp.logo}
                           alt={`${exp.company} logo`}
-                          width={40}
-                          height={40}
-                          className="object-contain"
+                          width={32}
+                          height={32}
+                          className="object-contain sm:w-10 sm:h-10"
                         />
                       ) : (
-                        <Building2 className="h-8 w-8 text-muted-foreground" />
+                        <Building2 className="h-6 w-6 sm:h-8 sm:w-8 text-muted-foreground" />
                       )}
                     </div>
                     <div>
-                      <CardTitle className="text-xl font-semibold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                      <CardTitle className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
                         {exp.position}
                       </CardTitle>
                       <div className="flex items-center gap-2 text-muted-foreground mt-1">
-                        <Building2 className="h-4 w-4" />
-                        <span className="font-medium">{exp.company}</span>
+                        <Building2 className="h-3 w-3 sm:h-4 sm:w-4" />
+                        <span className="font-medium text-sm sm:text-base">{exp.company}</span>
                       </div>
                     </div>
                   </div>
-                  <div className="flex flex-col sm:items-end gap-2 text-sm text-muted-foreground">
-                    <div className="flex items-center gap-2 bg-purple-50 dark:bg-purple-900/20 px-3 py-1 rounded-full">
-                      <Calendar className="h-4 w-4 text-purple-600" />
-                      <span className="font-medium">{exp.duration}</span>
-                    </div>
-                    <div className="flex items-center gap-2 bg-pink-50 dark:bg-pink-900/20 px-3 py-1 rounded-full">
-                      <MapPin className="h-4 w-4 text-pink-600" />
-                      <span className="font-medium">{exp.location}</span>
+                  <div className="flex flex-col sm:items-end gap-1.5 sm:gap-2 text-xs sm:text-sm text-muted-foreground">
+                    <div className="flex flex-row sm:flex-col gap-2 sm:gap-1.5">
+                      <div className="flex items-center gap-1.5 sm:gap-2 bg-purple-50 dark:bg-purple-900/20 px-2 sm:px-3 py-1 rounded-full">
+                        <Calendar className="h-3 w-3 sm:h-4 sm:w-4 text-purple-600" />
+                        <span className="font-medium">{exp.duration}</span>
+                      </div>
+                      <div className="flex items-center gap-1.5 sm:gap-2 bg-pink-50 dark:bg-pink-900/20 px-2 sm:px-3 py-1 rounded-full">
+                        <MapPin className="h-3 w-3 sm:h-4 sm:w-4 text-pink-600" />
+                        <span className="font-medium">{exp.location}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
               </CardHeader>
               <CardContent>
-                <CardDescription className="text-base mb-6 leading-relaxed">
+                <CardDescription className="text-sm sm:text-base mb-4 sm:mb-6 leading-relaxed">
                   {exp.description}
                 </CardDescription>
-                <div className="flex flex-wrap gap-2 mb-4">
+                <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4">
                   {exp.technologies.map((tech) => (
                     <span
                       key={tech}
-                      className="px-3 py-1.5 bg-muted text-muted-foreground text-sm rounded-full font-medium hover:bg-muted/80 transition-colors duration-200"
+                      className="px-2 sm:px-3 py-1 sm:py-1.5 bg-muted text-muted-foreground text-xs sm:text-sm rounded-full font-medium hover:bg-muted/80 transition-colors duration-200"
                     >
                       {tech}
                     </span>
                   ))}
                 </div>
                 {exp.certificate && (
-                  <div className="mt-4">
+                  <div className="mt-3 sm:mt-4">
                     <a
                       href={exp.certificate}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-lg hover:bg-primary/20 transition-colors duration-200"
+                      className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-primary/10 text-primary rounded-lg hover:bg-primary/20 transition-colors duration-200"
                     >
-                      <FileText className="h-4 w-4" />
-                      <span className="text-sm font-medium">Letter of recommendation</span>
+                      <FileText className="h-3 w-3 sm:h-4 sm:w-4" />
+                      <span className="text-xs sm:text-sm font-medium">Letter of recommendation</span>
                     </a>
                   </div>
                 )}
@@ -171,15 +173,15 @@ const Experience = () => {
         </div>
 
         {/* Additional Info */}
-        <div className="mt-16 text-center">
-          <p className="text-muted-foreground mb-4">
+        <div className="mt-12 sm:mt-16 text-center px-4 sm:px-0">
+          <p className="text-muted-foreground mb-4 text-sm sm:text-base">
             Interested in my full experience? Check out my detailed resume.
           </p>
           <a
             href="/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+            className="inline-flex items-center px-4 sm:px-6 py-2.5 sm:py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors text-sm sm:text-base"
           >
             Download Resume
           </a>

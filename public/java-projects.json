@@ -1,0 +1,22 @@
+{
+  "projects": {
+    "blackjack-java": {
+      "name": "Blackjack Game",
+      "description": "A console-based Blackjack game implementing OOP principles",
+      "githubUrl": "https://github.com/tobiasrogerhammer/blackjack-java",
+      "complexity": "Beginner",
+      "concepts": [
+        "Classes & Objects",
+        "Inheritance",
+        "Exception Handling",
+        "Collections"
+      ]
+    }
+  },
+  "lastUpdated": "2025-10-24T23:26:52.862Z",
+  "instructions": {
+    "download": "Click the 'View Code' button to access the GitHub repository",
+    "run": "Clone the repository and open in your Java IDE",
+    "requirements": "Java 8+ and any Java IDE"
+  }
+}

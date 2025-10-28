@@ -3,7 +3,8 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { ExternalLink, Github } from "lucide-react"
+import { ExternalLink, Github, Code, BookOpen, Star } from "lucide-react"
+import Image from "next/image"
 
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState("all")
@@ -13,6 +14,7 @@ const Projects = () => {
     { id: "web", label: "Web Apps" },
     { id: "mobile", label: "Mobile" },
     { id: "fullstack", label: "Full Stack" },
+    { id: "java", label: "Java Projects" },
   ]
 
   const projects = [
@@ -39,15 +41,44 @@ const Projects = () => {
     {
       id: 3,
       title: "Blackjack Game",
-      description: "Blackjack game built with Java. Simple and easy to use. First project in Java.",
+      description: "Interactive Blackjack game with web interface. Play directly in your browser! Features card dealing, player betting, and game logic with proper error handling. Converted from console to web application using Spring Boot.",
       image: "/api/placeholder/600/400",
-      tags: ["Java"],
-      category: "mobile",
-      github: "https://github.com",
-      live: "https://example.com",
+      tags: ["Java", "Spring Boot", "Web App", "REST API"],
+      category: "java",
+      github: "https://github.com/tobiasrogerhammer/blackjack-java",
+      live: "https://blackjack-web-hxol.onrender.com/",
+      complexity: "Intermediate",
+      concepts: ["Spring Boot", "REST API", "Web Development", "Java", "Object-Oriented Programming"],
+      learningOutcome: "Learned web application development with Spring Boot and REST API design"
     },
     {
       id: 4,
+      title: "Student Management System",
+      description: "A comprehensive student management system with GUI interface. Features include adding/removing students, grade tracking, and data persistence using file I/O.",
+      image: "/api/placeholder/600/400",
+      tags: ["Java", "Swing", "File I/O", "GUI"],
+      category: "java",
+      github: "https://github.com",
+      live: "https://example.com",
+      complexity: "Intermediate",
+      concepts: ["Swing GUI", "File I/O", "Data Structures", "Event Handling"],
+      learningOutcome: "Learned GUI development and data persistence in Java"
+    },
+    {
+      id: 5,
+      title: "Bank Account Simulator",
+      description: "A multi-threaded banking application simulating concurrent transactions. Implements thread safety, synchronization, and demonstrates advanced Java concurrency concepts.",
+      image: "/api/placeholder/600/400",
+      tags: ["Java", "Multithreading", "Synchronization", "Concurrency"],
+      category: "java",
+      github: "https://github.com",
+      live: "https://example.com",
+      complexity: "Advanced",
+      concepts: ["Threading", "Synchronization", "Deadlock Prevention", "Atomic Operations"],
+      learningOutcome: "Mastered Java concurrency and thread safety patterns"
+    },
+    {
+      id: 6,
       title: "Portfolio Website",
       description: "A modern, responsive portfolio website showcasing projects and skills. Built with Next.js and Tailwind CSS.",
       image: "/api/placeholder/600/400",
@@ -57,7 +88,7 @@ const Projects = () => {
       live: "https://example.com",
     },
     {
-      id: 5,
+      id: 7,
       title: "Social Media Dashboard",
       description: "A comprehensive dashboard for managing social media accounts with analytics and scheduling features.",
       image: "/api/placeholder/600/400",
@@ -67,7 +98,7 @@ const Projects = () => {
       live: "https://example.com",
     },
     {
-      id: 6,
+      id: 8,
       title: "Weather App",
       description: "A beautiful weather application with location-based forecasts and interactive maps.",
       image: "/api/placeholder/600/400",
@@ -83,37 +114,37 @@ const Projects = () => {
   )
 
   return (
-    <section id="projects" className="py-20 relative overflow-hidden">
+    <section id="projects" className="py-12 sm:py-16 lg:py-20 relative overflow-hidden px-4 sm:px-6 lg:px-8">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/50 via-blue-50/30 to-cyan-50/50 dark:from-indigo-950/10 dark:via-blue-950/10 dark:to-cyan-950/10" />
       
-      {/* Animated background elements */}
+      {/* Animated background elements - optimized for mobile */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 left-20 w-40 h-40 bg-gradient-to-r from-indigo-400/20 to-blue-400/20 rounded-full blur-2xl animate-pulse" />
-        <div className="absolute bottom-20 right-20 w-36 h-36 bg-gradient-to-r from-cyan-400/20 to-teal-400/20 rounded-full blur-2xl animate-pulse delay-1000" />
+        <div className="absolute top-10 left-10 sm:top-20 sm:left-20 w-24 h-24 sm:w-40 sm:h-40 bg-gradient-to-r from-indigo-400/20 to-blue-400/20 rounded-full blur-2xl animate-pulse" />
+        <div className="absolute bottom-10 right-10 sm:bottom-20 sm:right-20 w-20 h-20 sm:w-36 sm:h-36 bg-gradient-to-r from-cyan-400/20 to-teal-400/20 rounded-full blur-2xl animate-pulse delay-1000" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-16">
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="text-center mb-12 sm:mb-16">
           <div className="inline-block">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4 bg-gradient-to-r from-indigo-600 via-blue-600 to-cyan-600 bg-clip-text text-transparent">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 bg-gradient-to-r from-indigo-600 via-blue-600 to-cyan-600 bg-clip-text text-transparent">
               Featured Projects
             </h2>
-            <div className="h-1 w-24 bg-gradient-to-r from-indigo-500 to-cyan-500 mx-auto rounded-full"></div>
+            <div className="h-1 w-16 sm:w-24 bg-gradient-to-r from-indigo-500 to-cyan-500 mx-auto rounded-full"></div>
           </div>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mt-6">
+          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto mt-4 sm:mt-6 px-4 sm:px-0">
             A collection of projects that showcase my skills and passion for development.
           </p>
         </div>
 
         {/* Filter Buttons */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-8 sm:mb-12 px-4 sm:px-0">
           {filters.map((filter) => (
             <Button
               key={filter.id}
               variant={activeFilter === filter.id ? "default" : "outline"}
               onClick={() => setActiveFilter(filter.id)}
-              className={`transition-all duration-200 ${
+              className={`text-sm sm:text-base px-3 sm:px-4 py-2 sm:py-2.5 transition-all duration-200 ${
                 activeFilter === filter.id 
                   ? "bg-gradient-to-r from-indigo-500 to-cyan-500 hover:from-indigo-600 hover:to-cyan-600 text-white shadow-lg" 
                   : "hover:bg-gradient-to-r hover:from-indigo-50 hover:to-cyan-50 hover:border-indigo-300"
@@ -125,21 +156,33 @@ const Projects = () => {
         </div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {filteredProjects.map((project, index) => {
             const cardColors = [
               "bg-gradient-to-br from-indigo-50 to-blue-50 dark:from-indigo-900/20 dark:to-blue-900/20",
               "bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20",
               "bg-gradient-to-br from-cyan-50 to-teal-50 dark:from-cyan-900/20 dark:to-teal-900/20"
             ]
+            
+            // Java-specific colors
+            const javaCardColors = [
+              "bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20",
+              "bg-gradient-to-br from-red-50 to-pink-50 dark:from-red-900/20 dark:to-pink-900/20",
+              "bg-gradient-to-br from-pink-50 to-purple-50 dark:from-pink-900/20 dark:to-purple-900/20"
+            ]
+            
+            const isJavaProject = project.category === "java"
+            const currentCardColors = isJavaProject ? javaCardColors : cardColors
+            
             return (
               <Card key={project.id} className="group hover:shadow-xl transition-all duration-300 hover:scale-105 overflow-hidden border-0 bg-white/90 dark:bg-gray-900/95 backdrop-blur-sm hover:bg-white dark:hover:bg-gray-900 dark:text-white">
-                <div className={`aspect-video ${cardColors[index % cardColors.length]} flex items-center justify-center relative overflow-hidden`}>
+                <div className={`aspect-video ${currentCardColors[index % currentCardColors.length]} flex items-center justify-center relative overflow-hidden`}>
                   {project.image && project.image !== "/api/placeholder/600/400" ? (
-                    <img 
+                    <Image 
                       src={project.image} 
                       alt={project.title}
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
                       onError={(e) => {
                         // Fallback to placeholder if image fails to load
                         e.currentTarget.style.display = 'none';
@@ -147,10 +190,14 @@ const Projects = () => {
                       }}
                     />
                   ) : null}
-                  <div className={`absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-cyan-500/10 flex items-center justify-center ${project.image && project.image !== "/api/placeholder/600/400" ? 'hidden' : 'flex'}`}>
+                  <div className={`absolute inset-0 ${isJavaProject ? 'bg-gradient-to-br from-orange-500/10 to-red-500/10' : 'bg-gradient-to-br from-indigo-500/10 to-cyan-500/10'} flex items-center justify-center ${project.image && project.image !== "/api/placeholder/600/400" ? 'hidden' : 'flex'}`}>
                     <div className="text-center relative z-10">
-                      <div className="w-20 h-20 bg-gradient-to-r from-indigo-500 to-cyan-500 rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300">
-                        <span className="text-3xl font-bold text-white">P</span>
+                      <div className={`w-20 h-20 ${isJavaProject ? 'bg-gradient-to-r from-orange-500 to-red-500' : 'bg-gradient-to-r from-indigo-500 to-cyan-500'} rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300`}>
+                        {isJavaProject ? (
+                          <Code className="h-8 w-8 text-white" />
+                        ) : (
+                          <span className="text-3xl font-bold text-white">P</span>
+                        )}
                       </div>
                       <p className="text-sm text-muted-foreground font-medium">Project Image</p>
                     </div>
@@ -158,16 +205,63 @@ const Projects = () => {
                 </div>
                 
                 <CardHeader className="pb-4">
-                  <CardTitle className="bg-gradient-to-r from-indigo-600 to-cyan-600 bg-clip-text text-transparent text-xl font-semibold">
+                  <CardTitle className={`${isJavaProject ? 'bg-gradient-to-r from-orange-600 to-red-600' : 'bg-gradient-to-r from-indigo-600 to-cyan-600'} bg-clip-text text-transparent text-xl font-semibold`}>
                     {project.title}
                   </CardTitle>
                   <CardDescription className="leading-relaxed">{project.description}</CardDescription>
                 </CardHeader>
                 
                 <CardContent>
-                  <div className="flex flex-wrap gap-2 mb-6">
+                  {/* Java-specific information */}
+                  {isJavaProject && project.complexity && (
+                    <div className="mb-4 p-2 sm:p-3 bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 rounded-lg border border-orange-200 dark:border-orange-800">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Star className="h-3 w-3 sm:h-4 sm:w-4 text-orange-600" />
+                        <span className="text-xs sm:text-sm font-semibold text-orange-800 dark:text-orange-200">
+                          {project.complexity} Level
+                        </span>
+                      </div>
+                      {project.concepts && (
+                        <div className="mb-2">
+                          <div className="flex items-center gap-1 mb-1">
+                            <BookOpen className="h-2 w-2 sm:h-3 sm:w-3 text-orange-600" />
+                            <span className="text-xs font-medium text-orange-700 dark:text-orange-300">Concepts:</span>
+                          </div>
+                          <div className="flex flex-wrap gap-1">
+                            {project.concepts.map((concept) => (
+                              <span
+                                key={concept}
+                                className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 text-xs rounded-md"
+                              >
+                                {concept}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                      {project.learningOutcome && (
+                        <p className="text-xs text-orange-700 dark:text-orange-300 italic mb-2">
+                          💡 {project.learningOutcome}
+                        </p>
+                      )}
+                      <div className="mt-2 p-1.5 sm:p-2 bg-orange-100 dark:bg-orange-900/30 rounded border-l-2 border-orange-400">
+                        <p className="text-xs text-orange-800 dark:text-orange-200 font-medium">
+                          📁 <strong>How to access the code:</strong>
+                        </p>
+                        <p className="text-xs text-orange-700 dark:text-orange-300 mt-1">
+                          Click &quot;View Code&quot; to open the GitHub repository. You can download the ZIP file or clone the repository to run the code locally.
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                  
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4 sm:mb-6">
                     {project.tags.map((tag, tagIndex) => {
-                      const tagColors = [
+                      const tagColors = isJavaProject ? [
+                        "bg-gradient-to-r from-orange-500 to-red-500 text-white",
+                        "bg-gradient-to-r from-red-500 to-pink-500 text-white",
+                        "bg-gradient-to-r from-pink-500 to-purple-500 text-white"
+                      ] : [
                         "bg-gradient-to-r from-indigo-500 to-blue-500 text-white",
                         "bg-gradient-to-r from-blue-500 to-cyan-500 text-white",
                         "bg-gradient-to-r from-cyan-500 to-teal-500 text-white"
@@ -175,7 +269,7 @@ const Projects = () => {
                       return (
                         <span
                           key={tag}
-                          className={`px-3 py-1 ${tagColors[tagIndex % tagColors.length]} text-xs rounded-full font-medium shadow-sm hover:shadow-md transition-shadow duration-200`}
+                          className={`px-2 sm:px-3 py-1 ${tagColors[tagIndex % tagColors.length]} text-xs rounded-full font-medium shadow-sm hover:shadow-md transition-shadow duration-200`}
                         >
                           {tag}
                         </span>
@@ -183,17 +277,17 @@ const Projects = () => {
                     })}
                   </div>
                   
-                  <div className="flex space-x-2">
-                    <Button asChild size="sm" variant="outline" className="flex-1 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-cyan-50 hover:border-indigo-300 transition-all duration-200">
+                  <div className="flex flex-col sm:flex-row gap-2 sm:space-x-2">
+                    <Button asChild size="sm" variant="outline" className="flex-1 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-cyan-50 hover:border-indigo-300 transition-all duration-200 text-xs sm:text-sm">
                       <a href={project.github} target="_blank" rel="noopener noreferrer">
-                        <Github className="h-4 w-4 mr-2" />
-                        Code
+                        <Github className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                        {isJavaProject ? "View Code" : "Code"}
                       </a>
                     </Button>
-                    <Button asChild size="sm" className="flex-1 bg-gradient-to-r from-indigo-500 to-cyan-500 hover:from-indigo-600 hover:to-cyan-600 text-white shadow-lg hover:shadow-xl transition-all duration-200">
+                    <Button asChild size="sm" className={`flex-1 ${isJavaProject ? 'bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600' : 'bg-gradient-to-r from-indigo-500 to-cyan-500 hover:from-indigo-600 hover:to-cyan-600'} text-white shadow-lg hover:shadow-xl transition-all duration-200 text-xs sm:text-sm`}>
                       <a href={project.live} target="_blank" rel="noopener noreferrer">
-                        <ExternalLink className="h-4 w-4 mr-2" />
-                        Live
+                        <ExternalLink className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                        {isJavaProject ? "GitHub" : "Live"}
                       </a>
                     </Button>
                   </div>
@@ -204,8 +298,8 @@ const Projects = () => {
         </div>
 
         {/* View More Button */}
-        <div className="text-center mt-12">
-          <Button asChild size="lg" className="bg-gradient-to-r from-indigo-500 to-cyan-500 hover:from-indigo-600 hover:to-cyan-600 text-white shadow-lg hover:shadow-xl transition-all duration-200 text-lg px-8 py-6">
+        <div className="text-center mt-8 sm:mt-12 px-4 sm:px-0">
+          <Button asChild size="lg" className="bg-gradient-to-r from-indigo-500 to-cyan-500 hover:from-indigo-600 hover:to-cyan-600 text-white shadow-lg hover:shadow-xl transition-all duration-200 text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 w-full sm:w-auto">
             <a href="https://github.com/tobiasrogerhammer" target="_blank" rel="noopener noreferrer">
               View More on GitHub
             </a>
