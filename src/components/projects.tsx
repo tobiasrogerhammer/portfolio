@@ -114,9 +114,9 @@ const Projects = () => {
   )
 
   return (
-    <section id="projects" className="py-12 sm:py-16 lg:py-20 relative overflow-hidden px-4 sm:px-6 lg:px-8">
+    <section id="projects" className="py-12 sm:py-16 lg:py-20 relative overflow-hidden px-4 sm:px-6 lg:px-8 bg-section-projects">
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/50 via-blue-50/30 to-cyan-50/50 dark:from-indigo-950/10 dark:via-blue-950/10 dark:to-cyan-950/10" />
+      <div className="absolute inset-0 bg-gradient-to-br from-section-projects via-section-projects to-section-projects" />
       
       {/* Animated background elements - optimized for mobile */}
       <div className="absolute inset-0 overflow-hidden">
@@ -175,7 +175,7 @@ const Projects = () => {
             const currentCardColors = isJavaProject ? javaCardColors : cardColors
             
             return (
-              <Card key={project.id} className="group hover:shadow-xl transition-all duration-300 hover:scale-105 overflow-hidden border-0 bg-white/90 dark:bg-gray-900/95 backdrop-blur-sm hover:bg-white dark:hover:bg-gray-900 dark:text-white">
+              <Card key={project.id} className="group hover:shadow-xl transition-all duration-300 hover:scale-105 overflow-hidden border border-border bg-card backdrop-blur-sm hover:bg-secondary">
                 <div className={`aspect-video ${currentCardColors[index % currentCardColors.length]} flex items-center justify-center relative overflow-hidden`}>
                   {project.image && project.image !== "/api/placeholder/600/400" ? (
                     <Image 

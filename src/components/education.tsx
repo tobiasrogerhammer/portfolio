@@ -124,9 +124,9 @@ const Education = () => {
   ]
 
   return (
-    <section id="education" className="py-12 sm:py-16 lg:py-20 relative overflow-hidden px-4 sm:px-6 lg:px-8">
+    <section id="education" className="py-12 sm:py-16 lg:py-20 relative overflow-hidden px-4 sm:px-6 lg:px-8 bg-section-education">
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-green-50/50 via-emerald-50/30 to-teal-50/50 dark:from-green-950/10 dark:via-emerald-950/10 dark:to-teal-950/10" />
+      <div className="absolute inset-0 bg-gradient-to-br from-section-education via-section-education to-section-education" />
       
       {/* Animated background elements - optimized for mobile */}
       <div className="absolute inset-0 overflow-hidden">
@@ -152,7 +152,7 @@ const Education = () => {
             const isExpanded = expandedCards.includes(index)
             
             return (
-            <Card key={index} className="group hover:shadow-xl transition-all duration-300 hover:scale-[1.02] border-0 bg-white/90 dark:bg-gray-900/95 backdrop-blur-sm hover:bg-white dark:hover:bg-gray-900 dark:text-white">
+            <Card key={index} className="group hover:shadow-xl transition-all duration-300 hover:scale-[1.02] border border-border bg-card backdrop-blur-sm hover:bg-secondary">
                 <CardHeader className="pb-3 sm:pb-4">
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
                     <div className="flex items-center gap-3 sm:gap-4">

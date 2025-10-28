@@ -1,58 +1,181 @@
 @import "tailwindcss";
 
 @layer base {
-  :root {
+  :root,
+  .light {
+    /* Light mode colors - improved contrast */
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
+    --card: 0 0% 98%;
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
     --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96%;
+    --secondary: 210 40% 92%;
     --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96%;
+    --muted: 210 40% 88%;
     --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96%;
+    --accent: 210 40% 90%;
     --accent-foreground: 222.2 47.4% 11.2%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
+    --border: 214.3 31.8% 85%;
+    --input: 214.3 31.8% 88%;
     --ring: 222.2 84% 4.9%;
     --radius: 0.5rem;
+    
+    /* Custom brand colors - improved contrast */
+    --brand-primary: 217 91% 30%; /* #124D95 */
+    --brand-primary-light: 217 91% 92%; /* Lighter blue background */
+    --brand-primary-lighter: 217 91% 96%; /* Even lighter for sections */
+    --brand-secondary: 0 100% 70%; /* #FF6B6B */
+    --brand-accent: 174 100% 41%; /* #2BBBAD */
+    
+    /* Section-specific backgrounds for better hierarchy */
+    --section-hero: 217 91% 98%;
+    --section-about: 210 40% 96%;
+    --section-experience: 220 40% 94%;
+    --section-education: 200 40% 96%;
+    --section-projects: 240 40% 94%;
   }
 
   .dark {
-    --background: 0 0% 3%;
-    --foreground: 0 0% 95%;
-    --card: 0 0% 6%;
-    --card-foreground: 0 0% 95%;
-    --popover: 0 0% 6%;
-    --popover-foreground: 0 0% 95%;
-    --primary: 0 0% 95%;
-    --primary-foreground: 0 0% 3%;
-    --secondary: 0 0% 12%;
-    --secondary-foreground: 0 0% 95%;
-    --muted: 0 0% 12%;
-    --muted-foreground: 0 0% 70%;
-    --accent: 0 0% 12%;
-    --accent-foreground: 0 0% 95%;
+    /* Dark mode colors - improved contrast and warmth */
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 217.2 32.6% 12%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 84% 4.9%;
+    --secondary: 217.2 32.6% 15%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 18%;
+    --muted-foreground: 215 20.2% 90%;
+    --accent: 217.2 32.6% 15%;
+    --accent-foreground: 210 40% 98%;
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 95%;
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
-    --ring: 0 0% 70%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 20%;
+    --input: 217.2 32.6% 18%;
+    --ring: 212.7 26.8% 83.9%;
+    
+    /* Custom brand colors for dark mode */
+    --brand-primary: 217 91% 60%; /* Lighter blue for dark mode */
+    --brand-primary-light: 217 91% 8%; /* Darker blue background */
+    --brand-primary-lighter: 217 91% 6%; /* Even darker for sections */
+    --brand-secondary: 0 100% 70%; /* Keep vibrant red */
+    --brand-accent: 174 100% 50%; /* Brighter teal */
+    
+    /* Section-specific backgrounds for better hierarchy in dark mode */
+    --section-hero: 217 91% 6%;
+    --section-about: 210 40% 8%;
+    --section-experience: 220 40% 10%;
+    --section-education: 200 40% 8%;
+    --section-projects: 240 40% 10%;
   }
 }
 
 @layer base {
   * {
     border-color: hsl(var(--border));
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
   }
+  
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  /* Smooth transitions for theme changes */
+  * {
+    transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+  }
+  
+  /* Custom scrollbar for dark mode */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground));
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--foreground));
+  }
+  
+  /* Selection colors */
+  ::selection {
+    background-color: hsl(var(--brand-primary) / 0.3);
+    color: hsl(var(--foreground));
+  }
+  
+  /* Focus styles */
+  :focus-visible {
+    outline: 2px solid hsl(var(--brand-primary));
+    outline-offset: 2px;
+  }
+}
+
+/* Custom utility classes for brand colors */
+@layer utilities {
+  .bg-brand-primary {
+    background-color: hsl(var(--brand-primary));
+  }
+  
+  .text-brand-primary {
+    color: hsl(var(--brand-primary));
+  }
+  
+  .border-brand-primary {
+    border-color: hsl(var(--brand-primary));
+  }
+  
+  .bg-brand-primary-light {
+    background-color: hsl(var(--brand-primary-light));
+  }
+  
+  .bg-brand-primary-lighter {
+    background-color: hsl(var(--brand-primary-lighter));
+  }
+  
+  .text-brand-secondary {
+    color: hsl(var(--brand-secondary));
+  }
+  
+  .text-brand-accent {
+    color: hsl(var(--brand-accent));
+  }
+  
+  /* Section-specific background utilities */
+  .bg-section-hero {
+    background-color: hsl(var(--section-hero));
+  }
+  
+  .bg-section-about {
+    background-color: hsl(var(--section-about));
+  }
+  
+  .bg-section-experience {
+    background-color: hsl(var(--section-experience));
+  }
+  
+  .bg-section-education {
+    background-color: hsl(var(--section-education));
+  }
+  
+  .bg-section-projects {
+    background-color: hsl(var(--section-projects));
   }
 }
