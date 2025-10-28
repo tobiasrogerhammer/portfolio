@@ -39,13 +39,13 @@ export const metadata: Metadata = {
   creator: "Tobias Hammer",
   icons: {
     icon: [
-      { url: "/favicon.svg", sizes: "any" },
-      { url: "/favicon.svg", sizes: "32x32", type: "image/svg+xml" },
-      { url: "/favicon.svg", sizes: "16x16", type: "image/svg+xml" },
+      { url: "/th-logo.png", sizes: "any" },
+      { url: "/th-logo.png", sizes: "32x32", type: "image/png" },
+      { url: "/th-logo.png", sizes: "16x16", type: "image/png" },
     ],
-    shortcut: "/favicon.svg",
+    shortcut: "/th-logo.png",
     apple: [
-      { url: "/favicon.svg", sizes: "180x180" },
+      { url: "/th-logo.png", sizes: "180x180" },
     ],
   },
   manifest: "/site.webmanifest",

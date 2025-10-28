@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
@@ -8,6 +8,7 @@ import { ThemeToggle, ThemeToggleMobile } from "@/components/theme-toggle"
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState("home")
 
   const navItems = [
     { name: "Home", href: "#home" },
@@ -16,6 +17,36 @@ const Navigation = () => {
     { name: "Education", href: "#education" },
     { name: "Projects", href: "#projects" },
   ]
+
+  // Track active section based on scroll position
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = navItems.map(item => item.href.substring(1))
+      const scrollPosition = window.scrollY + 100
+
+      for (const section of sections) {
+        const element = document.getElementById(section)
+        if (element) {
+          const { offsetTop, offsetHeight } = element
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(section)
+            break
+          }
+        }
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  const handleNavClick = (href: string) => {
+    setIsOpen(false)
+    const element = document.querySelector(href)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
 
   return (
     <nav className="fixed top-0 w-full bg-background/80 backdrop-blur-md border-b border-border z-50">
@@ -28,21 +59,31 @@ const Navigation = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-6 lg:space-x-8">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="text-sm lg:text-base text-foreground hover:text-primary transition-colors duration-200"
-              >
-                {item.name}
-              </Link>
-            ))}
+            {navItems.map((item) => {
+              const isActive = activeSection === item.href.substring(1)
+              return (
+                <button
+                  key={item.name}
+                  onClick={() => handleNavClick(item.href)}
+                  className={`text-sm lg:text-base transition-all duration-200 relative ${
+                    isActive 
+                      ? 'text-brand-primary font-medium' 
+                      : 'text-foreground hover:text-brand-primary'
+                  }`}
+                >
+                  {item.name}
+                  {isActive && (
+                    <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-brand-primary rounded-full" />
+                  )}
+                </button>
+              )
+            })}
           </div>
 
           {/* Theme Toggle & CTA Button */}
           <div className="hidden md:flex items-center space-x-3">
             <ThemeToggle />
-            <Button asChild size="sm" className="text-xs lg:text-sm px-3 lg:px-4 py-2 lg:py-2.5 bg-brand-primary text-white hover:bg-brand-primary/90 border-brand-primary" style={{ backgroundColor: '#124D95', color: '#E9F5FF', borderColor: '#124D95' }}>
+            <Button asChild size="sm" className="text-xs lg:text-sm px-3 lg:px-4 py-2 lg:py-2.5 bg-brand-primary text-white hover:bg-brand-primary/90 border-brand-primary">
               <a href="/Tobias_Hammer_Resume.pdf" download>
                 Download Resume
               </a>
@@ -66,19 +107,25 @@ const Navigation = () => {
         {isOpen && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 bg-background border-t border-border">
-              {navItems.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className="block px-3 py-2.5 text-sm font-medium text-foreground hover:text-primary transition-colors duration-200 touch-manipulation"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              ))}
+              {navItems.map((item) => {
+                const isActive = activeSection === item.href.substring(1)
+                return (
+                  <button
+                    key={item.name}
+                    onClick={() => handleNavClick(item.href)}
+                    className={`block w-full text-left px-3 py-2.5 text-sm font-medium transition-all duration-200 touch-manipulation rounded-md ${
+                      isActive 
+                        ? 'text-brand-primary bg-brand-primary/10' 
+                        : 'text-foreground hover:text-brand-primary hover:bg-muted/50'
+                    }`}
+                  >
+                    {item.name}
+                  </button>
+                )
+              })}
               <div className="px-3 py-2 space-y-2">
                 <ThemeToggleMobile />
-                <Button asChild className="w-full text-sm py-2.5 bg-brand-primary text-white hover:bg-brand-primary/90 border-brand-primary" style={{ backgroundColor: '#124D95', color: '#E9F5FF', borderColor: '#124D95' }}>
+                <Button asChild className="w-full text-sm py-2.5 bg-brand-primary text-white hover:bg-brand-primary/90 border-brand-primary">
                   <a href="/Tobias_Hammer_Resume.pdf" download>
                     Download Resume
                   </a>

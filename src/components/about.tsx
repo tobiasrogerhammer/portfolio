@@ -24,7 +24,7 @@ const About = () => {
     },
     {
       category: "Skills",
-      items: ["Problem Solving", "Communication", "Teamwork", "Adaptability", "Innovation", "Entrepreneurship"],
+      items: ["Problem Solving", "Teamwork", "Communication", "Adaptability", "Innovation", "Entrepreneurship"],
       icon: Users,
       color: "#8B5CF6", // Purple
     },
@@ -104,7 +104,7 @@ const About = () => {
           </div>
           
           {/* Compact skills grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {skills.map((skill) => {
               const Icon = skill.icon
               return (
@@ -120,7 +120,7 @@ const About = () => {
                   </div>
                   
                   {/* Skills Tags - Compact horizontal layout */}
-                  <div className="flex flex-wrap gap-1.5">
+                  <div className="flex flex-wrap gap-2 sm:gap-2.5">
                     {skill.items.map((item) => (
                       <span
                         key={item}

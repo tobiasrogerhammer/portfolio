@@ -63,9 +63,9 @@
     --ring: 212.7 26.8% 83.9%;
     
     /* Custom brand colors for dark mode */
-    --brand-primary: 217 91% 60%; /* Lighter blue for dark mode */
-    --brand-primary-light: 217 91% 8%; /* Darker blue background */
-    --brand-primary-lighter: 217 91% 6%; /* Even darker for sections */
+    --brand-primary: 213 93% 67%; /* #3c83f6 - brighter blue for dark mode */
+    --brand-primary-light: 213 93% 8%; /* Darker blue background */
+    --brand-primary-lighter: 213 93% 6%; /* Even darker for sections */
     --brand-secondary: 0 100% 70%; /* Keep vibrant red */
     --brand-accent: 174 100% 50%; /* Brighter teal */
     
@@ -125,6 +125,151 @@
   :focus-visible {
     outline: 2px solid hsl(var(--brand-primary));
     outline-offset: 2px;
+  }
+  
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Custom animations */
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  .animate-fade-in-up {
+    animation: fade-in-up 0.8s ease-out forwards;
+    opacity: 0;
+  }
+  
+  .animation-delay-200 {
+    animation-delay: 0.2s;
+  }
+  
+  .animation-delay-400 {
+    animation-delay: 0.4s;
+  }
+  
+  .animation-delay-600 {
+    animation-delay: 0.6s;
+  }
+  
+  .animation-delay-800 {
+    animation-delay: 0.8s;
+  }
+  
+  .animation-delay-1000 {
+    animation-delay: 1s;
+  }
+  
+  /* Accessibility improvements */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+  
+  /* Focus improvements */
+  .focus-visible:focus {
+    outline: 2px solid hsl(var(--brand-primary));
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  
+  /* Skip to content link */
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: hsl(var(--brand-primary));
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 4px;
+    z-index: 1000;
+  }
+  
+  .skip-link:focus {
+    top: 6px;
+  }
+  
+  /* Improved button focus states */
+  button:focus-visible,
+  a:focus-visible {
+    outline: 2px solid hsl(var(--brand-primary));
+    outline-offset: 2px;
+  }
+  
+  /* Improved text rendering */
+  body {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Better image loading */
+  img {
+    loading: lazy;
+  }
+  
+  /* Line clamp utility */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  /* Improved link states */
+  a {
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Better form elements */
+  input, textarea, select {
+    font-family: inherit;
+  }
+  
+  /* Improved button states */
+  button {
+    cursor: pointer;
+  }
+  
+  button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
   }
 }
 

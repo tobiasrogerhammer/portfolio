@@ -144,10 +144,10 @@ const Projects = () => {
               key={filter.id}
               variant={activeFilter === filter.id ? "default" : "outline"}
               onClick={() => setActiveFilter(filter.id)}
-              className={`text-sm sm:text-base px-3 sm:px-4 py-2 sm:py-2.5 transition-all duration-200 ${
+              className={`text-sm sm:text-base px-3 sm:px-4 py-2 sm:py-2.5 transition-all duration-300 transform hover:scale-105 ${
                 activeFilter === filter.id 
-                  ? "bg-gradient-to-r from-indigo-500 to-cyan-500 hover:from-indigo-600 hover:to-cyan-600 text-white shadow-lg" 
-                  : "hover:bg-gradient-to-r hover:from-indigo-50 hover:to-cyan-50 hover:border-indigo-300"
+                  ? "bg-gradient-to-r from-indigo-500 to-cyan-500 hover:from-indigo-600 hover:to-cyan-600 text-white shadow-lg hover:shadow-xl" 
+                  : "hover:bg-gradient-to-r hover:from-indigo-50 hover:to-cyan-50 hover:border-indigo-300 hover:shadow-md"
               }`}
             >
               {filter.label}
@@ -175,8 +175,8 @@ const Projects = () => {
             const currentCardColors = isJavaProject ? javaCardColors : cardColors
             
             return (
-              <Card key={project.id} className="group hover:shadow-xl transition-all duration-300 hover:scale-105 overflow-hidden border border-border bg-card backdrop-blur-sm hover:bg-secondary">
-                <div className={`aspect-video ${currentCardColors[index % currentCardColors.length]} flex items-center justify-center relative overflow-hidden`}>
+              <Card key={project.id} className="group hover:shadow-2xl transition-all duration-500 hover:scale-105 overflow-hidden border border-border bg-card backdrop-blur-sm hover:bg-secondary hover:-translate-y-2">
+                <div className={`aspect-[4/3] sm:aspect-video ${currentCardColors[index % currentCardColors.length]} flex items-center justify-center relative overflow-hidden`}>
                   {project.image && project.image !== "/api/placeholder/600/400" ? (
                     <Image 
                       src={project.image} 
@@ -204,58 +204,11 @@ const Projects = () => {
                   </div>
                 </div>
                 
-                <CardHeader className="pb-4">
-                  <CardTitle className={`${isJavaProject ? 'bg-gradient-to-r from-orange-600 to-red-600' : 'bg-gradient-to-r from-indigo-600 to-cyan-600'} bg-clip-text text-transparent text-xl font-semibold`}>
+                <CardHeader className="pb-1 sm:pb-4 px-3 sm:px-6 pt-3 sm:pt-6">
+                  <CardTitle className={`${isJavaProject ? 'bg-gradient-to-r from-orange-600 to-red-600' : 'bg-gradient-to-r from-indigo-600 to-cyan-600'} bg-clip-text text-transparent text-base sm:text-xl font-semibold`}>
                     {project.title}
                   </CardTitle>
-                  <CardDescription className="leading-relaxed">{project.description}</CardDescription>
-                </CardHeader>
-                
-                <CardContent>
-                  {/* Java-specific information */}
-                  {isJavaProject && project.complexity && (
-                    <div className="mb-4 p-2 sm:p-3 bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 rounded-lg border border-orange-200 dark:border-orange-800">
-                      <div className="flex items-center gap-2 mb-2">
-                        <Star className="h-3 w-3 sm:h-4 sm:w-4 text-orange-600" />
-                        <span className="text-xs sm:text-sm font-semibold text-orange-800 dark:text-orange-200">
-                          {project.complexity} Level
-                        </span>
-                      </div>
-                      {project.concepts && (
-                        <div className="mb-2">
-                          <div className="flex items-center gap-1 mb-1">
-                            <BookOpen className="h-2 w-2 sm:h-3 sm:w-3 text-orange-600" />
-                            <span className="text-xs font-medium text-orange-700 dark:text-orange-300">Concepts:</span>
-                          </div>
-                          <div className="flex flex-wrap gap-1">
-                            {project.concepts.map((concept) => (
-                              <span
-                                key={concept}
-                                className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 text-xs rounded-md"
-                              >
-                                {concept}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-                      {project.learningOutcome && (
-                        <p className="text-xs text-orange-700 dark:text-orange-300 italic mb-2">
-                          💡 {project.learningOutcome}
-                        </p>
-                      )}
-                      <div className="mt-2 p-1.5 sm:p-2 bg-orange-100 dark:bg-orange-900/30 rounded border-l-2 border-orange-400">
-                        <p className="text-xs text-orange-800 dark:text-orange-200 font-medium">
-                          📁 <strong>How to access the code:</strong>
-                        </p>
-                        <p className="text-xs text-orange-700 dark:text-orange-300 mt-1">
-                          Click &quot;View Code&quot; to open the GitHub repository. You can download the ZIP file or clone the repository to run the code locally.
-                        </p>
-                      </div>
-                    </div>
-                  )}
-                  
-                  <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4 sm:mb-6">
+                  <div className="flex flex-wrap gap-1 sm:gap-1.5 mb-2 sm:mb-4">
                     {project.tags.map((tag, tagIndex) => {
                       const tagColors = isJavaProject ? [
                         "bg-gradient-to-r from-orange-500 to-red-500 text-white",
@@ -276,15 +229,20 @@ const Projects = () => {
                       )
                     })}
                   </div>
-                  
-                  <div className="flex flex-col sm:flex-row gap-2 sm:space-x-2">
-                    <Button asChild size="sm" variant="outline" className="flex-1 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-cyan-50 hover:border-indigo-300 transition-all duration-200 text-xs sm:text-sm">
+                   <CardDescription className="leading-relaxed text-xs sm:text-base mb-3 sm:mb-4">{project.description}</CardDescription>
+                 </CardHeader>
+                 
+                 <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6">
+                   
+                   
+                   <div className="flex flex-col sm:flex-row gap-1 sm:gap-2">
+                    <Button asChild size="sm" variant="outline" className="flex-1 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-cyan-50 hover:border-indigo-300 transition-all duration-200 text-xs sm:text-sm py-1.5 sm:py-2.5">
                       <a href={project.github} target="_blank" rel="noopener noreferrer">
                         <Github className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
                         {isJavaProject ? "View Code" : "Code"}
                       </a>
                     </Button>
-                    <Button asChild size="sm" className={`flex-1 ${isJavaProject ? 'bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600' : 'bg-gradient-to-r from-indigo-500 to-cyan-500 hover:from-indigo-600 hover:to-cyan-600'} text-white shadow-lg hover:shadow-xl transition-all duration-200 text-xs sm:text-sm`}>
+                    <Button asChild size="sm" className={`flex-1 ${isJavaProject ? 'bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600' : 'bg-gradient-to-r from-indigo-500 to-cyan-500 hover:from-indigo-600 hover:to-cyan-600'} text-white shadow-lg hover:shadow-xl transition-all duration-200 text-xs sm:text-sm py-1.5 sm:py-2.5`}>
                       <a href={project.live} target="_blank" rel="noopener noreferrer">
                         <ExternalLink className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
                         {isJavaProject ? "GitHub" : "Live"}

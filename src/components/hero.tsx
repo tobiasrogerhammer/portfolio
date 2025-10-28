@@ -26,40 +26,40 @@ const Hero = () => {
       <div className="relative z-10 max-w-7xl mx-auto text-center">
         <div className="max-w-4xl mx-auto">
           {/* Greeting */}
-          <div className="mb-4 sm:mb-6">
+          <div className="mb-4 sm:mb-6 animate-fade-in-up">
             <span className="text-sm sm:text-base font-medium tracking-wide uppercase text-brand-primary">Hello, welcome to my portfolio!</span>
           </div>
 
           {/* Name */}
-          <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-4 sm:mb-6 tracking-tight">
+          <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-4 sm:mb-6 tracking-tight animate-fade-in-up animation-delay-200">
             <span className="text-brand-primary">
               Tobias Hammer
             </span>
           </h1>
 
           {/* Title */}
-          <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-8 text-foreground tracking-wide">
+          <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-8 text-foreground tracking-wide animate-fade-in-up animation-delay-400">
             Developer / Tech enthusiast / Entrepreneur
           </h2>
 
           {/* Description */}
-          <p className="text-lg sm:text-xl mb-8 sm:mb-12 max-w-3xl mx-auto leading-relaxed text-muted-foreground px-4 sm:px-0 font-normal">
+          <p className="text-lg sm:text-xl mb-8 sm:mb-12 max-w-3xl mx-auto leading-relaxed text-muted-foreground px-4 sm:px-0 font-normal animate-fade-in-up animation-delay-600">
           I design and develop digital products that connect ideas with people.
           Combining technical precision with an eye for innovation and impact.
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-12 sm:mb-16 px-4 sm:px-0">
-            <Button asChild size="lg" className="text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 w-full sm:w-auto bg-brand-primary text-white hover:bg-brand-primary/90 border-brand-primary" style={{ backgroundColor: '#124D95', color: '#E9F5FF', borderColor: '#124D95' }}>
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-12 sm:mb-16 px-4 sm:px-0 animate-fade-in-up animation-delay-800">
+            <Button asChild size="lg" className="text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 w-full sm:w-auto bg-brand-primary text-white hover:bg-brand-primary/90 border-brand-primary hover:scale-105 transition-transform duration-200">
               <Link href="#projects">View My Work</Link>
             </Button>
-            <Button asChild variant="outline" size="lg" className="text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 w-full sm:w-auto border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white" style={{ borderColor: '#124D95', color: '#124D95' }}>
+            <Button asChild variant="outline" size="lg" className="text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 w-full sm:w-auto border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white hover:scale-105 transition-all duration-200">
               <Link href="#about">About Me</Link>
             </Button>
           </div>
 
           {/* Social Links */}
-          <div className="flex justify-center space-x-4 sm:space-x-6 mb-12 sm:mb-16">
+          <div className="flex justify-center space-x-4 sm:space-x-6 mb-12 sm:mb-16 animate-fade-in-up animation-delay-1000">
             {socialLinks.map((link, index) => {
               const Icon = link.icon
               const colors = [

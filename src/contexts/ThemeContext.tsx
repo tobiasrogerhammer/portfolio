@@ -54,14 +54,39 @@ export function ThemeProvider({
 
       root.classList.add(systemTheme)
       setActualTheme(systemTheme)
+      
+      // Debug logging
+      console.log(`System theme detected: ${systemTheme}, applied class: ${systemTheme}`)
     } else {
       root.classList.add(theme)
       setActualTheme(theme)
+      
+      // Debug logging
+      console.log(`Manual theme set: ${theme}, applied class: ${theme}`)
     }
 
     // Store theme preference
     localStorage.setItem(storageKey, theme)
   }, [theme, storageKey])
+
+  // Listen for system theme changes
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)")
+    
+    const handleChange = () => {
+      if (theme === "system") {
+        const root = window.document.documentElement
+        root.classList.remove("light", "dark")
+        
+        const systemTheme = mediaQuery.matches ? "dark" : "light"
+        root.classList.add(systemTheme)
+        setActualTheme(systemTheme)
+      }
+    }
+
+    mediaQuery.addEventListener("change", handleChange)
+    return () => mediaQuery.removeEventListener("change", handleChange)
+  }, [theme])
 
   const value = {
     theme,

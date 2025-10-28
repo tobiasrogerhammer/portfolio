@@ -21,7 +21,7 @@ const Experience = () => {
       location: "Oppegård, Norway",
       duration: "2023 - Present",
       description: "Co-founded Renow AS, a web development company specializing in creating websites that drive growth for small and medium-sized businesses. Focus on sustainable web development with 88% reduced CO2 emissions and modern technologies like Next.js and React.",
-      technologies: ["Innovation", "Problem Solving", "Web Development", "Networking", "Business Development"],
+      technologies: ["Innovation", "Problem Solving", "Networking", "Web Development", "Business Development"],
       logo: "/renow.png",
       website: "https://renow.no/",
     },
@@ -97,7 +97,7 @@ const Experience = () => {
             ]
             
             return (
-              <Card key={index} className={`group hover:shadow-xl transition-all duration-300 hover:scale-[1.02] border border-border bg-card backdrop-blur-sm hover:bg-secondary ${colors[index % colors.length]}`}>
+              <Card key={index} className={`group hover:shadow-xl transition-all duration-300 hover:scale-[1.02] border border-border backdrop-blur-sm hover:bg-secondary ${colors[index % colors.length]}`} style={{ backgroundColor: 'hsl(var(--card) / 0.5)' }}>
                 <CardHeader className="pb-3 sm:pb-4">
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
                     <div className="flex items-center gap-3 sm:gap-4">

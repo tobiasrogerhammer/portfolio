@@ -105,7 +105,7 @@ const Education = () => {
             "2nd Semester:",
             "Full Stack Application Development",
             "Digital Security & Privacy",
-            "",
+            "Ethical Innovation",
             "System Development", 
           ]
         },
@@ -181,11 +181,11 @@ const Education = () => {
                     </div>
                     <div className="flex flex-col sm:items-end gap-1.5 sm:gap-2 text-xs sm:text-sm text-muted-foreground">
                       <div className="flex flex-row sm:flex-col gap-2 sm:gap-1.5">
-                        <div className="flex items-center gap-1.5 sm:gap-2 bg-green-50 dark:bg-green-900/20 px-2 sm:px-3 py-1 rounded-full">
+                        <div className="flex items-center gap-1.5 sm:gap-2 text-green-700 bg-green-50 dark:bg-green-900/20 px-2 sm:px-3 py-1 rounded-full">
                           <Calendar className="h-3 w-3 sm:h-4 sm:w-4 text-green-600" />
                       <span className="font-medium">{edu.duration}</span>
                     </div>
-                        <div className="flex items-center gap-1.5 sm:gap-2 bg-emerald-50 dark:bg-emerald-900/20 px-2 sm:px-3 py-1 rounded-full">
+                        <div className="flex items-center gap-1.5 sm:gap-2 text-green-700 bg-emerald-50 dark:bg-emerald-900/20 px-2 sm:px-3 py-1 rounded-full">
                           <MapPin className="h-3 w-3 sm:h-4 sm:w-4 text-emerald-600" />
                       <span className="font-medium">{edu.location}</span>
                         </div>
@@ -221,7 +221,7 @@ const Education = () => {
                       <div className={`overflow-hidden transition-all duration-300 ease-in-out ${
                         isExpanded ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'
                       }`}>
-                        <div className="mt-4 p-4 bg-gradient-to-r from-green-50/50 to-emerald-50/50 dark:from-green-900/10 dark:to-emerald-900/10 rounded-lg border border-green-200/50 dark:border-green-800/50">
+                        <div className="mt-4 p-4 rounded-lg border border-green-200/50 dark:border-green-800/50" style={{ background: 'linear-gradient(to right, hsl(var(--muted) / 0.5), hsl(var(--muted) / 0.5))' }}>
                           <div className="relative">
                             {/* Timeline line - segmented by progress */}
                             {edu.institution === "Drømtorp Videregående Skole" ? (
@@ -230,9 +230,9 @@ const Education = () => {
                             ) : (
                               // Segmented for OsloMet (current/upcoming)
                               <>
-                                <div className="absolute left-4 sm:left-6 top-0 w-0.5 h-8 sm:h-12 bg-gradient-to-b from-green-500 to-emerald-500"></div>
-                                <div className="absolute left-4 sm:left-6 top-8 sm:top-12 w-0.5 h-8 sm:h-12 bg-gradient-to-b from-gray-400 to-gray-500"></div>
-                                <div className="absolute left-4 sm:left-6 top-16 sm:top-24 w-0.5 bottom-0 bg-gradient-to-b from-gray-400 to-gray-500"></div>
+                                <div className="absolute left-4 sm:left-6 top-0 w-0.5 h-12 sm:h-16 bg-gradient-to-b from-green-500 to-emerald-500"></div>
+                                <div className="absolute left-4 sm:left-6 top-12 sm:top-16 w-0.5 h-12 sm:h-16 bg-gradient-to-b from-gray-400 to-gray-500"></div>
+                                <div className="absolute left-4 sm:left-6 top-24 sm:top-32 w-0.5 bottom-0 bg-gradient-to-b from-gray-400 to-gray-500"></div>
                               </>
                             )}
                             
@@ -245,7 +245,7 @@ const Education = () => {
                               return (
                                 <div key={yearIndex} className="relative flex items-start mb-6 sm:mb-8 last:mb-0">
                           {/* Timeline dot */}
-                                  <div className={`relative z-10 flex items-center justify-center w-8 h-8 sm:w-12 sm:h-12 rounded-full shadow-lg transition-all duration-300 ${
+                                  <div className={`relative z-10 flex items-center justify-center w-8 h-8 sm:w-12 sm:h-12 rounded-full shadow-lg transition-all duration-300 flex-shrink-0 ${
                                     isCompleted 
                                       ? 'bg-gradient-to-r from-green-500 to-emerald-500' 
                                       : isUpcoming 
@@ -256,23 +256,17 @@ const Education = () => {
                           </div>
                           
                           {/* Content */}
-                                  <div className="ml-4 sm:ml-6 flex-1">
+                                  <div className="ml-4 sm:ml-6 flex-1 min-w-0">
                                     <h5 className={`font-semibold mb-2 sm:mb-3 text-sm sm:text-lg transition-colors duration-200 ${
                                       isCompleted 
-                                        ? 'text-green-700 dark:text-green-300' 
+                                        ? 'text-green-500 dark:text-green-300' 
                                         : isUpcoming 
                                           ? 'text-gray-500 dark:text-gray-400' 
-                                          : 'text-green-700 dark:text-green-300'
+                                          : 'text-green-500 dark:text-green-300'
                                     }`}>
                                       {isUpcoming ? `Upcoming ${yearData.year}` : yearData.year}
                                     </h5>
-                                    <div className={`transition-colors duration-200 ${
-                                      isCompleted 
-                                        ? 'text-gray-700 dark:text-gray-300' 
-                                        : isUpcoming 
-                                          ? 'text-gray-500 dark:text-gray-400' 
-                                          : 'text-gray-700 dark:text-gray-300'
-                                    }`}>
+                                    <div className={`transition-colors duration-200`} style={{ color: isCompleted ? 'hsl(var(--foreground))' : isUpcoming ? 'hsl(var(--muted-foreground))' : 'hsl(var(--foreground))' }}>
                                       <ul className="list-disc list-inside space-y-0.5 sm:space-y-1">
                                         {yearData.subjects.map((subject) => {
                                           // Check if this is a semester header (contains ":")
@@ -326,10 +320,10 @@ const Education = () => {
         <div className="mt-12 sm:mt-16 px-4 sm:px-0">
           {/* Journey Visualization */}
           <div className="text-center mb-6 sm:mb-8">
-            <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-2">
+            <h3 className="text-lg sm:text-xl font-bold text-purple-600 dark:text-white mb-2">
               From Knowledge to Creation
             </h3>
-            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300">
+            <p className="text-sm sm:text-base" style={{ color: 'hsl(var(--muted-foreground))' }}>
               Every lesson learned becomes a building block for innovation
             </p>
           </div>
@@ -348,7 +342,7 @@ const Education = () => {
                   <BookOpen className="text-white w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
                 <div className="mt-3 sm:mt-4 text-center">
-                  <h5 className="font-semibold mb-1 sm:mb-2 text-xs sm:text-sm text-indigo-700 dark:text-indigo-300">
+                  <h5 className="font-semibold mb-1 sm:mb-2 text-xs sm:text-sm" style={{ color: 'hsl(var(--foreground))' }}>
                     Foundation
                   </h5>
                 </div>
@@ -360,7 +354,7 @@ const Education = () => {
                   <Zap className="text-white w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
                 <div className="mt-3 sm:mt-4 text-center">
-                  <h5 className="font-semibold mb-1 sm:mb-2 text-xs sm:text-sm text-purple-700 dark:text-purple-300">
+                  <h5 className="font-semibold mb-1 sm:mb-2 text-xs sm:text-sm" style={{ color: 'hsl(var(--foreground))' }}>
                     Application
                   </h5>
                 </div>
@@ -372,7 +366,7 @@ const Education = () => {
                   <Rocket className="text-white w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
                 <div className="mt-3 sm:mt-4 text-center">
-                  <h5 className="font-semibold mb-1 sm:mb-2 text-xs sm:text-sm text-pink-700 dark:text-pink-300">
+                  <h5 className="font-semibold mb-1 sm:mb-2 text-xs sm:text-sm" style={{ color: 'hsl(var(--foreground))' }}>
                     Innovation
                   </h5>
                 </div>
