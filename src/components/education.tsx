@@ -2,11 +2,13 @@
 
 import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { ChevronDown, BookOpen, Zap, Rocket, Calendar, MapPin, GraduationCap, ChevronUp, ChevronRight } from "lucide-react"
+import { ChevronDown, BookOpen, Zap, Rocket, Calendar, MapPin, GraduationCap, ChevronUp, ChevronRight, FileText, ExternalLink } from "lucide-react"
 import Image from "next/image"
+import { PdfViewerModal } from "./pdf-viewer-modal"
 
 const Education = () => {
   const [expandedCards, setExpandedCards] = useState<number[]>([])
+  const [openPdf, setOpenPdf] = useState<{ url: string; title: string } | null>(null)
 
   const toggleCard = (index: number) => {
     setExpandedCards(prev => 
@@ -25,6 +27,7 @@ const Education = () => {
       description: "Comprehensive study focusing on designing and developing technological solutions with emphasis on user-friendliness for all. Learn to use computer technology to fulfill user needs and develop universally designed solutions that everyone can use regardless of limitations.",
       achievements: ["User-Centered Design", "Universal Design", "Technology Innovation", "Practical Projects"],
       logo: "/oslomet-logo.webp",
+      website: "https://www.oslomet.no/studier/tkd/anvendt-datateknologi",
       years: [
         {
           year: "1st Year - Foundation (2025-2026)",
@@ -76,6 +79,7 @@ const Education = () => {
       description: "Completed high school education with focus on computer science, information technology, media production and entrepreneurship.",
       achievements: ["Regional Entrepreneurship Award", "Academic Excellence"],
       logo: "/akershus-fylkeskommune-logo.png",
+      certificate: "/entrepreneurship-nm.pdf",
       years: [
         {
           year: "Information Technology and Media Production (2021-2022)",
@@ -156,7 +160,7 @@ const Education = () => {
                 <CardHeader className="pb-3 sm:pb-4">
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
                     <div className="flex items-center gap-3 sm:gap-4">
-                      <div className="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center bg-gradient-to-br from-green-100 to-emerald-100 dark:from-green-900/20 dark:to-emerald-900/20 rounded-lg sm:rounded-xl shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                      <div className="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center bg-gradient-to-br from-green-100 to-emerald-100 rounded-lg sm:rounded-xl shadow-lg group-hover:shadow-xl transition-shadow duration-300" style={{ background: 'linear-gradient(to bottom right, rgba(220, 252, 231, 1), rgba(209, 250, 229, 1))' }}>
                       {edu.logo ? (
                         <Image
                           src={edu.logo}
@@ -173,19 +177,31 @@ const Education = () => {
                         <CardTitle className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
                         {edu.degree}
                       </CardTitle>
-                      <div className="flex items-center gap-2 text-muted-foreground mt-1">
+                      <div className="flex items-center gap-2 mt-1 text-muted-foreground" >
                           <GraduationCap className="h-3 w-3 sm:h-4 sm:w-4" />
-                          <span className="font-medium text-sm sm:text-base">{edu.institution}</span>
+                          {edu.website ? (
+                            <a 
+                              href={edu.website} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="font-medium text-sm sm:text-base hover:text-blue-600 transition-colors duration-200 flex items-center gap-1"
+                            >
+                              {edu.institution}
+                              <ExternalLink className="h-3 w-3 opacity-60 hover:opacity-100 transition-opacity duration-200" />
+                            </a>
+                          ) : (
+                            <span className="font-medium text-sm sm:text-base">{edu.institution}</span>
+                          )}
                         </div>
                       </div>
                     </div>
                     <div className="flex flex-col sm:items-end gap-1.5 sm:gap-2 text-xs sm:text-sm text-muted-foreground">
                       <div className="flex flex-row sm:flex-col gap-2 sm:gap-1.5">
-                        <div className="flex items-center gap-1.5 sm:gap-2 text-green-700 bg-green-50 dark:bg-green-900/20 px-2 sm:px-3 py-1 rounded-full">
+                        <div className="flex items-center gap-1.5 sm:gap-2 text-green-700 bg-green-dark px-2 sm:px-3 py-1 rounded-full">
                           <Calendar className="h-3 w-3 sm:h-4 sm:w-4 text-green-600" />
                       <span className="font-medium">{edu.duration}</span>
                     </div>
-                        <div className="flex items-center gap-1.5 sm:gap-2 text-green-700 bg-emerald-50 dark:bg-emerald-900/20 px-2 sm:px-3 py-1 rounded-full">
+                        <div className="flex items-center gap-1.5 sm:gap-2 text-green-700 bg-emerald-dark px-2 sm:px-3 py-1 rounded-full">
                           <MapPin className="h-3 w-3 sm:h-4 sm:w-4 text-emerald-600" />
                       <span className="font-medium">{edu.location}</span>
                         </div>
@@ -203,9 +219,19 @@ const Education = () => {
                     <div className="mb-4 sm:mb-6">
                       <button
                         onClick={() => toggleCard(index)}
-                        className="flex items-center justify-between w-full p-3 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-lg border border-green-200 dark:border-green-800 hover:from-green-100 hover:to-emerald-100 dark:hover:from-green-900/30 dark:hover:to-emerald-900/30 transition-all duration-200 group"
+                        className="flex items-center justify-between w-full p-3 rounded-lg border transition-all duration-200 group"
+                        style={{ 
+                          background: 'linear-gradient(to right, rgba(240, 253, 244, 1), rgba(236, 253, 245, 1))',
+                          borderColor: 'hsl(142, 71%, 45%)'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.background = 'linear-gradient(to right, rgba(220, 252, 231, 1), rgba(209, 250, 229, 1))'
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.background = 'linear-gradient(to right, rgba(240, 253, 244, 1), rgba(236, 253, 245, 1))'
+                        }}
                       >
-                        <span className="text-sm sm:text-base font-semibold text-green-700 dark:text-green-300">
+                        <span className="text-sm sm:text-base font-semibold text-green-700">
                           Academic Timeline
                         </span>
                         <div className="transform transition-transform duration-200 group-hover:scale-110">
@@ -221,7 +247,7 @@ const Education = () => {
                       <div className={`overflow-hidden transition-all duration-300 ease-in-out ${
                         isExpanded ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'
                       }`}>
-                        <div className="mt-4 p-4 rounded-lg border border-green-200/50 dark:border-green-800/50" style={{ background: 'linear-gradient(to right, hsl(var(--muted) / 0.5), hsl(var(--muted) / 0.5))' }}>
+                        <div className="mt-4 p-4 rounded-lg border" style={{ background: 'linear-gradient(to right, hsl(var(--muted) / 0.5), hsl(var(--muted) / 0.5))', borderColor: 'hsl(var(--border))' }}>
                           <div className="relative">
                             {/* Timeline line - segmented by progress */}
                             {edu.institution === "Drømtorp Videregående Skole" ? (
@@ -257,13 +283,7 @@ const Education = () => {
                           
                           {/* Content */}
                                   <div className="ml-4 sm:ml-6 flex-1 min-w-0">
-                                    <h5 className={`font-semibold mb-2 sm:mb-3 text-sm sm:text-lg transition-colors duration-200 ${
-                                      isCompleted 
-                                        ? 'text-green-500 dark:text-green-300' 
-                                        : isUpcoming 
-                                          ? 'text-gray-500 dark:text-gray-400' 
-                                          : 'text-green-500 dark:text-green-300'
-                                    }`}>
+                                    <h5 className="font-semibold mb-2 sm:mb-3 text-sm sm:text-lg transition-colors duration-200" style={{ color: isCompleted ? 'hsl(var(--foreground))' : isUpcoming ? 'hsl(var(--muted-foreground))' : 'hsl(var(--foreground))' }}>
                                       {isUpcoming ? `Upcoming ${yearData.year}` : yearData.year}
                                     </h5>
                                     <div className={`transition-colors duration-200`} style={{ color: isCompleted ? 'hsl(var(--foreground))' : isUpcoming ? 'hsl(var(--muted-foreground))' : 'hsl(var(--foreground))' }}>
@@ -310,6 +330,19 @@ const Education = () => {
                     )
                   })}
                 </div>
+                
+                {/* Certificate Button */}
+                {edu.certificate && (
+                  <div className="mt-4 sm:mt-6">
+                    <button
+                      onClick={() => setOpenPdf({ url: edu.certificate, title: "NM Entrepreneurship" })}
+                      className="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg hover:from-green-600 hover:to-green-700 transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105 font-medium"
+                    >
+                      <FileText className="h-4 w-4" />
+                      <span className="text-sm font-semibold">NM Entrepreneurship</span>
+                    </button>
+                  </div>
+                )}
               </CardContent>
             </Card>
             )
@@ -320,7 +353,7 @@ const Education = () => {
         <div className="mt-12 sm:mt-16 px-4 sm:px-0">
           {/* Journey Visualization */}
           <div className="text-center mb-6 sm:mb-8">
-            <h3 className="text-lg sm:text-xl font-bold text-purple-600 dark:text-white mb-2">
+            <h3 className="text-lg sm:text-xl font-bold mb-2" style={{ color: 'hsl(var(--foreground))' }}>
               From Knowledge to Creation
             </h3>
             <p className="text-sm sm:text-base" style={{ color: 'hsl(var(--muted-foreground))' }}>
@@ -338,7 +371,7 @@ const Education = () => {
               
               {/* Step 1: Foundation */}
               <div className="flex flex-col items-center relative z-20">
-                <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-full shadow-lg bg-gradient-to-r from-indigo-500 to-indigo-600 border-2 border-white dark:border-gray-900 flex items-center justify-center">
+                <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-full shadow-lg bg-gradient-to-r from-indigo-500 to-indigo-600 border-2 flex items-center justify-center" style={{ borderColor: 'hsl(var(--background))' }}>
                   <BookOpen className="text-white w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
                 <div className="mt-3 sm:mt-4 text-center">
@@ -350,7 +383,7 @@ const Education = () => {
               
               {/* Step 2: Application */}
               <div className="flex flex-col items-center relative z-20">
-                <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-full shadow-lg bg-gradient-to-r from-purple-500 to-purple-600 border-2 border-white dark:border-gray-900 flex items-center justify-center">
+                <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-full shadow-lg bg-gradient-to-r from-purple-500 to-purple-600 border-2 flex items-center justify-center" style={{ borderColor: 'hsl(var(--background))' }}>
                   <Zap className="text-white w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
                 <div className="mt-3 sm:mt-4 text-center">
@@ -362,7 +395,7 @@ const Education = () => {
               
               {/* Step 3: Innovation */}
               <div className="flex flex-col items-center relative z-20">
-                <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-full shadow-lg bg-gradient-to-r from-pink-500 to-pink-600 border-2 border-white dark:border-gray-900 flex items-center justify-center">
+                <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-full shadow-lg bg-gradient-to-r from-pink-500 to-pink-600 border-2 flex items-center justify-center" style={{ borderColor: 'hsl(var(--background))' }}>
                   <Rocket className="text-white w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
                 <div className="mt-3 sm:mt-4 text-center">
@@ -376,13 +409,23 @@ const Education = () => {
           
           {/* Call to Action */}
           <div className="text-center mt-6 sm:mt-8">
-            <div className="inline-flex items-center gap-2 text-indigo-600 dark:text-indigo-400 font-medium text-sm sm:text-base">
+            <div className="inline-flex items-center gap-2 font-medium text-sm sm:text-base" style={{ color: 'hsl(var(--foreground))' }}>
               <span>Explore My Projects</span>
               <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5 animate-bounce" />
             </div>
           </div>
         </div>
       </div>
+      
+      {/* PDF Viewer Modal */}
+      {openPdf && (
+        <PdfViewerModal
+          pdfUrl={openPdf.url}
+          title={openPdf.title}
+          isOpen={!!openPdf}
+          onClose={() => setOpenPdf(null)}
+        />
+      )}
     </section>
   )
 }

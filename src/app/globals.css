@@ -76,6 +76,16 @@
     --section-education: 200 40% 8%;
     --section-projects: 240 40% 10%;
   }
+
+  /* Ensure light mode is enforced when .light class is present, overriding any media queries */
+  .light {
+    color-scheme: light;
+  }
+
+  /* Ensure dark mode is enforced when .dark class is present */
+  .dark {
+    color-scheme: dark;
+  }
 }
 
 @layer base {
@@ -322,5 +332,38 @@
   
   .bg-section-projects {
     background-color: hsl(var(--section-projects));
+  }
+  
+  /* Dark mode background overrides that respond to .dark class */
+  .bg-purple-dark {
+    background-color: rgba(168, 85, 247, 0.1);
+  }
+  
+  .bg-pink-dark {
+    background-color: rgba(236, 72, 153, 0.1);
+  }
+  
+  .bg-green-dark {
+    background-color: rgba(34, 197, 94, 0.1);
+  }
+  
+  .bg-emerald-dark {
+    background-color: rgba(16, 185, 129, 0.1);
+  }
+  
+  .dark .bg-purple-dark {
+    background-color: rgba(168, 85, 247, 0.2);
+  }
+  
+  .dark .bg-pink-dark {
+    background-color: rgba(236, 72, 153, 0.2);
+  }
+  
+  .dark .bg-green-dark {
+    background-color: rgba(34, 197, 94, 0.2);
+  }
+  
+  .dark .bg-emerald-dark {
+    background-color: rgba(16, 185, 129, 0.2);
   }
 }

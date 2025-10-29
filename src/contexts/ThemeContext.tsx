@@ -69,8 +69,14 @@ export function ThemeProvider({
     localStorage.setItem(storageKey, theme)
   }, [theme, storageKey])
 
-  // Listen for system theme changes
+  // Listen for system theme changes (only when theme is set to "system")
   useEffect(() => {
+    // Only listen to system changes if theme is set to "system"
+    // If manual theme is selected (light/dark), don't set up listener
+    if (theme !== "system") {
+      return
+    }
+
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)")
     
     const handleChange = () => {

@@ -1,8 +1,13 @@
+"use client"
+
+import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Calendar, MapPin, Building2, FileText, ExternalLink } from "lucide-react"
 import Image from "next/image"
+import { PdfViewerModal } from "./pdf-viewer-modal"
 
 const Experience = () => {
+  const [openPdf, setOpenPdf] = useState<{ url: string; title: string } | null>(null)
   const experiences = [
     {
       company: "Royal Norwegian Air Force",
@@ -12,7 +17,7 @@ const Experience = () => {
       description: "Completed military service in the Royal Norwegian Air Force, developing leadership skills, discipline, and teamwork abilities while serving the nation. Gained valuable experience in structured environments and mission-critical operations.",
       technologies: ["Teamwork", "Discipline", "Problem Solving", "Communication", "Service"],
       logo: "/norwegianAirForce.png",
-      certificate: "/jobbanbefaling-copy.pdf",
+      certificate: "/jobbanbefaling-army.pdf",
       website: "https://www.forsvaret.no/",
     },
     {
@@ -23,6 +28,7 @@ const Experience = () => {
       description: "Co-founded Renow AS, a web development company specializing in creating websites that drive growth for small and medium-sized businesses. Focus on sustainable web development with 88% reduced CO2 emissions and modern technologies like Next.js and React.",
       technologies: ["Innovation", "Problem Solving", "Networking", "Web Development", "Business Development"],
       logo: "/renow.png",
+      certificate: "/entrepreneurship-nm.pdf",
       website: "https://renow.no/",
     },
     {
@@ -85,15 +91,15 @@ const Experience = () => {
           {experiences.map((exp, index) => {
             const colors = [
               "border-l-4 border-l-blue-500",
-              "border-l-4 border-l-purple-500", 
               "border-l-4 border-l-green-500",
+              "border-l-4 border-l-purple-500", 
               "border-l-4 border-l-pink-500"
             ]
             const cardColors = [
               "bg-gradient-to-r from-blue-50 to-blue-100",
-              "bg-gradient-to-r from-purple-50 to-purple-100",
               "bg-gradient-to-r from-green-50 to-green-100",
-              "bg-gradient-to-r from-pink-50 to-rose-50 dark:from-pink-900/20 dark:to-rose-900/20"
+              "bg-gradient-to-r from-purple-50 to-purple-100",
+              "bg-gradient-to-r from-pink-50 to-rose-50"
             ]
             
             return (
@@ -129,7 +135,8 @@ const Experience = () => {
                             href={exp.website} 
                             target="_blank" 
                             rel="noopener noreferrer"
-                            className="font-medium text-sm sm:text-base hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 flex items-center gap-1"
+                            className="font-medium text-sm sm:text-base hover:text-blue-600 transition-colors duration-200 flex items-center gap-1"
+                            style={{ '--hover-color': 'hsl(var(--foreground) / 0.8)' } as React.CSSProperties}
                           >
                             {exp.company}
                             <ExternalLink className="h-3 w-3 opacity-60 hover:opacity-100 transition-opacity duration-200" />
@@ -139,15 +146,15 @@ const Experience = () => {
                     </div>
                     <div className="flex flex-col sm:items-end gap-1.5 sm:gap-2 text-xs sm:text-sm text-muted-foreground">
                       <div className="flex flex-row sm:flex-col gap-2 sm:gap-1.5">
-                        <div className="flex items-center gap-1.5 sm:gap-2 bg-purple-50 dark:bg-purple-900/20 px-2 sm:px-3 py-1 rounded-full">
+                        <div className="flex items-center gap-1.5 sm:gap-2 bg-purple-dark px-2 sm:px-3 py-1 rounded-full">
                           <Calendar className="h-3 w-3 sm:h-4 sm:w-4 text-purple-600" />
-                          <span className="font-medium text-gray-900 dark:text-black">
+                          <span className="font-medium" style={{ color: 'hsl(var(--foreground))' }}>
                             {exp.positions ? `${exp.positions[exp.positions.length - 1].duration.split(' - ')[0]} - ${exp.positions[0].duration.split(' - ')[1]}` : exp.duration}
                           </span>
                         </div>
-                        <div className="flex items-center gap-1.5 sm:gap-2 bg-pink-50 dark:bg-pink-900/20 px-2 sm:px-3 py-1 rounded-full">
+                        <div className="flex items-center gap-1.5 sm:gap-2 bg-pink-dark px-2 sm:px-3 py-1 rounded-full">
                           <MapPin className="h-3 w-3 sm:h-4 sm:w-4 text-pink-600" />
-                          <span className="font-medium text-gray-900 dark:text-black">{exp.location}</span>
+                          <span className="font-medium" style={{ color: 'hsl(var(--foreground))' }}>{exp.location}</span>
                         </div>
                       </div>
                     </div>
@@ -158,10 +165,10 @@ const Experience = () => {
                     // LinkedIn-style multiple positions
                     <div className="space-y-4">
                       {exp.positions.map((pos, posIndex) => (
-                        <div key={posIndex} className="border-l-2 border-gray-200 dark:border-gray-700 pl-4 relative">
-                          <div className="absolute -left-1.5 top-0 w-3 h-3 bg-gray-300 dark:bg-gray-600 rounded-full"></div>
+                        <div key={posIndex} className="border-l-2 pl-4 relative" style={{ borderColor: 'hsl(var(--border))' }}>
+                          <div className="absolute -left-1.5 top-0 w-3 h-3 rounded-full" style={{ backgroundColor: 'hsl(var(--muted))' }}></div>
                           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2">
-                            <h4 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white">
+                            <h4 className="text-base sm:text-lg font-semibold" style={{ color: 'hsl(var(--foreground))' }}>
                               {pos.title}
                             </h4>
                             <span className="text-xs sm:text-sm font-medium" style={{ color: 'hsl(var(--muted-foreground))' }}>
@@ -175,7 +182,20 @@ const Experience = () => {
                             {pos.technologies.map((tech) => (
                               <span
                                 key={tech}
-                                className="px-2.5 sm:px-3 py-1.5 sm:py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-xs sm:text-sm rounded-md font-medium hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200 border border-gray-200 dark:border-gray-700"
+                                className="px-2.5 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm rounded-md font-medium transition-colors duration-200"
+                                style={{ 
+                                  backgroundColor: 'hsl(var(--muted))',
+                                  color: 'hsl(var(--foreground))',
+                                  borderColor: 'hsl(var(--border))',
+                                  borderWidth: '1px',
+                                  borderStyle: 'solid'
+                                }}
+                                onMouseEnter={(e) => {
+                                  e.currentTarget.style.backgroundColor = 'hsl(var(--muted) / 0.8)'
+                                }}
+                                onMouseLeave={(e) => {
+                                  e.currentTarget.style.backgroundColor = 'hsl(var(--muted))'
+                                }}
                               >
                                 {tech}
                               </span>
@@ -187,14 +207,27 @@ const Experience = () => {
                   ) : (
                     // Single position layout
                     <>
-                      <CardDescription className="text-sm sm:text-base mb-4 sm:mb-6 leading-relaxed dark:text-white">
+                      <CardDescription className="text-sm sm:text-base mb-4 sm:mb-6 leading-relaxed" style={{ color: 'hsl(var(--foreground))' }}>
                         {exp.description}
                       </CardDescription>
                       <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4">
                         {exp.technologies.map((tech) => (
                           <span
                             key={tech}
-                            className="px-2.5 sm:px-3 py-1.5 sm:py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-xs sm:text-sm rounded-md font-medium hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200 border border-gray-200 dark:border-gray-700"
+                            className="px-2.5 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm rounded-md font-medium transition-colors duration-200"
+                            style={{ 
+                              backgroundColor: 'hsl(var(--muted))',
+                              color: 'hsl(var(--foreground))',
+                              borderColor: 'hsl(var(--border))',
+                              borderWidth: '1px',
+                              borderStyle: 'solid'
+                            }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.backgroundColor = 'hsl(var(--muted) / 0.8)'
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.backgroundColor = 'hsl(var(--muted))'
+                            }}
                           >
                             {tech}
                           </span>
@@ -202,15 +235,22 @@ const Experience = () => {
                       </div>
                       {exp.certificate && (
                         <div className="mt-3 sm:mt-4">
-                          <a
-                            href={exp.certificate}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105 font-medium"
+                          <button
+                            onClick={() => setOpenPdf({ 
+                              url: exp.certificate, 
+                              title: exp.certificate === "/entrepreneurship-nm.pdf" ? "NM Entrepreneurship" : "Letter of recommendation" 
+                            })}
+                            className={`inline-flex items-center gap-2 px-4 py-2.5 text-white rounded-lg transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105 font-medium ${
+                              exp.certificate === "/jobbanbefaling-army.pdf"
+                                ? "bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700"
+                                : "bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700"
+                            }`}
                           >
                             <FileText className="h-4 w-4" />
-                            <span className="text-sm font-semibold">Letter of recommendation</span>
-                          </a>
+                            <span className="text-sm font-semibold">
+                              {exp.certificate === "/entrepreneurship-nm.pdf" ? "NM Entrepreneurship" : "Letter of recommendation"}
+                            </span>
+                          </button>
                         </div>
                       )}
                     </>
@@ -236,6 +276,16 @@ const Experience = () => {
           </a>
         </div>
       </div>
+      
+      {/* PDF Viewer Modal */}
+      {openPdf && (
+        <PdfViewerModal
+          pdfUrl={openPdf.url}
+          title={openPdf.title}
+          isOpen={!!openPdf}
+          onClose={() => setOpenPdf(null)}
+        />
+      )}
     </section>
   )
 }
