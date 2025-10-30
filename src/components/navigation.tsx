@@ -5,10 +5,12 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 import { ThemeToggle, ThemeToggleMobile } from "@/components/theme-toggle"
+import { PdfViewerModal } from "@/components/pdf-viewer-modal"
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [activeSection, setActiveSection] = useState("home")
+  const [openResumePdf, setOpenResumePdf] = useState(false)
 
   const navItems = [
     { name: "Home", href: "#home" },
@@ -83,10 +85,12 @@ const Navigation = () => {
           {/* Theme Toggle & CTA Button */}
           <div className="hidden md:flex items-center space-x-3">
             <ThemeToggle />
-            <Button asChild size="sm" className="text-xs lg:text-sm px-3 lg:px-4 py-2 lg:py-2.5 bg-brand-primary text-white hover:bg-brand-primary/90 border-brand-primary">
-              <a href="/Tobias_Hammer_Resume.pdf" download>
-                Download Resume
-              </a>
+            <Button 
+              size="sm" 
+              className="text-xs lg:text-sm px-3 lg:px-4 py-2 lg:py-2.5 bg-brand-primary text-white hover:bg-brand-primary/90 border-brand-primary"
+              onClick={() => setOpenResumePdf(true)}
+            >
+              View Resume
             </Button>
           </div>
 
@@ -125,16 +129,28 @@ const Navigation = () => {
               })}
               <div className="px-3 py-2 space-y-2">
                 <ThemeToggleMobile />
-                <Button asChild className="w-full text-sm py-2.5 bg-brand-primary text-white hover:bg-brand-primary/90 border-brand-primary">
-                  <a href="/Tobias_Hammer_Resume.pdf" download>
-                    Download Resume
-                  </a>
+                <Button 
+                  className="w-full text-sm py-2.5 bg-brand-primary text-white hover:bg-brand-primary/90 border-brand-primary"
+                  onClick={() => {
+                    setOpenResumePdf(true)
+                    setIsOpen(false)
+                  }}
+                >
+                  View Resume
                 </Button>
               </div>
             </div>
           </div>
         )}
       </div>
+
+      {/* Resume PDF Viewer Modal */}
+      <PdfViewerModal
+        pdfUrl="/Tobias-resume.pdf"
+        title="Tobias Hammer - Resume"
+        isOpen={openResumePdf}
+        onClose={() => setOpenResumePdf(false)}
+      />
     </nav>
   )
 }

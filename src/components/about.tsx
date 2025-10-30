@@ -1,3 +1,5 @@
+"use client"
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Code, Palette, Smartphone, Zap, Monitor, Server, Wrench, Users } from "lucide-react"
 import Image from "next/image"
@@ -80,8 +82,19 @@ const About = () => {
 
           {/* Profile Image */}
           <div className="relative group order-1 lg:order-2">
-            <div className="absolute -inset-2 sm:-inset-4 rounded-2xl sm:rounded-3xl blur opacity-25 group-hover:opacity-40 transition duration-300" style={{ backgroundColor: '#124D95' }}></div>
-            <div className="relative aspect-square rounded-xl sm:rounded-2xl overflow-hidden p-1 max-w-sm mx-auto lg:max-w-none" style={{ backgroundColor: '#E9F5FF' }}>
+            <div 
+              className="relative aspect-square rounded-xl sm:rounded-2xl overflow-hidden p-1 max-w-2xs mx-auto lg:max-w-none transition-all duration-300" 
+              style={{ 
+                backgroundColor: '#E9F5FF',
+                boxShadow: '0 0 20px rgba(18, 77, 149, 0.25), 0 0 40px rgba(18, 77, 149, 0.15)'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.boxShadow = '0 0 30px rgba(18, 77, 149, 0.4), 0 0 60px rgba(18, 77, 149, 0.2)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.boxShadow = '0 0 20px rgba(18, 77, 149, 0.25), 0 0 40px rgba(18, 77, 149, 0.15)'
+              }}
+            >
               <Image
                 src="/tobias.webp"
                 alt="Tobias Hammer - Full-Stack Developer"

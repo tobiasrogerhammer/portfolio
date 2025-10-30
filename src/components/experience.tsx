@@ -14,7 +14,7 @@ const Experience = () => {
       position: "Military Service",
       location: "Rygge, Norway",
       duration: "2024 - 2025",
-      description: "Completed military service in the Royal Norwegian Air Force, developing leadership skills, discipline, and teamwork abilities while serving the nation. Gained valuable experience in structured environments and mission-critical operations.",
+      description: "Developed discipline, mental resilience, and strong teamwork and communication skills. Represented soldiers in welfare and organizational discussions, ensuring fair treatment and improved conditions.",
       technologies: ["Teamwork", "Discipline", "Problem Solving", "Communication", "Service"],
       logo: "/norwegianAirForce.png",
       certificate: "/jobbanbefaling-army.pdf",
@@ -25,7 +25,7 @@ const Experience = () => {
       position: "Co-Founder",
       location: "Oppegård, Norway",
       duration: "2023 - Present",
-      description: "Co-founded Renow AS, a web development company specializing in creating websites that drive growth for small and medium-sized businesses. Focus on sustainable web development with 88% reduced CO2 emissions and modern technologies like Next.js and React.",
+      description: "Co-founded Renow and helped transform it from a student startup into a registered limited company. Lead responsibilities include developing sustainable, high-performance websites, overseeing strategy, and managing client relationships. Played a key role in the company’s early success, winning the Regional Sustainability Award and receiving multiple national nominations.",
       technologies: ["Innovation", "Problem Solving", "Networking", "Web Development", "Business Development"],
       logo: "/renow.png",
       certificate: "/entrepreneurship-nm.pdf",
@@ -37,7 +37,7 @@ const Experience = () => {
         {
           title: "Working Student",
           duration: "2022 - Present",
-          description: "Working as a student employee at Huddly AS, gaining hands-on experience in technology and professional development while pursuing studies.",
+          description: "Working as a student employee at Huddly AS, contributing to the development of AI-powered conference cameras through AI training, scripting, and product testing.",
           technologies: ["Technology", "Professional Development", "Learning", "Collaboration"]
         },
         {
@@ -56,7 +56,7 @@ const Experience = () => {
       position: "Swimming Instructor",
       location: "Kolbotn, Norway",
       duration: "2021 - 2022",
-      description: "Taught swimming lessons and water safety to students of various ages at Kolbotn IL. Developed strong communication and teaching skills while ensuring student safety and progress.",
+      description: "Delivered swimming instruction and water safety training to students of various ages. Strengthened communication, patience, and leadership skills through hands-on teaching experience.",
       technologies: ["Teaching", "Communication", "Safety", "Leadership", "Mentoring"],
       logo: "/Kolbotn_IL.png",
       website: "https://kolbotnil.no/vare-idretter/svomming",
@@ -266,14 +266,12 @@ const Experience = () => {
           <p className="text-muted-foreground mb-4 text-sm sm:text-base">
             Interested in my full experience? Check out my detailed resume.
           </p>
-          <a
-            href="/resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            onClick={() => setOpenPdf({ url: "/Tobias-resume.pdf", title: "Tobias Hammer - Resume" })}
             className="inline-flex items-center px-4 sm:px-6 py-2.5 sm:py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors text-sm sm:text-base"
           >
-            Download Resume
-          </a>
+            View Resume
+          </button>
         </div>
       </div>
       

@@ -18,7 +18,7 @@ const Footer = () => {
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-brand-primary">Tobias Hammer</h3>
             <p className="text-muted-foreground leading-relaxed">
-              Full-stack developer passionate about creating beautiful and functional web applications that make a difference.
+            Full-stack developer, entrepreneur, and student transforming complex ideas into accessible digital solutions.
             </p>
             <div className="flex items-center space-x-2 text-sm text-muted-foreground">
               <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>

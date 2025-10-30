@@ -21,7 +21,7 @@ const Education = () => {
   const education = [
     {
       institution: "Oslo Metropolitan University (OsloMet)",
-      degree: "Bachelor of Applied Computer Technology",
+      degree: "Bachelor of Computer Science",
       location: "Oslo, Norway",
       duration: "2025 - 2028",
       description: "Comprehensive study focusing on designing and developing technological solutions with emphasis on user-friendliness for all. Learn to use computer technology to fulfill user needs and develop universally designed solutions that everyone can use regardless of limitations.",
@@ -247,7 +247,7 @@ const Education = () => {
                       <div className={`overflow-hidden transition-all duration-300 ease-in-out ${
                         isExpanded ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'
                       }`}>
-                        <div className="mt-4 p-4 rounded-lg border" style={{ background: 'linear-gradient(to right, hsl(var(--muted) / 0.5), hsl(var(--muted) / 0.5))', borderColor: 'hsl(var(--border))' }}>
+                        <div className="mt-4 p-4 sm:p-6 rounded-lg border shadow-sm" style={{ backgroundColor: 'hsl(var(--card))', borderColor: 'hsl(var(--border))' }}>
                           <div className="relative">
                             {/* Timeline line - segmented by progress */}
                             {edu.institution === "Drømtorp Videregående Skole" ? (
