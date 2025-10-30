@@ -1,10 +1,7 @@
 import {
   Mail,
-  Github,
-  Linkedin,
   Globe,
   MapPin,
-  Calendar,
   Award,
   Phone,
 } from "lucide-react";
@@ -118,7 +115,7 @@ export default function ResumePage() {
                 developing sustainable, high-performance
                 websites, overseeing strategy, and managing
                 client relationships. Played a key role in the
-                company's early success, winning the Regional
+                company&apos;s early success, winning the Regional
                 Sustainability Award and receiving nominations in
                 the national student entrepreneurship
                 competitions.
@@ -396,7 +393,7 @@ export default function ResumePage() {
                 />
                 <div>
                   <p className="text-slate-900 text-xs leading-tight">
-                    Driver's Licenses: B, D1
+                    Driver&apos;s Licenses: B, D1
                   </p>
                   <p className="text-xs text-slate-600 mt-0.5">
                     Statens Vegvesen

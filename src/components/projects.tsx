@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { ExternalLink, Github, Code, BookOpen, Star } from "lucide-react"
+import { ExternalLink, Github, Code } from "lucide-react"
 import Image from "next/image"
 
 const Projects = () => {

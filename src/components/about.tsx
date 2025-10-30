@@ -1,7 +1,6 @@
 "use client"
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Code, Palette, Smartphone, Zap, Monitor, Server, Wrench, Users } from "lucide-react"
+import { Monitor, Server, Wrench, Users } from "lucide-react"
 import Image from "next/image"
 
 const About = () => {
