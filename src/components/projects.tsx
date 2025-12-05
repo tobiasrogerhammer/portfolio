@@ -185,6 +185,17 @@ const Projects = () => {
     },
     {
       id: 3,
+      title: "Skoleboost",
+      description: "Eksamensoppgave i prototyping og interaksjonsdesign. Et grundig og dokumentert prosjekt ment for å motivere elever til å møte opp på skolen. Bygget med React og Convex som database.",
+      image: "/api/placeholder/600/400",
+      tags: ["React", "Convex", "TypeScript", "Prototyping", "UX Design"],
+      category: "web",
+      developmentType: "fullstack",
+      github: "https://github.com/tobiasrogerhammer/skoleboost",
+      live: "https://skoleboost.tobiashammer.dev",
+    },
+    {
+      id: 4,
       title: "Blackjack Game",
       description: "Interactive Blackjack game with web interface. Play directly in your browser! Features card dealing, player betting, and game logic with proper error handling. Converted from console to web application using Spring Boot.",
       image: "/blackjack.png",
@@ -198,7 +209,7 @@ const Projects = () => {
       learningOutcome: "Learned web application development with Spring Boot and REST API design"
     },
     {
-      id: 4,
+      id: 5,
       title: "Portfolio Website",
       description: "A modern, responsive portfolio website showcasing projects and skills. Built with Next.js and Tailwind CSS.",
       image: "/api/placeholder/600/400",
@@ -209,7 +220,7 @@ const Projects = () => {
       live: "https://example.com",
     },
     {
-      id: 5,
+      id: 6,
       title: "High School Projects",
       description: "A collection of projects from my high school years (2021-2024) at Drømtorp Videregående Skole. These projects showcase my early journey in web development, JavaScript, React, and database design.",
       image: "/api/placeholder/600/400",
@@ -444,37 +455,39 @@ const Projects = () => {
                   <div className={`absolute top-3 right-3 z-10 px-2.5 py-1 rounded-full text-xs font-semibold bg-gradient-to-r ${devTypeConfig.color} text-white shadow-lg`}>
                     {devTypeConfig.label}
                   </div>
-                  <div className={`${shouldShrinkHighSchool ? 'aspect-[21/9] sm:aspect-[21/9]' : 'aspect-[4/3] sm:aspect-video'} ${currentCardColors[index % currentCardColors.length]} flex items-center justify-center relative overflow-hidden`}>
-                    {project.image && project.image !== "/api/placeholder/600/400" ? (
-                      <Image 
-                        src={project.image} 
-                        alt={project.title}
-                        fill
-                        className="object-cover"
-                        loading="lazy"
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        onError={(e) => {
-                          // Fallback to placeholder if image fails to load
-                          e.currentTarget.style.display = 'none';
-                          (e.currentTarget.nextElementSibling as HTMLElement)?.style.setProperty('display', 'flex');
-                        }}
-                      />
-                    ) : null}
-                    <div className={`absolute inset-0 bg-gradient-to-br ${devTypeConfig.bgColor} opacity-50 flex items-center justify-center ${project.image && project.image !== "/api/placeholder/600/400" ? 'hidden' : 'flex'}`}>
-                      <div className="text-center relative z-10">
-                        <div className={`w-20 h-20 bg-gradient-to-r ${devTypeConfig.color} rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300`}>
-                          {isJavaProject ? (
-                            <Code className="h-8 w-8 text-white" />
-                          ) : isHighSchoolProject ? (
-                            <span className="text-3xl font-bold text-white">HS</span>
-                          ) : (
-                            <span className="text-3xl font-bold text-white">P</span>
-                          )}
+                  {!(isExpanded && isHighSchoolProject) && (
+                    <div className={`${shouldShrinkHighSchool ? 'aspect-[21/9] sm:aspect-[21/9]' : 'aspect-[4/3] sm:aspect-video'} ${currentCardColors[index % currentCardColors.length]} flex items-center justify-center relative overflow-hidden`}>
+                      {project.image && project.image !== "/api/placeholder/600/400" ? (
+                        <Image 
+                          src={project.image} 
+                          alt={project.title}
+                          fill
+                          className="object-cover"
+                          loading="lazy"
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          onError={(e) => {
+                            // Fallback to placeholder if image fails to load
+                            e.currentTarget.style.display = 'none';
+                            (e.currentTarget.nextElementSibling as HTMLElement)?.style.setProperty('display', 'flex');
+                          }}
+                        />
+                      ) : null}
+                      <div className={`absolute inset-0 bg-gradient-to-br ${devTypeConfig.bgColor} opacity-50 flex items-center justify-center ${project.image && project.image !== "/api/placeholder/600/400" ? 'hidden' : 'flex'}`}>
+                        <div className="text-center relative z-10">
+                          <div className={`w-20 h-20 bg-gradient-to-r ${devTypeConfig.color} rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300`}>
+                            {isJavaProject ? (
+                              <Code className="h-8 w-8 text-white" />
+                            ) : isHighSchoolProject ? (
+                              <span className="text-3xl font-bold text-white">HS</span>
+                            ) : (
+                              <span className="text-3xl font-bold text-white">P</span>
+                            )}
+                          </div>
+                          <p className="text-sm text-muted-foreground font-medium">Project Image</p>
                         </div>
-                        <p className="text-sm text-muted-foreground font-medium">Project Image</p>
                       </div>
                     </div>
-                  </div>
+                  )}
                   
                   <CardHeader className={`${shouldShrinkHighSchool ? 'pb-1 sm:pb-2 px-3 sm:px-4 pt-2 sm:pt-3' : 'pb-1 sm:pb-4 px-3 sm:px-6 pt-3 sm:pt-6'} flex-shrink-0`}>
                     <div className="flex items-center justify-between">
@@ -521,7 +534,7 @@ const Projects = () => {
                         <Button asChild size="sm" variant="outline" className="flex-1 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-cyan-50 hover:border-indigo-300 transition-all duration-200 text-xs sm:text-sm py-1.5 sm:py-2.5">
                           <a href={project.github} target="_blank" rel="noopener noreferrer">
                             <Github className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
-                            {isJavaProject ? "View Code" : "Code"}
+                            View Code
                           </a>
                         </Button>
                       )}
@@ -539,7 +552,7 @@ const Projects = () => {
                           }}
                         >
                             <ExternalLink className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
-                            {isJavaProject ? "GitHub" : "Live"}
+                            Live
                         </Button>
                       )}
                     </div>
