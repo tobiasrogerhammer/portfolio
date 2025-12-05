@@ -530,7 +530,8 @@ const Projects = () => {
                           size="sm" 
                           className={`flex-1 bg-gradient-to-r ${devTypeConfig.color} hover:opacity-90 text-white shadow-lg hover:shadow-xl transition-all duration-200 text-xs sm:text-sm py-1.5 sm:py-2.5`}
                           onClick={() => {
-                            if (project.id === 3 && project.live?.startsWith('http://localhost')) {
+                            if (!project.live) return
+                            if (project.id === 3 && project.live.startsWith('http://localhost')) {
                               setBlackjackModalOpen(true)
                             } else {
                               window.open(project.live, '_blank', 'noopener,noreferrer')
