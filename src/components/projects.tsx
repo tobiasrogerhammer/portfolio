@@ -6,6 +6,32 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { ExternalLink, Github, Code, ChevronDown, ChevronRight, ChevronLeft, X, ArrowLeft } from "lucide-react"
 import Image from "next/image"
 
+type DevelopmentType = "frontend" | "fullstack" | "backend" | "learning"
+
+interface SubProject {
+  name: string
+  description: string
+  path: string
+  tags: string[]
+}
+
+interface Project {
+  id: number
+  title: string
+  description: string
+  image: string
+  tags: string[]
+  category: string
+  developmentType?: DevelopmentType
+  github: string | null
+  live: string | null
+  complexity?: string
+  concepts?: string[]
+  learningOutcome?: string
+  isExpandable?: boolean
+  subProjects?: SubProject[]
+}
+
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState("all")
   const [expandedProjects, setExpandedProjects] = useState<number[]>([])
@@ -262,7 +288,7 @@ const Projects = () => {
     (project) => {
       if (activeFilter === "all") return true
       if (activeFilter === "frontend" || activeFilter === "fullstack" || activeFilter === "backend" || activeFilter === "learning") {
-        return (project as any).developmentType === activeFilter
+        return project.developmentType === activeFilter
       }
       return project.category === activeFilter
     }
@@ -274,16 +300,8 @@ const Projects = () => {
     const carousel = carouselRef.current.querySelector('.flex') as HTMLElement
     if (!carousel) return
 
-    const totalProjects = filteredProjects.find(p => (p as any).isExpandable)?.subProjects?.length || 0
+    const totalProjects = filteredProjects.find(p => p.isExpandable)?.subProjects?.length || 0
     if (totalProjects === 0) return
-
-    // If we're viewing the duplicate last item (should show as last real item)
-    // This happens when we go forward from the last real item
-    if (highSchoolProjectIndex === totalProjects - 1) {
-      // Check if we need to jump to duplicate
-      const isAtEnd = highSchoolProjectIndex === totalProjects - 1
-      // We'll handle this in the navigation functions instead
-    }
   }, [highSchoolProjectIndex, filteredProjects])
 
   useEffect(() => {
@@ -375,9 +393,6 @@ const Projects = () => {
         {/* Filter Buttons */}
         <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-8 sm:mb-12 px-4 sm:px-0">
           {filters.map((filter) => {
-            const filterConfig = filter.id === "all" 
-              ? { color: "from-indigo-500 to-cyan-500", hoverColor: "from-indigo-600 to-cyan-600" }
-              : developmentTypes[filter.id as keyof typeof developmentTypes] || developmentTypes.frontend
             const isActive = activeFilter === filter.id
             return (
             <Button
@@ -411,29 +426,11 @@ const Projects = () => {
         {/* Projects Grid */}
         <div ref={gridRef} className={`${filteredProjects.length <= 3 ? 'flex flex-wrap justify-center' : 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'} gap-6 sm:gap-8 items-stretch`}>
           {filteredProjects.map((project, index) => {
-            const cardColors = [
-              "bg-gradient-to-br from-indigo-50 to-blue-50 dark:from-indigo-900/20 dark:to-blue-900/20",
-              "bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20",
-              "bg-gradient-to-br from-cyan-50 to-teal-50 dark:from-cyan-900/20 dark:to-teal-900/20"
-            ]
-            
-            // Java-specific colors
-            const javaCardColors = [
-              "bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20",
-              "bg-gradient-to-br from-red-50 to-pink-50 dark:from-red-900/20 dark:to-pink-900/20",
-              "bg-gradient-to-br from-pink-50 to-purple-50 dark:from-pink-900/20 dark:to-purple-900/20"
-            ]
-
-            // High school projects colors
-            const highSchoolCardColors = [
-              "bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20",
-            ]
-            
-            const developmentType = (project as any).developmentType || "frontend"
-            const devTypeConfig = developmentTypes[developmentType as keyof typeof developmentTypes] || developmentTypes.frontend
+            const developmentType = project.developmentType || "frontend"
+            const devTypeConfig = developmentTypes[developmentType] || developmentTypes.frontend
             const isJavaProject = project.category === "java"
             const isHighSchoolProject = project.category === "high-school"
-            const isExpandable = (project as any).isExpandable === true
+            const isExpandable = project.isExpandable === true
             const isExpanded = expandedProjects.includes(project.id)
             const isLearningCategory = activeFilter === "learning"
             const shouldShrinkHighSchool = isLearningCategory && isHighSchoolProject && filteredProjects.length === 1
@@ -547,7 +544,7 @@ const Projects = () => {
                     </div>
 
                     {/* Expandable Sub-Projects */}
-                    {isExpandable && (project as any).subProjects && (
+                    {isExpandable && project.subProjects && project.subProjects.length > 0 && (
                       <div className={`transition-all duration-300 ease-in-out ${
                         isExpanded ? 'max-h-[5000px] opacity-100 mt-4' : 'max-h-0 opacity-0 overflow-hidden'
                       } ${isExpanded ? 'overflow-visible' : ''}`}>
@@ -557,10 +554,10 @@ const Projects = () => {
                               <div className="flex items-center gap-2">
                                 <span className="text-xs text-muted-foreground">
                                   {highSchoolProjectIndex < 0 
-                                    ? (project as any).subProjects.length 
-                                    : highSchoolProjectIndex >= (project as any).subProjects.length 
+                                    ? project.subProjects.length 
+                                    : highSchoolProjectIndex >= project.subProjects.length 
                                       ? 1 
-                                      : highSchoolProjectIndex + 1} / {(project as any).subProjects.length}
+                                      : highSchoolProjectIndex + 1} / {project.subProjects.length}
                                 </span>
                               </div>
                           </div>
@@ -570,27 +567,27 @@ const Projects = () => {
                               className="max-w-lg mx-auto"
                               onTouchStart={handleTouchStart}
                               onTouchMove={handleTouchMove}
-                              onTouchEnd={() => handleTouchEnd((project as any).subProjects.length)}
+                              onTouchEnd={() => handleTouchEnd(project.subProjects!.length)}
                             >
                               <div className="overflow-hidden px-[15%] relative">
                                 <div 
                                   className="flex transition-transform duration-300 ease-in-out"
                                   style={{ 
-                                    transform: `translateX(calc(${15 - (highSchoolProjectIndex < 0 ? (project as any).subProjects.length : highSchoolProjectIndex + 1) * 70}% - ${(highSchoolProjectIndex < 0 ? (project as any).subProjects.length : highSchoolProjectIndex + 1) * 0.25}rem))` 
+                                    transform: `translateX(calc(${15 - (highSchoolProjectIndex < 0 ? project.subProjects!.length : highSchoolProjectIndex + 1) * 70}% - ${(highSchoolProjectIndex < 0 ? project.subProjects!.length : highSchoolProjectIndex + 1) * 0.25}rem))` 
                                   }}
                                 >
                                   {/* Duplicate last item at the beginning for seamless loop */}
-                                  {(project as any).subProjects.length > 0 && (
+                                  {project.subProjects.length > 0 && (
                                     <>
                                       <div className="w-[70%] flex-shrink-0 px-1 relative flex">
                                         <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105 border border-border bg-card/70 opacity-90 flex flex-col w-full h-full">
                                           <CardHeader className="pb-2 px-4 pt-4 flex-shrink-0">
-                                            <CardTitle className="text-sm font-semibold mb-2">{(project as any).subProjects[(project as any).subProjects.length - 1].name}</CardTitle>
+                                            <CardTitle className="text-sm font-semibold mb-2">{project.subProjects[project.subProjects.length - 1].name}</CardTitle>
                                             <CardDescription className="text-xs mb-3 leading-relaxed line-clamp-3">
-                                              {(project as any).subProjects[(project as any).subProjects.length - 1].description}
+                                              {project.subProjects[project.subProjects.length - 1].description}
                                             </CardDescription>
                                             <div className="flex flex-wrap gap-1 mb-2">
-                                              {(project as any).subProjects[(project as any).subProjects.length - 1].tags.map((tag: string, tagIdx: number) => (
+                                              {project.subProjects[project.subProjects.length - 1].tags.map((tag, tagIdx) => (
                                                 <span
                                                   key={tagIdx}
                                                   className="px-2 py-0.5 bg-gradient-to-r from-purple-400 to-pink-400 text-white text-xs rounded-full font-medium"
@@ -602,7 +599,7 @@ const Projects = () => {
                                           </CardHeader>
                                           <CardContent className="px-4 pb-4 flex-grow flex flex-col justify-end">
                                             <Button asChild size="sm" variant="outline" className="w-full text-xs py-1.5 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white border-0">
-                                              <a href={(project as any).subProjects[(project as any).subProjects.length - 1].path} target="_blank" rel="noopener noreferrer">
+                                              <a href={project.subProjects[project.subProjects.length - 1].path} target="_blank" rel="noopener noreferrer">
                                                 <ExternalLink className="h-3 w-3 mr-1.5" />
                                                 View Project
                                               </a>
@@ -622,7 +619,7 @@ const Projects = () => {
                                   )}
                                   
                                   {/* Original items */}
-                            {(project as any).subProjects.map((subProject: any, subIndex: number) => (
+                            {project.subProjects.map((subProject, subIndex) => (
                                     <div key={subIndex} className="w-[70%] flex-shrink-0 px-1 flex">
                                       <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105 border border-border bg-card/50 flex flex-col w-full h-full">
                                         <CardHeader className="pb-2 px-4 pt-4 flex-shrink-0">
@@ -631,7 +628,7 @@ const Projects = () => {
                                     {subProject.description}
                                   </CardDescription>
                                   <div className="flex flex-wrap gap-1 mb-2">
-                                    {subProject.tags.map((tag: string, tagIdx: number) => (
+                                    {subProject.tags.map((tag, tagIdx) => (
                                       <span
                                         key={tagIdx}
                                         className="px-2 py-0.5 bg-gradient-to-r from-purple-400 to-pink-400 text-white text-xs rounded-full font-medium"
@@ -654,7 +651,7 @@ const Projects = () => {
                                   ))}
                                   
                                   {/* Loop separator */}
-                                    {(project as any).subProjects.length > 0 && (
+                                    {project.subProjects.length > 0 && (
                                       <div className="flex-shrink-0 flex items-center justify-center px-2">
                                         <div className="flex flex-col items-center gap-1.5">
                                           <div className="w-0.5 h-12 bg-gradient-to-b from-purple-400 via-purple-500 to-pink-400 rounded-full"></div>
@@ -665,16 +662,16 @@ const Projects = () => {
                                     )}
                                   
                                   {/* Duplicate first item at the end for seamless loop */}
-                                  {(project as any).subProjects.length > 0 && (
+                                  {project.subProjects.length > 0 && (
                                     <div className="w-[70%] flex-shrink-0 px-1 relative flex">
                                       <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105 border border-border bg-card/70 opacity-90 flex flex-col w-full h-full">
                                         <CardHeader className="pb-2 px-4 pt-4 flex-shrink-0">
-                                          <CardTitle className="text-sm font-semibold mb-2">{(project as any).subProjects[0].name}</CardTitle>
+                                          <CardTitle className="text-sm font-semibold mb-2">{project.subProjects[0].name}</CardTitle>
                                           <CardDescription className="text-xs mb-3 leading-relaxed line-clamp-3">
-                                            {(project as any).subProjects[0].description}
+                                            {project.subProjects[0].description}
                                           </CardDescription>
                                           <div className="flex flex-wrap gap-1 mb-2">
-                                            {(project as any).subProjects[0].tags.map((tag: string, tagIdx: number) => (
+                                            {project.subProjects[0].tags.map((tag, tagIdx) => (
                                               <span
                                                 key={tagIdx}
                                                 className="px-2 py-0.5 bg-gradient-to-r from-purple-400 to-pink-400 text-white text-xs rounded-full font-medium"
@@ -686,7 +683,7 @@ const Projects = () => {
                                         </CardHeader>
                                         <CardContent className="px-4 pb-4 flex-grow flex flex-col justify-end">
                                           <Button asChild size="sm" variant="outline" className="w-full text-xs py-1.5 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white border-0">
-                                            <a href={(project as any).subProjects[0].path} target="_blank" rel="noopener noreferrer">
+                                            <a href={project.subProjects[0].path} target="_blank" rel="noopener noreferrer">
                                               <ExternalLink className="h-3 w-3 mr-1.5" />
                                               View Project
                                             </a>
@@ -700,10 +697,10 @@ const Projects = () => {
                             </div>
                             
                             {/* Navigation Arrows - Outside the carousel container */}
-                            {(project as any).subProjects.length > 1 && (
+                            {project.subProjects.length > 1 && (
                               <>
                                 <button
-                                  onClick={() => prevHighSchoolProject((project as any).subProjects.length)}
+                                  onClick={() => prevHighSchoolProject(project.subProjects!.length)}
                                   className="absolute left-0 top-1/2 -translate-y-1/2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white p-2.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-200"
                                   aria-label="Previous project"
                                   style={{ zIndex: 9999 }}
@@ -711,7 +708,7 @@ const Projects = () => {
                                   <ChevronLeft className="h-5 w-5" />
                                 </button>
                                 <button
-                                  onClick={() => nextHighSchoolProject((project as any).subProjects.length)}
+                                  onClick={() => nextHighSchoolProject(project.subProjects!.length)}
                                   className="absolute right-0 top-1/2 -translate-y-1/2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white p-2.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-200"
                                   aria-label="Next project"
                                   style={{ zIndex: 9999 }}

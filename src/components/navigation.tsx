@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
@@ -12,13 +12,13 @@ const Navigation = () => {
   const [activeSection, setActiveSection] = useState("home")
   const [openResumePdf, setOpenResumePdf] = useState(false)
 
-  const navItems = [
+  const navItems = useMemo(() => [
     { name: "Home", href: "#home" },
     { name: "About", href: "#about" },
     { name: "Experience", href: "#experience" },
     { name: "Education", href: "#education" },
     { name: "Projects", href: "#projects" },
-  ]
+  ], [])
 
   // Track active section based on scroll position (throttled for performance)
   useEffect(() => {
