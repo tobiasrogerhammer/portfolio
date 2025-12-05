@@ -1,0 +1,155 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-color: #6699cc;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #c8d0e7;
+}
+
+#header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 15%;
+}
+
+#backButton {
+    position: relative;
+    right: 30%;
+    color: #E4EBF5;
+    height: 30%;
+    cursor: pointer;
+}
+
+#quizLogo {
+    height: 80%;
+}
+
+#otherGames {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 200%;
+    transition: .1s ease-in-out;
+    color: #3473c7;
+    background-color: #c8d0e7;
+    width: 50%;
+    padding: 0.5%;
+    border: 0px;
+    border-radius: 10px;
+    margin: 1%;
+}
+
+.leveltext {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    font-size: 100%;
+    word-break: break-all;
+    width: 50%;
+    height: 100%;
+    margin-left: 3%;
+}
+
+.leveltheme {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    font-size: 100%;
+    word-break: break-all;
+    width: 50%;
+    height: 100%;
+    margin-right: 3%;
+}
+
+#gamemenu {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 85%;
+}
+
+.levels {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: .1s ease-in-out;
+    color: #3473c7;
+    background-color: #c8d0e7;
+    margin: 1%;
+    border-radius: 10px;
+    font-size: 200%;
+    border: 0px;
+    width: 65%;
+    height: 12%;
+}
+
+#levelOne:hover {
+    box-shadow: inset .3rem .3rem .6rem #f82c2c, inset -.2rem -.2rem .5rem #e44f4f;
+    font-size: 2.5rem;
+    margin: 1%;
+}
+
+#levelTwo:hover {
+    box-shadow: inset .3rem .3rem .6rem #23710d, inset -.2rem -.2rem .5rem #3a9234;
+    font-size: 2.5rem;
+    margin: 1%;
+}
+
+#levelThree:hover {
+    box-shadow: inset .3rem .3rem .6rem #8a0ac6, inset -.2rem -.2rem .5rem #9e36b3;
+    font-size: 2.5rem;
+    margin: 1%;
+}
+
+#levelFour:hover {
+    box-shadow: inset .3rem .3rem .6rem #ffdf00, inset -.2rem -.2rem .5rem #ffbf00;
+    font-size: 2.5rem;
+    margin: 1%;
+}
+
+#levelFive:hover {
+    box-shadow: inset .6rem .6rem .6rem #1c50ed, inset -.5rem -.5rem .5rem #5557ee;
+    font-size: 2.5rem;
+    margin: 1%;
+}
+
+#otherGames:hover {
+    box-shadow: inset .3rem .3rem .6rem #c8d0e7, inset -.2rem -.2rem .5rem #FFFFFF;
+}
+
+#otherGames:active {
+    box-shadow: inset .6rem .6rem .6rem #c8d0e7, inset -.5rem -.5rem .5rem #FFFFFF;
+}
+
+@media only screen and (max-width: 768px) {
+    #backButton{
+        right: 5%;
+    }
+    .levels {
+        width: 75%;
+        margin: 3%;
+        margin-bottom: 8;
+        font-size: 150%;
+    }
+
+    #otherGames {
+        height: 8%;
+        font-size: 150%;
+    }
+}

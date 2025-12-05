@@ -1,0 +1,19 @@
+# Render Blueprint for Blackjack Java Game
+# Repository: tobiasrogerhammer/blackjack-java
+# Branch: master
+
+services:
+  - type: web
+    name: blackjack-java
+    env: java
+    buildCommand: ./mvnw clean package -DskipTests
+    startCommand: java -jar target/blackjack-web-1.0.0.jar
+    envVars:
+      - key: JAVA_VERSION
+        value: 17
+      - key: SPRING_PROFILES_ACTIVE
+        value: production
+      - key: PORT
+        value: 8080
+    healthCheckPath: /api/game/state
+    plan: free

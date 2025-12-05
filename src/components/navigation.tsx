@@ -20,25 +20,33 @@ const Navigation = () => {
     { name: "Projects", href: "#projects" },
   ]
 
-  // Track active section based on scroll position
+  // Track active section based on scroll position (throttled for performance)
   useEffect(() => {
+    let ticking = false
+    
     const handleScroll = () => {
-      const sections = navItems.map(item => item.href.substring(1))
-      const scrollPosition = window.scrollY + 100
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const sections = navItems.map(item => item.href.substring(1))
+          const scrollPosition = window.scrollY + 100
 
-      for (const section of sections) {
-        const element = document.getElementById(section)
-        if (element) {
-          const { offsetTop, offsetHeight } = element
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section)
-            break
+          for (const section of sections) {
+            const element = document.getElementById(section)
+            if (element) {
+              const { offsetTop, offsetHeight } = element
+              if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+                setActiveSection(section)
+                break
+              }
+            }
           }
-        }
+          ticking = false
+        })
+        ticking = true
       }
     }
 
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [navItems])
 
@@ -51,6 +59,7 @@ const Navigation = () => {
   }
 
   return (
+    <>
     <nav className="fixed top-0 w-full bg-background/80 backdrop-blur-md border-b border-border z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-14 sm:h-16">
@@ -143,15 +152,16 @@ const Navigation = () => {
           </div>
         )}
       </div>
-
-      {/* Resume PDF Viewer Modal */}
-      <PdfViewerModal
-        pdfUrl="/Tobias-resume.pdf"
-        title="Tobias Hammer - Resume"
-        isOpen={openResumePdf}
-        onClose={() => setOpenResumePdf(false)}
-      />
     </nav>
+
+    {/* Resume PDF Viewer Modal - render outside nav to avoid clipping */}
+    <PdfViewerModal
+      pdfUrl="/Tobias-resume.pdf"
+      title="Tobias Hammer - Resume"
+      isOpen={openResumePdf}
+      onClose={() => setOpenResumePdf(false)}
+    />
+    </>
   )
 }
 

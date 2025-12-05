@@ -1,0 +1,615 @@
+{
+    "Module": {
+        "name": "English-Quiz",
+        "quizOne": 10,
+        "quizTwo": 10,
+        "quizThree": 10,
+        "quizFour": 10,
+        "quizFive": 20,
+        "revision": "randomValue"
+    },
+        "quizOne": [{
+                "question": 1,
+                "images": "images/banana.png",
+                "answers": [
+                    "Banana",
+                    "Apple",
+                    "Strawberry",
+                    "Blueberry"
+                ],
+                "correct_answer": 0,
+                "hint": "Likner norske ordet"
+            },
+            {
+                "question": 2,
+                "images": "images/waffle.png",
+                "answers": [
+                    "Pancake",
+                    "Waffle",
+                    "Scones",
+                    "Nuggets"
+                ],
+                "correct_answer": 1,
+                "hint": "Likner norske ordet"
+            },
+            {
+                "question": 3,
+                "images": "images/pie.png",
+                "answers": [
+                    "Taco",
+                    "Steak",
+                    "Pie",
+                    "Mac'N Cheese"
+                ],
+                "correct_answer": 2,
+                "hint": "Mindre enn 4 bokstaver"
+            },
+            {
+                "question": 4,
+                "images": "images/ceasarsalad.png",
+                "answers": [
+                    "Corn Flakes",
+                    "Mushrooms",
+                    "Ceasar Salad",
+                    "Yoghurt"
+                ],
+                "correct_answer": 2,
+                "hint": "En type salat"
+            },
+            {
+                "question": 5,
+                "images": "images/salmon.png",
+                "answers": [
+                    "Tater Tots",
+                    "Bread",
+                    "Fajitas",
+                    "Salmon"
+                ],
+                "correct_answer": 3,
+                "hint": "Ikke bread"
+            },
+            {
+                "question": 6,
+                "images": "images/smores.png",
+                "answers": [
+                    "P&J Sandwich",
+                    "Enchiladas",
+                    "Smores",
+                    "Chicken wings"
+                ],
+                "correct_answer": 2,
+                "hint": "Ett ord"
+            },
+            {
+                "question": 7,
+                "images": "images/cookies.png",
+                "answers": [
+                    "Lasagne",
+                    "BBQ Ribs",
+                    "Apple Pie",
+                    "Cookies"
+                ],
+                "correct_answer": 3,
+                "hint": "Ett ord"
+            },
+            {
+                "question": 8,
+                "images": "images/stroganof.png",
+                "answers": [
+                    "Beef Stroganof",
+                    "Spagetthi and Meatballs",
+                    "Chicken and Rice",
+                    "Pizza"
+                ],
+                "correct_answer": 0,
+                "hint": "Mer enn et ord"
+            },
+            {
+                "question": 9,
+                "images": "images/hotdogs.png",
+                "answers": [
+                    "Nachos",
+                    "Hotdogs",
+                    "Cheese Burger",
+                    "Turkey"
+                ],
+                "correct_answer": 1,
+                "hint": "Et ord"
+            },
+            {
+                "question": 10,
+                "images": "images/burritos.png",
+                "answers": [
+                    "Spaghetti",
+                    "Fried chicken",
+                    "Beef stir fry",
+                    "Burritos"
+                ],
+                "correct_answer": 3,
+                "hint": "Ikke spaghetti"
+            }
+        ],    
+        "quizTwo": [{
+                "question": 1,
+                "images": "images/sink.png",
+                "answers": [
+                    "Fork",
+                    "Glass",
+                    "Blender",
+                    "Sink"
+                ],
+                "correct_answer": 3,
+                "hint": "Rimer på flink"
+            },
+            {
+                "question": 2,
+                "images": "images/knife.png",
+                "answers": [
+                    "Bowl",
+                    "Dishwasher",
+                    "Knife",
+                    "Pokemon"
+                ],
+                "correct_answer": 2,
+                "hint": "K er i ordet"
+            },
+            {
+                "question": 3,
+                "images": "images/mug.png",
+                "answers": [
+                    "A Mug",
+                    "Boiler",
+                    "Bread Knife",
+                    "Spoon"
+                ],
+                "correct_answer": 0,
+                "hint": "2 ord"
+            },
+            {
+                "question": 4,
+                "images": "images/whisk.png",
+                "answers": [
+                    "Coffee maker",
+                    "Waffle Iron",
+                    "Whisk",
+                    "Frying Pan"
+                ],
+                "correct_answer": 2,
+                "hint": "W er i ordet"
+            },
+            {
+                "question": 5,
+                "images": "images/freezer.png",
+                "answers": [
+                    "Toaster",
+                    "Freezer",
+                    "Can Opener",
+                    "Measuring Jug"
+                ],
+                "correct_answer": 1,
+                "hint": "Likner norske ordet"
+            },
+            {
+                "question": 6,
+                "images": "images/spatula.png",
+                "answers": [
+                    "Spatula",
+                    "Corkskrew",
+                    "Oven Gloves",
+                    "Aluminium foil"
+                ],
+                "correct_answer": 0,
+                "hint": "Ikke Corkskrew"
+            },
+            {
+                "question": 7,
+                "images": "images/vegetablepeeler.png",
+                "answers": [
+                    "Fridge",
+                    "Kitchen scales",
+                    "Pizza Cutter",
+                    "Vegetable peeler"
+                ],
+                "correct_answer": 3,
+                "hint": "2 ord"
+            },
+            {
+                "question": 8,
+                "images": "images/teaspoon.png",
+                "answers": [
+                    "Microwave",
+                    "Plastic wrap",
+                    "Teaspoon",
+                    "Kettle"
+                ],
+                "correct_answer": 2,
+                "hint": "Poo er i ordet"
+            },
+            {
+                "question": 9,
+                "images": "images/strainer.png",
+                "answers": [
+                    "Casserole",
+                    "Kitchen scissors",
+                    "Strainer",
+                    "Laddle"
+                ],
+                "correct_answer": 2,
+                "hint": "Rain er i ordet"
+            },
+            {
+                "question": 10,
+                "images": "images/bottles.png",
+                "answers": [
+                    "Bottles",
+                    "Thermos",
+                    "Cutting board",
+                    "Napkin"
+                ],
+                "correct_answer": 0,
+                "hint": "Ikke Thermos"
+        }],
+            "quizThree": [{
+                "question": 1,
+                "images": "images/laptop.png",
+                "answers": [
+                    "Curling Iron",
+                    "Blender",
+                    "Remote control",
+                    "Laptop"
+                ],
+                "correct_answer": 3,
+                "hint": "ikke 'Blender' eller 'Curling iron'"
+            },
+            {
+                "question": 2,
+                "images": "images/radiator.png",
+                "answers": [
+                    "Ear phones",
+                    "Radiator",
+                    "Copier",
+                    "Electric guitar"
+                ],
+                "correct_answer": 1,
+                "hint": "Et ord"
+            },
+            {
+                "question": 3,
+                "images": "images/ceilingfan.png",
+                "answers": [
+                    "Reading light",
+                    "Ceiling fan",
+                    "Printer",
+                    "Computer mouse"
+                ],
+                "correct_answer": 1,
+                "hint": "2 ord"
+            },
+            {
+                "question": 4,
+                "images": "images/digitalcamera.png",
+                "answers": [
+                    "Coffee maker",
+                    "Hair dryer",
+                    "Charger",
+                    "Digital camera"
+                ],
+                "correct_answer": 3,
+                "hint": "Nesten norsk"
+            },
+            {
+                "question": 5,
+                "images": "images/drone.png",
+                "answers": [
+                    "Drone",
+                    "Speaker",
+                    "USB drive",
+                    "MODEM"
+                ],
+                "correct_answer": 0,
+                "hint": "Likt som norsk"
+            },
+            {
+                "question": 6,
+                "images": "images/router.png",
+                "answers": [
+                    "Smartwatch",
+                    "Webcam",
+                    "Router",
+                    "Drill"
+                ],
+                "correct_answer": 2,
+                "hint": "6 bokstaver"
+            },
+            {
+                "question": 7,
+                "images": "images/headphones.png",
+                "answers": [
+                    "Headphones",
+                    "TV",
+                    "Digital thermometer",
+                    "Disco Light"
+                ],
+                "correct_answer": 0,
+                "hint": "Et ord"
+            },
+            {
+                "question": 8,
+                "images": "images/gameconsole.png",
+                "answers": [
+                    "Microwave",
+                    "Phone",
+                    "Game console",
+                    "Light bulbs"
+                ],
+                "correct_answer": 2,
+                "hint": "2 ord"
+            },
+            {
+                "question": 9,
+                "images": "images/amplifier.png",
+                "answers": [
+                    "SD card",
+                    "Amplifier",
+                    "Tablet",
+                    "Fan"
+                ],
+                "correct_answer": 1,
+                "hint": "Mest bokstaver"
+            },
+            {
+                "question": 10,
+                "images": "images/vr.png",
+                "answers": [
+                    "VR",
+                    "Fridge",
+                    "Monitor",
+                    "Radio"
+                ],
+                "correct_answer": 0,
+                "hint": "En forkortelse"
+            }
+        ],
+            "quizFour": [{
+                "question": 1,
+                "images": "images/caps.png",
+                "answers": [
+                    "Caps",
+                    "Boxer shorts",
+                    "Tie",
+                    "Gloves"
+                ],
+                "correct_answer": 0,
+                "hint": "Norsk-engelsk"
+            },
+            {
+                "question": 2,
+                "images": "images/sneakers.png",
+                "answers": [
+                    "Mittons",
+                    "Bowtie",
+                    "Tights",
+                    "Sneakers"
+                ],
+                "correct_answer": 3,
+                "hint": "Flest bokstaver"
+            },
+            {
+                "question": 3,
+                "images": "images/shirt.png",
+                "answers": [
+                    "Tank top",
+                    "Shirt",
+                    "Vest",
+                    "Scarf"
+                ],
+                "correct_answer": 1,
+                "hint": "5 bokstaver"
+            },
+            {
+                "question": 4,
+                "images": "images/socks.png",
+                "answers": [
+                    "Socks",
+                    "Belt",
+                    "Swim suit",
+                    "Suspenders"
+                ],
+                "correct_answer": 0,
+                "hint": "Likner norsk"
+            },
+            {
+                "question": 5,
+                "images": "images/pants.png",
+                "answers": [
+                    "Hat",
+                    "Rain coat",
+                    "Pants",
+                    "Boots"
+                ],
+                "correct_answer": 2,
+                "hint": "Ikke Hat eller Boots"
+            },
+            {
+                "question": 6,
+                "images": "images/jacket.png",
+                "answers": [
+                    "Sunglasses",
+                    "Hoodie",
+                    "Sweatpants",
+                    "Jacket"
+                ],
+                "correct_answer": 3,
+                "hint": "C er i ordet"
+            },
+            {
+                "question": 7,
+                "images": "images/sweater.png",
+                "answers": [
+                    "Track suit",
+                    "High heels",
+                    "Sweater",
+                    "Skirt"
+                ],
+                "correct_answer": 2,
+                "hint": "Begynner på S"
+            },
+            {
+                "question": 8,
+                "images": "images/shorts.png",
+                "answers": [
+                    "Suit",
+                    "Shorts",
+                    "Polo Shirt",
+                    "Singlet"
+                ],
+                "correct_answer": 1,
+                "hint": "Norsk-engelsk"
+            },
+            {
+                "question": 9,
+                "images": "images/jeans.png",
+                "answers": [
+                    "Sneakers",
+                    "Blazer",
+                    "Jeans",
+                    "Flip flops"
+                ],
+                "correct_answer": 2,
+                "hint": "Et ord"
+            },
+            {
+                "question": 10,
+                "images": "images/pajamas.png",
+                "answers": [
+                    "Gym clothes",
+                    "Blouse",
+                    "Pajamas",
+                    "Dress"
+                ],
+                "correct_answer": 2,
+                "hint": "Også et norsk ord"
+            }
+        ],
+            "quizFive": [{
+                "question": 1,
+                "images": "images/banana.png",
+                "answers": "banana",
+                "hint": "Likner norske ordet"
+            },
+            {
+                "question": 2,
+                "images": "images/pie.png",
+                "answers": "pie",
+                "hint": "Mindre enn 4 bokstaver"
+            },
+            {
+                "question": 3,
+                "images": "images/salmon.png",
+                "answers": "salmon",
+                "hint": "Ikke bread"
+            },
+            {
+                "question": 4,
+                "images": "images/cookies.png",
+                "answers": "Ccookies",
+                "hint": "Ett ord"
+            },
+            {
+                "question": 5,
+                "images": "images/hotdogs.png",
+                "answers": "hotdogs",
+                "hint": "Et ord"
+            },
+            {
+                "question": 6,
+                "images": "images/sink.png",
+                "answers": "sink",
+                "hint": "Rimer på flink"
+            },
+            {
+                "question": 7,
+                "images": "images/mug.png",
+                "answers":"a mug",
+                "hint": "2 ord"
+            },
+            {
+                "question": 8,
+                "images": "images/freezer.png",
+                "answers": "freezer",
+                "hint": "Likner norske ordet"
+            },
+            {
+                "question": 9,
+                "images": "images/vegetablepeeler.png",
+                "answers": "vegetable peeler",
+                "hint": "2 ord"
+            },
+            {
+                "question": 10,
+                "images": "images/strainer.png",
+                "answers":"strainer",
+                "hint": "Rain er i ordet"
+            },
+            {
+                "question": 11,
+                "images": "images/laptop.png",
+                "answers": "laptop",
+                "hint": "ikke 'Blender' eller 'Curling iron'"
+            },
+            {
+                "question": 12,
+                "images": "images/ceilingfan.png",
+                "answers": "ceiling fan",
+                "hint": "2 ord"
+            },
+            {
+                "question": 13,
+                "images": "images/drone.png",
+                "answers": "drone",
+                "hint": "Likt som norsk"
+            },
+            {
+                "question": 14,
+                "images": "images/headphones.png",
+                "answers": "headphones",
+                "hint": "Et ord"
+            },
+            {
+                "question": 15,
+                "images": "images/amplifier.png",
+                "answers": "amplifier",
+                "hint": "Mest bokstaver"
+            },
+            {
+                "question": 16,
+                "images": "images/caps.png",
+                "answers": "caps",
+                "hint": "Norsk-engelsk"
+            },
+            {
+                "question": 17,
+                "images": "images/shirt.png",
+                "answers": "shirt",
+                "hint": "5 bokstaver"
+            },
+            {
+                "question": 18,
+                "images": "images/pants.png",
+                "answers": "pants",
+                "hint": "Ikke Hat eller Boots"
+            },
+            {
+                "question": 19,
+                "images": "images/sweater.png",
+                "answers": "sweater",
+                "hint": "Begynner på S"
+            },
+            {
+                "question": 20,
+                "images": "images/jeans.png",
+                "answers": "jeans",
+                "hint": "Et ord"
+            }
+        ]            
+}

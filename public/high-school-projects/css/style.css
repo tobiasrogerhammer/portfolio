@@ -1,0 +1,185 @@
+:root {
+    --primary-color: #6699cc;
+    --secondary-color: #F8F8F8;;
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --tertiary-color: #c8d0e7;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--primary-color);
+    font-family: var(--font-family);
+    color: var(--secondary-color);
+}
+
+
+#welcome {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-weight: 700;
+    font-size: 3rem;
+    font-family: Open Sans Bold;
+    background-color: #3473c7;
+    width: 100%;
+    height: 10%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+}
+
+#jokerLogo {
+    width: 75%;
+    height: 100%;
+    margin-left: 3%;
+}
+
+#quizLogo {
+    height: 75%;
+}
+
+#reactionLogo {
+    height: 70%;
+}
+
+#jsLogo {
+    height: 70%;
+}
+
+#oopLogo {
+    height: 70%;
+}
+
+#joker:hover {
+    box-shadow: inset .3rem .3rem .6rem #f82c2c, inset -.2rem -.2rem .5rem #e44f4f;
+}
+
+#quiz:hover {
+    box-shadow: inset .3rem .3rem .6rem #23710d, inset -.2rem -.2rem .5rem #3a9234;
+}
+
+#reactionTest:hover {
+    box-shadow: inset .3rem .3rem .6rem #8a0ac6, inset -.2rem -.2rem .5rem #9e36b3;
+}
+
+#easyjs:hover {
+    box-shadow: inset .3rem .3rem .6rem #ffdf00, inset -.2rem -.2rem .5rem #ffbf00;
+}
+
+#oopAge:hover {
+    box-shadow: inset .6rem .6rem .6rem #1c50ed, inset -.5rem -.5rem .5rem #5557ee;
+}
+
+#gamemenu {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10%;
+}
+
+.project {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--font-family);
+    background-color: var(--primary-color);
+    width: 25%;
+    height: 20%;
+    padding: 1%;
+    border-radius: 10px;
+    font-size: 2rem;
+    border: 0px;
+    margin: 2%;
+    box-shadow: .3rem .3rem .6rem var(--tertiary-color), -.2rem -.2rem .5rem #FFFFFF;
+    transition: .1s ease-in-out;
+    color: var(--secondary-color);
+    cursor: pointer;
+}
+
+.projectName {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    font-size: 100%;
+    width: 100%;
+    height: 100%;
+    word-break: break-word;
+    margin-left: 5%;
+    text-align: center;
+}
+
+.project:hover {
+    box-shadow: inset .6rem .6rem .6rem #4a4a4a, inset -.5rem -.5rem .5rem #6c6c6c;
+    transform: translateY(-5px);
+}
+@media (max-width: 1100px){
+    #gamemenu {
+        height: 60%;
+        justify-content: center;
+    }
+
+    .project {
+        padding: 1%;
+        margin: 2%;
+        font-size: 1.5rem;
+        width: 30%;
+        height: 15%;
+    }
+}
+
+@media (max-width: 768px) {
+    #welcome {
+        font-size: 2rem;
+    }
+
+    .project {
+        padding: 2%;
+        margin: 3%;
+        font-size: 1.5rem;
+        width: 75%;
+        height: 7%;
+    }
+
+    #gamemenu {
+        height: 100%;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: center;
+    }
+
+    #jokerLogo {
+        width: 50%;
+    }
+
+    #quizLogo {
+        height: 70%;
+    }
+
+    #reactionLogo {
+        height: 70%;
+    }
+
+    #jsLogo {
+        height: 70%;
+    }
+
+    #oopLogo {
+        height: 50%;
+    }
+
+}

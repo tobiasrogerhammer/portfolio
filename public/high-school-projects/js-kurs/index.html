@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="CSS/style.css" rel="stylesheet">
+        <title>Kurs Skoleoppgaver</title>
+    </head>
+    <body>
+        <div id="square"></div>
+    </body>
+    <script>
+    var square = document.getElementById("square");
+        var pos = 0;
+        var id = setInterval(frame, 1);
+        function frame() {
+          if (pos == 1750) {
+            clearInterval(id);
+          } else {
+            pos++;
+            square.style.left = pos + 'px'; 
+          }
+        }
+        </script>
+</html>

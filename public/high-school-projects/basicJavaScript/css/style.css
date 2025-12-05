@@ -1,0 +1,300 @@
+body {
+    background-color: #6699cc;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+#headline{
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+    background-color: #3473c7;
+    color: #fff;
+}
+
+#backButton {
+    position: relative;
+    right: 25%;
+    height: 30%;
+    cursor: pointer;
+}
+
+h1 {
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
+    font-size: 200%;
+}
+
+#oppgaver {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 95%;
+    margin-top: 15%;
+}
+
+.collapsible {
+    flex-direction: column;
+    padding: 18px;
+    margin: 1%;
+    width: 75%;
+    border: none;
+    text-align: left;
+    outline: none;
+    border-radius: 10px;
+    font-size: 220%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #E4EBF5;
+    display: flex;
+    height: 35%;
+    justify-content: center;
+    align-items: center;
+    transition: .1s ease-in-out;
+    color: #000000;
+    cursor: pointer;
+
+}
+
+#one:hover {
+    box-shadow: inset .3rem .3rem .6rem #f82c2c, inset -.2rem -.2rem .5rem #e44f4f;
+    margin: 1%;
+}
+
+#two:hover {
+    box-shadow: inset .3rem .3rem .6rem #23710d, inset -.2rem -.2rem .5rem #3a9234;
+    margin: 1%;
+}
+
+#three:hover {
+    box-shadow: inset .3rem .3rem .6rem #8a0ac6, inset -.2rem -.2rem .5rem #9e36b3;
+    margin: 1%;
+}
+
+#four:hover {
+    box-shadow: inset .6rem .6rem .6rem #1c50ed, inset -.5rem -.5rem .5rem #5557ee;
+    margin: 1%;
+}
+
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 75%;
+    margin: 10px;
+    display: none;
+    overflow: hidden;
+    background-color: #E4EBF5;
+    padding: 1%;
+    border-radius: 10px;
+}
+
+.languageJavascript {
+    height: 5%;
+    width: 80%;
+    border-radius: 5px;
+    padding: 3.5%;
+    font-size: 130%;
+    background-color: rgb(164, 164, 164);
+    display: flex;
+    text-align: left;
+    align-items: center;
+    word-break: break-all;
+    overflow: scroll;
+}
+
+pre {
+    height: 25%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+#calculators {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+}
+
+#arealCalculator {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    width: 30%;
+    margin: 2%;
+}
+
+#triangleCalculator {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    width: 30%;
+    margin: 2%;
+}
+
+#calculatorOutput {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 90%;
+    padding: 2%;
+    margin: 2%;
+    background-color: rgb(164, 164, 164);
+    border-radius: 10px;
+}
+
+#triangleOutput {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 90%;
+    padding: 2%;
+    margin: 2%;
+    background-color: rgb(164, 164, 164);
+    border-radius: 10px;
+}
+
+#submit {
+    margin: 2%;
+    cursor: pointer;
+}
+
+#submitT {
+    margin: 2%;
+    cursor: pointer;
+}
+
+#checkNationality {
+    display: flex;
+    font-size: 110%;
+}
+
+#inputField {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 100%;
+    width: 120%;
+}
+
+#nasjonalitetForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    width: 30%;
+    margin: 2%;
+}
+
+#nasjonalitetKnapp {
+    display: flex;
+    width: 123%;
+    font-size: 100%;
+    margin-top: 2%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#nasjonalitetOutput {
+    background-color: rgb(164, 164, 164);
+    padding: 2%;
+    border-radius: 15px;
+    text-align: center;
+    height: 100%;
+    padding: 2%;
+}
+
+#gameContainer {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+}
+
+#secretInput {
+    display: flex;
+    width: 120%;
+    margin: 2%;
+    font-size: 100%;
+}
+
+#secretSubmit {
+    display: flex;
+    width: 120%;
+    margin: 2%;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    font-size: 100%;
+}
+
+@media (max-width: 768px) {
+
+    #backButton{
+        left: 2%;
+    }
+    #oppgaver{
+        margin-top: 25%;
+    }
+    .collapsible {
+        margin: 8%;
+    }
+
+    .content {
+        align-items: center;
+    }
+
+    pre {
+        width: 95%;
+    }
+
+    #calculators{
+        justify-content: center;
+    }
+
+    #checkNationality{
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #nasjonalitetForm{
+        width: 90%;
+    }
+
+    #inputField{
+        width: 95%;
+        font-size: 80%;
+    }
+    #nasjonalitetKnapp{
+        width: 95%;
+    }
+    #gameContainer{
+        width: 95%;
+    }
+    #secretInput{
+        width: 95%;
+    }
+    #secretSubmit{
+        width: 95%;
+    }
+    .languageJavascript{
+        font-size: 100%;
+    }
+}

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Basic JavaScript Tobias</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/style.css">
+    <script defer src="js/collapsibles.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('pre code').html(function (_, html) {
+                return html.replace(/\s*\n[\t\s]*/g, '\n');
+            });
+        });
+    </script>
+
+
+</head>
+
+<body>
+    <div id="headline">
+        <svg id="backButton" onclick="window.location='/';" height="18px"
+            viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" direction="left">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M4.243 2.306a1.056 1.056 0 00-.01.009L1.289 5.297a1 1 0 000 1.406l2.946 2.982a1 1 0 001.423 0l.045-.045a1 1 0 000-1.406L4.483 7h6.512a1 1 0 100-2H4.482l1.22-1.234a1 1 0 000-1.406l-.045-.045a1 1 0 00-1.414-.009z"
+                fill="currentColor"></path>
+        </svg>
+        <h1>Tobias basic Javascript</h1>
+    </div>
+    <div id="oppgaver">
+        <button type="button" class="collapsible" id="one">Oppgave 1</button>
+        <div class="content">
+            <h3>Hva skriver du i javascript dersom du vil gi variablen "test" verdien "8"? Hvilken datatype er dette?
+            </h3>
+            <p class="svar">
+                Denne variablen er et tall og den vil derfor antageligvis ha verdien Int. For å gi test-variablen
+                verdien "8" i Javascript kan du bruke denne koden:
+                <br></br>
+            <pre>
+                                <code class="languageJavascript">
+                                    var test = 8;
+                                </code>
+                            </pre>
+            </p>
+            <h3>Hva skriver du i javascript dersom du vil gi variablen "test" verdien "testverdi"? Hvilken datatype er
+                dette?</h3>
+            <p class="svar">
+                Denne variablen er bokstaver og den vil derfor antageligvis ha verdien String. For å gi test-variablen
+                verdien "testverdi" i Javascript kan du bruke denne koden:
+                <br></br>
+            <pre>
+                                <code class="languageJavascript">
+                                    var test = 'testverdi';
+                                </code>
+                            </pre>
+            </p>
+            <h3>Hva skriver du dersom du vil regne ut 2 * 3 og sette resultatet inn i variabelen produkt?</h3>
+            <p class="svar">
+                For å regne ut 2*3 I javascript og gjøre det til en variabel kan du bruke denne koden:
+                <br></br>
+            <pre>
+                                <code class="languageJavascript">
+                                    var produkt = 2*3;
+                                </code>
+                            </pre>
+            </p>
+            <h3>Hva skriver du dersom du vil regne ut verdien av brøken 2/3 og sette
+                resultatet inn i variabelen broek?</h3>
+            <p class="svar">
+                For å regne ut ver brøken2/3 og gjøre det til variabelen broek kan du bruke denne koden:
+                <br></br>
+            <pre>
+                                <code class="languageJavascript"> 
+                                    var broek = 2/3;
+                                </code>
+                            </pre>
+            </p>
+            <h3>Lag et program der du tester om alle kommandoene over fungerer ved
+                å bruke console.log() til å skrive ut innholdet av variablene.</h3>
+            <p class="svar">
+                For å få alle disse variablene i console log kan du bruke denne koden:
+                <br></br>
+            <pre>
+                                <code class="languageJavascript">
+                                    var test = 8;
+                                    var testVerdi = 'testverdi';
+                                    var produkt = 2*3;
+                                    var broek = 2/3;
+                                    console.log(test)
+                                    console.log(testVerdi)
+                                    console.log(produkt)
+                                    console.log(broek)
+                                </code>
+                            </pre>
+            </p>
+        </div>
+        <button type="button" class="collapsible" id="two">Oppgave 2</button>
+        <div class="content">
+            <h3>Lag et program som regner ut arealet av et rektangel. Lengden er 8 og bredden er 8. Skriv dette som
+                funksjon i python. </h3>
+            <p class="svar">
+                For å regne ut arealet av et rektangel kan man putte matte-formelen i en variabel. For å gjøre dette i
+                Javascript kan du bruke denne koden:
+                <br></br>
+            <pre>
+                             <code class="languageJavascript">
+                                var test = 8 * 8;
+                             </code>
+                            </pre>
+            </p>
+            <h3>Lag et program som regner ut arealet av en trekant. Formelen for arealet av en trekant er A = l * b / 2
+            </h3>
+            <p class="svar">
+                Denne variablen er bokstaver og den vil derfor antageligvis ha verdien String. For å gi test-variablen
+                verdien "testverdi" i Javascript kan du bruke denne koden:
+                <br></br>
+            <pre>
+                             <code class="languageJavascript">
+                                var trekant = 8 * 6 / 2;
+                             </code>
+                            </pre>
+            </p>
+            <h3>Lag et program som heter areal(lengde, bredde). Denne har to input-parametre; lengde og bredde.
+                Funksjonen skal
+                regne ut både arealet av et rektangel og en trekant. Men du skal ikke
+                skrive utregningen på nytt.
+                Returner arealet fra rektangel og en trekant. Bruk valgfrie sider som
+                lengde og bredde.</h3>
+            <p class="svar" id="calculator">
+                For å regne ut arealet av en valgfri triangel i javascript og gjøre det til en variabel kan du bruke
+                koden under, for en firkant gjelder samme kode utenom å dele på to og endre til riktige verdier på html:
+                <br></br>
+            <pre>
+                             <code class="languageJavascript">
+                                document.getElementById('triangleCalculator').addEventListener('submit', function(e) {
+                                    e.preventDefault();
+                                    const lengde = document.getElementById('lengde').value;
+                                    const bredde = document.getElementById('bredde').value;
+                                  
+                                    document.getElementById('triangleOutput').innerHTML = (lengde * bredde) / 2 + "cm i annen";
+                                  });
+                             </code>
+                            </pre>
+            <div id="calculators">
+                <form id="arealCalculator">
+                    <label for="lengde">Lengde:</label>
+                    <input type="number" id="lengde" name="lengde">
+                    <label for="bredde">Bredde:</label>
+                    <input type="number" id="bredde" name="bredde">
+                    <input type="submit" id="submit" value="Submit">
+                    <div id="calculatorOutput">Areal rektangel</div>
+                </form>
+                <form id="triangleCalculator">
+                    <label for="lengden">Lengde:</label>
+                    <input type="number" id="lengden" name="lengden">
+                    <label for="bredden">Bredde:</label>
+                    <input type="number" id="bredden" name="bredden">
+                    <input type="submit" id="submitT" value="Submit">
+                    <div id="triangleOutput">Areal triangel</div>
+                </form>
+            </div>
+            </p>
+        </div>
+        <button type="button" class="collapsible" id="three">Oppgave 3</button>
+        <div class="content">
+            <h3>Lag et program der brukeren av programmet oppgir
+                om man er norsk eller svensk. Dette skal gjøres ved at brukeren skriver inn "n" dersom
+                man er norsk eller "s" dersom man er svensk. Deretter skal
+                programmet skrive enten "Du er norsk." eller "Du er svensk." ut ifra
+                svaret til brukeren. </h3>
+            <p class="svar">
+                Denne variablen er et tall og den vil derfor antageligvis ha verdien Int. For å gi test-variablen
+                verdien "8" i Javascript kan du bruke denne koden:
+                <br></br>
+            <pre>
+                                <code class="languageJavascript">
+                                    function checkNationality() {
+                                        var input = document.getElementById("inputField").value;
+                                        var output = document.getElementById("output");
+                                      
+                                        if (input === "n") {
+                                          output.innerHTML = "Du er norsk.";
+                                        } else if (input === "s") {
+                                          output.innerHTML = "Du er svensk.";
+                                        } else {
+                                          output.innerHTML = "Ugyldig nasjonalitet. Skriv inn 'n' for norsk eller 's' for svensk.";
+                                        }
+                                      }
+                                </code>
+                            </pre>
+            <div id="checkNationality">
+                <form id="nasjonalitetForm">
+                    <input type="text" id="inputField" placeholder="Skriv 'n' for norsk eller 's' for svensk" />
+                    <button type="button" id="nasjonalitetKnapp" onclick="checkNationality()">Submit</button>
+                    <p id="nasjonalitetOutput">Din nasjonalitet vises her</p>
+                </form>
+            </div>
+            </p>
+        </div>
+        <button type="button" class="collapsible" id="four">Oppgave 4/5</button>
+        <div class="content">
+            <h3>Lag en funksjon hvor brukeren kan velge et tall mellom 1-100. Deretter få maskinen til å gjette hvilket
+                tall du har valgt basert på om tallet er høyere eller lavere enn forrige gjett.</h3>
+            <p class="svar">
+                Denne koden definerer funksjonen "startGame()" som ber spilleren må velge et tall mellom 1 og 100, og
+                scriptet prøver å gjette tallet. Funksjonen får først tallet fra brukeren fra "secret-input" på
+                HTML-siden. Deretter bruker den en while-loop for å sjekke om det hemmelige nummeret er mellom 1 og 100,
+                og om det er et tall. Hvis ikke blir spilleren bedt om å oppgi et gyldig nummer ved hjelp av
+                "prompt"-funksjonen.
+
+                Jeg bruker deretter en til while-løkke for å gjette det hemmelige nummeret. Koden starter med å gjette
+                det midterste tallet mellom minimum og maksimum mulige verdier og oppdaterer minimum og maksimum basert
+                på om gjetningen er for høy eller lav. Forsøkene og antall forsøk lagres så de kan vises etter svaret er
+                funnet.
+
+                Til slutt oppdateres elementene på HTML-siden med info om "guesses", "secret-number", "attempts". Dette
+                er koden jeg har brukt:
+                <br></br>
+            <pre>
+                             <code class="languageJavascript">
+                                function startGame() {
+                                    // Get the secret number from the input element
+                                    let min = 1;
+                                    let max = 100;
+                                    let secretNumber = parseInt(document.getElementById("secret-input").value);
+                                  
+                                    while (secretNumber < min || secretNumber > max || isNaN(secretNumber)) {
+                                        secretNumber = parseInt(prompt("Invalid input. Please enter a number between " + min + " and " + max + ":"));
+                                    }
+                                  
+                                    // Start guessing
+                                    let guess;
+                                    let attempts = 1;
+                                    let guesses = [];
+                                    guess = Math.floor((max + min) / 2);
+                                    guesses.push(guess);
+                                  
+                                    while (guess !== secretNumber) {
+                                        if (guess > secretNumber) {
+                                            max = guess - 1;
+                                        } else {
+                                            min = guess + 1;
+                                        }
+                                        guess = Math.floor((max + min) / 2);
+                                        guesses.push(guess);
+                                        attempts++;
+                                    }
+                                  
+                                    // display the result in the HTML
+                                    document.getElementById("guesses").innerHTML = guesses;
+                                    document.getElementById("secret-number").innerHTML = secretNumber;
+                                    document.getElementById("attempts").innerHTML = attempts;
+                                    document.getElementById("result").innerHTML = "The computer found it in " + attempts + " attempts";
+                                  }
+                             </code>
+                            </pre>
+            <div id="gameContainer">
+                <label for="secretInput">Vennligst velg et nummer mellom 1 og 100: </label>
+                <input type="number" id="secretInput" min="1" max="100">
+                <button id="secretSubmit" type="button" onclick="startGame()">Submit</button>
+                <p>Maskinens forsøk: <span id="guesses"></span></p>
+                <p>Ditt nummer: <span id="secretNumber"></span></p>
+                <p>Antall forsøk: <span id="attempts"></span></p>
+                <p>Resultat: <span id="result"></span></p>
+            </div>
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

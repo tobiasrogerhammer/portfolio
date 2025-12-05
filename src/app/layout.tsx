@@ -6,11 +6,15 @@ import { ThemeProvider } from "@/contexts/ThemeContext";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap", // Optimize font loading
+  preload: true,
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap", // Optimize font loading
+  preload: false, // Only preload primary font
 });
 
 export const metadata: Metadata = {
@@ -39,13 +43,13 @@ export const metadata: Metadata = {
   creator: "Tobias Hammer",
   icons: {
     icon: [
-      { url: "/th-logo.png", sizes: "any" },
-      { url: "/th-logo.png", sizes: "32x32", type: "image/png" },
-      { url: "/th-logo.png", sizes: "16x16", type: "image/png" },
+      { url: "/logo/icon.svg", type: "image/svg+xml" },
+      { url: "/logo/favicon-64.png", sizes: "64x64", type: "image/png" },
+      { url: "/logo/favicon-192.png", sizes: "192x192", type: "image/png" },
     ],
-    shortcut: "/th-logo.png",
+    shortcut: "/logo/icon.svg",
     apple: [
-      { url: "/th-logo.png", sizes: "180x180" },
+      { url: "/logo/apple-touch-icon-180.png", sizes: "180x180" },
     ],
   },
   manifest: "/site.webmanifest",

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="/ow/assets/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/ow/assets/favicons/favicon-16x16.png">
+    <link rel="stylesheet" href="CSS/style.css">
+    <script src="JS/joker.js" defer></script>
+    <title> Tobias Joker </title>
+</head>
+
+<body onload="jokerGame.startGame();jokerGame.playgame();">
+    <div id="content">
+        <div id="info">
+            <div id="logo">
+                <svg id="backButton" onclick="window.location='/';" height="18px"
+                    viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                    direction="left">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M4.243 2.306a1.056 1.056 0 00-.01.009L1.289 5.297a1 1 0 000 1.406l2.946 2.982a1 1 0 001.423 0l.045-.045a1 1 0 000-1.406L4.483 7h6.512a1 1 0 100-2H4.482l1.22-1.234a1 1 0 000-1.406l-.045-.045a1 1 0 00-1.414-.009z"
+                        fill="currentColor"></path>
+                </svg>
+                <img alt="Joker" src="//www.norsk-tipping.no/staticimages/ntds/logos/joker/joker-full-color-red.svg"
+                    id="jokerLogo">
+            </div>
+            <div id="header">
+                <h1>Joker-kandidatens prøvespill</h1>
+            </div>
+            <div id="intro">
+                Trekk tallene og se om du vinner!
+            </div>
+        </div>
+        <div id="gameContainer">
+            <img src="image/jokerHat.png" id="jokerHat">
+            <div id="gameAndPrices">
+                <div id="spill">
+                    <div id="gamePlay">
+                        <div class="item">
+                            <button id="up0" class="up" type="button">^</button>
+                            <button id="btn0" class="btnMiddle" type="button"></button>
+                            <button id="down0" class="down" type="button">v</button>
+                        </div>
+                        <div class="item">
+                            <button id="up1" class="up" type="button">^</button>
+                            <button id="btn1" class="btnMiddle" type="button"></button>
+                            <button id="down1" class="down" type="button">v</button>
+                        </div>
+                        <div class="item">
+                            <button id="up2" class="up" type="button">^</button>
+                            <button id="btn2" class="btnMiddle" type="button"></button>
+                            <button id="down2" class="down" type="button">v</button>
+                        </div>
+                        <div class="item">
+                            <button id="up3" class="up" type="button">^</button>
+                            <button id="btn3" class="btnMiddle" type="button"></button>
+                            <button id="down3" class="down" type="button">v</button>
+                        </div>
+                        <div class="item">
+                            <button id="up4" class="up" type="button">^</button>
+                            <button id="btn4" class="btnMiddle" type="button"></button>
+                            <button id="down4" class="down" type="button">v</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="prices">
+                    <div class="priceText" id="priceFive">2 196 000 kr</div>
+                    <div class="priceText" id="priceFour">1 464 000 kr</div>
+                    <div class="priceText" id="priceThree">1 010 000 kr</div>
+                    <div class="priceText" id="priceTwo">722 000 kr</div>
+                    <div class="priceText" id="priceOne">535 000 kr</div>
+                    <div class="priceText" id="priceZero">412 000 kr</div>
+                </div>
+            </div>
+            <button class="start_game" id="replay" type="button">Spill på nytt</button>
+        </div>
+    </div>
+</body>
+
+</html>

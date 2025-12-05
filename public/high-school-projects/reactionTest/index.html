@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/style.css">
+    <script src="JS/timers.js"></script>
+    <title>Reaction test</title>
+</head>
+
+<body>
+    <div id="backGround">
+        <div id="header">
+            <svg id="backButton" onclick="window.location='/';" height="18px"
+                viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" direction="left">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M4.243 2.306a1.056 1.056 0 00-.01.009L1.289 5.297a1 1 0 000 1.406l2.946 2.982a1 1 0 001.423 0l.045-.045a1 1 0 000-1.406L4.483 7h6.512a1 1 0 100-2H4.482l1.22-1.234a1 1 0 000-1.406l-.045-.045a1 1 0 00-1.414-.009z"
+                    fill="currentColor"></path>
+            </svg>
+            <div id="gameName">Reaction test</div>
+            <img src="replay.png" id="replay" onclick="resetGame();">
+        </div>
+
+        <div id="game">
+            <div id="boxes">
+                <div class="box" id="box1"></div>
+                <div class="box" id="box2"></div>
+                <div class="box" id="box3"></div>
+            </div>
+            <img src="clock.png" id="clock">
+            <div id="timer"></div>
+            <div id="explanation">When the red box turns green, tap as quickly as you can.</div>
+                <button id="start" onclick="startGame();">Tap to start!</button>
+                <button id="stopbutton" onclick="stopTimer();setAverageReactionTime();"></button>
+            <div id="average">Average of 5:</div>
+            <div id="bestScore">Best average:</div>
+        </div>
+    </div>
+</body>
+
+</html>

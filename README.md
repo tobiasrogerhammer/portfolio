@@ -110,26 +110,59 @@ The app can be deployed to any platform that supports Next.js:
 - **Icons**: Lucide React
 - **Fonts**: Geist Sans & Mono
 
+## Included Projects
+
+### Blackjack Java Game
+
+A Spring Boot web application located in the `blackjack-java/` directory. This interactive Blackjack game features:
+
+- REST API backend with Spring Boot
+- Web interface with HTML/CSS/JavaScript
+- Card dealing and game logic
+- Player betting system
+
+To run the Java project locally:
+
+```bash
+cd blackjack-java
+./mvnw spring-boot:run
+```
+
+The game will be available at `http://localhost:8080/`
+
 ## Project Structure
 
 ```
-src/
-├── app/
-│   ├── globals.css
-│   ├── layout.tsx
-│   └── page.tsx
-├── components/
-│   ├── ui/
-│   │   ├── button.tsx
-│   │   └── card.tsx
-│   ├── about.tsx
-│   ├── contact.tsx
-│   ├── footer.tsx
-│   ├── hero.tsx
-│   ├── navigation.tsx
-│   └── projects.tsx
-└── lib/
-    └── utils.ts
+portfolio/
+├── src/
+│   ├── app/
+│   │   ├── globals.css
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── components/
+│   │   ├── ui/
+│   │   │   ├── button.tsx
+│   │   │   └── card.tsx
+│   │   ├── about.tsx
+│   │   ├── contact.tsx
+│   │   ├── footer.tsx
+│   │   ├── hero.tsx
+│   │   ├── navigation.tsx
+│   │   └── projects.tsx
+│   └── lib/
+│       └── utils.ts
+├── blackjack-java/
+│   ├── pom.xml
+│   ├── mvnw
+│   ├── src/
+│   │   └── main/
+│   │       ├── java/
+│   │       └── resources/
+│   ├── README.md
+│   ├── Dockerfile
+│   └── render.yaml
+└── public/
+    └── ...
 ```
 
 ## Contributing

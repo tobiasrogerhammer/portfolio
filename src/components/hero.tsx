@@ -39,7 +39,7 @@ const Hero = () => {
 
           {/* Title */}
           <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-8 text-foreground tracking-wide animate-fade-in-up animation-delay-400">
-            Developer / Tech enthusiast / Entrepreneur
+            Developer / Problem Solver / Entrepreneur
           </h2>
 
           {/* Description */}

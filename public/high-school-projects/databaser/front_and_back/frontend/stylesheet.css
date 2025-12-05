@@ -1,0 +1,122 @@
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: #E4EBF5;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  justify-content: center;
+  align-items: center;
+  }
+  #backButton{
+    position: relative;
+    right: 45%;
+    height: 50px;
+    color: #717e9c;
+    cursor: pointer;
+  }
+  header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  h1{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 200%;
+    color: #717e9c;
+    text-align: center;
+}
+
+  #SQLTable{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #E4EBF5;
+    padding: 5%;
+    margin: 1%;
+    flex-wrap: wrap;
+    width: 80%;
+    overflow: hidden;
+  }
+  tbody{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+  }
+  tr{
+    display: flex;
+    flex-direction: row;
+    width: 30%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  th {
+    display: flex;
+    flex-direction: row;
+    padding: 5%;
+    border: 2px solid;
+    margin: 3%;
+    width: 100%;
+  }
+
+  #buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: row;
+    width: 90%;
+    height: 25%;
+  }
+  #consoleTest{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 45%;
+    height: 100%;
+    background-color: #E4EBF5;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: .3rem .3rem .6rem #c8d0e7, -.2rem -.2rem .5rem #FFFFFF;
+    font-size: 180%;
+    padding: 2%;
+    margin: 2%;
+    margin-left: 10%;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+#consoleTest:hover {
+  box-shadow: inset .3rem .3rem .6rem #c8d0e7, inset -.2rem -.2rem .5rem #FFFFFF;
+}
+
+#consoleTest:active {
+  box-shadow: inset .6rem .6rem .6rem #c8d0e7, inset -.5rem -.5rem .5rem #FFFFFF;
+}
+#databaseTest{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 45%;
+  height: 100%;
+  background-color: #E4EBF5;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: .3rem .3rem .6rem #c8d0e7, -.2rem -.2rem .5rem #FFFFFF;
+  font-size: 180%;
+  padding: 2%;
+  margin: 2%;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+#databaseTest:hover {
+  box-shadow: inset .3rem .3rem .6rem #c8d0e7, inset -.2rem -.2rem .5rem #FFFFFF;
+}
+
+#databaseTest:active {
+  box-shadow: inset .6rem .6rem .6rem #c8d0e7, inset -.5rem -.5rem .5rem #FFFFFF;
+}

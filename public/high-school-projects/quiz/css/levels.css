@@ -1,0 +1,328 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-color: #6699cc;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #003f87;
+}
+
+h1 {
+    font-size: 300%;
+}
+
+#game {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-content: center;
+}
+
+#header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    height: 10%;
+}
+
+#mainMenu {
+    width: 15%;
+    height: 65%;
+    margin: 1%;
+    border-radius: 10px;
+    font-size: 200%;
+    text-align: center;
+    vertical-align: middle;
+    word-break: break-all;
+}
+
+#progressbarBorder {
+    margin: auto;
+    margin-right: 20%;
+    width: 60%;
+    height: 60%;
+    justify-content: left;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    border-radius: 10px 10px 10px 10px;
+    background-color: #E4EBF5;
+}
+
+#hint {
+    display: flex;
+    width: 30%;
+    height: 5%;
+    justify-content: center;
+    font-size: 200%;
+    border-radius: 10px;
+    word-break: break-all;
+}
+
+#status {
+    width: 0%;
+    height: 100%;
+    border-radius: 10px 0px 0px 10px;
+    background-color: #90EE90;
+}
+
+#redStatus {
+    width: 0%;
+    height: 100%;
+    border-radius: 10px 0px 0px 10px;
+    background-color: #d54040;
+}
+
+#status-text {
+    position: fixed;
+    left: 48%;
+}
+
+#answers {
+    width: 95%;
+    height: 35%;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    word-break: break-all;
+}
+
+.answer {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #E4EBF5;
+    width: 40%;
+    height: 30%;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 10px;
+    font-size: 200%;
+    border: 0px;
+    transition: .1s ease-in-out;
+    color: #003f87;
+    cursor: pointer;
+}
+
+#answer1:hover {
+    box-shadow: inset .3rem .3rem .6rem #f82c2c, inset -.2rem -.2rem .5rem #e44f4f;
+    font-size: 2.5rem;
+}
+
+#answer2:hover {
+    box-shadow: inset .3rem .3rem .6rem #23710d, inset -.2rem -.2rem .5rem #3a9234;
+    font-size: 2.5rem;
+}
+
+#answer3:hover {
+    box-shadow: inset .3rem .3rem .6rem #8a0ac6, inset -.2rem -.2rem .5rem #9e36b3;
+    font-size: 2.5rem;
+}
+
+#answer4:hover {
+    box-shadow: inset .3rem .3rem .6rem #ffdf00, inset -.2rem -.2rem .5rem #ffbf00;
+    font-size: 2.5rem;
+}
+
+#hint:hover{
+    box-shadow: inset .3rem .3rem .6rem #c8d0e7, inset -.2rem -.2rem .5rem #FFFFFF;
+}
+
+#mainMenu:hover{
+    box-shadow: inset .3rem .3rem .6rem #c8d0e7, inset -.2rem -.2rem .5rem #FFFFFF;
+}
+
+#answerSumbit:hover{
+    box-shadow: inset .3rem .3rem .6rem #c8d0e7, inset -.2rem -.2rem .5rem #FFFFFF;
+    font-size: 2.5rem;
+}
+
+.answer:active {
+    box-shadow: inset .6rem .6rem .6rem #c8d0e7, inset -.5rem -.5rem .5rem #FFFFFF;
+}
+
+.fruitIMG {
+    border-radius: 10px;
+    height: 250px;
+    border: solid 0.1px #E4EBF5;
+}
+
+#blur {
+    filter: blur(0px);
+    display: flex;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+}
+
+#next {
+    height: 100vh;
+    width: 100vh;
+    display: none;
+    flex-direction: column;
+    z-index: 1;
+    align-items: center;
+}
+
+#nextAnswers {
+    height: 100px;
+    width: 330px;
+}
+
+#nextText {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: black;
+    font-size: 100px;
+    color: #003f87;
+}
+
+#question {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#final {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    white-space: pre-line;
+    font-size: 200%;
+}
+
+#results {
+    background-color: #E4EBF5;
+    border: 0px;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 7px;
+}
+
+.cor {
+    color: green;
+    font-weight: bold;
+}
+
+.wrong {
+    color: red;
+    font-weight: bold;
+}
+
+#mainMenuF {
+    width: 15%;
+    height: 5%;
+    margin: 1%;
+    border-radius: 10px;
+    font-size: 100%;
+    padding: 1%;
+    text-align: center;
+    vertical-align: middle;
+    position: fixed;
+    top: 2%;
+    left: 1%;
+}
+
+#retake {
+    margin: 1%;
+    border-radius: 10px;
+    font-size: 130%;
+    padding: 2%;
+    text-align: center;
+    vertical-align: middle;
+    position: fixed;
+    top: 1%;
+    right: 1%;
+    cursor: pointer;
+}
+
+#answerInput {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #E4EBF5;
+    width: 40%;
+    height: 20%;
+    font-size: 2rem;
+    border: 0px;
+    transition: .1s ease-in-out;
+    color: #003f87;
+    cursor: text;
+    border-radius: 10px;
+    padding: 2%;
+}
+
+#answers2 {
+    width: 95%;
+    height: 35%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    word-break: break-all;
+    flex-direction: column;
+}
+#answerSumbit{
+    width: 74vh;
+}
+
+@media only screen and (max-width: 600px) {
+    #mainMenu {
+        font-size: 100%;
+        word-break: unset;
+    }
+    h1 {
+        font-size: 150%;
+    }
+    #hint {
+        font-size: 100%;
+        height: 3%;
+        width: 70%;
+    }
+    .answer {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #E4EBF5;
+        width: 80%;
+        height: 15%;
+        margin: 5%;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        border-radius: 10px;
+        font-size: 150%;
+        border: 0px;
+        transition: .1s ease-in-out;
+        color: #003f87;
+        cursor: pointer;
+    }
+    #answers {
+        width: 95%;
+        height: 50%;
+        margin-bottom: 10%;
+        justify-content: center;
+        display: flex;
+        flex-wrap: wrap;
+        word-break: break-all;
+    }
+    #answerInput{
+        width: 75%;
+    }
+    #answerSumbit{
+        width: 80%;
+    }
+}

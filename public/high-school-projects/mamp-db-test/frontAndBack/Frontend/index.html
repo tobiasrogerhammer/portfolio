@@ -1,0 +1,64 @@
+<!Doctype html>
+<html>
+    <head>
+        <title> Frontend example </title>
+        <link rel="stylesheet" href="CSS/style.css">
+    </head>
+    <body>
+        <script src="JS/fetchData.js"></script>
+        <svg  id="backButton" onclick="window.location='/';" height="18px" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" direction="left">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M4.243 2.306a1.056 1.056 0 00-.01.009L1.289 5.297a1 1 0 000 1.406l2.946 2.982a1 1 0 001.423 0l.045-.045a1 1 0 000-1.406L4.483 7h6.512a1 1 0 100-2H4.482l1.22-1.234a1 1 0 000-1.406l-.045-.045a1 1 0 00-1.414-.009z" fill="currentColor"></path>
+        </svg>
+        <h1> Frontend example - Drømtorp Database </h1>
+
+        <div class="box">
+            <h2> Select every row from database </h2>
+            <input type="button" value="Select * from elev" onclick="fetchData();" />
+            <table id="tablebody">
+                
+            </table>
+        </div>
+
+        <div class="box">
+            <h2> Update hobby med et gitt fornavn </h2>
+            <form action="javascript:updateRow()">
+                <label for="fname">Ny hobby</label><br>
+                <input type="text" id="hvilken_hobby" value="Fotball"><br>
+                <label for="lname">Hvilken elev skal jeg oppdatere? (ElevID)</label><br>
+                <input type="text" id="hvilket_elevid_update" value="4"><br><br>
+                <input type="submit" value="Update row in database">
+              </form>
+            <p id="Respons_update"> </p>
+        </div>
+
+        <div class="box">
+            <h2> Delete row from table  </h2>
+            <form action="javascript:deleteRow()">
+                <label for="fname">Hvilken elev vil du slette? Skriv elevID</label><br>
+                <input type="text" id="hvilken_elev" value="1"><br>
+                <input type="submit" value="Delete from elev table">
+              </form> 
+        </div>
+
+        <div class="box">
+            <h2> Legg til en elev i tabellen elev </h2>
+            <form action="javascript:updateRow()">
+                <label for="fname">Ny elevID (10-100)</label><br>
+                <input type="text" id="hvilken_elevid_insert"><br>
+                <label for="lname">Fornavn</label><br>
+                <input type="text" id="fornavn_insert"><br><br>
+                <label for="fname">Etternavn</label><br>
+                <input type="text" id="etternavn_insert"><br>
+                <label for="lname">Hobby</label><br>
+                <input type="text" id="hobby_insert"><br><br>
+                <label for="lname">Kjønn (G eller J)</label><br>
+                <input type="text" id="kjonn_insert"><br><br>
+                <label for="lname">Programfag (1-4)</label><br>
+                <input type="text" id="programfag_insert"><br><br>
+                <label for="lname">Datamaskin (1-4) </label><br>
+                <input type="text" id="datamaskin_insert"><br><br>
+                <input type="submit" value="Insert row in database">
+            </form>
+        </div>
+    </body>
+</html>

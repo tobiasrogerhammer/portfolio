@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="css/levels.css" rel="stylesheet">
+    <title>Level 1</title>
+    <meta charset="utf-8">
+    <script defer src="js/leveltwo.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <div id="next">
+        <p id="nextText"></p>
+        <button id="nextAnswers" class="answer" onclick="nextAnswers();">Next question</button>
+    </div>
+    <div id="blur">
+        <div id="header">
+            <div id="mainMenu" class="answer" onclick="window.location='index.html';"> Main menu </div>
+            <div id="progressbarBorder">
+                <div id="status"></div>
+                <div id="redStatus"></div>
+            </div>
+        </div>
+        <div id="statusText"> 0 / 10 </div>
+        <div id="question">
+            <h1>What is this?</h1>
+            <div id="picture">
+                <img src="images/sink.png" class="fruitIMG" id="image" alt="sink">
+            </div>
+        </div>
+        <button id="hint" class="answer" onclick="hint();">Show hint</button>
+        <div id="answers">
+            <button id="answer1" class="answer" onclick="answer(0);"></button>
+            <button id="answer2" class="answer" onclick="answer(1);"></button>
+            <button id="answer3" class="answer" onclick="answer(2);"></button>
+            <button id="answer4" class="answer" onclick="answer(3);"></button>
+        </div>
+    </div>
+    <div id="final">
+        <div id="mainMenuF" class="answer" onclick="window.location='index.html';"> Hoved meny </div>
+        <div id="end">Congratulations! You finished the quiz! <br>
+        </div>
+        <div id="results">Du fikk <br> <span class="cor">0</span> Correct<br> <span class="wrong">0</span> Wrong
+        </div>
+        <div id="retake" onclick="window.location='leveltwo.html';"> <img src="images/reload.png" height="100px"> </div>
+    </div>
+</body>
+
+</html>

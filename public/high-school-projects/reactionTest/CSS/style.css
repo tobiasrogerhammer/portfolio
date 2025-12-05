@@ -1,0 +1,217 @@
+:root {
+    --main-color: #6699cc;
+    --danger-color: #E23D28;
+    --highlight-color: #4CBB17;
+    --font-color: #fff;
+    --header-gradient: #3473c7;
+    --header-wait: #b33221;
+    --header-tap: #3e9615;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--main-color);
+    overflow: hidden;
+}
+
+#backGround {
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: baseline;
+    width: 100%;
+    height: 100%;
+}
+.waitHeader {
+    background-color: var(--header-wait) !important;
+}
+
+.tapHeader {
+    background-color: var(--header-tap) !important;
+}
+
+.wait {
+    background-color: var(--danger-color);
+}
+
+.tap {
+    background-color: var(--highlight-color);
+}
+
+#header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+    color: var(--font-color);
+    background-color: var(--header-gradient);
+}
+
+#gameName {
+    font-weight: 700;
+    font-size: 3rem;
+    font-family: Open Sans Bold;
+}
+
+#backButton {
+    position: relative;
+    cursor: pointer;
+    right: 30%;
+    height: 30%;
+}
+
+#replay {
+    position: relative;
+    height: 30%;
+    left: 30%;
+    cursor: pointer;
+}
+
+#game {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 95%;
+    height: 80%;
+}
+
+#clock{
+    height: 10%;
+    display: none;
+}
+
+#boxes {
+    display: flex;
+    flex-direction: row;
+    display: none;
+}
+
+.box {
+    animation: jump 0.8s infinite;
+    border: 20px solid var(--font-color);
+    border-radius: 10px;
+    margin: 5%;
+    display: none;
+}
+
+#box1 {
+    animation-delay: 0s;
+}
+
+#box2 {
+    animation-delay: 0.2s;
+}
+
+#box3 {
+    animation-delay: 0.4s;
+}
+
+@keyframes jump {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+#start {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 2.5rem;
+    margin: 1rem;
+    border-radius: 10px;
+    padding: 1rem;
+    color: black;
+    background-color: var(--font-color);
+    transition: all 0.2s ease-in-out;
+}
+
+#start:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px var(--font-color);
+}
+
+#stopbutton {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 2.5rem;
+    margin: 1rem;
+    border-radius: 10px;
+    padding: 1rem;
+    color: #000;
+    transition: all 0.2s ease-in-out;
+}
+
+#stopbutton:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px var(--font-color);
+}
+
+#timer {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--font-color);
+    margin: 1rem;
+}
+
+#average {
+    text-align: center;
+    font-size: 2rem;
+    color: var(--font-color);
+    margin: 1rem;
+}
+
+#explanation {
+    text-align: center;
+    font-size: 1.5rem;
+    color: var(--font-color);
+    margin: 1rem;
+}
+
+#bestScore {
+    text-align: center;
+    font-size: 2rem;
+    color: var(--font-color);
+    margin: 1rem;
+}
+
+/* Media Queries */
+
+@media (max-width: 768px) {
+
+    #backButton {
+        right: 10%;
+    }
+
+    #gameName {
+        font-size: 2.5rem;
+    }
+
+    #replay {
+        left: 10%;
+    }
+}

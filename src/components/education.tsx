@@ -167,7 +167,8 @@ const Education = () => {
                           alt={`${edu.institution} logo`}
                           width={40}
                           height={40}
-                            className="object-contain sm:w-10 sm:h-10"
+                          className="object-contain sm:w-10 sm:h-10"
+                          loading="lazy"
                         />
                       ) : (
                           <GraduationCap className="h-6 w-6 sm:h-8 sm:w-8 text-green-600" />

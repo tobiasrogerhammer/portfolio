@@ -109,7 +109,7 @@ const Experience = () => {
                     <div className="flex items-center gap-3 sm:gap-4">
                       <div className={`w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center ${cardColors[index % cardColors.length]} rounded-lg sm:rounded-xl shadow-lg group-hover:shadow-xl transition-shadow duration-300`}>
                         {exp.logo === "huddly-svg" ? (
-                          <svg width="24" height="24" className="sm:w-8 sm:h-8" viewBox="0 0 16 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <svg width="24" height="24" className="sm:w-8 sm:h-8 text-gray-900 dark:text-gray-900" viewBox="0 0 16 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <title>Huddly Square Logo</title>
                             <path d="M11.6923 21.7692H16V17.4615H11.6923V21.7692ZM4.30769 0.23077H0V4.53846H4.30769V0.23077ZM0 21.7692H4.30769V17.4615H0V21.7692ZM0 8.84616V13.1538H14.7077H16V8.84616H14.7077H0ZM11.6923 0.23077V4.53846H16V0.23077H11.6923Z" fill="currentColor" />
                           </svg>
@@ -120,6 +120,7 @@ const Experience = () => {
                             width={32}
                             height={32}
                             className="object-contain sm:w-10 sm:h-10"
+                            loading="lazy"
                           />
                         ) : (
                           <Building2 className="h-6 w-6 sm:h-8 sm:w-8 text-muted-foreground" />

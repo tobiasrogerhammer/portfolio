@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackjack Game - Live Demo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <header class="game-header">
+            <h1>BLACKJACK</h1>
+            <p class="subtitle">Classic Casino Game</p>
+        </header>
+
+        <div class="game-stats">
+            <div class="stat-card">
+                <span class="stat-label">Money</span>
+                <span class="stat-value" id="money">$100</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Current Bet</span>
+                <span class="stat-value" id="current-bet">$0</span>
+            </div>
+        </div>
+
+        <div class="game-table">
+            <div class="dealer-area">
+                <div class="player-label">
+                    <span class="label-text">Dealer</span>
+                    <span class="hand-total" id="dealer-value">0</span>
+                </div>
+                <div class="cards-container" id="dealer-hand">
+                    <div class="empty-state">Waiting for cards...</div>
+                </div>
+            </div>
+
+            <div class="player-area">
+                <div class="player-label">
+                    <span class="label-text">You</span>
+                    <span class="hand-total" id="player-value">0</span>
+                </div>
+                <div class="cards-container" id="player-hand">
+                    <div class="empty-state">Waiting for cards...</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-controls">
+            <div class="bet-controls" id="bet-controls">
+                <div class="bet-input-group">
+                <label for="bet-amount">Place your bet:</label>
+                    <div class="input-wrapper">
+                        <span class="currency">$</span>
+                        <input type="number" id="bet-amount" min="1" max="100" value="10" placeholder="10" step="1">
+                    </div>
+                    <button class="btn btn-primary" id="place-bet-btn">Start Game</button>
+                </div>
+            </div>
+
+            <div class="action-controls" id="game-controls" style="display: none;">
+                <button class="btn btn-hit" id="hit-btn">Hit</button>
+                <button class="btn btn-stand" id="stand-btn">Stand</button>
+            </div>
+
+            <div class="new-game-controls" id="new-game-controls" style="display: none;">
+                <button class="btn btn-new-game" id="new-game-btn">Play Again</button>
+            </div>
+        </div>
+
+        <div class="game-status" id="game-status">
+            <p>Welcome! Place a bet to start playing.</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
