@@ -160,7 +160,7 @@ const Projects = () => {
     },
   }
 
-  const projects = [
+  const projects: Project[] = [
     {
       id: 1,
       title: "Renow AS Website",
@@ -426,7 +426,7 @@ const Projects = () => {
         {/* Projects Grid */}
         <div ref={gridRef} className={`${filteredProjects.length <= 3 ? 'flex flex-wrap justify-center' : 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'} gap-6 sm:gap-8 items-stretch`}>
           {filteredProjects.map((project, index) => {
-            const developmentType = project.developmentType || "frontend"
+            const developmentType: DevelopmentType = project.developmentType || "frontend"
             const devTypeConfig = developmentTypes[developmentType] || developmentTypes.frontend
             const isJavaProject = project.category === "java"
             const isHighSchoolProject = project.category === "high-school"
