@@ -58,3 +58,4 @@ export interface BoatDocument {
   createdAt?: Date;
   updatedAt?: Date;
 }
+
