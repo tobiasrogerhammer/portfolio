@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
     const body = await parseRequestBody(request);
 
     // Validate input
-    if (!body.title || body.title.trim().length === 0) {
+    if (!body.title || typeof body.title !== 'string' || body.title.trim().length === 0) {
       return createErrorResponse('Title is required', 400);
     }
 
@@ -28,11 +28,11 @@ export async function POST(request: NextRequest) {
       return createErrorResponse(dateValidation.error, 400);
     }
 
-    if (!body.location || body.location.trim().length === 0) {
+    if (!body.location || typeof body.location !== 'string' || body.location.trim().length === 0) {
       return createErrorResponse('Location is required', 400);
     }
 
-    if (!body.agenda || body.agenda.trim().length === 0) {
+    if (!body.agenda || typeof body.agenda !== 'string' || body.agenda.trim().length === 0) {
       return createErrorResponse('Agenda is required', 400);
     }
 
@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
       endTime: new Date(body.endTime),
       location: body.location.trim(),
       agenda: body.agenda.trim(),
-      isCompleted: body.isCompleted || false,
+      isCompleted: typeof body.isCompleted === 'boolean' ? body.isCompleted : false,
     });
 
     const meeting = await newMeeting.save();

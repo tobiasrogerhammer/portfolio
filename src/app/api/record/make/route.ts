@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
       return createErrorResponse('Date is required', 400);
     }
 
-    if (!body.reason || body.reason.trim().length === 0) {
+    if (!body.reason || typeof body.reason !== 'string' || body.reason.trim().length === 0) {
       return createErrorResponse('Reason is required', 400);
     }
 
@@ -33,6 +33,13 @@ export async function POST(request: NextRequest) {
     const recordDate = new Date(body.date);
     if (isNaN(recordDate.getTime())) {
       return createErrorResponse('Invalid date format', 400);
+    }
+
+    if (typeof body.username !== 'string') {
+      return createErrorResponse('Username must be a string', 400);
+    }
+    if (typeof body.mailadress !== 'string') {
+      return createErrorResponse('Email must be a string', 400);
     }
 
     const newRecord = new Record({

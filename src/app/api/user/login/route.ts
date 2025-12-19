@@ -11,8 +11,11 @@ export async function POST(request: NextRequest) {
     const body = await parseRequestBody(request);
 
     // Validate input
-    if (!body.username || !body.password) {
-      return createErrorResponse('Username and password are required', 400);
+    if (!body.username || typeof body.username !== 'string') {
+      return createErrorResponse('Username is required', 400);
+    }
+    if (!body.password || typeof body.password !== 'string') {
+      return createErrorResponse('Password is required', 400);
     }
 
     const user = await User.findOne({ username: body.username.trim() });

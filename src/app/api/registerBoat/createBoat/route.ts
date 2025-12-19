@@ -10,8 +10,8 @@ export async function POST(request: NextRequest) {
 
     const body = await parseRequestBody(request);
 
-    // Validate input
-    if (!body.Adresse || body.Adresse.trim().length === 0) {
+    // Validate input with type guards
+    if (!body.Adresse || typeof body.Adresse !== 'string' || body.Adresse.trim().length === 0) {
       return createErrorResponse('Address is required', 400);
     }
 
@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
       return createErrorResponse(postnummerValidation.error, 400);
     }
 
-    if (!body.Poststed || body.Poststed.trim().length === 0) {
+    if (!body.Poststed || typeof body.Poststed !== 'string' || body.Poststed.trim().length === 0) {
       return createErrorResponse('Poststed is required', 400);
     }
 
@@ -28,8 +28,8 @@ export async function POST(request: NextRequest) {
       return createErrorResponse('Båtplass is required', 400);
     }
 
-    const båtplass = parseInt(body.Båtplass);
-    if (isNaN(båtplass) || båtplass < 1) {
+    const båtplassValue = typeof body.Båtplass === 'string' ? parseInt(body.Båtplass) : typeof body.Båtplass === 'number' ? body.Båtplass : NaN;
+    if (isNaN(båtplassValue) || båtplassValue < 1) {
       return createErrorResponse('Båtplass must be a positive number', 400);
     }
 
@@ -42,6 +42,10 @@ export async function POST(request: NextRequest) {
       return createErrorResponse(dateValidation.error, 400);
     }
 
+    if (!body.mailadress || typeof body.mailadress !== 'string') {
+      return createErrorResponse('Email is required', 400);
+    }
+
     const emailValidation = validateEmail(body.mailadress);
     if (!emailValidation.valid) {
       return createErrorResponse(emailValidation.error, 400);
@@ -52,7 +56,7 @@ export async function POST(request: NextRequest) {
     const endDate = new Date(body.endUse);
 
     const existingBoat = await Boat.findOne({
-      Båtplass: båtplass,
+      Båtplass: båtplassValue,
       $or: [
         {
           startUse: { $lte: endDate },
@@ -63,16 +67,16 @@ export async function POST(request: NextRequest) {
 
     if (existingBoat) {
       return createErrorResponse(
-        `Boat spot ${båtplass} is already reserved for this period`,
+        `Boat spot ${båtplassValue} is already reserved for this period`,
         409
       );
     }
 
     const boat = new Boat({
-      Adresse: body.Adresse.trim(),
-      Postnummer: parseInt(body.Postnummer),
-      Poststed: body.Poststed.trim(),
-      Båtplass: båtplass,
+      Adresse: typeof body.Adresse === 'string' ? body.Adresse.trim() : String(body.Adresse),
+      Postnummer: typeof body.Postnummer === 'number' ? body.Postnummer : parseInt(String(body.Postnummer)),
+      Poststed: typeof body.Poststed === 'string' ? body.Poststed.trim() : String(body.Poststed),
+      Båtplass: båtplassValue,
       startUse: startDate,
       endUse: endDate,
       mailadress: body.mailadress.trim().toLowerCase(),

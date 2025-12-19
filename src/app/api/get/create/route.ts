@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
       return createErrorResponse(usernameValidation.error, 400);
     }
 
-    if (!body.message || body.message.trim().length === 0) {
+    if (!body.message || typeof body.message !== 'string' || body.message.trim().length === 0) {
       return createErrorResponse('Message cannot be empty', 400);
     }
 
@@ -26,6 +26,10 @@ export async function POST(request: NextRequest) {
 
     if (!body.time) {
       return createErrorResponse('Time is required', 400);
+    }
+
+    if (typeof body.username !== 'string') {
+      return createErrorResponse('Username must be a string', 400);
     }
 
     const newMessage = new Message({

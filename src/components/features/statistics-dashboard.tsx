@@ -122,7 +122,6 @@ export const StatisticsDashboard = ({ skills }: { skills: Skill[] }) => {
   
   // Calculate counts correctly
   const totalTechnologies = technologies.reduce((sum, skill) => sum + skill.items.length, 0) // 7 + 7 + 8 = 22
-  const totalSkills = skills.reduce((sum, skill) => sum + skill.items.length, 0) // 28 total
 
   // Calculate tech breakdown - only technologies, not skills
   const techBreakdown = technologies.map((skill) => ({

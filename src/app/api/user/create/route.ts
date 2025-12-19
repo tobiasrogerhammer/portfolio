@@ -27,6 +27,16 @@ export async function POST(request: NextRequest) {
       return createErrorResponse(passwordValidation.error, 400);
     }
 
+    if (typeof body.password !== 'string') {
+      return createErrorResponse('Password must be a string', 400);
+    }
+    if (typeof body.username !== 'string') {
+      return createErrorResponse('Username must be a string', 400);
+    }
+    if (typeof body.mailadress !== 'string') {
+      return createErrorResponse('Email must be a string', 400);
+    }
+
     const hashedPassword = await bcrypt.hash(body.password, 12);
     const newUser = new User({
       username: body.username.trim(),
