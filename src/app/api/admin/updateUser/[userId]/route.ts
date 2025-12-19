@@ -21,7 +21,7 @@ export async function PUT(
     const updatedUser = await user.save();
 
     return NextResponse.json(updatedUser);
-  } catch (error: any) {
+  } catch (error: unknown) {
     return handleApiError(error);
   }
 }

@@ -2,15 +2,9 @@
 
 import { Monitor, Server, Wrench, Users, Github, Linkedin, Mail, Briefcase, TrendingUp, Calendar } from "lucide-react"
 import Image from "next/image"
-import Link from "next/link"
 import { StatisticsDashboard, StatCard } from "@/components/features/statistics-dashboard"
 
 const About = () => {
-  const socialLinks = [
-    { name: "GitHub", href: "https://github.com/tobiasrogerhammer", icon: Github },
-    { name: "LinkedIn", href: "https://linkedin.com/in/tobias-hammer-321a4624b", icon: Linkedin },
-    { name: "Email", href: "mailto:tobias@hammerhome.no", icon: Mail },
-  ]
 
   // Calculate stats for the 3 simple stat cards
   const stats = {

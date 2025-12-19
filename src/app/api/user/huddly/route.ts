@@ -9,7 +9,7 @@ export async function GET() {
 
     const users = await User.find({}, { username: 1, _id: 0 });
     return NextResponse.json(users);
-  } catch (err: any) {
+  } catch (err: unknown) {
     return handleApiError(err);
   }
 }

@@ -12,7 +12,7 @@ export async function GET() {
       { username: 1, _id: 1, mailadress: 1, isAdmin: 1 }
     );
     return NextResponse.json(users);
-  } catch (err: any) {
+  } catch (err: unknown) {
     return handleApiError(err);
   }
 }

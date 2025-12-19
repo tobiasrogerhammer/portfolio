@@ -75,7 +75,7 @@ const Projects = () => {
       const carousel = carouselRef.current?.querySelector('.flex') as HTMLElement
       if (carousel) {
         carousel.style.transition = 'none'
-        carousel.offsetHeight
+        void carousel.offsetHeight
         isTransitioningRef.current = false
       }
     }
@@ -86,7 +86,7 @@ const Projects = () => {
         const carousel = carouselRef.current?.querySelector('.flex') as HTMLElement
         if (carousel) {
           carousel.style.transition = 'none'
-          carousel.offsetHeight
+          void carousel.offsetHeight
           setTimeout(() => {
             carousel.style.transition = ''
             setHighSchoolProjectIndex(1)
@@ -106,7 +106,7 @@ const Projects = () => {
           setTimeout(() => {
             carousel.style.transition = 'none'
             setHighSchoolProjectIndex(0)
-            carousel.offsetHeight
+            void carousel.offsetHeight
             setTimeout(() => {
               carousel.style.transition = ''
               isTransitioningRef.current = false
@@ -125,7 +125,7 @@ const Projects = () => {
       const carousel = carouselRef.current?.querySelector('.flex') as HTMLElement
       if (carousel) {
         carousel.style.transition = 'none'
-        carousel.offsetHeight
+        void carousel.offsetHeight
         isTransitioningRef.current = false
       }
     }
@@ -136,7 +136,7 @@ const Projects = () => {
         const carousel = carouselRef.current?.querySelector('.flex') as HTMLElement
         if (carousel) {
           carousel.style.transition = 'none'
-          carousel.offsetHeight
+          void carousel.offsetHeight
           setTimeout(() => {
             carousel.style.transition = ''
             setHighSchoolProjectIndex(totalProjects - 2)
@@ -156,7 +156,7 @@ const Projects = () => {
           setTimeout(() => {
             carousel.style.transition = 'none'
             setHighSchoolProjectIndex(totalProjects - 1)
-            carousel.offsetHeight
+            void carousel.offsetHeight
             setTimeout(() => {
               carousel.style.transition = ''
               isTransitioningRef.current = false

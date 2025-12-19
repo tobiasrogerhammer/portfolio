@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function parseRequestBody(request: NextRequest): Promise<any> {
+export async function parseRequestBody(request: NextRequest): Promise<Record<string, unknown>> {
   const contentType = request.headers.get('content-type') || '';
   
   if (contentType.includes('application/json')) {
-    return await request.json();
+    return await request.json() as Record<string, unknown>;
   } else if (contentType.includes('application/x-www-form-urlencoded')) {
     const formData = await request.formData();
-    const body: any = {};
+    const body: Record<string, unknown> = {};
     for (const [key, value] of formData.entries()) {
       // Try to parse as number if it looks like a number
       const numValue = Number(value);
@@ -18,7 +18,7 @@ export async function parseRequestBody(request: NextRequest): Promise<any> {
   
   // Try JSON as fallback
   try {
-    return await request.json();
+    return await request.json() as Record<string, unknown>;
   } catch {
     return {};
   }
@@ -43,20 +43,22 @@ export function createErrorResponse(
   );
 }
 
-export function handleApiError(err: any): NextResponse<ApiError> {
+export function handleApiError(err: unknown): NextResponse<ApiError> {
   console.error('API Error:', err);
 
   // Handle validation errors
-  if (err.name === 'ValidationError') {
-    const details = Object.values(err.errors)
-      .map((e: any) => e.message)
+  if (err && typeof err === 'object' && 'name' in err && err.name === 'ValidationError' && 'errors' in err) {
+    const validationError = err as { errors: Record<string, { message: string }> };
+    const details = Object.values(validationError.errors)
+      .map((e) => e.message)
       .join(', ');
     return createErrorResponse('Validation error', 400, details);
   }
 
   // Handle duplicate key error (MongoDB)
-  if (err.code === 11000) {
-    const field = Object.keys(err.keyPattern)[0];
+  if (err && typeof err === 'object' && 'code' in err && err.code === 11000 && 'keyPattern' in err) {
+    const mongoError = err as { keyPattern: Record<string, unknown> };
+    const field = Object.keys(mongoError.keyPattern)[0];
     return createErrorResponse(
       `${field === 'username' ? 'Username' : field === 'email' ? 'Email' : 'Field'} already exists`,
       409
@@ -64,12 +66,19 @@ export function handleApiError(err: any): NextResponse<ApiError> {
   }
 
   // Handle authentication errors
-  if (err.status === 401 || err.message?.toLowerCase().includes('unauthorized')) {
+  const errorMessage = err && typeof err === 'object' && 'message' in err && typeof err.message === 'string' 
+    ? err.message.toLowerCase() 
+    : '';
+  const errorStatus = err && typeof err === 'object' && 'status' in err && typeof err.status === 'number'
+    ? err.status
+    : undefined;
+
+  if (errorStatus === 401 || errorMessage.includes('unauthorized')) {
     return createErrorResponse('Unauthorized', 401);
   }
 
   // Handle not found errors
-  if (err.status === 404 || err.message?.toLowerCase().includes('not found')) {
+  if (errorStatus === 404 || errorMessage.includes('not found')) {
     return createErrorResponse('Resource not found', 404);
   }
 
@@ -77,7 +86,9 @@ export function handleApiError(err: any): NextResponse<ApiError> {
   return createErrorResponse(
     'Internal server error',
     500,
-    process.env.NODE_ENV === 'development' ? err.message : undefined
+    process.env.NODE_ENV === 'development' && err && typeof err === 'object' && 'message' in err && typeof err.message === 'string'
+      ? err.message
+      : undefined
   );
 }
 

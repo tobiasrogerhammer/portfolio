@@ -36,7 +36,7 @@ export const MobileGeometricShapes = () => {
         { size: 100, color: 'rgba(43, 187, 173, 0.12)', rotation: time * 0.4 },
       ]
 
-      shapes.forEach((shape, index) => {
+      shapes.forEach((shape) => {
         ctx.save()
         ctx.translate(centerX, centerY)
         ctx.rotate(shape.rotation)

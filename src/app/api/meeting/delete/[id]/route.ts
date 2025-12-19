@@ -26,9 +26,9 @@ export async function DELETE(
       message: 'Meeting deleted successfully',
       id: id,
     });
-  } catch (err: any) {
+  } catch (err: unknown) {
     // Handle invalid ObjectId
-    if (err.name === 'CastError') {
+    if (err && typeof err === 'object' && 'name' in err && err.name === 'CastError') {
       return createErrorResponse('Invalid meeting ID format', 400);
     }
     return handleApiError(err);

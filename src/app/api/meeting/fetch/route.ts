@@ -9,7 +9,7 @@ export async function GET() {
 
     const meetings = await Meeting.find().sort({ startTime: 1 });
     return NextResponse.json(meetings);
-  } catch (err: any) {
+  } catch (err: unknown) {
     return handleApiError(err);
   }
 }

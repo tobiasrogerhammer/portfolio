@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
       },
       { status: 201 }
     );
-  } catch (err: any) {
+  } catch (err: unknown) {
     return handleApiError(err);
   }
 }

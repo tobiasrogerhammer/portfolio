@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Calendar, MapPin, Building2, FileText, ExternalLink, ChevronDown, ChevronUp, ChevronRight } from "lucide-react"
+import { Calendar, MapPin, Building2, FileText, ExternalLink, ChevronDown, ChevronRight } from "lucide-react"
 import Image from "next/image"
 import { PdfViewerModal } from "@/components/features/pdf-viewer-modal"
 

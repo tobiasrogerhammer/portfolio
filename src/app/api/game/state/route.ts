@@ -13,8 +13,11 @@ export async function GET(request: NextRequest) {
       success: true,
       game: game.toJSON(),
     });
-  } catch (error: any) {
-    return createErrorResponse(error.message || 'Failed to get game state', 400);
+  } catch (error: unknown) {
+    const errorMessage = error && typeof error === 'object' && 'message' in error && typeof error.message === 'string'
+      ? error.message
+      : 'Failed to get game state';
+    return createErrorResponse(errorMessage, 400);
   }
 }
 

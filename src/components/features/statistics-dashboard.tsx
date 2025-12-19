@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
-import { Code, Briefcase, Award, TrendingUp, Calendar, Zap, Monitor, Server, Wrench, Users } from "lucide-react"
+import { Briefcase, TrendingUp, Calendar } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 
 interface StatCardProps {
@@ -28,13 +28,14 @@ export const StatCard = ({ icon: Icon, label, value, suffix = "", color, delay =
       { threshold: 0.1 }
     )
 
-    if (cardRef.current) {
-      observer.observe(cardRef.current)
+    const currentCard = cardRef.current
+    if (currentCard) {
+      observer.observe(currentCard)
     }
 
     return () => {
-      if (cardRef.current) {
-        observer.unobserve(cardRef.current)
+      if (currentCard) {
+        observer.unobserve(currentCard)
       }
     }
   }, [isVisible])
@@ -123,7 +124,6 @@ export const StatisticsDashboard = ({ skills }: { skills: Skill[] }) => {
   // Calculate counts correctly
   const totalTechnologies = technologies.reduce((sum, skill) => sum + skill.items.length, 0) // 7 + 7 + 8 = 22
   const totalSkills = skills.reduce((sum, skill) => sum + skill.items.length, 0) // 28 total
-  const softSkillsCount = softSkills?.items.length || 0 // 6
   
   const stats = {
     totalSkills,
@@ -133,8 +133,6 @@ export const StatisticsDashboard = ({ skills }: { skills: Skill[] }) => {
     experiencePositions: 4,
     awards: 1,
   }
-
-  const statCards = [
     {
       icon: Briefcase,
       label: "Years Experience",

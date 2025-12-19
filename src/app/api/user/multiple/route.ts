@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import User from '@/models/User';
 import { validateEmail, validatePassword, validateUsername } from '@/lib/validators';
-import { parseRequestBody, handleApiError, createErrorResponse } from '@/lib/api-helpers';
+import { parseRequestBody, handleApiError } from '@/lib/api-helpers';
 import bcrypt from 'bcryptjs';
 
 export async function POST(request: NextRequest) {
@@ -18,8 +18,21 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const results: any[] = [];
-    const errors: any[] = [];
+    interface UserResult {
+      index: number;
+      username: string;
+      mailadress: string;
+      success: boolean;
+    }
+    
+    interface UserError {
+      index: number;
+      username: string;
+      error: string;
+    }
+    
+    const results: UserResult[] = [];
+    const errors: UserError[] = [];
 
     // Process each user
     for (let i = 0; i < body.users.length; i++) {
@@ -91,21 +104,25 @@ export async function POST(request: NextRequest) {
           mailadress: savedUser.mailadress,
           success: true,
         });
-      } catch (err: any) {
+      } catch (err: unknown) {
         console.error(`Error creating user ${i}:`, err);
         
-        if (err.code === 11000) {
-          const field = Object.keys(err.keyPattern)[0];
+        if (err && typeof err === 'object' && 'code' in err && err.code === 11000 && 'keyPattern' in err) {
+          const mongoError = err as { keyPattern: Record<string, unknown> };
+          const field = Object.keys(mongoError.keyPattern)[0];
           errors.push({
             index: i,
             username: userData.username,
             error: `${field === 'username' ? 'Username' : 'Email'} already exists`,
           });
         } else {
+          const errorMessage = err && typeof err === 'object' && 'message' in err && typeof err.message === 'string'
+            ? err.message
+            : 'Failed to create user';
           errors.push({
             index: i,
             username: userData.username,
-            error: err.message || 'Failed to create user',
+            error: errorMessage,
           });
         }
       }
@@ -117,7 +134,7 @@ export async function POST(request: NextRequest) {
       results: results,
       errors: errors,
     });
-  } catch (err: any) {
+  } catch (err: unknown) {
     return handleApiError(err);
   }
 }

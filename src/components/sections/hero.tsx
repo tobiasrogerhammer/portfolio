@@ -5,7 +5,6 @@ import { ArrowDown, Github, Linkedin, Mail } from "lucide-react"
 import Link from "next/link"
 import { RotatingProjectPreviews } from "@/components/hero-visuals/rotating-projects"
 // Mobile visual components
-import { MobileTechIcons } from "@/components/hero-visuals/mobile-tech-icons"
 import { MobileProjectShowcase } from "@/components/hero-visuals/mobile-project-showcase"
 // import { MobileCodeSnippet } from "@/components/hero-visuals/mobile-code-snippet"
 // import { MobileGeometricShapes } from "@/components/hero-visuals/mobile-geometric-shapes"

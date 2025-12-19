@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
       message: 'Login successful',
       isAdmin: user.isAdmin || false,
     });
-  } catch (err: any) {
+  } catch (err: unknown) {
     return handleApiError(err);
   }
 }

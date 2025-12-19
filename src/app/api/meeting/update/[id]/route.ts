@@ -43,9 +43,9 @@ export async function PUT(
       message: 'Meeting updated successfully',
       meeting: meeting,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     // Handle invalid ObjectId
-    if (error.name === 'CastError') {
+    if (error && typeof error === 'object' && 'name' in error && error.name === 'CastError') {
       return createErrorResponse('Invalid meeting ID format', 400);
     }
     return handleApiError(error);

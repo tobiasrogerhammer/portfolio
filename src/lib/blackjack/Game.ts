@@ -253,7 +253,21 @@ export class Game {
   }
 
   // Serialize game state for API responses
-  toJSON(): any {
+  toJSON(): {
+    player: {
+      money: number;
+      hand: Card[];
+      currentBet: number;
+      hasStood: boolean;
+      handValue: number;
+      isBusted: boolean;
+      hasBlackjack: boolean;
+    };
+    dealerHand: Card[];
+    dealerValue: number;
+    isPlayerTurn: boolean;
+    gameStatus: string;
+  } {
     return {
       player: {
         money: this.player.money,

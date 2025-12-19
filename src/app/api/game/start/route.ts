@@ -15,8 +15,11 @@ export async function POST(request: NextRequest) {
       game: game.toJSON(),
       message: 'New game started!',
     });
-  } catch (error: any) {
-    return createErrorResponse(error.message || 'Failed to start game', 400);
+  } catch (error: unknown) {
+    const errorMessage = error && typeof error === 'object' && 'message' in error && typeof error.message === 'string'
+      ? error.message
+      : 'Failed to start game';
+    return createErrorResponse(errorMessage, 400);
   }
 }
 

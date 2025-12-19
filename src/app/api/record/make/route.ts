@@ -50,10 +50,11 @@ export async function POST(request: NextRequest) {
       },
       { status: 201 }
     );
-  } catch (err: any) {
+  } catch (err: unknown) {
     // Handle duplicate key error
-    if (err.code === 11000) {
-      const field = Object.keys(err.keyPattern)[0];
+    if (err && typeof err === 'object' && 'code' in err && err.code === 11000 && 'keyPattern' in err) {
+      const mongoError = err as { keyPattern: Record<string, unknown> };
+      const field = Object.keys(mongoError.keyPattern)[0];
       return createErrorResponse(
         `${field === 'username' ? 'Username' : 'Email'} already has a record`,
         409

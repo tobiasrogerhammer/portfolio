@@ -9,7 +9,7 @@ export async function GET() {
 
     const messages = await Message.find().sort({ time: 1 });
     return NextResponse.json(messages);
-  } catch (err: any) {
+  } catch (err: unknown) {
     return handleApiError(err);
   }
 }

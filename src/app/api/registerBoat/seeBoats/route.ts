@@ -22,7 +22,7 @@ export async function GET() {
     ).sort({ Båtplass: 1 });
 
     return NextResponse.json(boatSpots);
-  } catch (error: any) {
+  } catch (error: unknown) {
     return handleApiError(error);
   }
 }

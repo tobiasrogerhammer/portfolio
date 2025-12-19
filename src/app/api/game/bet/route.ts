@@ -18,8 +18,11 @@ export async function POST(request: NextRequest) {
       success: true,
       game: game.toJSON(),
     });
-  } catch (error: any) {
-    return createErrorResponse(error.message || 'Failed to place bet', 400);
+  } catch (error: unknown) {
+    const errorMessage = error && typeof error === 'object' && 'message' in error && typeof error.message === 'string'
+      ? error.message
+      : 'Failed to place bet';
+    return createErrorResponse(errorMessage, 400);
   }
 }
 
