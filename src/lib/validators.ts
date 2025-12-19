@@ -1,7 +1,11 @@
 // Email validation
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-export function validateEmail(email: string | undefined) {
+type ValidationResult = 
+  | { valid: true }
+  | { valid: false; error: string };
+
+export function validateEmail(email: string | undefined): ValidationResult {
   if (!email || typeof email !== 'string') {
     return { valid: false, error: 'Email is required' };
   }
@@ -12,7 +16,7 @@ export function validateEmail(email: string | undefined) {
 }
 
 // Password validation
-export function validatePassword(password: string | undefined) {
+export function validatePassword(password: string | undefined): ValidationResult {
   if (!password || typeof password !== 'string') {
     return { valid: false, error: 'Password is required' };
   }
@@ -23,7 +27,7 @@ export function validatePassword(password: string | undefined) {
 }
 
 // Username validation
-export function validateUsername(username: string | undefined) {
+export function validateUsername(username: string | undefined): ValidationResult {
   if (!username || typeof username !== 'string') {
     return { valid: false, error: 'Username is required' };
   }
@@ -37,7 +41,7 @@ export function validateUsername(username: string | undefined) {
 }
 
 // Date validation
-export function validateDateRange(startDate: string | undefined, endDate: string | undefined) {
+export function validateDateRange(startDate: string | undefined, endDate: string | undefined): ValidationResult {
   if (!startDate || !endDate) {
     return { valid: false, error: 'Start date and end date are required' };
   }
@@ -62,7 +66,7 @@ export function validateDateRange(startDate: string | undefined, endDate: string
 }
 
 // Postnummer validation (Norwegian postal code - 4 digits)
-export function validatePostnummer(postnummer: number | string | undefined | null) {
+export function validatePostnummer(postnummer: number | string | undefined | null): ValidationResult {
   if (postnummer === undefined || postnummer === null) {
     return { valid: false, error: 'Postnummer is required' };
   }

@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
           errors.push({
             index: i,
             username: typeof userData.username === 'string' ? userData.username : String(userData.username || ''),
-            error: usernameValidation.error,
+            error: usernameValidation.error || 'Invalid username',
           });
           continue;
         }
@@ -58,7 +58,7 @@ export async function POST(request: NextRequest) {
           errors.push({
             index: i,
             username: typeof userData.username === 'string' ? userData.username : String(userData.username || ''),
-            error: emailValidation.error,
+            error: emailValidation.error || 'Invalid email',
           });
           continue;
         }
@@ -68,7 +68,7 @@ export async function POST(request: NextRequest) {
           errors.push({
             index: i,
             username: typeof userData.username === 'string' ? userData.username : String(userData.username || ''),
-            error: passwordValidation.error,
+            error: passwordValidation.error || 'Invalid password',
           });
           continue;
         }

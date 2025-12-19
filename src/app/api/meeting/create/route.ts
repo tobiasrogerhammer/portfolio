@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
 
     const dateValidation = validateDateRange(body.startTime as string | undefined, body.endTime as string | undefined);
     if (!dateValidation.valid) {
-      return createErrorResponse(dateValidation.error, 400);
+      return createErrorResponse(dateValidation.error || 'Invalid date range', 400);
     }
 
     if (!body.location || typeof body.location !== 'string' || body.location.trim().length === 0) {

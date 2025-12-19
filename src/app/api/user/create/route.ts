@@ -14,17 +14,17 @@ export async function POST(request: NextRequest) {
     // Validate input
     const usernameValidation = validateUsername(body.username as string | undefined);
     if (!usernameValidation.valid) {
-      return createErrorResponse(usernameValidation.error, 400);
+      return createErrorResponse(usernameValidation.error || 'Invalid username', 400);
     }
 
     const emailValidation = validateEmail(body.mailadress as string | undefined);
     if (!emailValidation.valid) {
-      return createErrorResponse(emailValidation.error, 400);
+      return createErrorResponse(emailValidation.error || 'Invalid email', 400);
     }
 
     const passwordValidation = validatePassword(body.password as string | undefined);
     if (!passwordValidation.valid) {
-      return createErrorResponse(passwordValidation.error, 400);
+      return createErrorResponse(passwordValidation.error || 'Invalid password', 400);
     }
 
     if (typeof body.password !== 'string') {

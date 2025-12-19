@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
     // Validate input
     const usernameValidation = validateUsername(body.username as string | undefined);
     if (!usernameValidation.valid) {
-      return createErrorResponse(usernameValidation.error, 400);
+      return createErrorResponse(usernameValidation.error || 'Invalid username', 400);
     }
 
     if (!body.message || typeof body.message !== 'string' || body.message.trim().length === 0) {

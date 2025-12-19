@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
 
     const postnummerValidation = validatePostnummer(body.Postnummer as number | string | undefined | null);
     if (!postnummerValidation.valid) {
-      return createErrorResponse(postnummerValidation.error, 400);
+      return createErrorResponse(postnummerValidation.error || 'Invalid postnummer', 400);
     }
 
     if (!body.Poststed || typeof body.Poststed !== 'string' || body.Poststed.trim().length === 0) {
@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
 
     const dateValidation = validateDateRange(body.startUse as string | undefined, body.endUse as string | undefined);
     if (!dateValidation.valid) {
-      return createErrorResponse(dateValidation.error, 400);
+      return createErrorResponse(dateValidation.error || 'Invalid date range', 400);
     }
 
     if (!body.mailadress || typeof body.mailadress !== 'string') {
@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
 
     const emailValidation = validateEmail(body.mailadress as string | undefined);
     if (!emailValidation.valid) {
-      return createErrorResponse(emailValidation.error, 400);
+      return createErrorResponse(emailValidation.error || 'Invalid email', 400);
     }
 
     // Check for overlapping reservations
