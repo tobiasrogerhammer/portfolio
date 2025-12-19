@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { ChevronDown, BookOpen, Zap, Rocket, Calendar, MapPin, GraduationCap, ChevronRight, FileText, ExternalLink } from "lucide-react"
 import Image from "next/image"
-import { PdfViewerModal } from "./pdf-viewer-modal"
+import { PdfViewerModal } from "@/components/features/pdf-viewer-modal"
 
 const Education = () => {
   const [expandedCards, setExpandedCards] = useState<number[]>([])
@@ -312,25 +312,6 @@ const Education = () => {
                     </div>
                   </div>
                 )}
-                
-                  <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                  {edu.achievements.map((achievement, achievementIndex) => {
-                    const achievementColors = [
-                      "bg-gradient-to-r from-green-500 to-emerald-500 text-white",
-                      "bg-gradient-to-r from-emerald-500 to-teal-500 text-white",
-                      "bg-gradient-to-r from-teal-500 to-cyan-500 text-white",
-                      "bg-gradient-to-r from-cyan-500 to-blue-500 text-white"
-                    ]
-                    return (
-                      <span
-                        key={achievement}
-                          className={`px-2 sm:px-3 py-1 sm:py-1.5 ${achievementColors[achievementIndex % achievementColors.length]} text-xs sm:text-sm rounded-full font-medium shadow-sm hover:shadow-md transition-shadow duration-200`}
-                      >
-                        {achievement}
-                      </span>
-                    )
-                  })}
-                </div>
                 
                 {/* Certificate Button */}
                 {edu.certificate && (

@@ -1,0 +1,61 @@
+import { NextRequest, NextResponse } from 'next/server';
+import connectDB from '@/lib/mongodb';
+import User from '@/models/User';
+import { validateEmail, validatePassword, validateUsername } from '@/lib/validators';
+import { parseRequestBody, handleApiError, createErrorResponse } from '@/lib/api-helpers';
+import bcrypt from 'bcryptjs';
+
+export async function POST(request: NextRequest) {
+  try {
+    await connectDB();
+
+    const body = await parseRequestBody(request);
+
+    // Validate input
+    const usernameValidation = validateUsername(body.username);
+    if (!usernameValidation.valid) {
+      return createErrorResponse(usernameValidation.error, 400);
+    }
+
+    const emailValidation = validateEmail(body.mailadress);
+    if (!emailValidation.valid) {
+      return createErrorResponse(emailValidation.error, 400);
+    }
+
+    const passwordValidation = validatePassword(body.password);
+    if (!passwordValidation.valid) {
+      return createErrorResponse(passwordValidation.error, 400);
+    }
+
+    const hashedPassword = await bcrypt.hash(body.password, 12);
+    const newUser = new User({
+      username: body.username.trim(),
+      mailadress: body.mailadress.trim().toLowerCase(),
+      password: hashedPassword,
+    });
+
+    const user = await newUser.save();
+    return NextResponse.json(
+      {
+        message: 'User created successfully',
+        username: user.username,
+        exists: false,
+      },
+      { status: 201 }
+    );
+  } catch (err: any) {
+    // Handle duplicate key error with exists flag
+    if (err.code === 11000) {
+      const field = Object.keys(err.keyPattern)[0];
+      return NextResponse.json(
+        {
+          error: `${field === 'username' ? 'Username' : 'Email'} already exists`,
+          exists: true,
+        },
+        { status: 409 }
+      );
+    }
+    return handleApiError(err);
+  }
+}
+

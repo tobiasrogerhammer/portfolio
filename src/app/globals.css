@@ -91,20 +91,11 @@
 @layer base {
   * {
     border-color: hsl(var(--border));
-    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
   }
   
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  
-  /* Smooth transitions for theme changes */
-  * {
-    transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 300ms;
   }
   
   /* Custom scrollbar for dark mode */
@@ -163,6 +154,48 @@
     }
   }
   
+  @keyframes pulse-4s {
+    0%, 100% {
+      opacity: 0.1;
+    }
+    50% {
+      opacity: 0.2;
+    }
+  }
+  
+  @keyframes slideInRight {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes scaleIn {
+    from {
+      transform: translate(-50%, -50%) scale(0.9);
+      opacity: 0;
+    }
+    to {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideInTopRight {
+    from {
+      transform: translate(100%, -100%);
+      opacity: 0;
+    }
+    to {
+      transform: translate(0, 0);
+      opacity: 1;
+    }
+  }
+  
   .animate-fade-in-up {
     animation: fade-in-up 0.8s ease-out forwards;
     opacity: 0;
@@ -186,6 +219,10 @@
   
   .animation-delay-1000 {
     animation-delay: 1s;
+  }
+  
+  .animate-pulse-4s {
+    animation: pulse-4s 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
   
   /* Accessibility improvements */

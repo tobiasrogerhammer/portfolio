@@ -2,24 +2,22 @@
 
 import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Calendar, MapPin, Building2, FileText, ExternalLink } from "lucide-react"
+import { Calendar, MapPin, Building2, FileText, ExternalLink, ChevronDown, ChevronUp, ChevronRight } from "lucide-react"
 import Image from "next/image"
-import { PdfViewerModal } from "./pdf-viewer-modal"
+import { PdfViewerModal } from "@/components/features/pdf-viewer-modal"
 
 const Experience = () => {
   const [openPdf, setOpenPdf] = useState<{ url: string; title: string } | null>(null)
+  const [expandedMobile, setExpandedMobile] = useState<number[]>([])
+  
+  const toggleMobileExpansion = (index: number) => {
+    setExpandedMobile(prev => 
+      prev.includes(index) 
+        ? prev.filter(i => i !== index)
+        : [...prev, index]
+    )
+  }
   const experiences = [
-    {
-      company: "Royal Norwegian Air Force",
-      position: "Military Service",
-      location: "Rygge, Norway",
-      duration: "2024 - 2025",
-      description: "Developed discipline, mental resilience, and strong teamwork and communication skills. Represented soldiers in welfare and organizational discussions, ensuring fair treatment and improved conditions.",
-      technologies: ["Teamwork", "Discipline", "Problem Solving", "Communication", "Service"],
-      logo: "/norwegianAirForce.png",
-      certificate: "/jobbanbefaling-army.pdf",
-      website: "https://www.forsvaret.no/",
-    },
     {
       company: "Renow AS",
       position: "Co-Founder",
@@ -33,12 +31,13 @@ const Experience = () => {
     },
     {
       company: "Huddly AS",
+      position: "Working Student",
       positions: [
         {
           title: "Working Student",
           duration: "2022 - Present",
           description: "Working as a student employee at Huddly AS, contributing to the development of AI-powered conference cameras through AI training, scripting, and product testing.",
-          technologies: ["Technology", "Professional Development", "Learning", "Collaboration"]
+          technologies: ["AI-training", "Professional Development", "Learning", "Collaboration"]
         },
         {
           title: "Intern",
@@ -50,6 +49,17 @@ const Experience = () => {
       location: "Oslo, Norway",
       logo: "huddly-svg",
       website: "https://www.huddly.com/",
+    },
+    {
+      company: "Royal Norwegian Air Force",
+      position: "Military Service",
+      location: "Rygge, Norway",
+      duration: "2024 - 2025",
+      description: "Developed discipline, mental resilience, and strong teamwork and communication skills. Represented soldiers in welfare and organizational discussions, ensuring fair treatment and improved conditions.",
+      technologies: ["Teamwork", "Discipline", "Problem Solving", "Communication", "Service"],
+      logo: "/norwegianAirForce.png",
+      certificate: "/jobbanbefaling-army.pdf",
+      website: "https://www.forsvaret.no/",
     },
     {
       company: "Kolbotn IL",
@@ -75,39 +85,26 @@ const Experience = () => {
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="text-center mb-12 sm:mb-16">
+        <div className="text-center mb-4 sm:mb-12">
           <div className="inline-block">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 bg-gradient-to-r from-purple-600 via-pink-600 to-orange-600 bg-clip-text text-transparent">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-2 bg-gradient-to-r from-purple-600 via-pink-600 to-orange-600 bg-clip-text text-transparent">
               Work Experience
             </h2>
             <div className="h-1 w-16 sm:w-24 bg-gradient-to-r from-purple-500 to-orange-500 mx-auto rounded-full"></div>
           </div>
           <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto mt-4 sm:mt-6 px-4 sm:px-0">
-            My professional journey in software development and the companies I&apos;ve had the privilege to work with.
+          The organizations and roles that have shaped my professional journey.
           </p>
         </div>
 
         <div className="space-y-6 sm:space-y-8">
           {experiences.map((exp, index) => {
-            const colors = [
-              "border-l-4 border-l-blue-500",
-              "border-l-4 border-l-green-500",
-              "border-l-4 border-l-purple-500", 
-              "border-l-4 border-l-pink-500"
-            ]
-            const cardColors = [
-              "bg-gradient-to-r from-blue-50 to-blue-100",
-              "bg-gradient-to-r from-green-50 to-green-100",
-              "bg-gradient-to-r from-purple-50 to-purple-100",
-              "bg-gradient-to-r from-pink-50 to-rose-50"
-            ]
-            
             return (
-              <Card key={index} className={`group hover:shadow-xl transition-all duration-300 hover:scale-[1.02] border border-border backdrop-blur-sm hover:bg-secondary ${colors[index % colors.length]}`} style={{ backgroundColor: 'hsl(var(--card) / 0.5)' }}>
-                <CardHeader className="pb-3 sm:pb-4">
-                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
-                    <div className="flex items-center gap-3 sm:gap-4">
-                      <div className={`w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center ${cardColors[index % cardColors.length]} rounded-lg sm:rounded-xl shadow-lg group-hover:shadow-xl transition-shadow duration-300`}>
+              <Card key={index} className="group hover:shadow-xl transition-all duration-300 hover:scale-[1.02] border border-border backdrop-blur-sm hover:bg-secondary relative before:absolute before:left-0 before:top-0 before:bottom-0 before:w-1 before:bg-gradient-to-b before:from-purple-600 before:via-pink-600 before:to-orange-600" style={{ backgroundColor: 'hsl(var(--card) / 0.5)' }}>
+                <CardHeader className="pb-2 sm:pb-3 px-3 sm:px-6 pt-3 sm:pt-6">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3">
+                    <div className="flex items-center gap-2 sm:gap-3 flex-1">
+                      <div className="w-10 h-10 sm:w-14 sm:h-14 flex items-center justify-center bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-lg sm:rounded-xl shadow-lg group-hover:shadow-xl transition-shadow duration-300">
                         {exp.logo === "huddly-svg" ? (
                           <svg width="24" height="24" className="sm:w-8 sm:h-8 text-gray-900 dark:text-gray-900" viewBox="0 0 16 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <title>Huddly Square Logo</title>
@@ -126,10 +123,24 @@ const Experience = () => {
                           <Building2 className="h-6 w-6 sm:h-8 sm:w-8 text-muted-foreground" />
                         )}
                       </div>
-                      <div>
-                        <CardTitle className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                          {exp.positions ? exp.company : exp.position}
-                        </CardTitle>
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between gap-2">
+                          <CardTitle className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                            {exp.position}
+                          </CardTitle>
+                          {/* Mobile: Expand/Collapse button - aligned with title */}
+                          <button
+                            onClick={() => toggleMobileExpansion(index)}
+                            className="sm:hidden p-1 rounded-lg hover:bg-muted/80 transition-colors flex-shrink-0"
+                            aria-label={expandedMobile.includes(index) ? 'Collapse details' : 'Expand details'}
+                          >
+                            {expandedMobile.includes(index) ? (
+                              <ChevronDown className="h-5 w-5 text-muted-foreground" />
+                            ) : (
+                              <ChevronRight className="h-5 w-5 text-muted-foreground" />
+                            )}
+                          </button>
+                        </div>
                         <div className="flex items-center gap-2 text-muted-foreground mt-1">
                           <Building2 className="h-3 w-3 sm:h-4 sm:w-4" />
                           <a 
@@ -145,15 +156,15 @@ const Experience = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="flex flex-col sm:items-end gap-1.5 sm:gap-2 text-xs sm:text-sm text-muted-foreground">
-                      <div className="flex flex-row sm:flex-col gap-2 sm:gap-1.5">
-                        <div className="flex items-center gap-1.5 sm:gap-2 bg-purple-dark px-2 sm:px-3 py-1 rounded-full">
+                    <div className="flex flex-col sm:items-end gap-1 sm:gap-1.5 text-xs sm:text-sm text-muted-foreground">
+                      <div className="flex flex-row sm:flex-col gap-1.5 sm:gap-1">
+                        <div className="flex items-center gap-1 sm:gap-1.5 bg-purple-dark px-2 sm:px-2.5 py-0.5 rounded-full">
                           <Calendar className="h-3 w-3 sm:h-4 sm:w-4 text-purple-600" />
                           <span className="font-medium" style={{ color: 'hsl(var(--foreground))' }}>
                             {exp.positions ? `${exp.positions[exp.positions.length - 1].duration.split(' - ')[0]} - ${exp.positions[0].duration.split(' - ')[1]}` : exp.duration}
                           </span>
                         </div>
-                        <div className="flex items-center gap-1.5 sm:gap-2 bg-pink-dark px-2 sm:px-3 py-1 rounded-full">
+                        <div className="flex items-center gap-1 sm:gap-1.5 bg-pink-dark px-2 sm:px-2.5 py-0.5 rounded-full">
                           <MapPin className="h-3 w-3 sm:h-4 sm:w-4 text-pink-600" />
                           <span className="font-medium" style={{ color: 'hsl(var(--foreground))' }}>{exp.location}</span>
                         </div>
@@ -161,14 +172,14 @@ const Experience = () => {
                     </div>
                   </div>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6 pt-0">
                   {exp.positions ? (
                     // LinkedIn-style multiple positions
-                    <div className="space-y-4">
+                    <div className="space-y-3">
                       {exp.positions.map((pos, posIndex) => (
-                        <div key={posIndex} className="border-l-2 pl-4 relative" style={{ borderColor: 'hsl(var(--border))' }}>
+                        <div key={posIndex} className="border-l-2 pl-3 relative" style={{ borderColor: 'hsl(var(--border))' }}>
                           <div className="absolute -left-1.5 top-0 w-3 h-3 rounded-full" style={{ backgroundColor: 'hsl(var(--muted))' }}></div>
-                          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2">
+                          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5 mb-1.5">
                             <h4 className="text-base sm:text-lg font-semibold" style={{ color: 'hsl(var(--foreground))' }}>
                               {pos.title}
                             </h4>
@@ -176,31 +187,33 @@ const Experience = () => {
                               {pos.duration}
                             </span>
                           </div>
-                          <p className="text-sm sm:text-base mb-3 leading-relaxed" style={{ color: 'hsl(var(--muted-foreground))' }}>
-                            {pos.description}
-                          </p>
-                          <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                            {pos.technologies.map((tech) => (
+                          <div className={`${expandedMobile.includes(index) ? 'block' : 'hidden'} sm:block`}>
+                            <p className="text-sm sm:text-base mb-2 leading-relaxed" style={{ color: 'hsl(var(--muted-foreground))' }}>
+                              {pos.description}
+                            </p>
+                            <div className="flex flex-wrap gap-1 sm:gap-1.5">
+                              {pos.technologies.map((tech) => (
                               <span
                                 key={tech}
-                                className="px-2.5 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm rounded-md font-medium transition-colors duration-200"
-                                style={{ 
-                                  backgroundColor: 'hsl(var(--muted))',
-                                  color: 'hsl(var(--foreground))',
-                                  borderColor: 'hsl(var(--border))',
-                                  borderWidth: '1px',
-                                  borderStyle: 'solid'
-                                }}
-                                onMouseEnter={(e) => {
-                                  e.currentTarget.style.backgroundColor = 'hsl(var(--muted) / 0.8)'
-                                }}
-                                onMouseLeave={(e) => {
-                                  e.currentTarget.style.backgroundColor = 'hsl(var(--muted))'
-                                }}
-                              >
-                                {tech}
-                              </span>
-                            ))}
+                                className="px-2 sm:px-2.5 py-1 sm:py-1.5 text-xs sm:text-sm rounded-md font-medium transition-colors duration-200"
+                                  style={{ 
+                                    backgroundColor: 'hsl(var(--muted))',
+                                    color: 'hsl(var(--foreground))',
+                                    borderColor: 'hsl(var(--border))',
+                                    borderWidth: '1px',
+                                    borderStyle: 'solid'
+                                  }}
+                                  onMouseEnter={(e) => {
+                                    e.currentTarget.style.backgroundColor = 'hsl(var(--muted) / 0.8)'
+                                  }}
+                                  onMouseLeave={(e) => {
+                                    e.currentTarget.style.backgroundColor = 'hsl(var(--muted))'
+                                  }}
+                                >
+                                  {tech}
+                                </span>
+                              ))}
+                            </div>
                           </div>
                         </div>
                       ))}
@@ -208,43 +221,45 @@ const Experience = () => {
                   ) : (
                     // Single position layout
                     <>
-                      <CardDescription className="text-sm sm:text-base mb-4 sm:mb-6 leading-relaxed" style={{ color: 'hsl(var(--foreground))' }}>
-                        {exp.description}
-                      </CardDescription>
-                      <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4">
-                        {exp.technologies.map((tech) => (
-                          <span
-                            key={tech}
-                            className="px-2.5 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm rounded-md font-medium transition-colors duration-200"
-                            style={{ 
-                              backgroundColor: 'hsl(var(--muted))',
-                              color: 'hsl(var(--foreground))',
-                              borderColor: 'hsl(var(--border))',
-                              borderWidth: '1px',
-                              borderStyle: 'solid'
-                            }}
-                            onMouseEnter={(e) => {
-                              e.currentTarget.style.backgroundColor = 'hsl(var(--muted) / 0.8)'
-                            }}
-                            onMouseLeave={(e) => {
-                              e.currentTarget.style.backgroundColor = 'hsl(var(--muted))'
-                            }}
-                          >
-                            {tech}
-                          </span>
-                        ))}
+                      <div className={`${expandedMobile.includes(index) ? 'block' : 'hidden'} sm:block`}>
+                        <CardDescription className="text-sm sm:text-base mb-2 sm:mb-3 leading-relaxed" style={{ color: 'hsl(var(--foreground))' }}>
+                          {exp.description}
+                        </CardDescription>
+                        <div className="flex flex-wrap gap-1 sm:gap-1.5 mb-2 sm:mb-3">
+                          {exp.technologies.map((tech) => (
+                              <span
+                                key={tech}
+                                className="px-2 sm:px-2.5 py-1 sm:py-1.5 text-xs sm:text-sm rounded-md font-medium transition-colors duration-200"
+                              style={{ 
+                                backgroundColor: 'hsl(var(--muted))',
+                                color: 'hsl(var(--foreground))',
+                                borderColor: 'hsl(var(--border))',
+                                borderWidth: '1px',
+                                borderStyle: 'solid'
+                              }}
+                              onMouseEnter={(e) => {
+                                e.currentTarget.style.backgroundColor = 'hsl(var(--muted) / 0.8)'
+                              }}
+                              onMouseLeave={(e) => {
+                                e.currentTarget.style.backgroundColor = 'hsl(var(--muted))'
+                              }}
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
                       </div>
                       {exp.certificate && (
-                        <div className="mt-3 sm:mt-4">
+                        <div className={`mt-2 sm:mt-3 ${expandedMobile.includes(index) ? 'block' : 'hidden'} sm:block`}>
                           <button
                             onClick={() => setOpenPdf({ 
                               url: exp.certificate, 
                               title: exp.certificate === "/entrepreneurship-nm.pdf" ? "NM Entrepreneurship" : "Letter of recommendation" 
                             })}
-                            className={`inline-flex items-center gap-2 px-4 py-2.5 text-white rounded-lg transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105 font-medium ${
+                            className={`inline-flex items-center gap-2 px-3 py-2 text-white rounded-lg transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105 font-medium text-sm ${
                               exp.certificate === "/jobbanbefaling-army.pdf"
                                 ? "bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700"
-                                : "bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700"
+                                : "bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700"
                             }`}
                           >
                             <FileText className="h-4 w-4" />
@@ -264,13 +279,14 @@ const Experience = () => {
 
         {/* Additional Info */}
         <div className="mt-12 sm:mt-16 text-center px-4 sm:px-0">
-          <p className="text-muted-foreground mb-4 text-sm sm:text-base">
+          <p className="text-muted-foreground mb-6 text-sm sm:text-base">
             Interested in my full experience? Check out my detailed resume.
           </p>
           <button
             onClick={() => setOpenPdf({ url: "/Tobias-resume.pdf", title: "Tobias Hammer - Resume" })}
-            className="inline-flex items-center px-4 sm:px-6 py-2.5 sm:py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors text-sm sm:text-base"
+            className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-purple-600 via-pink-600 to-orange-600 hover:from-purple-700 hover:via-pink-700 hover:to-orange-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 text-base sm:text-lg"
           >
+            <FileText className="h-5 w-5 sm:h-6 sm:w-6 mr-2" />
             View Resume
           </button>
         </div>

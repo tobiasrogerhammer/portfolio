@@ -1,14 +1,14 @@
 import { Suspense, lazy } from "react"
-import Navigation from "@/components/navigation"
-import Hero from "@/components/hero"
-import ScrollToTop from "@/components/scroll-to-top"
+import Navigation from "@/components/layout/navigation"
+import Hero from "@/components/sections/hero"
+import ScrollToTop from "@/components/layout/scroll-to-top"
 
 // Lazy load below-the-fold components for better initial load performance
-const About = lazy(() => import("@/components/about"))
-const Experience = lazy(() => import("@/components/experience"))
-const Education = lazy(() => import("@/components/education"))
-const Projects = lazy(() => import("@/components/projects"))
-const Footer = lazy(() => import("@/components/footer"))
+const About = lazy(() => import("@/components/sections/about"))
+const Experience = lazy(() => import("@/components/sections/experience"))
+const Education = lazy(() => import("@/components/sections/education"))
+const Projects = lazy(() => import("@/components/sections/projects"))
+const Footer = lazy(() => import("@/components/layout/footer"))
 
 // Loading fallback component
 const SectionLoader = () => (

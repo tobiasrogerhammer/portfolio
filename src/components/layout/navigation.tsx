@@ -4,8 +4,8 @@ import { useState, useEffect, useMemo } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
-import { ThemeToggle, ThemeToggleMobile } from "@/components/theme-toggle"
-import { PdfViewerModal } from "@/components/pdf-viewer-modal"
+import { ThemeToggle, ThemeToggleMobile } from "@/components/features/theme-toggle"
+import { PdfViewerModal } from "@/components/features/pdf-viewer-modal"
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -118,38 +118,54 @@ const Navigation = () => {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-background border-t border-border">
-              {navItems.map((item) => {
-                const isActive = activeSection === item.href.substring(1)
-                return (
-                  <button
-                    key={item.name}
-                    onClick={() => handleNavClick(item.href)}
-                    className={`block w-full text-left px-3 py-2.5 text-sm font-medium transition-all duration-200 touch-manipulation rounded-md ${
-                      isActive 
-                        ? 'text-brand-primary bg-brand-primary/10' 
-                        : 'text-foreground hover:text-brand-primary hover:bg-muted/50'
-                    }`}
+          <>
+            {/* Backdrop overlay */}
+            <div 
+              className="fixed inset-0 bg-background z-40 md:hidden"
+              onClick={() => setIsOpen(false)}
+            />
+            {/* Right side menu */}
+            <div 
+              className="md:hidden fixed top-14 sm:top-16 right-0 w-48 border-l border-border shadow-xl z-50"
+              style={{ 
+                backgroundColor: 'hsl(var(--background))'
+              }}
+            >
+              <div className="px-3 pt-3 pb-4 space-y-1" style={{ backgroundColor: 'hsl(var(--background))' }}>
+                {navItems.map((item) => {
+                  const isActive = activeSection === item.href.substring(1)
+                  return (
+                    <button
+                      key={item.name}
+                      onClick={() => handleNavClick(item.href)}
+                      className={`flex items-center gap-2 w-full text-left px-3 py-2.5 text-sm font-medium transition-all duration-200 touch-manipulation rounded-md ${
+                        isActive 
+                          ? 'text-brand-primary bg-brand-primary/10' 
+                          : 'text-foreground hover:text-brand-primary hover:bg-muted/50'
+                      }`}
+                    >
+                      {isActive && (
+                        <div className="w-2 h-2 rounded-full bg-brand-primary flex-shrink-0" />
+                      )}
+                      <span>{item.name}</span>
+                    </button>
+                  )
+                })}
+                <div className="px-3 py-2 space-y-2 border-t border-border mt-2 pt-3">
+                  <ThemeToggleMobile />
+                  <Button 
+                    className="w-full text-sm py-2.5 bg-brand-primary text-white hover:bg-brand-primary/90 border-brand-primary"
+                    onClick={() => {
+                      setOpenResumePdf(true)
+                      setIsOpen(false)
+                    }}
                   >
-                    {item.name}
-                  </button>
-                )
-              })}
-              <div className="px-3 py-2 space-y-2">
-                <ThemeToggleMobile />
-                <Button 
-                  className="w-full text-sm py-2.5 bg-brand-primary text-white hover:bg-brand-primary/90 border-brand-primary"
-                  onClick={() => {
-                    setOpenResumePdf(true)
-                    setIsOpen(false)
-                  }}
-                >
-                  View Resume
-                </Button>
+                    View Resume
+                  </Button>
+                </div>
               </div>
             </div>
-          </div>
+          </>
         )}
       </div>
     </nav>
