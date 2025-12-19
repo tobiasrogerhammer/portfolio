@@ -1,6 +1,6 @@
 "use client"
 
-import { Monitor, Server, Wrench, Users, Github, Linkedin, Mail, Briefcase, TrendingUp, Calendar } from "lucide-react"
+import { Monitor, Server, Wrench, Users, Briefcase, TrendingUp, Calendar } from "lucide-react"
 import Image from "next/image"
 import { StatisticsDashboard, StatCard } from "@/components/features/statistics-dashboard"
 

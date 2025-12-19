@@ -5,12 +5,12 @@ import { parseRequestBody, createErrorResponse, handleApiError } from '@/lib/api
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await connectDB();
 
-    const id = params.id;
+    const { id } = await params;
 
     if (!id) {
       return createErrorResponse('Meeting ID is required', 400);

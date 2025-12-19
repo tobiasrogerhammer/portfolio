@@ -5,12 +5,12 @@ import { createErrorResponse, handleApiError } from '@/lib/api-helpers';
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { userId: string } }
+  { params }: { params: Promise<{ userId: string }> }
 ) {
   try {
     await connectDB();
 
-    const id = params.userId;
+    const { userId: id } = await params;
     const user = await User.findById(id);
 
     if (!user) {

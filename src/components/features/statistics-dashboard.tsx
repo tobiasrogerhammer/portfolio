@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
-import { Briefcase, TrendingUp, Calendar } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 
 interface StatCardProps {
@@ -124,15 +123,6 @@ export const StatisticsDashboard = ({ skills }: { skills: Skill[] }) => {
   // Calculate counts correctly
   const totalTechnologies = technologies.reduce((sum, skill) => sum + skill.items.length, 0) // 7 + 7 + 8 = 22
   const totalSkills = skills.reduce((sum, skill) => sum + skill.items.length, 0) // 28 total
-  
-  const stats = {
-    totalSkills,
-    totalTechnologies,
-    yearsExperience: new Date().getFullYear() - 2021,
-    projectsCompleted: 6,
-    experiencePositions: 4,
-    awards: 1,
-  }
 
   // Calculate tech breakdown - only technologies, not skills
   const techBreakdown = technologies.map((skill) => ({

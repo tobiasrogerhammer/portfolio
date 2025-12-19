@@ -5,12 +5,12 @@ import { createErrorResponse, handleApiError } from '@/lib/api-helpers';
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await connectDB();
 
-    const { id } = params;
+    const { id } = await params;
 
     if (!id) {
       return createErrorResponse('Meeting ID is required', 400);
