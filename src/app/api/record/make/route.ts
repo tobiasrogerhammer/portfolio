@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Validate date format
-    const recordDate = new Date(body.date);
+    const recordDate = new Date(body.date as string | number | Date);
     if (isNaN(recordDate.getTime())) {
       return createErrorResponse('Invalid date format', 400);
     }

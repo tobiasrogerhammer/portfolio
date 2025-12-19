@@ -38,8 +38,8 @@ export async function POST(request: NextRequest) {
 
     const newMeeting = new Meeting({
       title: body.title.trim(),
-      startTime: new Date(body.startTime),
-      endTime: new Date(body.endTime),
+      startTime: new Date(body.startTime as string | number | Date),
+      endTime: new Date(body.endTime as string | number | Date),
       location: body.location.trim(),
       agenda: body.agenda.trim(),
       isCompleted: typeof body.isCompleted === 'boolean' ? body.isCompleted : false,

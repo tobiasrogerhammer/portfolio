@@ -52,8 +52,8 @@ export async function POST(request: NextRequest) {
     }
 
     // Check for overlapping reservations
-    const startDate = new Date(body.startUse);
-    const endDate = new Date(body.endUse);
+    const startDate = new Date(body.startUse as string | number | Date);
+    const endDate = new Date(body.endUse as string | number | Date);
 
     const existingBoat = await Boat.findOne({
       Båtplass: båtplassValue,

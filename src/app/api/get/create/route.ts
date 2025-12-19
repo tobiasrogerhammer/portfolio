@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
     const newMessage = new Message({
       message: body.message.trim(),
       username: body.username.trim(),
-      time: new Date(body.time),
+      time: new Date(body.time as string | number | Date),
     });
 
     const message = await newMessage.save();
