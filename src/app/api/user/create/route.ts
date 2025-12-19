@@ -12,17 +12,17 @@ export async function POST(request: NextRequest) {
     const body = await parseRequestBody(request);
 
     // Validate input
-    const usernameValidation = validateUsername(body.username);
+    const usernameValidation = validateUsername(body.username as string | undefined);
     if (!usernameValidation.valid) {
       return createErrorResponse(usernameValidation.error, 400);
     }
 
-    const emailValidation = validateEmail(body.mailadress);
+    const emailValidation = validateEmail(body.mailadress as string | undefined);
     if (!emailValidation.valid) {
       return createErrorResponse(emailValidation.error, 400);
     }
 
-    const passwordValidation = validatePassword(body.password);
+    const passwordValidation = validatePassword(body.password as string | undefined);
     if (!passwordValidation.valid) {
       return createErrorResponse(passwordValidation.error, 400);
     }

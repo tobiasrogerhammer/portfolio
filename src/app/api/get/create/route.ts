@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
     const body = await parseRequestBody(request);
 
     // Validate input
-    const usernameValidation = validateUsername(body.username);
+    const usernameValidation = validateUsername(body.username as string | undefined);
     if (!usernameValidation.valid) {
       return createErrorResponse(usernameValidation.error, 400);
     }

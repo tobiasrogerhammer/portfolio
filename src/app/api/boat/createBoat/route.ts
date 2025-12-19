@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
       return createErrorResponse('Address is required', 400);
     }
 
-    const postnummerValidation = validatePostnummer(body.Postnummer);
+    const postnummerValidation = validatePostnummer(body.Postnummer as number | string | undefined | null);
     if (!postnummerValidation.valid) {
       return createErrorResponse(postnummerValidation.error, 400);
     }
@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
       return createErrorResponse('Start date and end date are required', 400);
     }
 
-    const dateValidation = validateDateRange(body.startUse, body.endUse);
+    const dateValidation = validateDateRange(body.startUse as string | undefined, body.endUse as string | undefined);
     if (!dateValidation.valid) {
       return createErrorResponse(dateValidation.error, 400);
     }
@@ -46,7 +46,7 @@ export async function POST(request: NextRequest) {
       return createErrorResponse('Email is required', 400);
     }
 
-    const emailValidation = validateEmail(body.mailadress);
+    const emailValidation = validateEmail(body.mailadress as string | undefined);
     if (!emailValidation.valid) {
       return createErrorResponse(emailValidation.error, 400);
     }

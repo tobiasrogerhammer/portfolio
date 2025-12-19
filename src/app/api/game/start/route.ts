@@ -5,8 +5,12 @@ import { parseRequestBody, createErrorResponse } from '@/lib/api-helpers';
 export async function POST(request: NextRequest) {
   try {
     const body = await parseRequestBody(request);
-    const initialMoney = body.initialMoney || 100;
-    const sessionId = body.sessionId;
+    const initialMoney = typeof body.initialMoney === 'number' 
+      ? body.initialMoney 
+      : typeof body.initialMoney === 'string' 
+        ? parseInt(body.initialMoney) || 100
+        : 100;
+    const sessionId = typeof body.sessionId === 'string' ? body.sessionId : undefined;
 
     const game = GameService.startNewGame(initialMoney, sessionId);
     

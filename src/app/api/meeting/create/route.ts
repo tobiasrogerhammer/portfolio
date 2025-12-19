@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
       return createErrorResponse('Start time and end time are required', 400);
     }
 
-    const dateValidation = validateDateRange(body.startTime, body.endTime);
+    const dateValidation = validateDateRange(body.startTime as string | undefined, body.endTime as string | undefined);
     if (!dateValidation.valid) {
       return createErrorResponse(dateValidation.error, 400);
     }

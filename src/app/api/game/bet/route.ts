@@ -5,8 +5,12 @@ import { parseRequestBody, createErrorResponse } from '@/lib/api-helpers';
 export async function POST(request: NextRequest) {
   try {
     const body = await parseRequestBody(request);
-    const amount = typeof body.amount === 'number' ? body.amount : parseInt(body.amount);
-    const sessionId = body.sessionId;
+    const amount = typeof body.amount === 'number' 
+      ? body.amount 
+      : typeof body.amount === 'string' 
+        ? parseInt(body.amount) 
+        : NaN;
+    const sessionId = typeof body.sessionId === 'string' ? body.sessionId : undefined;
 
     if (!amount || amount <= 0) {
       return createErrorResponse('Invalid bet amount', 400);

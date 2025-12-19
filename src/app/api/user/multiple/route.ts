@@ -34,38 +34,51 @@ export async function POST(request: NextRequest) {
     const results: UserResult[] = [];
     const errors: UserError[] = [];
 
+    // Type guard: ensure body.users is an array
+    const usersArray = Array.isArray(body.users) ? body.users : [];
+
     // Process each user
-    for (let i = 0; i < body.users.length; i++) {
-      const userData = body.users[i];
+    for (let i = 0; i < usersArray.length; i++) {
+      const userData = usersArray[i] as Record<string, unknown>;
       
       try {
         // Validate input
-        const usernameValidation = validateUsername(userData.username);
+        const usernameValidation = validateUsername(userData.username as string | undefined);
         if (!usernameValidation.valid) {
           errors.push({
             index: i,
-            username: userData.username,
+            username: typeof userData.username === 'string' ? userData.username : String(userData.username || ''),
             error: usernameValidation.error,
           });
           continue;
         }
 
-        const emailValidation = validateEmail(userData.mailadress);
+        const emailValidation = validateEmail(userData.mailadress as string | undefined);
         if (!emailValidation.valid) {
           errors.push({
             index: i,
-            username: userData.username,
+            username: typeof userData.username === 'string' ? userData.username : String(userData.username || ''),
             error: emailValidation.error,
           });
           continue;
         }
 
-        const passwordValidation = validatePassword(userData.password);
+        const passwordValidation = validatePassword(userData.password as string | undefined);
         if (!passwordValidation.valid) {
           errors.push({
             index: i,
-            username: userData.username,
+            username: typeof userData.username === 'string' ? userData.username : String(userData.username || ''),
             error: passwordValidation.error,
+          });
+          continue;
+        }
+
+        // Type guard for userData properties
+        if (typeof userData.username !== 'string' || typeof userData.mailadress !== 'string' || typeof userData.password !== 'string') {
+          errors.push({
+            index: i,
+            username: typeof userData.username === 'string' ? userData.username : String(userData.username || ''),
+            error: 'Invalid user data format',
           });
           continue;
         }
@@ -107,12 +120,14 @@ export async function POST(request: NextRequest) {
       } catch (err: unknown) {
         console.error(`Error creating user ${i}:`, err);
         
+        const usernameForError = typeof userData.username === 'string' ? userData.username : String(userData.username || '');
+        
         if (err && typeof err === 'object' && 'code' in err && err.code === 11000 && 'keyPattern' in err) {
           const mongoError = err as { keyPattern: Record<string, unknown> };
           const field = Object.keys(mongoError.keyPattern)[0];
           errors.push({
             index: i,
-            username: userData.username,
+            username: usernameForError,
             error: `${field === 'username' ? 'Username' : 'Email'} already exists`,
           });
         } else {
@@ -121,7 +136,7 @@ export async function POST(request: NextRequest) {
             : 'Failed to create user';
           errors.push({
             index: i,
-            username: userData.username,
+            username: usernameForError,
             error: errorMessage,
           });
         }

@@ -5,7 +5,7 @@ import { parseRequestBody, createErrorResponse } from '@/lib/api-helpers';
 export async function POST(request: NextRequest) {
   try {
     const body = await parseRequestBody(request);
-    const sessionId = body.sessionId;
+    const sessionId = typeof body.sessionId === 'string' ? body.sessionId : undefined;
 
     const game = GameService.hit(sessionId);
     
