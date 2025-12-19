@@ -133,29 +133,6 @@ export const StatisticsDashboard = ({ skills }: { skills: Skill[] }) => {
     experiencePositions: 4,
     awards: 1,
   }
-    {
-      icon: Briefcase,
-      label: "Years Experience",
-      value: stats.yearsExperience,
-      suffix: "+",
-      color: "#EF4444",
-      delay: 0,
-    },
-    {
-      icon: TrendingUp,
-      label: "Projects",
-      value: stats.projectsCompleted,
-      color: "#10B981",
-      delay: 100,
-    },
-    {
-      icon: Calendar,
-      label: "Positions",
-      value: stats.experiencePositions,
-      color: "#8B5CF6",
-      delay: 200,
-    },
-  ]
 
   // Calculate tech breakdown - only technologies, not skills
   const techBreakdown = technologies.map((skill) => ({
