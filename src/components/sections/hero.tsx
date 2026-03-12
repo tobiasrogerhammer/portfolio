@@ -51,7 +51,7 @@ const Hero = () => {
             <div className="space-y-6 xl:space-y-8">
               <div className="animate-fade-in-up">
                 <span className="text-sm xl:text-base font-medium tracking-wide uppercase text-brand-primary">
-                  Hello, welcome to Tobias Hammer's portfolio!
+                  Hello, welcome to Tobias Hammer&apos;s portfolio!
                 </span>
               </div>
 
@@ -130,6 +130,7 @@ const Hero = () => {
           <div className="mb-3 sm:mb-4 mt-12 sm:mt-14 animate-fade-in-up text-center">
             <span className="text-lg sm:text-base font-medium tracking-wide uppercase text-brand-primary">Hello, welcome to Tobias&apos;s portfolio!</span>
           </div>
+          <p className="text-lg sm:text-base leading-relaxed text-muted-foreground font-normal animate-fade-in-up animation-delay-600"> om </p>
 
           {/* Project carousel (mobile): right under welcome */}
           <div className="animate-fade-in-up animation-delay-200 mb-4 sm:mb-6">
