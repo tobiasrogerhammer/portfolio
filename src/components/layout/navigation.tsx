@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useMemo } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 import { ThemeToggle, ThemeToggleMobile } from "@/components/features/theme-toggle"
@@ -63,9 +64,18 @@ const Navigation = () => {
     <nav className="fixed top-0 w-full bg-background/80 backdrop-blur-md border-b border-border z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-14 sm:h-16">
-          {/* Logo */}
-          <Link href="/" className="text-lg sm:text-xl font-bold text-primary tracking-tight">
-            Tobias Hammer
+          {/* Logo + name */}
+          <Link href="/" className="flex items-center gap-2 sm:gap-2.5">
+            <Image
+              src="/logo/icon.svg"
+              alt=""
+              width={32}
+              height={32}
+              className="h-8 w-8 sm:h-9 sm:w-9 flex-shrink-0"
+            />
+            <span className="text-lg sm:text-xl font-bold text-brand-primary tracking-tight">
+              Tobias Hammer
+            </span>
           </Link>
 
           {/* Desktop Navigation */}

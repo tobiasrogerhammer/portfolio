@@ -191,3 +191,49 @@ export const RotatingProjectPreviews = () => {
     </div>
   )
 }
+
+/** Compact row of all 3 hero projects side by side; mobile = horizontal scroll carousel */
+export const HeroProjectsRow = () => (
+  <div className="flex sm:grid sm:grid-cols-3 gap-4 w-full overflow-x-auto sm:overflow-visible snap-x snap-mandatory sm:snap-none -mx-4 px-4 sm:mx-0 sm:px-0 pb-2 sm:pb-0">
+    {projects.map((project) => (
+      <a
+        key={project.title}
+        href={project.link}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group relative rounded-xl overflow-hidden border border-border/50 shadow-lg bg-card/50 backdrop-blur-xl hover:shadow-xl hover:border-brand-primary/30 transition-all duration-300 flex-shrink-0 snap-center min-w-[280px] w-[85vw] sm:min-w-0 sm:w-auto"
+      >
+        <div className="relative aspect-video w-full overflow-hidden">
+          {project.image ? (
+            <Image
+              src={project.image}
+              alt={project.title}
+              fill
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              sizes="(max-width: 640px) 100vw, 33vw"
+              loading="lazy"
+            />
+          ) : null}
+          <div className="absolute inset-0 bg-gradient-to-t from-card/90 via-transparent to-transparent" />
+        </div>
+        <div className="p-4">
+          <div className="flex items-center justify-between gap-2 mb-1">
+            <h3 className="font-semibold text-brand-primary truncate">{project.title}</h3>
+            <ExternalLink className="w-4 h-4 flex-shrink-0 text-muted-foreground group-hover:text-brand-primary transition-colors" />
+          </div>
+          <p className="text-xs text-muted-foreground line-clamp-2 mb-2">{project.description}</p>
+          <div className="flex flex-wrap gap-1">
+            {project.tech.slice(0, 3).map((tech) => (
+              <span
+                key={tech}
+                className="px-1.5 py-0.5 text-[10px] rounded bg-brand-primary/10 text-brand-primary border border-brand-primary/20 font-medium"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+        </div>
+      </a>
+    ))}
+  </div>
+)

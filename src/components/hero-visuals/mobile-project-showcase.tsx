@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
-import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react"
+import { ExternalLink } from "lucide-react"
 
 interface ProjectPreview {
   title: string
@@ -154,22 +154,6 @@ export const MobileProjectShowcase = () => {
             </div>
           </div>
           <div className="absolute inset-0 bg-gradient-to-t from-card/90 via-card/40 to-transparent" />
-          
-          {/* Navigation Arrows */}
-          <button
-            onClick={goToPrevious}
-            className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white border border-border/50 hover:bg-gray-50 active:scale-95 transition-all duration-200 touch-manipulation z-10 shadow-md"
-            aria-label="Previous project"
-          >
-            <ChevronLeft className="h-4 w-4 text-foreground" />
-          </button>
-          <button
-            onClick={goToNext}
-            className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white border border-border/50 hover:bg-gray-50 active:scale-95 transition-all duration-200 touch-manipulation z-10 shadow-md"
-            aria-label="Next project"
-          >
-            <ChevronRight className="h-4 w-4 text-foreground" />
-          </button>
         </div>
 
         {/* Project Info */}

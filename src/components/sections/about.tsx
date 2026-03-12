@@ -191,8 +191,8 @@ const About = () => {
                     I believe in continuous learning and staying current with the latest tools and trends in the industry to deliver high-quality, forward-thinking solutions.
                   </p>
                   <p>
-                    When I&apos;m not coding, I enjoy exploring new technologies, working on side projects, and contributing to open-source communities. 
-                    I&apos;m passionate about creating user-centered experiences and believe that great software comes from understanding both the technical and human sides of development.
+                    When I&apos;m not coding, I enjoy exploring new technologies, working on side projects, and learning from real-world projects. 
+                    I care about creating user-centered experiences and believe that great software comes from understanding both the technical and human sides of development.
                   </p>
                 </div>
               </div>
@@ -275,7 +275,7 @@ const About = () => {
               I believe in continuous learning and staying current with the latest tools and trends in the industry to deliver high-quality, forward-thinking solutions.
               </p>
                     <p>
-                      When I&apos;m not coding, I enjoy exploring new technologies, working on side projects, and contributing to open-source communities. 
+                      When I&apos;m not coding, I enjoy exploring new technologies, working on side projects, and learning from real-world projects. 
                       I&apos;m passionate about creating user-centered experiences and believe that great software comes from understanding both the technical and human sides of development.
                     </p>
           </div>

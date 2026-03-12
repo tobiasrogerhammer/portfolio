@@ -59,3 +59,7 @@ export interface BoatDocument {
   updatedAt?: Date;
 }
 
+
+
+
+

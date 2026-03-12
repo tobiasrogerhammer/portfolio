@@ -3,7 +3,8 @@
 import { Button } from "@/components/ui/button"
 import { ArrowDown, Github, Linkedin, Mail } from "lucide-react"
 import Link from "next/link"
-import { RotatingProjectPreviews } from "@/components/hero-visuals/rotating-projects"
+import Image from "next/image"
+import { HeroProjectsRow } from "@/components/hero-visuals/rotating-projects"
 // Mobile visual components
 import { MobileProjectShowcase } from "@/components/hero-visuals/mobile-project-showcase"
 // import { MobileCodeSnippet } from "@/components/hero-visuals/mobile-code-snippet"
@@ -17,7 +18,7 @@ const Hero = () => {
   ]
 
   return (
-    <section id="home" className="min-h-screen lg:min-h-screen flex items-start lg:items-center justify-center relative overflow-hidden px-4 sm:px-6 lg:px-8 bg-section-hero py-6 lg:py-0">
+    <section id="home" className="min-h-screen lg:min-h-screen flex items-start lg:items-center justify-center relative overflow-hidden px-4 sm:px-6 lg:px-8 bg-section-hero pt-20 sm:pt-24 lg:pt-28 pb-6 lg:pb-0">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-section-hero via-section-hero to-section-hero" />
       
@@ -29,134 +30,144 @@ const Hero = () => {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto w-full">
-        {/* Split Screen Layout - Desktop */}
-        <div className="hidden lg:grid lg:grid-cols-2 lg:gap-12 xl:gap-16 items-center min-h-[80vh]">
-          {/* Left Column - Text Content */}
-          <div className="space-y-6 xl:space-y-8">
-            {/* Greeting */}
-            <div className="animate-fade-in-up">
-              <span className="text-sm xl:text-base font-medium tracking-wide uppercase text-brand-primary">
-                Hello, welcome to my portfolio!
-              </span>
+        {/* Desktop: Image left, text right; then 3 projects at bottom */}
+        <div className="hidden lg:block">
+          <div className="grid lg:grid-cols-[auto_1fr] lg:gap-12 xl:gap-16 items-center min-h-[60vh]">
+            {/* Left - Profile image */}
+            <div className="relative flex-shrink-0 animate-fade-in-up">
+              <div className="relative w-80 h-80 xl:w-96 xl:h-96 2xl:w-[26rem] 2xl:h-[26rem] rounded-2xl overflow-hidden border-2 border-border/50 shadow-xl">
+                <Image
+                  src="/tobias.webp"
+                  alt="Tobias Hammer - Full-Stack Developer"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1280px) 320px, (max-width: 1536px) 384px, 416px"
+                  priority
+                />
+              </div>
             </div>
 
-            {/* Name */}
-            <h1 className="text-5xl xl:text-6xl 2xl:text-7xl font-black tracking-tight animate-fade-in-up animation-delay-200">
-              <span className="text-brand-primary">
-                Tobias Hammer
-              </span>
-            </h1>
+            {/* Right - Text content */}
+            <div className="space-y-6 xl:space-y-8">
+              <div className="animate-fade-in-up">
+                <span className="text-sm xl:text-base font-medium tracking-wide uppercase text-brand-primary">
+                  Hello, welcome to Tobias Hammer's portfolio!
+                </span>
+              </div>
 
-            {/* Title */}
-            <h2 className="text-xl xl:text-2xl text-foreground tracking-wide animate-fade-in-up animation-delay-400">
-              Developer / Problem Solver / Entrepreneur
-            </h2>
+              <h1 className="text-4xl xl:text-5xl 2xl:text-6xl font-black tracking-tight animate-fade-in-up animation-delay-200">
+                <span className="text-brand-primary">
+                  Developer / Entrepreneur
+                </span>
+              </h1>
 
-            {/* Description */}
-            <p className="text-lg xl:text-xl leading-relaxed text-muted-foreground font-normal animate-fade-in-up animation-delay-600">
-              I design and develop digital products that connect ideas with people.
-              Combining technical precision with an eye for innovation and impact.
-            </p>
+              <p className="text-lg xl:text-xl leading-relaxed text-muted-foreground font-normal animate-fade-in-up animation-delay-600">
+                I design and develop digital products that connect ideas with people.
+                Combining technical precision with an eye for innovation and impact.
+              </p>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-row gap-4 pt-2 animate-fade-in-up animation-delay-800">
-              <Button asChild size="lg" className="text-base xl:text-lg px-6 xl:px-8 py-4 xl:py-6 w-auto bg-brand-primary text-white hover:bg-brand-primary/90 border-brand-primary hover:scale-105 transition-transform duration-200">
-                <Link href="#projects">View My Work</Link>
-              </Button>
-              <Button asChild variant="outline" size="lg" className="text-base xl:text-lg px-6 xl:px-8 py-4 xl:py-6 w-auto border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white hover:scale-105 transition-all duration-200">
-                <Link href="#about">About Me</Link>
-              </Button>
-            </div>
+              <div className="flex flex-row gap-4 pt-2 animate-fade-in-up animation-delay-800">
+                <Button asChild size="lg" className="text-base xl:text-lg px-6 xl:px-8 py-4 xl:py-6 w-auto bg-brand-primary text-white hover:bg-brand-primary/90 border-brand-primary hover:scale-105 transition-transform duration-200">
+                  <Link href="#projects">View My Work</Link>
+                </Button>
+                <Button asChild variant="outline" size="lg" className="text-base xl:text-lg px-6 xl:px-8 py-4 xl:py-6 w-auto border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white hover:scale-105 transition-all duration-200">
+                  <Link href="#about">About Me</Link>
+                </Button>
+              </div>
 
-            {/* Social Links */}
-            <div className="flex space-x-6 pt-4 animate-fade-in-up animation-delay-1000">
-              {socialLinks.map((link, index) => {
-                const Icon = link.icon
-                const colors = [
-                  { hover: '#124D95' },
-                  { hover: '#FF6B6B' },
-                  { hover: '#2BBBAD' }
-                ]
-                return (
-                  <Link
-                    key={link.name}
-                    href={link.href}
-                    className="transition-all duration-200 p-3 rounded-full hover:scale-110 hover:text-white touch-manipulation"
-                    style={{ 
-                      backgroundColor: 'transparent',
-                      color: 'hsl(var(--foreground))',
-                      minWidth: '44px',
-                      minHeight: '44px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = colors[index % colors.length].hover
-                      e.currentTarget.style.color = 'white'
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = 'transparent'
-                      e.currentTarget.style.color = 'hsl(var(--foreground))'
-                    }}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Icon className="h-6 w-6" />
-                    <span className="sr-only">{link.name}</span>
-                  </Link>
-                )
-              })}
+              <div className="flex space-x-6 pt-4 animate-fade-in-up animation-delay-1000">
+                {socialLinks.map((link, index) => {
+                  const Icon = link.icon
+                  const colors = [
+                    { hover: '#124D95' },
+                    { hover: '#FF6B6B' },
+                    { hover: '#2BBBAD' }
+                  ]
+                  return (
+                    <Link
+                      key={link.name}
+                      href={link.href}
+                      className="transition-all duration-200 p-3 rounded-full hover:scale-110 hover:text-white touch-manipulation"
+                      style={{
+                        backgroundColor: 'transparent',
+                        color: 'hsl(var(--foreground))',
+                        minWidth: '44px',
+                        minHeight: '44px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = colors[index % colors.length].hover
+                        e.currentTarget.style.color = 'white'
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = 'transparent'
+                        e.currentTarget.style.color = 'hsl(var(--foreground))'
+                      }}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Icon className="h-6 w-6" />
+                      <span className="sr-only">{link.name}</span>
+                    </Link>
+                  )
+                })}
+              </div>
             </div>
           </div>
 
-          {/* Right Column - Animated Visual */}
-          <div className="relative h-full flex items-center justify-center animate-fade-in-up animation-delay-400">
-            <RotatingProjectPreviews />
+          {/* 3 projects side by side at bottom of hero */}
+          <div className="mt-12 xl:mt-16 animate-fade-in-up animation-delay-400">
+            <HeroProjectsRow />
           </div>
         </div>
 
-        {/* Mobile/Tablet Layout - Centered (Original) */}
-        <div className="lg:hidden text-center">
+        {/* Mobile/Tablet Layout - Same text as desktop; welcome above image and title, then 3 projects at bottom */}
+        <div className="lg:hidden">
         <div className="max-w-4xl mx-auto">
-          {/* Greeting */}
-          <div className="mb-2 mt-12 sm:mb-6 animate-fade-in-up">
-            <span className="text-sm sm:text-base font-medium tracking-wide uppercase text-brand-primary">Hello, welcome to my portfolio!</span>
+          {/* Welcome text above image and title */}
+          <div className="mb-3 sm:mb-4 mt-12 sm:mt-14 animate-fade-in-up text-center">
+            <span className="text-lg sm:text-base font-medium tracking-wide uppercase text-brand-primary">Hello, welcome to Tobias&apos;s portfolio!</span>
           </div>
 
-          {/* Name */}
-            <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl font-black mb-2 sm:mb-6 tracking-tight animate-fade-in-up animation-delay-200">
-            <span className="text-brand-primary">
-              Tobias Hammer
-            </span>
-          </h1>
-
-          {/* Title */}
-          <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl mb-2 sm:mb-8 text-foreground tracking-wide animate-fade-in-up animation-delay-400">
-            Developer / Problem Solver / Entrepreneur
-          </h2>
-
-          {/* Separator */}
-          <div className="w-16 h-px bg-border mx-auto mb-4 sm:mb-6 animate-fade-in-up animation-delay-500"></div>
-
-          {/* Mobile Visual Component - Project Preview Carousel */}
-          <div className="animate-fade-in-up animation-delay-700">
+          {/* Project carousel (mobile): right under welcome */}
+          <div className="animate-fade-in-up animation-delay-200 mb-4 sm:mb-6">
             <MobileProjectShowcase />
           </div>
 
-          {/* Description */}
-          <p className="text-sm sm:text-md mb-4 sm:mb-8 max-w-3xl mx-auto leading-relaxed text-muted-foreground px-4 sm:px-0 font-normal animate-fade-in-up animation-delay-600">
-          I design and develop digital products that connect ideas with people.
-          Combining technical precision with an eye for innovation and impact.
-          </p>
+          {/* Image left of title and description */}
+          <div className="flex flex-row gap-4 sm:gap-6 mb-4 sm:mb-6 animate-fade-in-up animation-delay-200">
+            <div className="relative w-28 h-28 sm:w-32 sm:h-32 flex-shrink-0 rounded-xl overflow-hidden border-2 border-border/50 shadow-lg">
+              <Image
+                src="/tobias.webp"
+                alt="Tobias Hammer"
+                fill
+                className="object-cover"
+                sizes="128px"
+                priority
+              />
+            </div>
+            <div className="min-w-0 flex-1">
+              <h1 className="text-xl sm:text-2xl font-black tracking-tight animate-fade-in-up animation-delay-200">
+                <span className="text-brand-primary">Developer / Entrepreneur</span>
+              </h1>
+              <p className="text-sm sm:text-base leading-relaxed text-muted-foreground mt-2 sm:mt-3 animate-fade-in-up animation-delay-600">
+                I build digital products that bring ideas and people together—blending technical craft with a focus on innovation and impact.
+              </p>
+            </div>
+          </div>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-row gap-3 sm:gap-4 justify-center mb-6 sm:mb-16 px-4 sm:px-0 animate-fade-in-up animation-delay-800">
-            <Button asChild size="lg" className="text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 w-auto bg-brand-primary text-white hover:bg-brand-primary/90 border-brand-primary hover:scale-105 transition-transform duration-200">
-              <Link href="#projects">View My Work</Link>
-            </Button>
-            <Button asChild variant="outline" size="lg" className="text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 w-auto border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white hover:scale-105 transition-all duration-200">
+          {/* Separator */}
+          <div className="w-16 h-px bg-border mb-4 sm:mb-6 animate-fade-in-up animation-delay-500 sm:mx-0 mx-auto"></div>
+
+          {/* CTA Buttons - equal width, full row; About Me left, View My Work right */}
+          <div className="flex flex-row gap-3 sm:gap-4 w-full mb-6 sm:mb-8 animate-fade-in-up animation-delay-700">
+            <Button asChild size="lg" className="flex-1 min-w-0 text-base sm:text-lg py-4 sm:py-6 border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white hover:scale-105 transition-all duration-200" variant="outline">
               <Link href="#about">About Me</Link>
+            </Button>
+            <Button asChild size="lg" className="flex-1 min-w-0 text-base sm:text-lg py-4 sm:py-6 bg-brand-primary text-white hover:bg-brand-primary/90 border-brand-primary hover:scale-105 transition-transform duration-200">
+              <Link href="#projects">View My Work</Link>
             </Button>
           </div>
 
