@@ -221,6 +221,7 @@ const Education = () => {
                       <button
                         onClick={() => toggleCard(index)}
                         className="flex items-center justify-between w-full p-3 rounded-lg border transition-all duration-200 group"
+                        aria-label={isExpanded ? `Collapse academic timeline for ${edu.institution}` : `Expand academic timeline for ${edu.institution}`}
                         style={{ 
                           background: 'linear-gradient(to right, rgba(240, 253, 244, 1), rgba(236, 253, 245, 1))',
                           borderColor: 'hsl(142, 71%, 45%)'

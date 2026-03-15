@@ -1,42 +1,21 @@
 "use client"
 
-import { Monitor, Server, Wrench, Users, Briefcase, TrendingUp, Calendar } from "lucide-react"
+import { Monitor, Server, Wrench, Users, Leaf } from "lucide-react"
 import Image from "next/image"
-import { StatisticsDashboard, StatCard } from "@/components/features/statistics-dashboard"
+import { StatisticsDashboard } from "@/components/features/statistics-dashboard"
+
+const ABOUT_TAGLINE = "Who is Tobias, and what is his story?"
+const ABOUT_INTRO = "Developer and co-founder of Renow AS. Studying at OsloMet. I care about sustainable tech and products that help people."
+
+/** Add as many paragraphs as you like — each string is rendered as its own paragraph under "More about me". */
+const ABOUT_STORY: string[] = [
+  "My journey in software development began five years ago, and since then I've been focused on building products that are both elegant and functional. I enjoy transforming complex challenges into simple, efficient solutions that make a real impact.",
+  "Beyond coding, I'm always looking for new opportunities to innovate, collaborate, and build meaningful products that make a difference.",
+  "I believe in continuous learning and staying current with the latest tools and trends in the industry to deliver high-quality, forward-thinking solutions.",
+]
+const ABOUT_CLOSING = "The team behind Renow, photo of us winning the Regional Sustainability Award."
 
 const About = () => {
-
-  // Calculate stats for the 3 simple stat cards
-  const stats = {
-    yearsExperience: new Date().getFullYear() - 2021,
-    projectsCompleted: 6,
-    experiencePositions: 4,
-  }
-
-  const statCards = [
-    {
-      icon: Briefcase,
-      label: "Years Experience",
-      value: stats.yearsExperience,
-      suffix: "+",
-      color: "#EF4444",
-      delay: 0,
-    },
-    {
-      icon: TrendingUp,
-      label: "Projects",
-      value: stats.projectsCompleted,
-      color: "#10B981",
-      delay: 100,
-    },
-    {
-      icon: Calendar,
-      label: "Positions",
-      value: stats.experiencePositions,
-      color: "#8B5CF6",
-      delay: 200,
-    },
-  ]
   const skills = [
     {
       category: "Frontend",
@@ -94,199 +73,184 @@ const About = () => {
   ]
 
   return (
-    <section id="about" className="py-12 sm:py-16 lg:py-20 relative overflow-hidden px-4 sm:px-6 lg:px-8 bg-section-about">
+    <section id="about" className="py-12 sm:py-16 lg:py-20 relative overflow-hidden px-0 sm:px-6 lg:px-8 bg-section-about">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-section-about via-section-about to-section-about" />
       
       {/* Animated background elements - optimized for mobile */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-10 right-10 sm:top-20 sm:right-20 w-20 h-20 sm:w-32 sm:h-32 rounded-full blur-2xl animate-pulse bg-brand-primary/10" style={{ backgroundColor: '#124D95', opacity: 0.1 }} />
         <div className="absolute bottom-10 left-10 sm:bottom-20 sm:left-20 w-24 h-24 sm:w-40 sm:h-40 rounded-full blur-2xl animate-pulse delay-1000 bg-brand-secondary/10" style={{ backgroundColor: '#FF6B6B', opacity: 0.1 }} />
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+        <div className="text-center mb-6 sm:mb-10 lg:mb-12 px-4 sm:px-0">
           <div className="inline-block">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 tracking-tight text-brand-primary">
               About Me
             </h2>
+            <p className="text-muted-foreground text-base sm:text-lg max-w-xl mx-auto mb-3">
+              {ABOUT_TAGLINE}
+            </p>
             <div className="h-1 w-16 sm:w-24 mx-auto rounded-full bg-brand-primary"></div>
           </div>
         </div>
 
-        <div className="mb-12 sm:mb-16">
+        <div className="mb-12 sm:mb-14 lg:mb-16">
           {/* Content with text wrapping around image */}
           <div className="relative">
-            {/* Mobile: Improved stacked layout */}
-            <div className="lg:hidden space-y-6 sm:space-y-8">
-              {/* Images side by side */}
-              <div className="flex gap-3 sm:gap-4 justify-center items-center">
-                {/* Renow Group Picture */}
-                <div className="relative flex-1 max-w-[240px] sm:max-w-[320px]">
-                  <div 
-                    className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden p-1.5" 
-                    style={{ 
-                      backgroundColor: '#E9F5FF',
-                      boxShadow: '0 4px 20px rgba(18, 77, 149, 0.25), 0 8px 40px rgba(18, 77, 149, 0.15)'
-                    }}
-                  >
+            {/* Mobile: Full-bleed image fading into section, overlapping content */}
+            <div className="lg:hidden">
+              <div className="relative w-full aspect-[4/5] sm:aspect-[3/4] overflow-hidden">
+                <Image
+                  src="/tobias.webp"
+                  alt="Tobias Hammer"
+                  fill
+                  className="object-cover object-top"
+                  sizes="100vw"
+                  priority
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none about-mobile-hero-fade"
+                />
+                <div className="absolute top-0 left-0 right-0 p-4 sm:p-5 pb-12 text-center">
+                  <p className="text-sm font-semibold text-white drop-shadow-md">
+                    20 years · Student · Oslo, Norway
+                  </p>
+                </div>
+              </div>
+
+              <div className="relative -mt-8 sm:-mt-12 px-4 space-y-6 sm:space-y-8">
+                <div className="rounded-2xl overflow-hidden bg-card/80 backdrop-blur-md p-5 sm:p-6 border-2 border-brand-primary shadow-lg bg-gradient-to-br from-card to-brand-primary/5">
+                  <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+                    {ABOUT_INTRO}
+                  </p>
+                </div>
+
+                <div className="space-y-4">
+                  <h3 className="text-2xl lg:text-3xl font-semibold tracking-tight text-brand-primary">
+                    My story
+                  </h3>
+                  <div className="space-y-4">
+                    {ABOUT_STORY.map((paragraph, i) => (
+                      <p key={i} className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+                        {paragraph}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Closing + Renow: single row on mobile, image left / text right */}
+                <div className="flex flex-row gap-4 sm:gap-5 items-stretch rounded-xl overflow-hidden border border-border/50 bg-muted/40 dark:bg-muted/20 shadow-sm">
+                  <div className="flex-shrink-0 w-32 sm:w-40 aspect-[4/3] rounded-l-xl overflow-hidden">
                     <Image
                       src="/mobileviewGroupPicture.jpeg"
-                      alt="Renow Group"
-                      width={500}
-                      height={375}
-                      className="w-full h-full object-cover rounded-xl"
-                      style={{ objectPosition: 'center 30%' }}
-                      priority
+                      alt="Renow team"
+                      width={160}
+                      height={120}
+                      className="w-full h-full object-cover scale-125"
+                      style={{ objectPosition: 'center 35%' }}
                     />
                   </div>
-                </div>
-
-                {/* Profile Image */}
-                <div className="relative group">
-                  <div 
-                    className="relative aspect-square rounded-2xl overflow-hidden p-1.5 w-40 h-40 sm:w-56 sm:h-56" 
-                    style={{ 
-                      backgroundColor: '#E9F5FF',
-                      boxShadow: '0 4px 20px rgba(18, 77, 149, 0.25), 0 8px 40px rgba(18, 77, 149, 0.15)'
-                    }}
-                  >
-                    <Image
-                      src="/tobias.webp"
-                      alt="Tobias Hammer - Full-Stack Developer"
-                      width={224}
-                      height={224}
-                      className="w-full h-full object-cover rounded-xl"
-                      priority
-                    />
+                  <div className="flex flex-1 min-w-0 flex-col justify-center py-4 pr-4 sm:py-5 sm:pr-5">
+                    <div className="flex items-center gap-2 mb-1">
+                      <Leaf className="h-5 w-5 flex-shrink-0 text-brand-primary" aria-hidden />
+                      <p className="text-base sm:text-lg font-semibold text-foreground">Renow AS</p>
+                    </div>
+                    <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+                      {ABOUT_CLOSING}
+                    </p>
                   </div>
-                </div>
-              </div>
-
-              {/* 3 Simple Stats Cards - Mobile with better spacing */}
-              <div className="grid grid-cols-3 gap-2 sm:gap-4 px-2 sm:px-0">
-                {statCards.map((stat, index) => (
-                  <StatCard key={index} {...stat} />
-                ))}
-              </div>
-
-              {/* Story Section - Improved card design */}
-              <div className="bg-card/60 backdrop-blur-sm rounded-2xl p-5 sm:p-6 border border-border/50 shadow-sm">
-                <div className="space-y-2 sm:space-y-3 mb-4 sm:mb-5">
-                  <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-brand-primary">
-                    My Story
-                  </h3>
-                  <div className="h-1 w-16 sm:w-20 rounded-full bg-brand-primary"></div>
-                </div>
-                <div className="space-y-3 sm:space-y-4 leading-relaxed text-muted-foreground text-sm sm:text-base font-normal">
-                  <p>
-                    My journey in software development began five years ago, and since then I&apos;ve been focused on building 
-                    products that are both elegant and functional. 
-                    I enjoy transforming complex challenges into simple, efficient solutions that make a real impact.
-                  </p>
-                  <p>
-                    Beyond coding, I&apos;m always looking for new opportunities to innovate, collaborate, and build meaningful products that make a difference. 
-                  </p>
-                  <p>
-                    I believe in continuous learning and staying current with the latest tools and trends in the industry to deliver high-quality, forward-thinking solutions.
-                  </p>
-                  <p>
-                    When I&apos;m not coding, I enjoy exploring new technologies, working on side projects, and learning from real-world projects. 
-                    I care about creating user-centered experiences and believe that great software comes from understanding both the technical and human sides of development.
-                  </p>
                 </div>
               </div>
             </div>
 
-            {/* Desktop: 12-column grid layout */}
+            {/* Desktop: 12-column grid layout (original from last push) */}
             <div className="hidden lg:block">
               <div className="grid lg:grid-cols-12 lg:gap-8 items-start">
-                {/* Left Column (7 cols): Profile Image + Stats Cards (side by side) + Statistics Dashboard */}
+                {/* Left Column (7 cols): Profile Image + Renow side by side, then Statistics Dashboard */}
                 <div className="lg:col-span-7 space-y-6">
-                  {/* Profile Image and Stats Cards - Side by Side */}
                   <div className="grid grid-cols-12 gap-4 items-stretch">
-                    {/* Profile Image */}
-                    <div className="col-span-5 h-full">
-                      <div className="flex justify-center lg:justify-start h-full">
-                        <div className="relative group w-full h-full">
-                          <div 
-                            className="relative rounded-2xl overflow-hidden p-1 w-full h-full" 
-                            style={{ 
-                              backgroundColor: '#E9F5FF',
-                              boxShadow: '0 0 20px rgba(18, 77, 149, 0.25), 0 0 40px rgba(18, 77, 149, 0.15)'
-                            }}
-                          >
-                            <Image
-                              src="/tobias.webp"
-                              alt="Tobias Hammer - Full-Stack Developer"
-                              width={320}
-                              height={320}
-                              className="w-full h-full object-cover rounded-xl"
-                              priority
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Renow Group Picture - To the right of profile image */}
-                    <div className="col-span-7 h-full">
-                      <div className="relative w-full h-full rounded-2xl overflow-hidden p-1" 
-                        style={{ 
-                          backgroundColor: '#E9F5FF',
-                          boxShadow: '0 0 20px rgba(18, 77, 149, 0.25), 0 0 40px rgba(18, 77, 149, 0.15)'
-                        }}
-                      >
+                    {/* Profile picture card: image + caption as one card — same image height as Renow */}
+                    <div
+                      className="col-span-5 flex flex-col rounded-2xl overflow-hidden"
+                      style={{
+                        backgroundColor: '#E9F5FF',
+                        boxShadow: '0 0 20px rgba(18, 77, 149, 0.25), 0 0 40px rgba(18, 77, 149, 0.15)',
+                      }}
+                    >
+                      <div className="relative h-[320px] w-full p-1 pb-0">
                         <Image
-                          src="/renowGroupPicture.jpeg"
-                          alt="Renow Group"
-                          width={500}
-                          height={500}
-                          className="w-full h-full object-cover rounded-xl"
+                          src="/tobias.webp"
+                          alt="Tobias Hammer - Full-Stack Developer"
+                          fill
+                          className="object-cover object-middle rounded-t-2xl"
+                          sizes="(min-width: 1024px) 40vw, 0"
                           priority
                         />
                       </div>
+                      <div className="p-3 flex-shrink-0 border-t border-brand-primary/10">
+                        <p className="text-sm text-muted-foreground leading-snug">
+                          {ABOUT_INTRO}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Renow picture card: image + caption as one card — same image height as profile */}
+                    <div
+                      className="col-span-7 flex flex-col rounded-2xl overflow-hidden"
+                      style={{
+                        backgroundColor: '#E9F5FF',
+                        boxShadow: '0 0 20px rgba(18, 77, 149, 0.25), 0 0 40px rgba(18, 77, 149, 0.15)',
+                      }}
+                    >
+                      <div className="relative h-[320px] w-full p-1 pb-0">
+                        <Image
+                          src="/renowGroupPicture.jpeg"
+                          alt="Renow Group"
+                          fill
+                          className="object-cover object-center rounded-t-2xl scale-110"
+                          style={{ objectPosition: 'center 40%' }}
+                          sizes="(min-width: 1024px) 58vw, 0"
+                          priority
+                        />
+                      </div>
+                      <div className="p-3 flex-shrink-0 border-t border-brand-primary/10">
+                        <p className="font-semibold text-foreground mb-1">Renow AS</p>
+                        <p className="text-sm text-muted-foreground leading-snug">
+                          {ABOUT_CLOSING}
+                        </p>
+                      </div>
                     </div>
                   </div>
-
-                  {/* Statistics Dashboard */}
-                  <StatisticsDashboard skills={skills} />
                 </div>
 
-                {/* Right Column (5 cols): My Story + Social Links */}
+                {/* Right Column (5 cols): My Story */}
                 <div className="lg:col-span-5 space-y-6">
-                  {/* Story Section */}
                   <div className="space-y-4 leading-relaxed text-muted-foreground text-base lg:text-lg font-normal">
                     <div className="space-y-3 mb-3">
                       <h3 className="text-2xl lg:text-3xl font-semibold tracking-tight text-brand-primary">
-                My Story
-              </h3>
-                      <div className="h-0.5 w-16 rounded-full" style={{ backgroundColor: '#124D95' }}></div>
-            </div>
-              <p>
-              My journey in software development began five years ago, and since then I&apos;ve been focused on building 
-              products that are both elegant and functional. 
-              I enjoy transforming complex challenges into simple, efficient solutions that make a real impact.
-              </p>
-              <p>
-              Beyond coding, I&apos;m always looking for new opportunities to innovate, collaborate, and build meaningful products that make a difference. 
-              </p>
-              <p>
-              I believe in continuous learning and staying current with the latest tools and trends in the industry to deliver high-quality, forward-thinking solutions.
-              </p>
-                    <p>
-                      When I&apos;m not coding, I enjoy exploring new technologies, working on side projects, and learning from real-world projects. 
-                      I&apos;m passionate about creating user-centered experiences and believe that great software comes from understanding both the technical and human sides of development.
-                    </p>
-          </div>
+                        My Story
+                      </h3>
+                      <div className="h-0.5 w-16 rounded-full bg-brand-primary" />
+                    </div>
+                    {ABOUT_STORY.map((paragraph, i) => (
+                      <p key={i}>{paragraph}</p>
+                    ))}
+                  </div>
                 </div>
+              </div>
+
+              {/* Skills & technologies: full width on desktop, single title in dashboard */}
+              <div className="mt-10 pt-6">
+                <StatisticsDashboard skills={skills} />
               </div>
             </div>
           </div>
         </div>
 
         {/* Mobile: Skills & Statistics Dashboard */}
-        <div className="lg:hidden">
+        <div className="lg:hidden px-4">
           <StatisticsDashboard skills={skills} />
         </div>
       </div>

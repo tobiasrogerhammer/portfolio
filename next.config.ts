@@ -3,6 +3,8 @@ const nextConfig = {
   output: 'standalone',
   compress: true, // Enable gzip compression
   poweredByHeader: false, // Remove X-Powered-By header for security
+  // Production optimizations for Lighthouse (minification is default; ensure strict)
+  reactStrictMode: true,
   images: {
     remotePatterns: [
       {

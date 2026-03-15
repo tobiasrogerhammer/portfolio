@@ -3,92 +3,6 @@
 import { useState, useEffect, useRef } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 
-interface StatCardProps {
-  icon: React.ElementType
-  label: string
-  value: number | string
-  suffix?: string
-  color: string
-  delay?: number
-}
-
-export const StatCard = ({ icon: Icon, label, value, suffix = "", color, delay = 0 }: StatCardProps) => {
-  const [count, setCount] = useState(0)
-  const [isVisible, setIsVisible] = useState(false)
-  const cardRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !isVisible) {
-          setIsVisible(true)
-        }
-      },
-      { threshold: 0.1 }
-    )
-
-    const currentCard = cardRef.current
-    if (currentCard) {
-      observer.observe(currentCard)
-    }
-
-    return () => {
-      if (currentCard) {
-        observer.unobserve(currentCard)
-      }
-    }
-  }, [isVisible])
-
-  useEffect(() => {
-    if (!isVisible) return
-
-    const numericValue = typeof value === "number" ? value : parseInt(value.toString()) || 0
-    if (numericValue === 0) return
-
-    const duration = 2000
-    const steps = 60
-    const increment = numericValue / steps
-    const stepDuration = duration / steps
-
-    let current = 0
-    const timer = setInterval(() => {
-      current += increment
-      if (current >= numericValue) {
-        setCount(numericValue)
-        clearInterval(timer)
-      } else {
-        setCount(Math.floor(current))
-      }
-    }, stepDuration)
-
-    return () => clearInterval(timer)
-  }, [isVisible, value])
-
-  return (
-    <Card
-      ref={cardRef}
-      className="group hover:shadow-lg transition-all duration-300 hover:scale-[1.02] border border-border bg-card/50 backdrop-blur-sm"
-      style={{ animationDelay: `${delay}ms` }}
-    >
-      <CardContent className="p-3 sm:p-4">
-        <div className="flex flex-col items-center text-center">
-          <div
-            className="p-1.5 rounded-lg mb-2 transition-transform duration-300 group-hover:scale-110"
-            style={{ backgroundColor: `${color}15` }}
-          >
-            <Icon className="h-4 w-4" style={{ color }} />
-          </div>
-          <div className="text-xl sm:text-2xl font-bold mb-0.5" style={{ color }}>
-              {typeof value === "number" ? count : value}
-              {suffix}
-          </div>
-          <div className="text-[10px] sm:text-xs text-muted-foreground font-medium leading-tight">{label}</div>
-        </div>
-      </CardContent>
-    </Card>
-  )
-}
-
 interface Skill {
   category: string
   items: string[]
@@ -139,30 +53,27 @@ export const StatisticsDashboard = ({ skills }: { skills: Skill[] }) => {
     <div className="mt-12 sm:mt-6">
       {/* Technologies Grid  Simplified */}
       <div className="mb-10">
-        {/* Title and Color Code Legend - Same Row */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 mb-6">
-          {/* Title */}
+        {/* Title with color code legend close by */}
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mb-6">
           <div>
-            <h3 className="text-sm sm:text-base font-semibold mb-1 tracking-tight text-brand-primary">
+            <h3 className="text-lg sm:text-xl font-semibold mb-1 tracking-tight text-brand-primary">
               Skills & Technologies
             </h3>
-            <div className="h-0.5 w-8 sm:w-10 rounded-full" style={{ backgroundColor: '#124D95' }}></div>
+            <div className="h-0.5 w-10 sm:w-12 rounded-full" style={{ backgroundColor: '#124D95' }}></div>
           </div>
-          
-          {/* Color Code Legend */}
-          <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-xs sm:text-sm">
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded shadow-sm" style={{ backgroundColor: '#059669' }}></div>
-            <span className="text-muted-foreground font-medium">Expert</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded shadow-sm" style={{ backgroundColor: '#2563eb' }}></div>
-            <span className="text-muted-foreground font-medium">Intermediate</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded shadow-sm" style={{ backgroundColor: '#6b7280' }}></div>
-            <span className="text-muted-foreground font-medium">Beginner</span>
-          </div>
+          <div className="flex flex-wrap items-center gap-4 text-xs sm:text-sm">
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 rounded shadow-sm" style={{ backgroundColor: '#059669' }}></div>
+              <span className="text-muted-foreground font-medium">Expert</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 rounded shadow-sm" style={{ backgroundColor: '#2563eb' }}></div>
+              <span className="text-muted-foreground font-medium">Intermediate</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 rounded shadow-sm" style={{ backgroundColor: '#6b7280' }}></div>
+              <span className="text-muted-foreground font-medium">Beginner</span>
+            </div>
           </div>
         </div>
         

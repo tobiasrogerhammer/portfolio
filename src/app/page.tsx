@@ -20,9 +20,6 @@ const SectionLoader = () => (
 export default function Home() {
   return (
     <div className="min-h-screen">
-      <a href="#main-content" className="skip-link">
-        Skip to main content
-      </a>
       <Navigation />
       <main id="main-content">
         <Hero />

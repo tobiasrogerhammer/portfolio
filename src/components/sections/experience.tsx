@@ -6,10 +6,22 @@ import { Calendar, MapPin, Building2, FileText, ExternalLink, ChevronDown, Chevr
 import Image from "next/image"
 import { PdfViewerModal } from "@/components/features/pdf-viewer-modal"
 
+/** Parse duration string "YYYY - YYYY" or "YYYY - Present" and return e.g. "2 yrs" */
+function formatTenure(durationStr: string): string {
+  const parts = durationStr.split(/\s*-\s*/).map((s) => s.trim())
+  if (parts.length < 2) return ""
+  const start = parseInt(parts[0], 10)
+  const end = parts[1].toLowerCase() === "present" ? new Date().getFullYear() : parseInt(parts[1], 10)
+  if (isNaN(start) || isNaN(end)) return ""
+  const years = end - start
+  if (years <= 0) return "1 yr"
+  return years === 1 ? "1 yr" : `${years} yrs`
+}
+
 const Experience = () => {
   const [openPdf, setOpenPdf] = useState<{ url: string; title: string } | null>(null)
   const [expandedMobile, setExpandedMobile] = useState<number[]>([])
-  
+
   const toggleMobileExpansion = (index: number) => {
     setExpandedMobile(prev => 
       prev.includes(index) 
@@ -125,9 +137,20 @@ const Experience = () => {
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center justify-between gap-2">
-                          <CardTitle className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                            {exp.position}
-                          </CardTitle>
+                          <div className="flex items-center gap-2 min-w-0">
+                            <CardTitle className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent truncate">
+                              {exp.company}
+                            </CardTitle>
+                            <a
+                              href={exp.website}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex-shrink-0 p-1.5 rounded-lg hover:bg-muted/80 transition-colors text-muted-foreground hover:text-foreground"
+                              aria-label={`Open ${exp.company} website`}
+                            >
+                              <ExternalLink className="h-4 w-4 sm:h-5 sm:w-5" />
+                            </a>
+                          </div>
                           {/* Mobile: Expand/Collapse button - aligned with title */}
                           <button
                             onClick={() => toggleMobileExpansion(index)}
@@ -141,19 +164,9 @@ const Experience = () => {
                             )}
                           </button>
                         </div>
-                        <div className="flex items-center gap-2 text-muted-foreground mt-1">
-                          <Building2 className="h-3 w-3 sm:h-4 sm:w-4" />
-                          <a 
-                            href={exp.website} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="font-medium text-sm sm:text-base hover:text-blue-600 transition-colors duration-200 flex items-center gap-1"
-                            style={{ '--hover-color': 'hsl(var(--foreground) / 0.8)' } as React.CSSProperties}
-                          >
-                            {exp.company}
-                            <ExternalLink className="h-3 w-3 opacity-60 hover:opacity-100 transition-opacity duration-200" />
-                          </a>
-                        </div>
+                        <p className="text-sm sm:text-base text-muted-foreground mt-1 font-medium">
+                          {exp.position}
+                        </p>
                       </div>
                     </div>
                     <div className="flex flex-col sm:items-end gap-1 sm:gap-1.5 text-xs sm:text-sm text-muted-foreground">
@@ -161,7 +174,13 @@ const Experience = () => {
                         <div className="flex items-center gap-1 sm:gap-1.5 bg-purple-dark px-2 sm:px-2.5 py-0.5 rounded-full">
                           <Calendar className="h-3 w-3 sm:h-4 sm:w-4 text-purple-600" />
                           <span className="font-medium" style={{ color: 'hsl(var(--foreground))' }}>
-                            {exp.positions ? `${exp.positions[exp.positions.length - 1].duration.split(' - ')[0]} - ${exp.positions[0].duration.split(' - ')[1]}` : exp.duration}
+                            {(() => {
+                              const range = exp.positions
+                                ? `${exp.positions[exp.positions.length - 1].duration.split(' - ')[0]} - ${exp.positions[0].duration.split(' - ')[1]}`
+                                : exp.duration
+                              const tenure = formatTenure(range)
+                              return <>{range}{tenure ? ` · ${tenure}` : ""}</>
+                            })()}
                           </span>
                         </div>
                         <div className="flex items-center gap-1 sm:gap-1.5 bg-pink-dark px-2 sm:px-2.5 py-0.5 rounded-full">
@@ -184,7 +203,10 @@ const Experience = () => {
                               {pos.title}
                             </h4>
                             <span className="text-xs sm:text-sm font-medium" style={{ color: 'hsl(var(--muted-foreground))' }}>
-                              {pos.duration}
+                              {(() => {
+                                const tenure = formatTenure(pos.duration)
+                                return tenure ? `${pos.duration} · ${tenure}` : pos.duration
+                              })()}
                             </span>
                           </div>
                           <div className={`${expandedMobile.includes(index) ? 'block' : 'hidden'} sm:block`}>

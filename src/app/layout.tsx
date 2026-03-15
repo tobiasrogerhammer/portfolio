@@ -1,22 +1,45 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Font options — swap the active pair by changing which pair is used in body className below.
+// All use --font-sans and --font-mono so globals.css can reference them.
+
+import { Outfit, Source_Code_Pro } from "next/font/google";
+const outfit = Outfit({
+  variable: "--font-sans",
   subsets: ["latin"],
-  display: "swap", // Optimize font loading
+  display: "swap",
   preload: true,
 });
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const sourceCode = Source_Code_Pro({
+  variable: "--font-mono",
   subsets: ["latin"],
-  display: "swap", // Optimize font loading
-  preload: false, // Only preload primary font
+  display: "swap",
+  weight: "400",
+  preload: false,
 });
+
+// Option B: Inter + JetBrains Mono (readable, dev-friendly)
+// import { Inter, JetBrains_Mono } from "next/font/google";
+// const fontSans = Inter({ variable: "--font-sans", subsets: ["latin"], display: "swap" });
+// const fontMono = JetBrains_Mono({ variable: "--font-mono", subsets: ["latin"], display: "swap" });
+
+// Option C: Plus Jakarta Sans + Fira Code
+// import { Plus_Jakarta_Sans, Fira_Code } from "next/font/google";
+// const fontSans = Plus_Jakarta_Sans({ variable: "--font-sans", subsets: ["latin"], display: "swap" });
+// const fontMono = Fira_Code({ variable: "--font-mono", subsets: ["latin"], display: "swap" });
+
+// Option D: DM Sans + DM Mono (rounded, approachable)
+// import { DM_Sans, DM_Mono } from "next/font/google";
+// const fontSans = DM_Sans({ variable: "--font-sans", subsets: ["latin"], display: "swap" });
+// const fontMono = DM_Mono({ variable: "--font-mono", subsets: ["latin"], display: "swap", weight: "400" });
+
+// Option E: Geist (original — clean, modern)
+// import { Geist, Geist_Mono } from "next/font/google";
+// const fontSans = Geist({ variable: "--font-sans", subsets: ["latin"], display: "swap" });
+// const fontMono = Geist_Mono({ variable: "--font-mono", subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
   title: "Tobias Hammer - Developer & Tech Enthusiast",
@@ -89,11 +112,13 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* Preload LCP image (hero) for faster Largest Contentful Paint */}
+        <link rel="preload" href="/herotobias.jpeg" as="image" />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-Z92ZGV8X2K"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script id="google-analytics" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
@@ -103,7 +128,7 @@ export default function RootLayout({
         </Script>
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${outfit.variable} ${sourceCode.variable} antialiased`}
       >
         <ThemeProvider
           defaultTheme="system"

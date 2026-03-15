@@ -17,21 +17,21 @@ const projects: ProjectPreview[] = [
     title: "Renow AS",
     image: "https://s0.wp.com/mshots/v1/https://renow.no?w=900&h=600",
     tech: ["Next.js", "TypeScript", "Tailwind"],
-    description: "Sustainable web development company",
+    description: "Co-founded Renow AS, a web development company specializing in creating websites that drive growth for small and medium-sized businesses. Focus on sustainable web development with 88% reduced CO2 emissions and modern technologies.",
     link: "https://renow.no"
   },
   {
     title: "Discgolf App",
     image: "/dg-thumbnail.png",
     tech: ["Next.js", "ConvexDB", "WebSocket"],
-    description: "Real-time scoring application",
+    description: "Discgolf scoring app for tracking your scores and stats in real time. Built with Next.js and ConvexDB with WebSocket support—explore new courses, log your rounds, and challenge your friends. Perfect for keeping your game history in one place.",
     link: "https://discgolf-beta.vercel.app/"
   },
   {
     title: "Blackjack Game",
     image: "/blackjack.png",
     tech: ["Java", "Spring Boot", "REST API"],
-    description: "Interactive Blackjack game with web interface",
+    description: "Interactive Blackjack game with web interface. Play directly in your browser! Features card dealing, player betting, and game logic with proper error handling. Converted from console to web application using Spring Boot.",
     link: "https://github.com/tobiasrogerhammer/blackjack-java"
   }
 ]
@@ -56,7 +56,7 @@ export const MobileProjectShowcase = () => {
         setCurrentIndex((prev) => (prev + 1) % projects.length)
         setIsTransitioning(false)
       }, 300)
-    }, 4000)
+    }, 7500)
 
     return () => clearInterval(interval)
   }, [isAutoPlaying])
@@ -114,7 +114,7 @@ export const MobileProjectShowcase = () => {
   const currentProject = projects[currentIndex]
 
   return (
-    <div className="w-full max-w-sm mx-auto mb-4 sm:mb-12 px-4">
+    <div className="w-full mb-4 sm:mb-12">
       {/* Carousel Container */}
       <div 
         ref={carouselRef}
@@ -158,7 +158,7 @@ export const MobileProjectShowcase = () => {
 
         {/* Project Info */}
         <div className="p-4 bg-card/90 backdrop-blur-md">
-          <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center justify-between gap-2 mb-2">
             <h3 className="text-base font-bold text-brand-primary">
               {currentProject.title}
             </h3>
@@ -167,13 +167,18 @@ export const MobileProjectShowcase = () => {
                 href={currentProject.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-1.5 rounded-lg hover:bg-muted transition-colors duration-200 text-muted-foreground hover:text-brand-primary touch-manipulation"
+                className="p-1.5 rounded-lg hover:bg-muted transition-colors duration-200 text-muted-foreground hover:text-brand-primary touch-manipulation flex-shrink-0"
                 aria-label={`Visit ${currentProject.title}`}
               >
                 <ExternalLink className="w-3.5 h-3.5" />
               </a>
             )}
           </div>
+          {currentProject.description && (
+            <p className="text-sm text-muted-foreground mb-3">
+              {currentProject.description}
+            </p>
+          )}
           <div className="flex flex-wrap gap-2">
             {currentProject.tech.map((tech) => (
               <span

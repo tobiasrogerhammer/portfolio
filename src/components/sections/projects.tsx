@@ -245,7 +245,7 @@ const Projects = () => {
     {
       id: 2,
       title: "Discgolf Scoretracking App",
-      description: "Discgolf scoring app for tracking your scores and stats. Explore new courses and challenge your friends.",
+      description: "Discgolf scoring app for tracking your scores and stats in real time. Built with Next.js and ConvexDB with WebSocket support—explore new courses, log your rounds, and challenge your friends. Perfect for keeping your game history in one place.",
       image: "/dg-thumbnail.png",
       tags: ["Next.js", "TypeScript", "ConvexDB", "WebSocket"],
       category: "web",
@@ -612,6 +612,7 @@ const Projects = () => {
                                   window.open(project.live, '_blank', 'noopener,noreferrer')
                                 }
                               }}
+                              aria-label={`Open ${project.title} live site`}
                             >
                               <ExternalLink className="h-3 w-3 mr-1" />
                               Live
@@ -963,6 +964,7 @@ const Projects = () => {
                                   window.open(project.live, '_blank', 'noopener,noreferrer')
                                 }
                               }}
+                              aria-label={`Open ${project.title} live site`}
                             >
                               <ExternalLink className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
                               Live
