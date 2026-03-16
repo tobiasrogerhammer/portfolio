@@ -206,7 +206,7 @@ const About = () => {
                     >
                       <div className="relative h-[320px] w-full p-1 pb-0">
                         <Image
-                          src="/renowGroupPicture.jpeg"
+                          src="/renowDinner.jpeg"
                           alt="Renow Group"
                           fill
                           className="object-cover object-center rounded-t-2xl scale-110"

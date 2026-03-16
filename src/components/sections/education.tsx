@@ -78,7 +78,7 @@ const Education = () => {
       duration: "2021 - 2024",
       description: "Completed high school education with focus on computer science, information technology, media production and entrepreneurship.",
       achievements: ["Regional Entrepreneurship Award", "Academic Excellence"],
-      logo: "/akershus-fylkeskommune-logo.png",
+      logo: "/dromtorp.png",
       certificate: "/entrepreneurship-nm.pdf",
       years: [
         {
