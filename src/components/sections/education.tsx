@@ -339,7 +339,7 @@ const Education = () => {
             <h3 className="text-lg sm:text-xl font-bold mb-2" style={{ color: 'hsl(var(--foreground))' }}>
               From Knowledge to Creation
             </h3>
-            <p className="text-sm sm:text-base" style={{ color: 'hsl(var(--muted-foreground))' }}>
+            <p className="text-sm sm:text-base" style={{ color: '#475569' }}>
               Every lesson learned becomes a building block for innovation
             </p>
           </div>

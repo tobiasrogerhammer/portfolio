@@ -25,8 +25,17 @@ const CarouselPlaceholder = ({ className }: { className?: string }) => (
 const Hero = () => {
   const [carouselsReady, setCarouselsReady] = useState(false)
   useEffect(() => {
-    const id = window.setTimeout(() => setCarouselsReady(true), 2500)
-    return () => clearTimeout(id)
+    const FALLBACK_MS = 4000
+    const scheduleMount = () => setCarouselsReady(true)
+    let cancel: () => void
+    if (typeof requestIdleCallback !== "undefined") {
+      const id = requestIdleCallback(scheduleMount, { timeout: FALLBACK_MS })
+      cancel = () => cancelIdleCallback(id)
+    } else {
+      const id = window.setTimeout(scheduleMount, FALLBACK_MS)
+      cancel = () => clearTimeout(id)
+    }
+    return cancel
   }, [])
   const socialLinks = [
     { name: "GitHub", href: "https://github.com/tobiasrogerhammer", icon: Github },
