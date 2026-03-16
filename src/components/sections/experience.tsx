@@ -99,10 +99,10 @@ const Experience = () => {
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-4 sm:mb-12">
           <div className="inline-block">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-2 text-purple-900 dark:text-purple-100">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-2 bg-gradient-to-r from-purple-700 to-orange-700 bg-clip-text text-transparent dark:from-purple-500 dark:to-orange-500">
               Work Experience
             </h2>
-            <div className="h-1 w-16 sm:w-24 bg-gradient-to-r from-purple-500 to-orange-500 mx-auto rounded-full"></div>
+            <div className="h-1 w-16 sm:w-24 bg-gradient-to-r from-purple-700 to-orange-700 mx-auto rounded-full"></div>
           </div>
           <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto mt-4 sm:mt-6 px-4 sm:px-0">
           The organizations and roles that have shaped my professional journey.
@@ -138,7 +138,7 @@ const Experience = () => {
                       <div className="flex-1">
                         <div className="flex items-center justify-between gap-2">
                           <div className="flex items-center gap-2 min-w-0">
-                            <CardTitle className="text-lg sm:text-xl font-semibold text-purple-900 dark:text-purple-100 truncate">
+                            <CardTitle className="text-lg sm:text-xl font-semibold text-foreground truncate">
                               {exp.company}
                             </CardTitle>
                             <a
@@ -171,7 +171,7 @@ const Experience = () => {
                     </div>
                     <div className="flex flex-col sm:items-end gap-1 sm:gap-1.5 text-xs sm:text-sm">
                       <div className="flex flex-row sm:flex-col gap-1.5 sm:gap-1">
-                        <div className="flex items-center gap-1 sm:gap-1.5 bg-purple-100 dark:bg-purple-900/50 px-2 sm:px-2.5 py-0.5 rounded-full text-purple-900 dark:text-purple-100">
+                        <div className="flex items-center gap-1 sm:gap-1.5 bg-purple-600 dark:bg-purple-600/90 px-2 sm:px-2.5 py-0.5 rounded-full text-white">
                           <Calendar className="h-3 w-3 sm:h-4 sm:w-4" aria-hidden />
                           <span className="font-medium">
                             {(() => {
@@ -183,7 +183,7 @@ const Experience = () => {
                             })()}
                           </span>
                         </div>
-                        <div className="flex items-center gap-1 sm:gap-1.5 bg-pink-100 dark:bg-pink-900/50 px-2 sm:px-2.5 py-0.5 rounded-full text-pink-900 dark:text-pink-100">
+                        <div className="flex items-center gap-1 sm:gap-1.5 bg-pink-500 dark:bg-pink-500/90 px-2 sm:px-2.5 py-0.5 rounded-full text-white">
                           <MapPin className="h-3 w-3 sm:h-4 sm:w-4" aria-hidden />
                           <span className="font-medium">{exp.location}</span>
                         </div>

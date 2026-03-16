@@ -26,7 +26,7 @@ const Hero = () => {
   const [carouselsReady, setCarouselsReady] = useState(false)
   useEffect(() => {
     const isMobile = typeof window !== "undefined" && window.innerWidth < 1024
-    const FALLBACK_MS = isMobile ? 10000 : 6000
+    const FALLBACK_MS = isMobile ? 2500 : 4000
     const scheduleMount = () => setCarouselsReady(true)
     let cancel: () => void
     if (typeof requestIdleCallback !== "undefined") {

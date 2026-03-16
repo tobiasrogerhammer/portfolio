@@ -1,5 +1,5 @@
 import { Suspense, lazy } from "react"
-import { NavigationWrapper } from "@/components/layout/navigation-wrapper"
+import Navigation from "@/components/layout/navigation"
 import Hero from "@/components/sections/hero"
 
 const ScrollToTop = lazy(() => import("@/components/layout/scroll-to-top"))
@@ -21,7 +21,7 @@ const SectionLoader = () => (
 export default function Home() {
   return (
     <div className="min-h-screen">
-        <NavigationWrapper />
+        <Navigation />
       <main id="main-content">
         <Hero />
         <Suspense fallback={<SectionLoader />}>

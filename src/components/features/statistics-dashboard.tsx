@@ -175,7 +175,7 @@ export const StatisticsDashboard = ({ skills }: { skills: Skill[] }) => {
             {softSkills.items.map((item) => (
               <span
                 key={item}
-                className="px-2 py-1 sm:px-3 sm:py-1.5 text-xs sm:text-sm rounded-md font-medium border border-violet-300 dark:border-violet-600 bg-violet-100 dark:bg-violet-900/50 text-violet-900 dark:text-violet-100"
+                className="px-2 py-1 sm:px-3 sm:py-1.5 text-xs sm:text-sm rounded-md font-medium text-white bg-purple-700"
               >
                 {item}
               </span>

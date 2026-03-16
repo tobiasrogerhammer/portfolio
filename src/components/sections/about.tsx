@@ -190,7 +190,7 @@ const About = () => {
                         />
                       </div>
                       <div className="p-3 flex-shrink-0 border-t border-brand-primary/10">
-                        <p className="text-sm text-muted-foreground leading-snug">
+                        <p className="text-sm text-muted-foreground dark:text-black leading-snug">
                           {ABOUT_INTRO}
                         </p>
                       </div>
@@ -216,8 +216,8 @@ const About = () => {
                         />
                       </div>
                       <div className="p-3 flex-shrink-0 border-t border-brand-primary/10">
-                        <p className="font-semibold text-foreground mb-1">Renow AS</p>
-                        <p className="text-sm text-muted-foreground leading-snug">
+                        <p className="font-semibold text-foreground dark:text-black mb-1">Renow AS</p>
+                        <p className="text-sm text-muted-foreground dark:text-black leading-snug">
                           {ABOUT_CLOSING}
                         </p>
                       </div>
