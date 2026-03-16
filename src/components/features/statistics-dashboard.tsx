@@ -1,6 +1,5 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 
 interface Skill {
@@ -16,8 +15,8 @@ interface Skill {
 const getProficiencyColor = (proficiency: 'expert' | 'intermediate' | 'beginner' = 'intermediate') => {
   switch (proficiency) {
     case 'expert':
-      // Dark green - expert level
-      return '#059669' // emerald-600
+      // Dark green - expert level (≥4.5:1 contrast with white)
+      return '#047857' // emerald-700
     case 'intermediate':
       // Medium blue - intermediate level
       return '#2563eb' // blue-600
@@ -103,7 +102,7 @@ export const StatisticsDashboard = ({ skills }: { skills: Skill[] }) => {
                       return (
                         <span
                           key={item}
-                          className="px-1 py-0.5 text-white text-[8px] rounded font-medium whitespace-nowrap"
+                          className="px-1.5 py-0.5 text-white text-xs rounded font-medium whitespace-nowrap"
                       style={{
                             backgroundColor: itemColor
                           }}

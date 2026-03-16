@@ -199,7 +199,7 @@ export const MobileProjectShowcase = () => {
             key={index}
             onClick={() => goToSlide(index)}
             className={`
-              h-2 rounded-full transition-all duration-300 touch-manipulation border-2
+              min-w-[24px] min-h-[24px] rounded-full transition-all duration-300 touch-manipulation border-2 flex items-center justify-center p-2
               ${index === currentIndex 
                 ? 'w-8 bg-brand-primary border-brand-primary' 
                 : 'w-2 bg-transparent border-border hover:border-brand-primary/50 active:border-brand-primary/70'

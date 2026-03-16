@@ -285,9 +285,9 @@ const Education = () => {
                           
                           {/* Content */}
                                   <div className="ml-4 sm:ml-6 flex-1 min-w-0">
-                                    <h5 className="font-semibold mb-2 sm:mb-3 text-sm sm:text-lg transition-colors duration-200" style={{ color: isCompleted ? 'hsl(var(--foreground))' : isUpcoming ? 'hsl(var(--muted-foreground))' : 'hsl(var(--foreground))' }}>
+                                    <h4 className="font-semibold mb-2 sm:mb-3 text-sm sm:text-lg transition-colors duration-200" style={{ color: isCompleted ? 'hsl(var(--foreground))' : isUpcoming ? 'hsl(var(--muted-foreground))' : 'hsl(var(--foreground))' }}>
                                       {isUpcoming ? `Upcoming ${yearData.year}` : yearData.year}
-                                    </h5>
+                                    </h4>
                                     <div className={`transition-colors duration-200`} style={{ color: isCompleted ? 'hsl(var(--foreground))' : isUpcoming ? 'hsl(var(--muted-foreground))' : 'hsl(var(--foreground))' }}>
                                       <ul className="list-disc list-inside space-y-0.5 sm:space-y-1">
                                         {yearData.subjects.map((subject) => {
@@ -358,9 +358,9 @@ const Education = () => {
                   <BookOpen className="text-white w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
                 <div className="mt-3 sm:mt-4 text-center">
-                  <h5 className="font-semibold mb-1 sm:mb-2 text-xs sm:text-sm" style={{ color: 'hsl(var(--foreground))' }}>
+                  <h4 className="font-semibold mb-1 sm:mb-2 text-xs sm:text-sm" style={{ color: 'hsl(var(--foreground))' }}>
                     Foundation
-                  </h5>
+                  </h4>
                 </div>
               </div>
               
@@ -370,9 +370,9 @@ const Education = () => {
                   <Zap className="text-white w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
                 <div className="mt-3 sm:mt-4 text-center">
-                  <h5 className="font-semibold mb-1 sm:mb-2 text-xs sm:text-sm" style={{ color: 'hsl(var(--foreground))' }}>
+                  <h4 className="font-semibold mb-1 sm:mb-2 text-xs sm:text-sm" style={{ color: 'hsl(var(--foreground))' }}>
                     Application
-                  </h5>
+                  </h4>
                 </div>
               </div>
               
@@ -382,9 +382,9 @@ const Education = () => {
                   <Rocket className="text-white w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
                 <div className="mt-3 sm:mt-4 text-center">
-                  <h5 className="font-semibold mb-1 sm:mb-2 text-xs sm:text-sm" style={{ color: 'hsl(var(--foreground))' }}>
+                  <h4 className="font-semibold mb-1 sm:mb-2 text-xs sm:text-sm" style={{ color: 'hsl(var(--foreground))' }}>
                     Innovation
-                  </h5>
+                  </h4>
                 </div>
               </div>
             </div>

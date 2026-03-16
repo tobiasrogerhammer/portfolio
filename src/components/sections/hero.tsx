@@ -76,7 +76,7 @@ const Hero = () => {
                   <Link href="#projects">My Projects</Link>
                 </Button>
                 <Button asChild size="lg" className="text-base xl:text-lg px-6 xl:px-8 py-4 xl:py-6 w-auto bg-brand-primary text-white hover:bg-brand-primary/90 border-brand-primary hover:scale-105 transition-transform duration-200">
-                  <Link href="/Tobias-resume.pdf" target="_blank" rel="noopener noreferrer">View Resume</Link>
+                  <a href="/Tobias-resume.pdf" target="_blank" rel="noopener noreferrer">View Resume</a>
                 </Button>
               </div>
 
@@ -207,7 +207,7 @@ const Hero = () => {
               <Link href="#projects">My Projects</Link>
             </Button>
             <Button asChild size="lg" className="flex-1 min-w-0 text-base sm:text-lg py-4 sm:py-6 bg-brand-primary text-white hover:bg-brand-primary/90 border-brand-primary hover:scale-105 transition-transform duration-200">
-              <Link href="/Tobias-resume.pdf" target="_blank" rel="noopener noreferrer">View Resume</Link>
+              <a href="/Tobias-resume.pdf" target="_blank" rel="noopener noreferrer">View Resume</a>
             </Button>
           </div>
 
