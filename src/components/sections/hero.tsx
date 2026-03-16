@@ -1,5 +1,6 @@
 "use client"
 
+import { useState, useEffect } from "react"
 import dynamic from "next/dynamic"
 import { Button } from "@/components/ui/button"
 import { ArrowDown, Github, Instagram, Linkedin, Mail } from "lucide-react"
@@ -8,15 +9,25 @@ import Image from "next/image"
 
 const HeroProjectsRow = dynamic(
   () => import("@/components/hero-visuals/rotating-projects").then((m) => ({ default: m.HeroProjectsRow })),
-  { ssr: false, loading: () => <div className="min-h-[200px] rounded-2xl bg-muted/30 animate-pulse" /> }
+  { ssr: false }
 )
-
 const MobileProjectShowcase = dynamic(
   () => import("@/components/hero-visuals/mobile-project-showcase").then((m) => ({ default: m.MobileProjectShowcase })),
-  { ssr: false, loading: () => <div className="min-h-[180px] rounded-xl bg-muted/30 animate-pulse" /> }
+  { ssr: false }
+)
+
+const CarouselPlaceholder = ({ className }: { className?: string }) => (
+  <div className={className} aria-hidden="true">
+    <div className="min-h-full w-full rounded-2xl bg-muted/20 animate-pulse" />
+  </div>
 )
 
 const Hero = () => {
+  const [carouselsReady, setCarouselsReady] = useState(false)
+  useEffect(() => {
+    const id = window.setTimeout(() => setCarouselsReady(true), 2500)
+    return () => clearTimeout(id)
+  }, [])
   const socialLinks = [
     { name: "GitHub", href: "https://github.com/tobiasrogerhammer", icon: Github },
     { name: "LinkedIn", href: "https://linkedin.com/in/tobias-hammer-321a4624b", icon: Linkedin },
@@ -54,7 +65,7 @@ const Hero = () => {
                   className="object-cover"
                   sizes="(max-width: 1280px) 320px, (max-width: 1536px) 384px, 416px"
                   priority
-                  quality={75}
+                  quality={65}
                 />
               </div>
             </div>
@@ -129,12 +140,12 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Featured projects - context for carousel */}
+          {/* Featured projects - deferred to keep TBT low */}
           <div className="mt-12 xl:mt-16 animate-fade-in-up animation-delay-400">
             <p className="text-lg font-medium text-muted-foreground mb-3">
               Featured projects
             </p>
-            <HeroProjectsRow />
+            {carouselsReady ? <HeroProjectsRow /> : <CarouselPlaceholder className="min-h-[200px]" />}
           </div>
         </div>
 
@@ -154,7 +165,7 @@ const Hero = () => {
                 sizes="(max-width: 640px) 100vw, 412px"
                 priority
                 fetchPriority="high"
-                quality={75}
+                quality={65}
               />
               {/* Gradient overlay for title readability */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />
@@ -219,12 +230,12 @@ const Hero = () => {
             </Button>
           </div>
 
-          {/* Project carousel (mobile) with context */}
+          {/* Project carousel (mobile) - deferred to keep TBT low */}
           <div className="animate-fade-in-up animation-delay-200 mb-4 sm:mb-6">
             <p className="text-xl font-medium text-muted-foreground mb-2 text-center sm:text-left">
               Featured projects
             </p>
-            <MobileProjectShowcase />
+            {carouselsReady ? <MobileProjectShowcase /> : <CarouselPlaceholder className="min-h-[180px]" />}
           </div>
 
           {/* Scroll indicator */}

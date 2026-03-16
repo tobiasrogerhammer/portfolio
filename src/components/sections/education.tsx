@@ -202,8 +202,8 @@ const Education = () => {
                           <Calendar className="h-3 w-3 sm:h-4 sm:w-4 text-green-700" />
                       <span className="font-medium">{edu.duration}</span>
                     </div>
-                        <div className="flex items-center gap-1.5 sm:gap-2 text-green-700 bg-emerald-dark px-2 sm:px-3 py-1 rounded-full">
-                          <MapPin className="h-3 w-3 sm:h-4 sm:w-4 text-emerald-600" />
+                        <div className="flex items-center gap-1.5 sm:gap-2 bg-emerald-dark px-2 sm:px-3 py-1 rounded-full" style={{ color: '#065f46' }}>
+                          <MapPin className="h-3 w-3 sm:h-4 sm:w-4 text-emerald-700" />
                       <span className="font-medium">{edu.location}</span>
                         </div>
                     </div>
