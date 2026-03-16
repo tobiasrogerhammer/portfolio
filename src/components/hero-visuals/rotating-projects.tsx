@@ -110,9 +110,9 @@ export const RotatingProjectPreviews = () => {
         {/* Content */}
         <div className="absolute bottom-0 left-0 right-0 p-6 bg-card/90 backdrop-blur-md border-t border-border/50">
           <div className="flex items-center justify-between mb-2">
-            <h3 className="text-xl font-bold text-brand-primary transition-colors duration-300">
+            <p className="text-xl font-bold text-brand-primary transition-colors duration-300">
               {currentProject.title}
-            </h3>
+            </p>
             {currentProject.link && (
               <a
                 href={currentProject.link}
@@ -218,7 +218,7 @@ export const HeroProjectsRow = () => (
         </div>
         <div className="p-4">
           <div className="flex items-center justify-between gap-2 mb-1">
-            <h3 className="font-semibold text-brand-primary truncate">{project.title}</h3>
+            <p className="font-semibold text-brand-primary truncate">{project.title}</p>
             <ExternalLink className="w-4 h-4 flex-shrink-0 text-muted-foreground group-hover:text-brand-primary transition-colors" />
           </div>
           <p className="text-xs text-muted-foreground line-clamp-2 mb-2">{project.description}</p>

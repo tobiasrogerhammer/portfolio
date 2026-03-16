@@ -159,9 +159,9 @@ export const MobileProjectShowcase = () => {
         {/* Project Info */}
         <div className="p-4 bg-card/90 backdrop-blur-md">
           <div className="flex items-center justify-between gap-2 mb-2">
-            <h3 className="text-base font-bold text-brand-primary">
+            <p className="text-base font-bold text-brand-primary">
               {currentProject.title}
-            </h3>
+            </p>
             {currentProject.link && (
               <a
                 href={currentProject.link}

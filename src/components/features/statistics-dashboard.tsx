@@ -178,7 +178,7 @@ export const StatisticsDashboard = ({ skills }: { skills: Skill[] }) => {
                 className="px-2 py-1 sm:px-3 sm:py-1.5 text-xs sm:text-sm rounded-md font-medium border"
                 style={{ 
                   backgroundColor: `${softSkills.color}15`,
-                  color: softSkills.color,
+                  color: '#5B21B6',
                   borderColor: `${softSkills.color}40`
                 }}
               >
