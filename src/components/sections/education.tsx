@@ -198,8 +198,8 @@ const Education = () => {
                     </div>
                     <div className="flex flex-col sm:items-end gap-1.5 sm:gap-2 text-xs sm:text-sm text-muted-foreground">
                       <div className="flex flex-row sm:flex-col gap-2 sm:gap-1.5">
-                        <div className="flex items-center gap-1.5 sm:gap-2 text-green-700 bg-green-dark px-2 sm:px-3 py-1 rounded-full">
-                          <Calendar className="h-3 w-3 sm:h-4 sm:w-4 text-green-600" />
+                        <div className="flex items-center gap-1.5 sm:gap-2 bg-green-dark px-2 sm:px-3 py-1 rounded-full" style={{ color: '#166534' }}>
+                          <Calendar className="h-3 w-3 sm:h-4 sm:w-4 text-green-700" />
                       <span className="font-medium">{edu.duration}</span>
                     </div>
                         <div className="flex items-center gap-1.5 sm:gap-2 text-green-700 bg-emerald-dark px-2 sm:px-3 py-1 rounded-full">

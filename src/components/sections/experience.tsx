@@ -202,7 +202,7 @@ const Experience = () => {
                             <h4 className="text-base sm:text-lg font-semibold" style={{ color: 'hsl(var(--foreground))' }}>
                               {pos.title}
                             </h4>
-                            <span className="text-xs sm:text-sm font-medium" style={{ color: 'hsl(var(--muted-foreground))' }}>
+                            <span className="text-xs sm:text-sm font-medium" style={{ color: 'hsl(215 28% 38%)' }}>
                               {(() => {
                                 const tenure = formatTenure(pos.duration)
                                 return tenure ? `${pos.duration} · ${tenure}` : pos.duration

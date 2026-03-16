@@ -1,14 +1,20 @@
 "use client"
 
+import dynamic from "next/dynamic"
 import { Button } from "@/components/ui/button"
 import { ArrowDown, Github, Instagram, Linkedin, Mail } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
-import { HeroProjectsRow } from "@/components/hero-visuals/rotating-projects"
-// Mobile visual components
-import { MobileProjectShowcase } from "@/components/hero-visuals/mobile-project-showcase"
-// import { MobileCodeSnippet } from "@/components/hero-visuals/mobile-code-snippet"
-// import { MobileGeometricShapes } from "@/components/hero-visuals/mobile-geometric-shapes"
+
+const HeroProjectsRow = dynamic(
+  () => import("@/components/hero-visuals/rotating-projects").then((m) => ({ default: m.HeroProjectsRow })),
+  { ssr: false, loading: () => <div className="min-h-[200px] rounded-2xl bg-muted/30 animate-pulse" /> }
+)
+
+const MobileProjectShowcase = dynamic(
+  () => import("@/components/hero-visuals/mobile-project-showcase").then((m) => ({ default: m.MobileProjectShowcase })),
+  { ssr: false, loading: () => <div className="min-h-[180px] rounded-xl bg-muted/30 animate-pulse" /> }
+)
 
 const Hero = () => {
   const socialLinks = [
@@ -48,6 +54,7 @@ const Hero = () => {
                   className="object-cover"
                   sizes="(max-width: 1280px) 320px, (max-width: 1536px) 384px, 416px"
                   priority
+                  quality={75}
                 />
               </div>
             </div>
@@ -144,9 +151,10 @@ const Hero = () => {
                 alt="Tobias Hammer"
                 fill
                 className="object-cover object-top"
-                sizes="100vw"
+                sizes="(max-width: 640px) 100vw, 412px"
                 priority
                 fetchPriority="high"
+                quality={75}
               />
               {/* Gradient overlay for title readability */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />

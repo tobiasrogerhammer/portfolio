@@ -112,8 +112,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Preload LCP image (hero) for faster Largest Contentful Paint */}
-        <link rel="preload" href="/herotobias.jpeg" as="image" />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-Z92ZGV8X2K"
           strategy="lazyOnload"

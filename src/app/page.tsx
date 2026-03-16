@@ -1,7 +1,9 @@
+import dynamic from "next/dynamic"
 import { Suspense, lazy } from "react"
 import Navigation from "@/components/layout/navigation"
 import Hero from "@/components/sections/hero"
-import ScrollToTop from "@/components/layout/scroll-to-top"
+
+const ScrollToTop = dynamic(() => import("@/components/layout/scroll-to-top"), { ssr: false })
 
 // Lazy load below-the-fold components for better initial load performance
 const About = lazy(() => import("@/components/sections/about"))
