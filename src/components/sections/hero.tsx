@@ -25,7 +25,8 @@ const CarouselPlaceholder = ({ className }: { className?: string }) => (
 const Hero = () => {
   const [carouselsReady, setCarouselsReady] = useState(false)
   useEffect(() => {
-    const FALLBACK_MS = 6000
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 1024
+    const FALLBACK_MS = isMobile ? 8000 : 6000
     const scheduleMount = () => setCarouselsReady(true)
     let cancel: () => void
     if (typeof requestIdleCallback !== "undefined") {
@@ -53,8 +54,8 @@ const Hero = () => {
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-section-hero via-section-hero to-section-hero" />
       
-      {/* Animated background elements - fixed viewport height to prevent CLS when section grows */}
-      <div className="absolute inset-0 overflow-hidden h-[100dvh] min-h-[100dvh] contain-layout" aria-hidden="true">
+      {/* Animated background elements - hidden on mobile to reduce GPU load (blur is expensive on mobile) */}
+      <div className="absolute inset-0 overflow-hidden h-[100dvh] min-h-[100dvh] contain-layout hidden lg:block" aria-hidden="true">
         <div className="absolute -top-20 -right-20 sm:-top-40 sm:-right-40 w-40 h-40 sm:w-80 sm:h-80 rounded-full blur-3xl animate-pulse-4s bg-brand-primary/10 dark:bg-brand-primary/20" style={{ backgroundColor: '#124D95', opacity: 0.1 }} />
         <div className="absolute -bottom-20 -left-20 sm:-bottom-40 sm:-left-40 w-40 h-40 sm:w-80 sm:h-80 rounded-full blur-3xl animate-pulse-4s delay-1000 bg-brand-secondary/10 dark:bg-brand-secondary/20" style={{ backgroundColor: '#FF6B6B', opacity: 0.1 }} />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 sm:w-96 sm:h-96 rounded-full blur-3xl animate-pulse-4s delay-500 bg-brand-accent/8 dark:bg-brand-accent/15" style={{ backgroundColor: '#2BBBAD', opacity: 0.08 }} />
@@ -195,7 +196,7 @@ const Hero = () => {
                     <Link
                       key={link.name}
                       href={link.href}
-                      className="transition-all duration-200 p-2.5 rounded-full hover:scale-110 hover:text-white touch-manipulation bg-black/40 backdrop-blur-sm text-white border border-white/20"
+                      className="transition-all duration-200 p-2.5 rounded-full hover:scale-110 hover:text-white touch-manipulation bg-black/40 text-white border border-white/20"
                       style={{
                         minWidth: '44px',
                         minHeight: '44px',

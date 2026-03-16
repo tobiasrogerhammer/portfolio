@@ -253,6 +253,15 @@
     animation: pulse-4s 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
   
+  /* Mobile performance: reduce animation cost on small screens (blur + animate is expensive) */
+  @media (max-width: 1024px) {
+    .animate-pulse,
+    .animate-pulse-4s {
+      animation: none;
+      opacity: 0.15;
+    }
+  }
+
   /* Accessibility improvements */
   @media (prefers-reduced-motion: reduce) {
     *,
