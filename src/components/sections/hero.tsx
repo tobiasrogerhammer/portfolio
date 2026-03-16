@@ -173,10 +173,10 @@ const Hero = () => {
                 alt="Tobias Hammer"
                 fill
                 className="object-cover object-top"
-                sizes="(max-width: 640px) 360px, 412px"
+                sizes="(max-width: 640px) 340px, 412px"
                 priority
                 fetchPriority="high"
-                quality={50}
+                quality={45}
               />
               {/* Gradient overlay for title readability */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />

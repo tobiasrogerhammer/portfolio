@@ -198,17 +198,17 @@ const Education = () => {
                     </div>
                     <div className="flex flex-col sm:items-end gap-1.5 sm:gap-2 text-xs sm:text-sm text-muted-foreground">
                       <div className="flex flex-row sm:flex-col gap-2 sm:gap-1.5">
-                        <div className="flex items-center gap-1.5 sm:gap-2 bg-green-dark px-2 sm:px-3 py-1 rounded-full" style={{ color: '#166534' }}>
-                          <Calendar className="h-3 w-3 sm:h-4 sm:w-4 text-green-700" />
-                      <span className="font-medium">{edu.duration}</span>
-                    </div>
-                        <div className="flex items-center gap-1.5 sm:gap-2 bg-emerald-dark px-2 sm:px-3 py-1 rounded-full" style={{ color: '#065f46' }}>
-                          <MapPin className="h-3 w-3 sm:h-4 sm:w-4 text-emerald-700" />
-                      <span className="font-medium">{edu.location}</span>
+                        <div className="flex items-center gap-1.5 sm:gap-2 bg-green-100 dark:bg-green-900/40 px-2 sm:px-3 py-1 rounded-full text-green-900 dark:text-green-100">
+                          <Calendar className="h-3 w-3 sm:h-4 sm:w-4" aria-hidden />
+                          <span className="font-medium">{edu.duration}</span>
+                        </div>
+                        <div className="flex items-center gap-1.5 sm:gap-2 bg-emerald-100 dark:bg-emerald-900/40 px-2 sm:px-3 py-1 rounded-full text-emerald-900 dark:text-emerald-100">
+                          <MapPin className="h-3 w-3 sm:h-4 sm:w-4" aria-hidden />
+                          <span className="font-medium">{edu.location}</span>
+                        </div>
                         </div>
                     </div>
                   </div>
-                </div>
               </CardHeader>
               <CardContent>
                   <CardDescription className="text-sm sm:text-base mb-4 sm:mb-6 leading-relaxed">
@@ -339,7 +339,7 @@ const Education = () => {
             <h3 className="text-lg sm:text-xl font-bold mb-2" style={{ color: 'hsl(var(--foreground))' }}>
               From Knowledge to Creation
             </h3>
-            <p className="text-sm sm:text-base" style={{ color: '#475569' }}>
+            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400">
               Every lesson learned becomes a building block for innovation
             </p>
           </div>

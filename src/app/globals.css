@@ -352,6 +352,13 @@
   .bg-brand-primary {
     background-color: hsl(var(--brand-primary));
   }
+  /* Dark mode: use darker blue for buttons so white text meets WCAG AA (4.5:1) */
+  .dark .bg-brand-primary.text-white,
+  .dark .bg-brand-primary.text-white:hover,
+  .dark a.bg-brand-primary.text-white,
+  .dark a.bg-brand-primary.text-white:hover {
+    background-color: hsl(217 91% 38%);
+  }
   
   .text-brand-primary {
     color: hsl(var(--brand-primary));
