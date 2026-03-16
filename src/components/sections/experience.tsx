@@ -99,7 +99,7 @@ const Experience = () => {
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-4 sm:mb-12">
           <div className="inline-block">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-2 bg-gradient-to-r from-purple-600 via-pink-600 to-orange-600 bg-clip-text text-transparent">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-2 text-purple-900 dark:text-purple-100">
               Work Experience
             </h2>
             <div className="h-1 w-16 sm:w-24 bg-gradient-to-r from-purple-500 to-orange-500 mx-auto rounded-full"></div>
@@ -112,7 +112,7 @@ const Experience = () => {
         <div className="space-y-6 sm:space-y-8">
           {experiences.map((exp, index) => {
             return (
-              <Card key={index} className="group hover:shadow-xl transition-all duration-300 hover:scale-[1.02] border border-border backdrop-blur-sm hover:bg-secondary relative before:absolute before:left-0 before:top-0 before:bottom-0 before:w-1 before:bg-gradient-to-b before:from-purple-600 before:via-pink-600 before:to-orange-600" style={{ backgroundColor: 'hsl(var(--card) / 0.5)' }}>
+              <Card key={index} className="group hover:shadow-xl transition-all duration-300 hover:scale-[1.02] border border-border backdrop-blur-sm hover:bg-secondary relative before:absolute before:left-0 before:top-0 before:bottom-0 before:w-1 before:bg-gradient-to-b before:from-purple-700 before:via-pink-700 before:to-orange-700" style={{ backgroundColor: 'hsl(var(--card))' }}>
                 <CardHeader className="pb-2 sm:pb-3 px-3 sm:px-6 pt-3 sm:pt-6">
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3">
                     <div className="flex items-center gap-2 sm:gap-3 flex-1">
@@ -138,7 +138,7 @@ const Experience = () => {
                       <div className="flex-1">
                         <div className="flex items-center justify-between gap-2">
                           <div className="flex items-center gap-2 min-w-0">
-                            <CardTitle className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent truncate">
+                            <CardTitle className="text-lg sm:text-xl font-semibold text-purple-900 dark:text-purple-100 truncate">
                               {exp.company}
                             </CardTitle>
                             <a
@@ -164,16 +164,16 @@ const Experience = () => {
                             )}
                           </button>
                         </div>
-                        <p className="text-sm sm:text-base text-muted-foreground mt-1 font-medium">
+                        <p className="text-sm sm:text-base text-foreground mt-1 font-medium">
                           {exp.position}
                         </p>
                       </div>
                     </div>
-                    <div className="flex flex-col sm:items-end gap-1 sm:gap-1.5 text-xs sm:text-sm text-muted-foreground">
+                    <div className="flex flex-col sm:items-end gap-1 sm:gap-1.5 text-xs sm:text-sm">
                       <div className="flex flex-row sm:flex-col gap-1.5 sm:gap-1">
-                        <div className="flex items-center gap-1 sm:gap-1.5 bg-purple-dark px-2 sm:px-2.5 py-0.5 rounded-full">
-                          <Calendar className="h-3 w-3 sm:h-4 sm:w-4 text-purple-600" />
-                          <span className="font-medium" style={{ color: 'hsl(var(--foreground))' }}>
+                        <div className="flex items-center gap-1 sm:gap-1.5 bg-purple-100 dark:bg-purple-900/50 px-2 sm:px-2.5 py-0.5 rounded-full text-purple-900 dark:text-purple-100">
+                          <Calendar className="h-3 w-3 sm:h-4 sm:w-4" aria-hidden />
+                          <span className="font-medium">
                             {(() => {
                               const range = exp.positions
                                 ? `${exp.positions[exp.positions.length - 1].duration.split(' - ')[0]} - ${exp.positions[0].duration.split(' - ')[1]}`
@@ -183,9 +183,9 @@ const Experience = () => {
                             })()}
                           </span>
                         </div>
-                        <div className="flex items-center gap-1 sm:gap-1.5 bg-pink-dark px-2 sm:px-2.5 py-0.5 rounded-full">
-                          <MapPin className="h-3 w-3 sm:h-4 sm:w-4 text-pink-600" />
-                          <span className="font-medium" style={{ color: 'hsl(var(--foreground))' }}>{exp.location}</span>
+                        <div className="flex items-center gap-1 sm:gap-1.5 bg-pink-100 dark:bg-pink-900/50 px-2 sm:px-2.5 py-0.5 rounded-full text-pink-900 dark:text-pink-100">
+                          <MapPin className="h-3 w-3 sm:h-4 sm:w-4" aria-hidden />
+                          <span className="font-medium">{exp.location}</span>
                         </div>
                       </div>
                     </div>
@@ -202,7 +202,7 @@ const Experience = () => {
                             <h4 className="text-base sm:text-lg font-semibold" style={{ color: 'hsl(var(--foreground))' }}>
                               {pos.title}
                             </h4>
-                            <span className="text-xs sm:text-sm font-medium" style={{ color: 'hsl(215 28% 38%)' }}>
+                            <span className="text-xs sm:text-sm font-medium text-foreground">
                               {(() => {
                                 const tenure = formatTenure(pos.duration)
                                 return tenure ? `${pos.duration} · ${tenure}` : pos.duration
