@@ -1,12 +1,17 @@
 "use client"
 
 import { useState, useEffect, useMemo } from "react"
+import dynamic from "next/dynamic"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 import { ThemeToggle, ThemeToggleMobile } from "@/components/features/theme-toggle"
-import { PdfViewerModal } from "@/components/features/pdf-viewer-modal"
+
+const PdfViewerModal = dynamic(
+  () => import("@/components/features/pdf-viewer-modal").then((m) => ({ default: m.PdfViewerModal })),
+  { ssr: false }
+)
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -181,13 +186,15 @@ const Navigation = () => {
       </div>
     </nav>
 
-    {/* Resume PDF Viewer Modal - render outside nav to avoid clipping */}
-    <PdfViewerModal
-      pdfUrl="/Tobias-resume.pdf"
-      title="Tobias Hammer - Resume"
-      isOpen={openResumePdf}
-      onClose={() => setOpenResumePdf(false)}
-    />
+    {/* Resume PDF Viewer Modal - lazy loaded when user clicks View Resume */}
+    {openResumePdf && (
+      <PdfViewerModal
+        pdfUrl="/Tobias-resume.pdf"
+        title="Tobias Hammer - Resume"
+        isOpen={openResumePdf}
+        onClose={() => setOpenResumePdf(false)}
+      />
+    )}
     </>
   )
 }

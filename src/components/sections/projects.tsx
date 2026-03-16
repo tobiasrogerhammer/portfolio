@@ -3,17 +3,10 @@
 import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { ExternalLink, Github, Code, ChevronDown, ChevronRight, ChevronLeft, X, ArrowLeft } from "lucide-react"
+import { ExternalLink, Github, Code, X, ArrowLeft } from "lucide-react"
 import Image from "next/image"
 
 type DevelopmentType = "frontend" | "fullstack" | "backend" | "learning"
-
-interface SubProject {
-  name: string
-  description: string
-  path: string
-  tags: string[]
-}
 
 interface Project {
   id: number
@@ -28,172 +21,12 @@ interface Project {
   complexity?: string
   concepts?: string[]
   learningOutcome?: string
-  isExpandable?: boolean
-  subProjects?: SubProject[]
 }
 
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState("all")
-  const [expandedProjects, setExpandedProjects] = useState<number[]>([])
-  const [highSchoolProjectIndex, setHighSchoolProjectIndex] = useState(0)
   const [blackjackModalOpen, setBlackjackModalOpen] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
   const gridRef = useRef<HTMLDivElement>(null)
-  const carouselRef = useRef<HTMLDivElement>(null)
-  const touchStartX = useRef<number | null>(null)
-  const touchEndX = useRef<number | null>(null)
-  const isTransitioningRef = useRef(false)
-
-  // Track mobile state
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 640)
-    }
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
-
-  const toggleProject = (projectId: number) => {
-    setExpandedProjects(prev => {
-      const isCurrentlyExpanded = prev.includes(projectId)
-      if (isCurrentlyExpanded) {
-        // Reset carousel index when collapsing
-        setHighSchoolProjectIndex(0)
-        return prev.filter(id => id !== projectId)
-      } else {
-        // Reset carousel index when expanding
-        setHighSchoolProjectIndex(0)
-        return [...prev, projectId]
-      }
-    })
-  }
-
-  const nextHighSchoolProject = (totalProjects: number) => {
-    // If we're already transitioning, allow it to continue
-    if (isTransitioningRef.current) {
-      const carousel = carouselRef.current?.querySelector('.flex') as HTMLElement
-      if (carousel) {
-        carousel.style.transition = 'none'
-        void carousel.offsetHeight
-        isTransitioningRef.current = false
-      }
-    }
-
-    setHighSchoolProjectIndex(prev => {
-      // If we're at the duplicate first item, reset to 0 and continue
-      if (prev >= totalProjects) {
-        const carousel = carouselRef.current?.querySelector('.flex') as HTMLElement
-        if (carousel) {
-          carousel.style.transition = 'none'
-          void carousel.offsetHeight
-          setTimeout(() => {
-            carousel.style.transition = ''
-            setHighSchoolProjectIndex(1)
-            isTransitioningRef.current = false
-          }, 0)
-        }
-        return 0
-      }
-      
-      const next = prev + 1
-      if (next >= totalProjects) {
-        // Reached the end, show duplicate first item, then jump to real first
-        isTransitioningRef.current = true
-        const carousel = carouselRef.current?.querySelector('.flex') as HTMLElement
-        if (carousel) {
-          // Show duplicate first item
-          setTimeout(() => {
-            carousel.style.transition = 'none'
-            setHighSchoolProjectIndex(0)
-            void carousel.offsetHeight
-            setTimeout(() => {
-              carousel.style.transition = ''
-              isTransitioningRef.current = false
-            }, 0)
-          }, 300)
-        }
-        return totalProjects // Show duplicate first item
-      }
-      return next
-    })
-  }
-
-  const prevHighSchoolProject = (totalProjects: number) => {
-    // If we're already transitioning, allow it to continue
-    if (isTransitioningRef.current) {
-      const carousel = carouselRef.current?.querySelector('.flex') as HTMLElement
-      if (carousel) {
-        carousel.style.transition = 'none'
-        void carousel.offsetHeight
-        isTransitioningRef.current = false
-      }
-    }
-
-    setHighSchoolProjectIndex(prev => {
-      // If we're at the duplicate last item, reset to last and continue
-      if (prev < 0) {
-        const carousel = carouselRef.current?.querySelector('.flex') as HTMLElement
-        if (carousel) {
-          carousel.style.transition = 'none'
-          void carousel.offsetHeight
-          setTimeout(() => {
-            carousel.style.transition = ''
-            setHighSchoolProjectIndex(totalProjects - 2)
-            isTransitioningRef.current = false
-          }, 0)
-        }
-        return totalProjects - 1
-      }
-      
-      const next = prev - 1
-      if (next < 0) {
-        // Reached the beginning, show duplicate last item, then jump to real last
-        isTransitioningRef.current = true
-        const carousel = carouselRef.current?.querySelector('.flex') as HTMLElement
-        if (carousel) {
-          // Show duplicate last item
-          setTimeout(() => {
-            carousel.style.transition = 'none'
-            setHighSchoolProjectIndex(totalProjects - 1)
-            void carousel.offsetHeight
-            setTimeout(() => {
-              carousel.style.transition = ''
-              isTransitioningRef.current = false
-            }, 0)
-          }, 300)
-        }
-        return -1 // Show duplicate last item
-      }
-      return next
-    })
-  }
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX
-  }
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    touchEndX.current = e.touches[0].clientX
-  }
-
-  const handleTouchEnd = (totalProjects: number) => {
-    if (!touchStartX.current || !touchEndX.current) return
-    
-    const distance = touchStartX.current - touchEndX.current
-    const minSwipeDistance = 50
-
-    if (distance > minSwipeDistance) {
-      // Swipe left - next
-      nextHighSchoolProject(totalProjects)
-    } else if (distance < -minSwipeDistance) {
-      // Swipe right - previous
-      prevHighSchoolProject(totalProjects)
-    }
-
-    touchStartX.current = null
-    touchEndX.current = null
-  }
 
   const filters = [
     { id: "all", label: "All" },
@@ -289,80 +122,6 @@ const Projects = () => {
       github: "https://github.com",
       live: "https://example.com",
     },
-    {
-      id: 6,
-      title: "High School Projects",
-      description: "A collection of projects from my high school years (2021-2024) at Drømtorp Videregående Skole. These projects showcase my early journey in web development, JavaScript, React, and database design.",
-      image: "/api/placeholder/600/400",
-      tags: ["JavaScript", "React", "HTML/CSS", "Databases", "Web Development"],
-      category: "high-school",
-      developmentType: "learning",
-      github: null,
-      live: null,
-      isExpandable: true,
-      subProjects: [
-        {
-          name: "Norsk Tipping Joker",
-          description: "Interactive Joker lottery game simulation with number selection mechanics.",
-          path: "/high-school-projects/norskTipping/index.html",
-          tags: ["JavaScript", "HTML", "CSS"],
-        },
-        {
-          name: "English Quiz",
-          description: "Multi-level English learning quiz application with 5 difficulty levels covering food, kitchen, electronics, and clothing vocabulary.",
-          path: "/high-school-projects/quiz/index.html",
-          tags: ["JavaScript", "HTML", "CSS", "JSON"],
-        },
-        {
-          name: "Reaction Test",
-          description: "Interactive reaction time testing game to measure and improve response speed.",
-          path: "/high-school-projects/reactionTest/index.html",
-          tags: ["JavaScript", "HTML", "CSS"],
-        },
-        {
-          name: "Age Calculator (OOP)",
-          description: "Object-oriented age calculator demonstrating OOP principles in JavaScript.",
-          path: "/high-school-projects/oop/index.html",
-          tags: ["JavaScript", "OOP", "HTML", "CSS"],
-        },
-        {
-          name: "Basic JavaScript Exercises",
-          description: "Collection of JavaScript exercises and practice problems covering fundamental concepts.",
-          path: "/high-school-projects/basicJavaScript/index.html",
-          tags: ["JavaScript", "HTML", "CSS"],
-        },
-        {
-          name: "React Clock",
-          description: "Real-time clock application built with React, showcasing component-based architecture.",
-          path: "/high-school-projects/clock/public/index.html",
-          tags: ["React", "JavaScript", "CSS"],
-        },
-        {
-          name: "Confetti Timer",
-          description: "Celebratory countdown timer with confetti animation built with React.",
-          path: "/high-school-projects/confettitimer/public/index.html",
-          tags: ["React", "JavaScript", "CSS", "Animations"],
-        },
-        {
-          name: "Database Projects",
-          description: "Backend and frontend integration projects demonstrating database connectivity and API design.",
-          path: "/high-school-projects/databaser/front_and_back/frontend/index.html",
-          tags: ["Express.js", "JavaScript", "Databases", "REST API"],
-        },
-        {
-          name: "MAMP Database Testing",
-          description: "Full-stack application with MAMP database integration, featuring frontend and backend connectivity.",
-          path: "/high-school-projects/mamp-db-test/frontAndBack/Frontend/index.html",
-          tags: ["Express.js", "MySQL", "JavaScript", "Full Stack"],
-        },
-        {
-          name: "JavaScript Course",
-          description: "Interactive JavaScript learning course with examples and exercises.",
-          path: "/high-school-projects/js-kurs/index.html",
-          tags: ["JavaScript", "HTML", "CSS", "Education"],
-        },
-      ],
-    },
   ]
 
   const filteredProjects = projects.filter(
@@ -374,16 +133,6 @@ const Projects = () => {
       return project.category === activeFilter
     }
   )
-
-  // Handle seamless looping transitions
-  useEffect(() => {
-    if (!carouselRef.current) return
-    const carousel = carouselRef.current.querySelector('.flex') as HTMLElement
-    if (!carousel) return
-
-    const totalProjects = filteredProjects.find(p => p.isExpandable)?.subProjects?.length || 0
-    if (totalProjects === 0) return
-  }, [highSchoolProjectIndex, filteredProjects])
 
   useEffect(() => {
     const setEqualHeights = () => {
@@ -454,7 +203,7 @@ const Projects = () => {
 
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
-  }, [filteredProjects, expandedProjects])
+  }, [filteredProjects])
 
   return (
     <section id="projects" className="py-12 sm:py-16 lg:py-20 relative overflow-hidden px-4 sm:px-6 lg:px-8 bg-section-projects">
@@ -519,25 +268,18 @@ const Projects = () => {
             const developmentType: DevelopmentType = project.developmentType || "frontend"
             const devTypeConfig = developmentTypes[developmentType] || developmentTypes.frontend
             const isJavaProject = project.category === "java"
-            const isHighSchoolProject = project.category === "high-school"
-            const isExpandable = project.isExpandable === true
-            const isExpanded = expandedProjects.includes(project.id)
-            const isLearningCategory = activeFilter === "learning"
-            const shouldShrinkHighSchool = isLearningCategory && isHighSchoolProject && filteredProjects.length === 1
-            
             const currentCardColors = [`bg-gradient-to-br ${devTypeConfig.bgColor}`]
             
             return (
-              <div key={project.id} data-project-card className={`${filteredProjects.length <= 3 ? (isExpandable && !shouldShrinkHighSchool ? "w-full" : shouldShrinkHighSchool ? "w-full max-w-2xl" : "w-full sm:w-auto") : (isExpandable ? "sm:col-span-2 lg:col-span-2" : "")} flex ${filteredProjects.length <= 3 && !isExpandable ? 'max-w-md' : 'w-full'}`}>
+              <div key={project.id} data-project-card className={`${filteredProjects.length <= 3 ? "w-full sm:w-auto" : ""} flex ${filteredProjects.length <= 3 ? 'max-w-md' : 'w-full'}`}>
                 <Card className={`group hover:shadow-2xl transition-all duration-500 hover:scale-105 overflow-hidden border-2 ${devTypeConfig.borderColor} bg-card backdrop-blur-sm hover:bg-secondary hover:-translate-y-2 flex flex-col w-full h-full relative`}>
                   {/* Development Type Badge */}
                   <div className={`absolute top-2 right-2 sm:top-3 sm:right-3 z-10 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-semibold bg-gradient-to-r ${devTypeConfig.color} text-white shadow-lg`}>
                     {devTypeConfig.label}
                   </div>
                   
-                  {/* Mobile: Horizontal layout (except high school projects) */}
-                  {!(isExpanded && isHighSchoolProject) && !isHighSchoolProject && (
-                    <div className="sm:hidden">
+                  {/* Mobile: Horizontal layout */}
+                  <div className="sm:hidden">
                       <div className="flex flex-row gap-3 p-3 pb-2">
                         {/* Image on left - smaller */}
                         <div className={`w-24 h-24 flex-shrink-0 ${currentCardColors[index % currentCardColors.length]} rounded-lg overflow-hidden relative`}>
@@ -621,254 +363,8 @@ const Projects = () => {
                         </div>
                       </div>
                     </div>
-                  )}
 
-                  {/* High School Project: Special layout with all content visible */}
-                  {isHighSchoolProject && (
-                    <>
-                      <div className={`aspect-[3/2] sm:aspect-[16/10] ${currentCardColors[index % currentCardColors.length]} flex items-center justify-center relative overflow-hidden`}>
-                    {project.image && project.image !== "/api/placeholder/600/400" ? (
-                      <Image 
-                        src={project.image} 
-                        alt={project.title}
-                        fill
-                        className="object-cover"
-                        loading="lazy"
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        onError={(e) => {
-                              e.currentTarget.style.display = 'none';
-                              (e.currentTarget.nextElementSibling as HTMLElement)?.style.setProperty('display', 'flex');
-                            }}
-                          />
-                        ) : null}
-                        <div className={`absolute inset-0 bg-gradient-to-br ${devTypeConfig.bgColor} opacity-70 flex items-center justify-center ${project.image && project.image !== "/api/placeholder/600/400" ? 'hidden' : 'flex'}`}>
-                          <div className="text-center relative z-10">
-                            <div className={`w-20 h-20 bg-gradient-to-r ${devTypeConfig.color} rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300`}>
-                              <span className="text-3xl font-bold text-white">HS</span>
-                            </div>
-                            <p className="text-sm text-muted-foreground font-medium">Project Image</p>
-                          </div>
-                        </div>
-                      </div>
-                      <CardHeader className="pb-4 px-4 sm:px-6 pt-4 sm:pt-6 flex-shrink-0">
-                        <div className="flex items-center justify-between">
-                          <CardTitle className={`bg-gradient-to-r ${devTypeConfig.color} bg-clip-text text-transparent text-lg sm:text-xl font-semibold`}>
-                            {project.title}
-                          </CardTitle>
-                          {isExpandable && (
-                            <button
-                              onClick={() => toggleProject(project.id)}
-                              className="ml-2 p-2 rounded-lg transition-all duration-200 hover:bg-muted"
-                              aria-label={isExpanded ? "Collapse projects" : "Expand projects"}
-                            >
-                              {isExpanded ? (
-                                <ChevronDown className="h-5 w-5 text-muted-foreground" />
-                              ) : (
-                                <ChevronRight className="h-5 w-5 text-muted-foreground" />
-                              )}
-                            </button>
-                          )}
-                        </div>
-                        <div className="flex flex-wrap gap-1.5 sm:gap-2 mt-3 mb-3">
-                          {project.tags.map((tag, tagIndex) => {
-                            const tagColors = [
-                              `bg-gradient-to-r ${devTypeConfig.color} text-white`,
-                              `bg-gradient-to-r ${devTypeConfig.color} text-white opacity-90`,
-                              `bg-gradient-to-r ${devTypeConfig.color} text-white opacity-80`
-                            ]
-                            return (
-                              <span
-                                key={tag}
-                                className={`px-2.5 sm:px-3 py-1 ${tagColors[tagIndex % tagColors.length]} text-xs sm:text-sm rounded-full font-medium shadow-sm hover:shadow-md transition-shadow duration-200`}
-                              >
-                                {tag}
-                              </span>
-                            )
-                          })}
-                        </div>
-                        <CardDescription className="leading-relaxed text-sm sm:text-base mb-4">
-                          {project.description}
-                        </CardDescription>
-                      </CardHeader>
-                      <CardContent className="px-4 sm:px-6 pb-4 sm:pb-6 flex-grow flex flex-col justify-end">
-                        {project.github && (
-                          <Button asChild size="sm" variant="outline" className="w-full sm:w-auto hover:bg-gradient-to-r hover:from-indigo-50 hover:to-cyan-50 hover:border-indigo-300 transition-all duration-200 text-sm py-2.5">
-                            <a href={project.github} target="_blank" rel="noopener noreferrer">
-                              <Github className="h-4 w-4 mr-2" />
-                              View Code
-                            </a>
-                          </Button>
-                        )}
-                      </CardContent>
-                      
-                      {/* Expandable Sub-Projects for High School Project */}
-                      {isExpandable && project.subProjects && project.subProjects.length > 0 && (
-                        <div className={`transition-all duration-300 ease-in-out ${
-                          isExpanded ? 'max-h-[5000px] opacity-100 mt-4' : 'max-h-0 opacity-0 overflow-hidden'
-                        } ${isExpanded ? 'overflow-visible' : ''}`}>
-                          <div className="pt-4 border-t border-border px-4 sm:px-6">
-                            <div className="flex items-center justify-between mb-4">
-                              <h4 className="text-sm font-semibold text-muted-foreground">Individual Projects:</h4>
-                              <div className="flex items-center gap-2">
-                                <span className="text-xs text-muted-foreground">
-                                  {highSchoolProjectIndex < 0 
-                                    ? project.subProjects.length 
-                                    : highSchoolProjectIndex >= project.subProjects.length 
-                                      ? 1 
-                                      : highSchoolProjectIndex + 1} / {project.subProjects.length}
-                                </span>
-                              </div>
-                            </div>
-                            <div className="relative overflow-visible px-4 sm:px-12 lg:px-16">
-                              <div 
-                                ref={carouselRef}
-                                className="max-w-lg mx-auto"
-                                onTouchStart={handleTouchStart}
-                                onTouchMove={handleTouchMove}
-                                onTouchEnd={() => handleTouchEnd(project.subProjects!.length)}
-                              >
-                                <div className="overflow-hidden px-[7.5%] sm:px-[15%] relative">
-                                  <div 
-                                    className="flex transition-transform duration-300 ease-in-out"
-                                    style={{ 
-                                      transform: `translateX(calc(${isMobile ? 7.5 : 15}% - (${highSchoolProjectIndex < 0 ? project.subProjects!.length : highSchoolProjectIndex + 1}) * ${isMobile ? 85 : 70}% - ${(highSchoolProjectIndex < 0 ? project.subProjects!.length : highSchoolProjectIndex + 1) * 0.25}rem))` 
-                                    }}
-                                  >
-                                    {/* Carousel items will be rendered here - using the existing carousel structure */}
-                                    {project.subProjects.length > 0 && (
-                                      <>
-                                        <div className="w-[85%] sm:w-[70%] flex-shrink-0 px-1 relative flex">
-                                          <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105 border border-border bg-card/70 opacity-90 flex flex-col w-full h-full">
-                                            <CardHeader className="pb-2 px-4 pt-4 flex-shrink-0">
-                                              <CardTitle className="text-sm font-semibold mb-2">{project.subProjects[project.subProjects.length - 1].name}</CardTitle>
-                                              <CardDescription className="text-xs mb-3 leading-relaxed line-clamp-3">
-                                                {project.subProjects[project.subProjects.length - 1].description}
-                                              </CardDescription>
-                                              <div className="flex flex-wrap gap-1 mb-2">
-                                                {project.subProjects[project.subProjects.length - 1].tags.map((tag, tagIdx) => (
-                                                  <span key={tagIdx} className="px-2 py-0.5 bg-gradient-to-r from-purple-400 to-pink-400 text-white text-xs rounded-full font-medium">
-                                                    {tag}
-                                                  </span>
-                                                ))}
-                                              </div>
-                                            </CardHeader>
-                                            <CardContent className="px-4 pb-4 flex-grow flex flex-col justify-end">
-                                              <Button asChild size="sm" variant="outline" className="w-full text-xs py-1.5 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white border-0">
-                                                <a href={project.subProjects[project.subProjects.length - 1].path} target="_blank" rel="noopener noreferrer">
-                                                  <ExternalLink className="h-3 w-3 mr-1.5" />
-                                                  View Project
-                                                </a>
-                                              </Button>
-                                            </CardContent>
-                                          </Card>
-                                        </div>
-                                        <div className="flex-shrink-0 flex items-center justify-center px-2">
-                                          <div className="flex flex-col items-center gap-1.5">
-                                            <div className="w-0.5 h-12 bg-gradient-to-b from-purple-400 via-purple-500 to-pink-400 rounded-full"></div>
-                                            <div className="w-2 h-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-500"></div>
-                                            <div className="w-0.5 h-12 bg-gradient-to-b from-pink-400 via-pink-500 to-purple-400 rounded-full"></div>
-                                          </div>
-                                        </div>
-                                      </>
-                                    )}
-                                    
-                                    {project.subProjects.map((subProject, subIndex) => (
-                                      <div key={subIndex} className="w-[85%] sm:w-[70%] flex-shrink-0 px-1 flex">
-                                        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105 border border-border bg-card/50 flex flex-col w-full h-full">
-                                          <CardHeader className="pb-2 px-4 pt-4 flex-shrink-0">
-                                            <CardTitle className="text-sm font-semibold mb-2">{subProject.name}</CardTitle>
-                                            <CardDescription className="text-xs mb-3 leading-relaxed line-clamp-3">
-                                              {subProject.description}
-                                            </CardDescription>
-                                            <div className="flex flex-wrap gap-1 mb-2">
-                                              {subProject.tags.map((tag, tagIdx) => (
-                                                <span key={tagIdx} className="px-2 py-0.5 bg-gradient-to-r from-purple-400 to-pink-400 text-white text-xs rounded-full font-medium">
-                                                  {tag}
-                                                </span>
-                                              ))}
-                                            </div>
-                                          </CardHeader>
-                                          <CardContent className="px-4 pb-4 flex-grow flex flex-col justify-end">
-                                            <Button asChild size="sm" variant="outline" className="w-full text-xs py-1.5 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white border-0">
-                                              <a href={subProject.path} target="_blank" rel="noopener noreferrer">
-                                                <ExternalLink className="h-3 w-3 mr-1.5" />
-                                                View Project
-                                              </a>
-                                            </Button>
-                                          </CardContent>
-                                        </Card>
-                                      </div>
-                                    ))}
-                                    
-                                    {project.subProjects.length > 0 && (
-                                      <>
-                                        <div className="flex-shrink-0 flex items-center justify-center px-2">
-                                          <div className="flex flex-col items-center gap-1.5">
-                                            <div className="w-0.5 h-12 bg-gradient-to-b from-purple-400 via-purple-500 to-pink-400 rounded-full"></div>
-                                            <div className="w-2 h-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-500"></div>
-                                            <div className="w-0.5 h-12 bg-gradient-to-b from-pink-400 via-pink-500 to-purple-400 rounded-full"></div>
-                                          </div>
-                                        </div>
-                                        <div className="w-[85%] sm:w-[70%] flex-shrink-0 px-1 relative flex">
-                                          <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105 border border-border bg-card/70 opacity-90 flex flex-col w-full h-full">
-                                            <CardHeader className="pb-2 px-4 pt-4 flex-shrink-0">
-                                              <CardTitle className="text-sm font-semibold mb-2">{project.subProjects[0].name}</CardTitle>
-                                              <CardDescription className="text-xs mb-3 leading-relaxed line-clamp-3">
-                                                {project.subProjects[0].description}
-                                              </CardDescription>
-                                              <div className="flex flex-wrap gap-1 mb-2">
-                                                {project.subProjects[0].tags.map((tag, tagIdx) => (
-                                                  <span key={tagIdx} className="px-2 py-0.5 bg-gradient-to-r from-purple-400 to-pink-400 text-white text-xs rounded-full font-medium">
-                                                    {tag}
-                                                  </span>
-                                                ))}
-                                              </div>
-                                            </CardHeader>
-                                            <CardContent className="px-4 pb-4 flex-grow flex flex-col justify-end">
-                                              <Button asChild size="sm" variant="outline" className="w-full text-xs py-1.5 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white border-0">
-                                                <a href={project.subProjects[0].path} target="_blank" rel="noopener noreferrer">
-                                                  <ExternalLink className="h-3 w-3 mr-1.5" />
-                                                  View Project
-                                                </a>
-                                              </Button>
-                                            </CardContent>
-                                          </Card>
-                                        </div>
-                                      </>
-                                    )}
-                                  </div>
-                                </div>
-                              </div>
-                              
-                              {project.subProjects.length > 1 && (
-                                <>
-                                  <button
-                                    onClick={() => prevHighSchoolProject(project.subProjects!.length)}
-                                    className="absolute left-0 top-1/2 -translate-y-1/2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white p-2.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-200"
-                                    aria-label="Previous project"
-                                    style={{ zIndex: 9999 }}
-                                  >
-                                    <ChevronLeft className="h-5 w-5" />
-                                  </button>
-                                  <button
-                                    onClick={() => nextHighSchoolProject(project.subProjects!.length)}
-                                    className="absolute right-0 top-1/2 -translate-y-1/2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white p-2.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-200"
-                                    aria-label="Next project"
-                                    style={{ zIndex: 9999 }}
-                                  >
-                                    <ChevronRight className="h-5 w-5" />
-                                  </button>
-                                </>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-                      )}
-                    </>
-                  )}
-
-                  {/* Desktop Projects: Original vertical layout */}
-                  {!(isExpanded && isHighSchoolProject) && !isHighSchoolProject && (
+                  {/* Desktop Projects: Vertical layout */}
                   <div className="hidden sm:block">
                     <div className={`aspect-[4/3] sm:aspect-video ${currentCardColors[index % currentCardColors.length]} flex items-center justify-center relative overflow-hidden`}>
                     {project.image && project.image !== "/api/placeholder/600/400" ? (
@@ -898,49 +394,28 @@ const Projects = () => {
                       </div>
                       </div>
                     </div>
-                  </div>
-                  )}
-                  
-                  {/* Desktop Card Header & Content - Only for non-high-school projects */}
-                  {!isHighSchoolProject && (
-                    <div className="hidden sm:block">
-                      <CardHeader className="pb-4 px-3 sm:px-6 pt-3 sm:pt-6 flex-shrink-0">
-                        <div className="flex items-center justify-between">
-                          <CardTitle className={`bg-gradient-to-r ${devTypeConfig.color} bg-clip-text text-transparent ${shouldShrinkHighSchool ? 'text-sm sm:text-base' : 'text-base sm:text-xl'} font-semibold`}>
-                            {project.title}
-                          </CardTitle>
-                          {isExpandable && (
-                            <button
-                              onClick={() => toggleProject(project.id)}
-                              className="ml-2 p-2 rounded-lg transition-all duration-200 hover:bg-muted"
-                              aria-label={isExpanded ? "Collapse projects" : "Expand projects"}
+                    <CardHeader className="pb-4 px-3 sm:px-6 pt-3 sm:pt-6 flex-shrink-0">
+                      <CardTitle className={`bg-gradient-to-r ${devTypeConfig.color} bg-clip-text text-transparent text-base sm:text-xl font-semibold`}>
+                        {project.title}
+                      </CardTitle>
+                      <div className="flex flex-wrap gap-1 sm:gap-1.5 mb-2 sm:mb-4">
+                        {project.tags.map((tag, tagIndex) => {
+                          const tagColors = [
+                            `bg-gradient-to-r ${devTypeConfig.color} text-white`,
+                            `bg-gradient-to-r ${devTypeConfig.color} text-white opacity-90`,
+                            `bg-gradient-to-r ${devTypeConfig.color} text-white opacity-80`
+                          ]
+                          return (
+                            <span
+                              key={tag}
+                              className={`px-2 sm:px-3 py-1 ${tagColors[tagIndex % tagColors.length]} text-xs rounded-full font-medium shadow-sm hover:shadow-md transition-shadow duration-200`}
                             >
-                              {isExpanded ? (
-                                <ChevronDown className="h-5 w-5 text-muted-foreground" />
-                              ) : (
-                                <ChevronRight className="h-5 w-5 text-muted-foreground" />
-                              )}
-                            </button>
-                          )}
-                        </div>
-                        <div className="flex flex-wrap gap-1 sm:gap-1.5 mb-2 sm:mb-4">
-                          {project.tags.map((tag, tagIndex) => {
-                            const tagColors = [
-                              `bg-gradient-to-r ${devTypeConfig.color} text-white`,
-                              `bg-gradient-to-r ${devTypeConfig.color} text-white opacity-90`,
-                              `bg-gradient-to-r ${devTypeConfig.color} text-white opacity-80`
-                            ]
-                            return (
-                              <span
-                                key={tag}
-                                className={`px-2 sm:px-3 py-1 ${tagColors[tagIndex % tagColors.length]} text-xs rounded-full font-medium shadow-sm hover:shadow-md transition-shadow duration-200`}
-                              >
-                                {tag}
-                              </span>
-                            )
-                          })}
-                        </div>
-                        <CardDescription className={`leading-relaxed ${shouldShrinkHighSchool ? 'text-xs sm:text-sm mb-2 sm:mb-2 line-clamp-2' : 'text-xs sm:text-base mb-3 sm:mb-4'}`}>{project.description}</CardDescription>
+                              {tag}
+                            </span>
+                          )
+                        })}
+                      </div>
+                      <CardDescription className="leading-relaxed text-xs sm:text-base mb-3 sm:mb-4">{project.description}</CardDescription>
                       </CardHeader>
                       <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6 flex-grow flex flex-col justify-end">
                         <div className="flex flex-col sm:flex-row gap-1 sm:gap-2">
@@ -973,186 +448,6 @@ const Projects = () => {
                         </div>
                       </CardContent>
                     </div>
-                  )}
-
-                  {/* Expandable Sub-Projects - Show for all projects except high school */}
-                    {isExpandable && project.subProjects && project.subProjects.length > 0 && !isHighSchoolProject && (
-                      <div className={`transition-all duration-300 ease-in-out ${
-                        isExpanded ? 'max-h-[5000px] opacity-100 mt-4' : 'max-h-0 opacity-0 overflow-hidden'
-                      } ${isExpanded ? 'overflow-visible' : ''}`}>
-                        <div className="pt-4 border-t border-border">
-                          <div className="flex items-center justify-between mb-4">
-                            <h4 className="text-sm font-semibold text-muted-foreground">Individual Projects:</h4>
-                              <div className="flex items-center gap-2">
-                                <span className="text-xs text-muted-foreground">
-                                  {highSchoolProjectIndex < 0 
-                                    ? project.subProjects.length 
-                                    : highSchoolProjectIndex >= project.subProjects.length 
-                                      ? 1 
-                                      : highSchoolProjectIndex + 1} / {project.subProjects.length}
-                                </span>
-                              </div>
-                          </div>
-                          <div className="relative overflow-visible px-4 sm:px-12 lg:px-16">
-                            <div 
-                              ref={carouselRef}
-                              className="max-w-lg mx-auto"
-                              onTouchStart={handleTouchStart}
-                              onTouchMove={handleTouchMove}
-                              onTouchEnd={() => handleTouchEnd(project.subProjects!.length)}
-                            >
-                              <div className="overflow-hidden px-[7.5%] sm:px-[15%] relative">
-                                <div 
-                                  className="flex transition-transform duration-300 ease-in-out"
-                                  style={{ 
-                                    transform: `translateX(calc(${isMobile ? 7.5 : 15}% - (${highSchoolProjectIndex < 0 ? project.subProjects!.length : highSchoolProjectIndex + 1}) * ${isMobile ? 85 : 70}% - ${(highSchoolProjectIndex < 0 ? project.subProjects!.length : highSchoolProjectIndex + 1) * 0.25}rem))` 
-                                  }}
-                                >
-                                  {/* Duplicate last item at the beginning for seamless loop */}
-                                  {project.subProjects.length > 0 && (
-                                    <>
-                                      <div className="w-[85%] sm:w-[70%] flex-shrink-0 px-1 relative flex">
-                                        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105 border border-border bg-card/70 opacity-90 flex flex-col w-full h-full">
-                                          <CardHeader className="pb-2 px-4 pt-4 flex-shrink-0">
-                                            <CardTitle className="text-sm font-semibold mb-2">{project.subProjects[project.subProjects.length - 1].name}</CardTitle>
-                                            <CardDescription className="text-xs mb-3 leading-relaxed line-clamp-3">
-                                              {project.subProjects[project.subProjects.length - 1].description}
-                                            </CardDescription>
-                                            <div className="flex flex-wrap gap-1 mb-2">
-                                              {project.subProjects[project.subProjects.length - 1].tags.map((tag, tagIdx) => (
-                                                <span
-                                                  key={tagIdx}
-                                                  className="px-2 py-0.5 bg-gradient-to-r from-purple-400 to-pink-400 text-white text-xs rounded-full font-medium"
-                                                >
-                                                  {tag}
-                                                </span>
-                                              ))}
-                                            </div>
-                                          </CardHeader>
-                                          <CardContent className="px-4 pb-4 flex-grow flex flex-col justify-end">
-                                            <Button asChild size="sm" variant="outline" className="w-full text-xs py-1.5 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white border-0">
-                                              <a href={project.subProjects[project.subProjects.length - 1].path} target="_blank" rel="noopener noreferrer">
-                                                <ExternalLink className="h-3 w-3 mr-1.5" />
-                                                View Project
-                                              </a>
-                                            </Button>
-                                          </CardContent>
-                                        </Card>
-                                      </div>
-                                      {/* Loop separator */}
-                                      <div className="flex-shrink-0 flex items-center justify-center px-2">
-                                        <div className="flex flex-col items-center gap-1.5">
-                                          <div className="w-0.5 h-12 bg-gradient-to-b from-purple-400 via-purple-500 to-pink-400 rounded-full"></div>
-                                          <div className="w-2 h-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-500"></div>
-                                          <div className="w-0.5 h-12 bg-gradient-to-b from-pink-400 via-pink-500 to-purple-400 rounded-full"></div>
-                                        </div>
-                                      </div>
-                                    </>
-                                  )}
-                                  
-                                  {/* Original items */}
-                            {project.subProjects.map((subProject, subIndex) => (
-                                    <div key={subIndex} className="w-[85%] sm:w-[70%] flex-shrink-0 px-1 flex">
-                                      <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105 border border-border bg-card/50 flex flex-col w-full h-full">
-                                        <CardHeader className="pb-2 px-4 pt-4 flex-shrink-0">
-                                  <CardTitle className="text-sm font-semibold mb-2">{subProject.name}</CardTitle>
-                                          <CardDescription className="text-xs mb-3 leading-relaxed line-clamp-3">
-                                    {subProject.description}
-                                  </CardDescription>
-                                  <div className="flex flex-wrap gap-1 mb-2">
-                                    {subProject.tags.map((tag, tagIdx) => (
-                                      <span
-                                        key={tagIdx}
-                                        className="px-2 py-0.5 bg-gradient-to-r from-purple-400 to-pink-400 text-white text-xs rounded-full font-medium"
-                                      >
-                                        {tag}
-                                      </span>
-                                    ))}
-                                  </div>
-                                </CardHeader>
-                                        <CardContent className="px-4 pb-4 flex-grow flex flex-col justify-end">
-                                  <Button asChild size="sm" variant="outline" className="w-full text-xs py-1.5 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white border-0">
-                                    <a href={subProject.path} target="_blank" rel="noopener noreferrer">
-                                      <ExternalLink className="h-3 w-3 mr-1.5" />
-                                      View Project
-                                    </a>
-                                  </Button>
-                                </CardContent>
-                              </Card>
-                                    </div>
-                                  ))}
-                                  
-                                  {/* Loop separator */}
-                                    {project.subProjects.length > 0 && (
-                                      <div className="flex-shrink-0 flex items-center justify-center px-2">
-                                        <div className="flex flex-col items-center gap-1.5">
-                                          <div className="w-0.5 h-12 bg-gradient-to-b from-purple-400 via-purple-500 to-pink-400 rounded-full"></div>
-                                          <div className="w-2 h-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-500"></div>
-                                          <div className="w-0.5 h-12 bg-gradient-to-b from-pink-400 via-pink-500 to-purple-400 rounded-full"></div>
-                                        </div>
-                                      </div>
-                                    )}
-                                  
-                                  {/* Duplicate first item at the end for seamless loop */}
-                                  {project.subProjects.length > 0 && (
-                                    <div className="w-[85%] sm:w-[70%] flex-shrink-0 px-1 relative flex">
-                                      <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105 border border-border bg-card/70 opacity-90 flex flex-col w-full h-full">
-                                        <CardHeader className="pb-2 px-4 pt-4 flex-shrink-0">
-                                          <CardTitle className="text-sm font-semibold mb-2">{project.subProjects[0].name}</CardTitle>
-                                          <CardDescription className="text-xs mb-3 leading-relaxed line-clamp-3">
-                                            {project.subProjects[0].description}
-                                          </CardDescription>
-                                          <div className="flex flex-wrap gap-1 mb-2">
-                                            {project.subProjects[0].tags.map((tag, tagIdx) => (
-                                              <span
-                                                key={tagIdx}
-                                                className="px-2 py-0.5 bg-gradient-to-r from-purple-400 to-pink-400 text-white text-xs rounded-full font-medium"
-                                              >
-                                                {tag}
-                                              </span>
-                                            ))}
-                                          </div>
-                                        </CardHeader>
-                                        <CardContent className="px-4 pb-4 flex-grow flex flex-col justify-end">
-                                          <Button asChild size="sm" variant="outline" className="w-full text-xs py-1.5 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white border-0">
-                                            <a href={project.subProjects[0].path} target="_blank" rel="noopener noreferrer">
-                                              <ExternalLink className="h-3 w-3 mr-1.5" />
-                                              View Project
-                                            </a>
-                                          </Button>
-                                        </CardContent>
-                                      </Card>
-                                    </div>
-                                  )}
-                                </div>
-                              </div>
-                            </div>
-                            
-                            {/* Navigation Arrows - Outside the carousel container */}
-                            {project.subProjects.length > 1 && (
-                              <>
-                                <button
-                                  onClick={() => prevHighSchoolProject(project.subProjects!.length)}
-                                  className="absolute left-0 top-1/2 -translate-y-1/2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white p-2.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-200"
-                                  aria-label="Previous project"
-                                  style={{ zIndex: 9999 }}
-                                >
-                                  <ChevronLeft className="h-5 w-5" />
-                                </button>
-                                <button
-                                  onClick={() => nextHighSchoolProject(project.subProjects!.length)}
-                                  className="absolute right-0 top-1/2 -translate-y-1/2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white p-2.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-200"
-                                  aria-label="Next project"
-                                  style={{ zIndex: 9999 }}
-                                >
-                                  <ChevronRight className="h-5 w-5" />
-                                </button>
-                              </>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                    )}
                 </Card>
               </div>
             )

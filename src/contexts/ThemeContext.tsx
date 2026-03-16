@@ -54,15 +54,9 @@ export function ThemeProvider({
 
       root.classList.add(systemTheme)
       setActualTheme(systemTheme)
-      
-      // Debug logging
-      console.log(`System theme detected: ${systemTheme}, applied class: ${systemTheme}`)
     } else {
       root.classList.add(theme)
       setActualTheme(theme)
-      
-      // Debug logging
-      console.log(`Manual theme set: ${theme}, applied class: ${theme}`)
     }
 
     // Store theme preference

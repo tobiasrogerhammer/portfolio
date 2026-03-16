@@ -53,11 +53,11 @@ const Hero = () => {
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-section-hero via-section-hero to-section-hero" />
       
-      {/* Animated background elements - optimized for mobile */}
-      <div className="absolute inset-0 overflow-hidden">
+      {/* Animated background elements - fixed viewport height to prevent CLS when section grows */}
+      <div className="absolute inset-0 overflow-hidden h-[100dvh] min-h-[100dvh] contain-layout" aria-hidden="true">
         <div className="absolute -top-20 -right-20 sm:-top-40 sm:-right-40 w-40 h-40 sm:w-80 sm:h-80 rounded-full blur-3xl animate-pulse-4s bg-brand-primary/10 dark:bg-brand-primary/20" style={{ backgroundColor: '#124D95', opacity: 0.1 }} />
         <div className="absolute -bottom-20 -left-20 sm:-bottom-40 sm:-left-40 w-40 h-40 sm:w-80 sm:h-80 rounded-full blur-3xl animate-pulse-4s delay-1000 bg-brand-secondary/10 dark:bg-brand-secondary/20" style={{ backgroundColor: '#FF6B6B', opacity: 0.1 }} />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 h-48 sm:w-96 sm:h-96 rounded-full blur-3xl animate-pulse-4s delay-500 bg-brand-accent/8 dark:bg-brand-accent/15" style={{ backgroundColor: '#2BBBAD', opacity: 0.08 }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 sm:w-96 sm:h-96 rounded-full blur-3xl animate-pulse-4s delay-500 bg-brand-accent/8 dark:bg-brand-accent/15" style={{ backgroundColor: '#2BBBAD', opacity: 0.08 }} />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto w-full">
