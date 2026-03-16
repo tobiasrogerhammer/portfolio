@@ -25,7 +25,7 @@ const CarouselPlaceholder = ({ className }: { className?: string }) => (
 const Hero = () => {
   const [carouselsReady, setCarouselsReady] = useState(false)
   useEffect(() => {
-    const FALLBACK_MS = 4000
+    const FALLBACK_MS = 6000
     const scheduleMount = () => setCarouselsReady(true)
     let cancel: () => void
     if (typeof requestIdleCallback !== "undefined") {
@@ -74,7 +74,8 @@ const Hero = () => {
                   className="object-cover"
                   sizes="(max-width: 1280px) 320px, (max-width: 1536px) 384px, 416px"
                   priority
-                  quality={65}
+                  fetchPriority="high"
+                  quality={60}
                 />
               </div>
             </div>
@@ -174,7 +175,7 @@ const Hero = () => {
                 sizes="(max-width: 640px) 100vw, 412px"
                 priority
                 fetchPriority="high"
-                quality={65}
+                quality={60}
               />
               {/* Gradient overlay for title readability */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />

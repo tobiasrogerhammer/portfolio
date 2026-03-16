@@ -1,7 +1,8 @@
 import { Suspense, lazy } from "react"
 import Navigation from "@/components/layout/navigation"
 import Hero from "@/components/sections/hero"
-import ScrollToTop from "@/components/layout/scroll-to-top"
+
+const ScrollToTop = lazy(() => import("@/components/layout/scroll-to-top"))
 
 // Lazy load below-the-fold components for better initial load performance
 const About = lazy(() => import("@/components/sections/about"))
@@ -39,7 +40,9 @@ export default function Home() {
       <Suspense fallback={null}>
         <Footer />
       </Suspense>
-      <ScrollToTop />
+      <Suspense fallback={null}>
+        <ScrollToTop />
+      </Suspense>
     </div>
   )
 }
