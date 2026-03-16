@@ -26,7 +26,7 @@ const Hero = () => {
   const [carouselsReady, setCarouselsReady] = useState(false)
   useEffect(() => {
     const isMobile = typeof window !== "undefined" && window.innerWidth < 1024
-    const FALLBACK_MS = isMobile ? 8000 : 6000
+    const FALLBACK_MS = isMobile ? 10000 : 6000
     const scheduleMount = () => setCarouselsReady(true)
     let cancel: () => void
     if (typeof requestIdleCallback !== "undefined") {
@@ -173,10 +173,10 @@ const Hero = () => {
                 alt="Tobias Hammer"
                 fill
                 className="object-cover object-top"
-                sizes="(max-width: 640px) 100vw, 412px"
+                sizes="(max-width: 640px) 360px, 412px"
                 priority
                 fetchPriority="high"
-                quality={60}
+                quality={50}
               />
               {/* Gradient overlay for title readability */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />

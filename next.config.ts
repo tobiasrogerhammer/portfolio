@@ -1,10 +1,24 @@
+import type { NextConfig } from "next";
+
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = {
   output: 'standalone',
   compress: true, // Enable gzip compression
   poweredByHeader: false, // Remove X-Powered-By header for security
   // Production optimizations for Lighthouse (minification is default; ensure strict)
   reactStrictMode: true,
+  // Remove legacy polyfills for modern browsers (~11 KiB savings, improves TBT)
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve ??= {};
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        '../build/polyfills/polyfill-module': false,
+        'next/dist/build/polyfills/polyfill-module': false,
+      } as Record<string, string | false>;
+    }
+    return config;
+  },
   images: {
     remotePatterns: [
       {

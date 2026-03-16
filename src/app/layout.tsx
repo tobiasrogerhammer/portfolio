@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "@/contexts/ThemeContext";
+import { DelayedAnalytics } from "@/components/analytics/delayed-analytics";
+import { DeferredManifest } from "@/components/deferred-manifest";
 
 // Font options — swap the active pair by changing which pair is used in body className below.
 // All use --font-sans and --font-mono so globals.css can reference them.
@@ -76,7 +77,7 @@ export const metadata: Metadata = {
       { url: "/logo/apple-touch-icon-180.png", sizes: "180x180" },
     ],
   },
-  manifest: "/site.webmanifest",
+  // Manifest is injected by DeferredManifest after load to avoid critical path
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -111,29 +112,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-Z92ZGV8X2K"
-          strategy="lazyOnload"
-        />
-        <Script id="google-analytics" strategy="lazyOnload">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-Z92ZGV8X2K');
-          `}
-        </Script>
-      </head>
+      <head />
       <body
         className={`${outfit.variable} ${sourceCode.variable} antialiased`}
       >
-        <ThemeProvider
-          defaultTheme="system"
-          storageKey="portfolio-theme"
-        >
-          {children}
-        </ThemeProvider>
+<ThemeProvider
+        defaultTheme="system"
+        storageKey="portfolio-theme"
+      >
+        {children}
+        <DeferredManifest />
+        <DelayedAnalytics />
+      </ThemeProvider>
       </body>
     </html>
   );
