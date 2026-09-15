@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import Image from "next/image"
 import { ExternalLink } from "lucide-react"
 import { featuredProjects } from "@/data/featured-projects"
+import { cn } from "@/lib/utils"
 
 const projects = featuredProjects
 
@@ -54,7 +55,10 @@ export const RotatingProjectPreviews = () => {
               src={currentProject.image}
               alt={currentProject.title}
               fill
-              className="object-cover transition-transform duration-700 group-hover:scale-110"
+              className={cn(
+                "object-cover transition-transform duration-700 group-hover:scale-110",
+                currentProject.imageClassName
+              )}
               sizes="(max-width: 768px) 100vw, 50vw"
               loading="lazy"
               onError={(e) => {
@@ -96,19 +100,9 @@ export const RotatingProjectPreviews = () => {
               </a>
             )}
           </div>
-          <p className="text-sm text-muted-foreground mb-3 leading-relaxed">
+          <p className="text-sm text-muted-foreground leading-relaxed">
             {currentProject.description}
           </p>
-          <div className="flex flex-wrap gap-2">
-            {currentProject.tech.map((tech) => (
-              <span
-                key={tech}
-                className="px-2 py-1 text-xs rounded-md bg-brand-primary/10 text-brand-primary border border-brand-primary/20 font-medium transition-all duration-200 hover:bg-brand-primary/20"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
         </div>
       </div>
 
@@ -123,7 +117,10 @@ export const RotatingProjectPreviews = () => {
             src={projects[(currentIndex + 1) % projects.length].image}
             alt={`Next: ${projects[(currentIndex + 1) % projects.length].title}`}
             fill
-            className="object-cover transition-transform duration-500 group-hover:scale-110"
+            className={cn(
+              "object-cover transition-transform duration-500 group-hover:scale-110",
+              projects[(currentIndex + 1) % projects.length].imageClassName
+            )}
             sizes="192px"
             loading="lazy"
           />
@@ -146,7 +143,10 @@ export const RotatingProjectPreviews = () => {
             src={projects[(currentIndex + projects.length - 1) % projects.length].image}
             alt={`Previous: ${projects[(currentIndex + projects.length - 1) % projects.length].title}`}
             fill
-            className="object-cover transition-transform duration-500 group-hover:scale-110"
+            className={cn(
+              "object-cover transition-transform duration-500 group-hover:scale-110",
+              projects[(currentIndex + projects.length - 1) % projects.length].imageClassName
+            )}
             sizes="176px"
             loading="lazy"
           />
@@ -180,7 +180,10 @@ export const HeroProjectsRow = () => (
               src={project.image}
               alt={project.title}
               fill
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              className={cn(
+                "object-cover transition-transform duration-500 group-hover:scale-105",
+                project.imageClassName
+              )}
               sizes="(max-width: 640px) 100vw, 33vw"
               loading="lazy"
             />
@@ -192,17 +195,7 @@ export const HeroProjectsRow = () => (
             <p className="font-semibold text-brand-primary truncate">{project.title}</p>
             <ExternalLink className="w-4 h-4 flex-shrink-0 text-muted-foreground group-hover:text-brand-primary transition-colors" />
           </div>
-          <p className="text-xs text-muted-foreground line-clamp-2 mb-2">{project.description}</p>
-          <div className="flex flex-wrap gap-1">
-            {project.tech.slice(0, 3).map((tech) => (
-              <span
-                key={tech}
-                className="px-1.5 py-0.5 text-[10px] rounded bg-brand-primary/10 text-brand-primary border border-brand-primary/20 font-medium"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
+          <p className="text-xs text-muted-foreground line-clamp-2">{project.description}</p>
         </div>
       </a>
     ))}

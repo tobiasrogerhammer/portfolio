@@ -69,7 +69,7 @@ const Hero = () => {
             <div className="relative flex-shrink-0 animate-fade-in-up">
               <div className="relative w-80 h-80 xl:w-96 xl:h-96 2xl:w-[26rem] 2xl:h-[26rem] rounded-2xl overflow-hidden border-2 border-border/50 shadow-xl">
                 <Image
-                  src="/herotobias.jpeg"
+                  src="/tobias.webp"
                   alt="Tobias Hammer - Full-Stack Developer"
                   fill
                   className="object-cover"
@@ -169,10 +169,11 @@ const Hero = () => {
           <div className="w-[calc(100%+2rem)] sm:w-[calc(100%+3rem)] -mx-4 sm:-mx-6 mb-0 animate-fade-in-up animation-delay-200">
             <div className="relative aspect-[4/5] sm:aspect-[3/4] overflow-hidden">
               <Image
-                src="/herotobias.jpeg"
+                src="/tobias.webp"
                 alt="Tobias Hammer"
                 fill
-                className="object-cover object-top"
+                className="object-cover"
+                style={{ objectPosition: "center 75%" }}
                 sizes="(max-width: 640px) 340px, 412px"
                 priority
                 fetchPriority="high"
@@ -226,7 +227,7 @@ const Hero = () => {
             </div>
             {/* Description under the image */}
             <p className="px-4 sm:px-6 pt-4 sm:pt-5 pb-0 text-sm sm:text-base leading-relaxed text-muted-foreground animate-fade-in-up animation-delay-600">
-              I build digital products that bring ideas and people together—blending technical craft with a focus on innovation and impact.
+              CO-founder of Renow AS doing sustainable web-development. 5 years work-experience at Huddly. Student at NTNU with an interess for entrepreneurship and coding.
             </p>
           </div>
 

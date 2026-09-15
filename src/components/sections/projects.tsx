@@ -3,8 +3,9 @@
 import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { ExternalLink, Github, Code, X, ArrowLeft } from "lucide-react"
+import { ExternalLink, Github, Code } from "lucide-react"
 import Image from "next/image"
+import { cn } from "@/lib/utils"
 
 type DevelopmentType = "frontend" | "fullstack" | "backend" | "learning"
 
@@ -13,6 +14,8 @@ interface Project {
   title: string
   description: string
   image: string
+  /** With `object-cover`, e.g. `object-left` to avoid cropping important edges */
+  imageClassName?: string
   tags: string[]
   category: string
   developmentType?: DevelopmentType
@@ -25,7 +28,6 @@ interface Project {
 
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState("all")
-  const [blackjackModalOpen, setBlackjackModalOpen] = useState(false)
   const gridRef = useRef<HTMLDivElement>(null)
 
   const filters = [
@@ -99,17 +101,15 @@ const Projects = () => {
     },
     {
       id: 4,
-      title: "Blackjack Game",
-      description: "Interactive Blackjack game with web interface. Play directly in your browser! Features card dealing, player betting, and game logic with proper error handling. Converted from console to web application using Spring Boot.",
-      image: "/blackjack.png",
-      tags: ["Java", "Spring Boot", "Web App", "REST API"],
-      category: "java",
-      developmentType: "backend",
-      github: "https://github.com/tobiasrogerhammer/blackjack-java",
-      live: "http://localhost:8080/",
-      complexity: "Intermediate",
-      concepts: ["Spring Boot", "REST API", "Web Development", "Java", "Object-Oriented Programming"],
-      learningOutcome: "Learned web application development with Spring Boot and REST API design"
+      title: "Say Something",
+      description: "Conversation icebreaker web app: spin the wheel for your next topic, tune depth from small talk to meaningful, optional safe mode, and custom tags—built for better team and social moments.",
+      image: "https://huddly-saysomething.vercel.app/og.png",
+      imageClassName: "object-left",
+      tags: ["Next.js", "TypeScript", "React"],
+      category: "web",
+      developmentType: "frontend",
+      github: null,
+      live: "https://huddly-saysomething.vercel.app/",
     },
     {
       id: 5,
@@ -288,7 +288,7 @@ const Projects = () => {
                               src={project.image} 
                               alt={project.title}
                               fill
-                              className="object-cover"
+                              className={cn("object-cover", project.imageClassName)}
                               loading="lazy"
                               sizes="96px"
                               onError={(e) => {
@@ -316,19 +316,6 @@ const Projects = () => {
                           <CardDescription className="text-xs leading-relaxed mb-2.5">
                             {project.description}
                           </CardDescription>
-                          <div className="flex flex-wrap gap-1">
-                            {project.tags.slice(0, 2).map((tag) => (
-                              <span
-                                key={tag}
-                                className={`px-1.5 py-0.5 bg-gradient-to-r ${devTypeConfig.color} text-white text-[10px] rounded font-medium`}
-                              >
-                                {tag}
-                              </span>
-                            ))}
-                            {project.tags.length > 2 && (
-                              <span className="text-[10px] text-muted-foreground">+{project.tags.length - 2}</span>
-                            )}
-                          </div>
                         </div>
                       </div>
                       {/* Buttons - full width */}
@@ -348,11 +335,7 @@ const Projects = () => {
                               className={`flex-1 h-7 text-[10px] px-2 py-0 bg-gradient-to-r ${devTypeConfig.color} hover:opacity-90 text-white`}
                               onClick={() => {
                                 if (!project.live) return
-                                if (project.id === 3 && project.live.startsWith('http://localhost')) {
-                                  setBlackjackModalOpen(true)
-                                } else {
-                                  window.open(project.live, '_blank', 'noopener,noreferrer')
-                                }
+                                window.open(project.live, '_blank', 'noopener,noreferrer')
                               }}
                               aria-label={`Open ${project.title} live site`}
                             >
@@ -372,7 +355,7 @@ const Projects = () => {
                         src={project.image} 
                         alt={project.title}
                         fill
-                        className="object-cover"
+                        className={cn("object-cover", project.imageClassName)}
                         loading="lazy"
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         onError={(e) => {
@@ -395,26 +378,9 @@ const Projects = () => {
                       </div>
                     </div>
                     <CardHeader className="pb-4 px-3 sm:px-6 pt-3 sm:pt-6 flex-shrink-0">
-                      <CardTitle className={`bg-gradient-to-r ${devTypeConfig.color} bg-clip-text text-transparent text-base sm:text-xl font-semibold`}>
+                      <CardTitle className={`bg-gradient-to-r ${devTypeConfig.color} bg-clip-text text-transparent text-base sm:text-xl font-semibold mb-2 sm:mb-4`}>
                         {project.title}
                       </CardTitle>
-                      <div className="flex flex-wrap gap-1 sm:gap-1.5 mb-2 sm:mb-4">
-                        {project.tags.map((tag, tagIndex) => {
-                          const tagColors = [
-                            `bg-gradient-to-r ${devTypeConfig.color} text-white`,
-                            `bg-gradient-to-r ${devTypeConfig.color} text-white opacity-90`,
-                            `bg-gradient-to-r ${devTypeConfig.color} text-white opacity-80`
-                          ]
-                          return (
-                            <span
-                              key={tag}
-                              className={`px-2 sm:px-3 py-1 ${tagColors[tagIndex % tagColors.length]} text-xs rounded-full font-medium shadow-sm hover:shadow-md transition-shadow duration-200`}
-                            >
-                              {tag}
-                            </span>
-                          )
-                        })}
-                      </div>
                       <CardDescription className="leading-relaxed text-xs sm:text-base mb-3 sm:mb-4">{project.description}</CardDescription>
                       </CardHeader>
                       <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6 flex-grow flex flex-col justify-end">
@@ -433,11 +399,7 @@ const Projects = () => {
                               className={`flex-1 bg-gradient-to-r ${devTypeConfig.color} hover:opacity-90 text-white shadow-lg hover:shadow-xl transition-all duration-200 text-xs sm:text-sm py-1.5 sm:py-2.5`}
                               onClick={() => {
                                 if (!project.live) return
-                                if (project.id === 3 && project.live.startsWith('http://localhost')) {
-                                  setBlackjackModalOpen(true)
-                                } else {
-                                  window.open(project.live, '_blank', 'noopener,noreferrer')
-                                }
+                                window.open(project.live, '_blank', 'noopener,noreferrer')
                               }}
                               aria-label={`Open ${project.title} live site`}
                             >
@@ -463,49 +425,6 @@ const Projects = () => {
           </Button>
         </div>
       </div>
-
-      {/* Blackjack Game Modal */}
-      {blackjackModalOpen && (
-        <div 
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
-          onClick={() => setBlackjackModalOpen(false)}
-        >
-          <div 
-            className="relative w-full h-[95vh] max-w-full sm:max-w-6xl bg-white dark:bg-gray-900 rounded-lg shadow-2xl flex flex-col"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Header with back button */}
-            <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 flex-shrink-0">
-              <button
-                onClick={() => setBlackjackModalOpen(false)}
-                className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white rounded-lg transition-all duration-200 font-medium"
-                aria-label="Back to portfolio"
-              >
-                <ArrowLeft className="h-4 w-4" />
-                Back to Portfolio
-              </button>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Blackjack Game</h3>
-              <button
-                onClick={() => setBlackjackModalOpen(false)}
-                className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors"
-                aria-label="Close"
-              >
-                <X className="h-5 w-5 text-gray-600 dark:text-gray-400" />
-              </button>
-            </div>
-
-            {/* Game iframe */}
-            <div className="flex-1 overflow-hidden bg-gray-100 dark:bg-gray-800">
-              <iframe
-                src="http://localhost:8080/"
-                className="border-0 w-full h-full"
-                title="Blackjack Game"
-                allow="fullscreen"
-              />
-            </div>
-          </div>
-        </div>
-      )}
     </section>
   )
 }

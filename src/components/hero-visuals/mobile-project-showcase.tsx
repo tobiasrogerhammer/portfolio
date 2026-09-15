@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import { ExternalLink } from "lucide-react"
 import { featuredProjects } from "@/data/featured-projects"
+import { cn } from "@/lib/utils"
 
 const projects = featuredProjects
 
@@ -101,9 +102,11 @@ export const MobileProjectShowcase = () => {
               src={currentProject.image}
               alt={currentProject.title}
               fill
-              className={`object-cover transition-opacity duration-300 ${
-                isTransitioning ? 'opacity-50' : 'opacity-100'
-              }`}
+              className={cn(
+                "object-cover transition-opacity duration-300",
+                isTransitioning ? "opacity-50" : "opacity-100",
+                currentProject.imageClassName
+              )}
               sizes="(max-width: 640px) 100vw, 384px"
               loading="lazy"
               onError={(e) => {
@@ -146,20 +149,10 @@ export const MobileProjectShowcase = () => {
             )}
           </div>
           {currentProject.description && (
-            <p className="text-sm text-muted-foreground mb-3">
+            <p className="text-sm text-muted-foreground">
               {currentProject.description}
             </p>
           )}
-          <div className="flex flex-wrap gap-2">
-            {currentProject.tech.map((tech) => (
-              <span
-                key={tech}
-                className="px-2 py-1 text-xs rounded-md bg-brand-primary/10 text-brand-primary border border-brand-primary/20 font-medium"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
         </div>
       </div>
 

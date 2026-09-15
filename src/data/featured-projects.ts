@@ -4,6 +4,8 @@ export interface ProjectPreview {
   tech: string[]
   description: string
   link?: string
+  /** Appended to `object-cover` (e.g. `object-left`) when wide art gets cropped in fixed aspect frames */
+  imageClassName?: string
 }
 
 export const featuredProjects: ProjectPreview[] = [
@@ -22,10 +24,11 @@ export const featuredProjects: ProjectPreview[] = [
     link: "https://discgolf-beta.vercel.app/",
   },
   {
-    title: "Blackjack Game",
-    image: "/blackjack.png",
-    tech: ["Java", "Spring Boot", "REST API"],
-    description: "Interactive Blackjack game with web interface. Play directly in your browser! Features card dealing, player betting, and game logic with proper error handling. Converted from console to web application using Spring Boot.",
-    link: "https://github.com/tobiasrogerhammer/blackjack-java",
+    title: "Say Something",
+    image: "https://huddly-saysomething.vercel.app/og.png",
+    imageClassName: "object-left",
+    tech: ["Next.js", "TypeScript", "React"],
+    description: "Conversation icebreaker web app: spin the wheel for your next topic, tune depth from small talk to meaningful, optional safe mode, and custom tags—built for better team and social moments.",
+    link: "https://huddly-saysomething.vercel.app/",
   },
 ]

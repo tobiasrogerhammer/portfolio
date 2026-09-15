@@ -188,14 +188,14 @@ export default function ResumePage() {
               <div className="flex justify-between items-start mb-1">
                 <div>
                   <h3 className="text-slate-900">
-                    Bachelor of Applied Computer Technology
+                    1yr of Applied Computer Technology
                   </h3>
                   <p className="text-sm text-slate-600">
                     Oslo Metropolitan University (OsloMet)
                   </p>
                 </div>
                 <div className="text-sm text-slate-500">
-                  2025 - 2028 (Ongoing)
+                  2025 - 2026
                 </div>
               </div>
               <p className="text-sm text-slate-700 mb-2">

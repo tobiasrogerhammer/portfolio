@@ -20,17 +20,39 @@ const Education = () => {
 
   const education = [
     {
+      institution: "Norwegian University of Science and Technology (NTNU)",
+      degree: "BSc. Digital Business Development",
+      location: "Trondheim, Norway",
+      duration: "2026 - 2029",
+      description: "Interdisciplinary program combining informatics, economics, marketing, organization, and management. Focus on planning and leading digital projects that streamline work processes and drive change in businesses, with hands-on experience through group work. Core topics include digital transformation, big data, digital strategy, digital entrepreneurship, information security, product development, project management, and the ethical implications of digital systems in business and society.",
+      achievements: ["Digital Innovation", "Software Product Management", "Business Strategy", "Entrepreneurship"],
+      logo: "/ntnu-logo.svg",
+      website: "https://www.ntnu.no/studier/bdig",
+      years: [
+        {
+          year: "1st Year - (2026-2027)",
+          subjects: [
+            "1st Semester:",
+            "Financial Management & Accounting",
+            "Ex.phil of Science & Ethics",
+            "Software Product Development & Management",
+            "Innovation & Entrepreneurship in Practice",
+          ],
+        },
+      ],
+    },
+    {
       institution: "Oslo Metropolitan University (OsloMet)",
-      degree: "Bachelor of Computer Science",
-      location: "Oslo, Norway",
-      duration: "2025 - 2028",
+      degree: "1yr of Computer Science",
+      location: "Trondheim, Norway",
+      duration: "2025 - 2026",
       description: "Comprehensive study focusing on designing and developing technological solutions with emphasis on user-friendliness for all. Learn to use computer technology to fulfill user needs and develop universally designed solutions that everyone can use regardless of limitations.",
       achievements: ["User-Centered Design", "Universal Design", "Technology Innovation", "Practical Projects"],
       logo: "/oslomet-logo.webp",
       website: "https://www.oslomet.no/studier/tkd/anvendt-datateknologi",
       years: [
         {
-          year: "1st Year - Foundation (2025-2026)",
+          year: "1st Year - (2025-2026)",
           subjects: [
             "1st Semester:",
             "Interaction Design & Prototyping",
@@ -41,32 +63,6 @@ const Education = () => {
             "Rapid Development with Scripting Languages",
             "Databases",
             "Web Programming"
-          ]
-        },
-        {
-          year: "2nd Year - Specialization (2026-2027)",
-          subjects: [
-            "3rd Semester:",
-            "Human-Computer Interaction",
-            "System Development",
-            "Specialization Track (Health Technology/HCI/Innovation/Programming)",
-            "4th Semester:",
-            "Visualization",
-            "Software Testing",
-            "Specialization Project"
-          ]
-        },
-        {
-          year: "3rd Year - Advanced Studies (2027-2028)",
-          subjects: [
-            "5th Semester:",
-            "Data Security",
-            "Universal ICT Design",
-            "Advanced Specialization Courses",
-            "6th Semester:",
-            "Bachelor's Thesis (20 ECTS)",
-            "Network & Cloud Services",
-            "Advanced Programming"
           ]
         }
       ]
@@ -256,12 +252,8 @@ const Education = () => {
                               // All green for completed Drømtorp education
                               <div className="absolute left-4 sm:left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-green-500 via-emerald-500 to-teal-500"></div>
                             ) : (
-                              // Segmented for OsloMet (current/upcoming)
-                              <>
-                                <div className="absolute left-4 sm:left-6 top-0 w-0.5 h-12 sm:h-16 bg-gradient-to-b from-green-500 to-emerald-500"></div>
-                                <div className="absolute left-4 sm:left-6 top-12 sm:top-16 w-0.5 h-12 sm:h-16 bg-gradient-to-b from-gray-400 to-gray-500"></div>
-                                <div className="absolute left-4 sm:left-6 top-24 sm:top-32 w-0.5 bottom-0 bg-gradient-to-b from-gray-400 to-gray-500"></div>
-                              </>
+                              // OsloMet: only 1st year completed so far
+                              <div className="absolute left-4 sm:left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-green-500 to-emerald-500"></div>
                             )}
                             
                             {edu.years.map((yearData, yearIndex) => {
@@ -332,8 +324,8 @@ const Education = () => {
           })}
         </div>
 
-        {/* Learning Journey Transition */}
-        <div className="mt-12 sm:mt-16 px-4 sm:px-0">
+        {/* Learning Journey Transition - hidden on mobile */}
+        <div className="hidden sm:block mt-12 sm:mt-16 px-4 sm:px-0">
           {/* Journey Visualization */}
           <div className="text-center mb-6 sm:mb-8">
             <h3 className="text-lg sm:text-xl font-bold mb-2" style={{ color: 'hsl(var(--foreground))' }}>

@@ -15,15 +15,20 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@portabletext/react": "^6.1.0",
     "@radix-ui/react-slot": "^1.2.3",
+    "@sanity/image-url": "^2.1.1",
+    "@sanity/vision": "^4.22.0",
     "bcryptjs": "^2.4.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.546.0",
     "mongoose": "^7.0.3",
     "next": "15.5.7",
+    "next-sanity": "^11.6.13",
     "react": "19.1.0",
     "react-dom": "19.1.0",
+    "sanity": "^4.22.0",
     "tailwind-merge": "^3.3.1",
     "tailwindcss-animate": "^1.0.7"
   },
