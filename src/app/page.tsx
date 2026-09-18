@@ -1,7 +1,7 @@
 import { Suspense, lazy } from "react"
 import { NavigationWrapper } from "@/components/layout/navigation-wrapper"
 import Hero from "@/components/sections/hero"
-import { client } from "@/sanity/client"
+import { client, isSanityConfigured } from "@/sanity/client"
 import { allPostsQuery } from "@/sanity/queries"
 import { urlFor } from "@/sanity/image"
 import type { SanityImageSource } from "@sanity/image-url"
@@ -33,10 +33,12 @@ const SectionLoader = () => (
 
 export default async function Home() {
   let posts: BlogPreviewPost[] = []
-  try {
-    posts = await client.fetch<BlogPreviewPost[]>(allPostsQuery)
-  } catch (error) {
-    console.error("Failed to fetch latest blog posts for homepage: ", error)
+  if (isSanityConfigured) {
+    try {
+      posts = await client.fetch<BlogPreviewPost[]>(allPostsQuery)
+    } catch (error) {
+      console.error("Failed to fetch latest blog posts for homepage: ", error)
+    }
   }
   const featuredPosts = posts.slice(0, 2).map((post) => ({
     title: post.title,

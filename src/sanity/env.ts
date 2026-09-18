@@ -1,20 +1,21 @@
 export const apiVersion =
   process.env.NEXT_PUBLIC_SANITY_API_VERSION || '2026-05-05'
 
-export const dataset = assertValue(
-  process.env.NEXT_PUBLIC_SANITY_DATASET,
-  'Missing environment variable: NEXT_PUBLIC_SANITY_DATASET'
-)
+export const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET ?? ''
 
-export const projectId = assertValue(
-  process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-  'Missing environment variable: NEXT_PUBLIC_SANITY_PROJECT_ID'
-)
+export const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? ''
 
-function assertValue<T>(v: T | undefined, errorMessage: string): T {
-  if (v === undefined) {
-    throw new Error(errorMessage)
-  }
+/**
+ * True when Sanity environment variables are configured. Use this to gate
+ * data fetching so builds don't fail when env vars are missing (e.g. on a
+ * preview branch without the CMS wired up).
+ */
+export const isSanityConfigured = Boolean(dataset && projectId)
 
-  return v
+if (!isSanityConfigured && typeof window === 'undefined') {
+  // Log a build-time warning so misconfigurations are obvious in Vercel logs.
+  console.warn(
+    '[sanity] NEXT_PUBLIC_SANITY_DATASET or NEXT_PUBLIC_SANITY_PROJECT_ID is missing. ' +
+      'Sanity-backed pages will render empty fallbacks until these are configured.'
+  )
 }

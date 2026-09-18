@@ -3,7 +3,7 @@ import Link from 'next/link'
 import {ArrowLeft} from 'lucide-react'
 import type {SanityImageSource} from '@sanity/image-url'
 
-import {client} from '@/sanity/client'
+import {client, isSanityConfigured} from '@/sanity/client'
 import {urlFor} from '@/sanity/image'
 import {allPostsQuery} from '@/sanity/queries'
 
@@ -28,11 +28,13 @@ function formatDate(date?: string) {
 export default async function BlogPage() {
   let posts: BlogPostListItem[] = []
   let loadError = false
-  try {
-    posts = await client.fetch<BlogPostListItem[]>(allPostsQuery)
-  } catch (error) {
-    loadError = true
-    console.error('Failed to fetch blog posts:', error)
+  if (isSanityConfigured) {
+    try {
+      posts = await client.fetch<BlogPostListItem[]>(allPostsQuery)
+    } catch (error) {
+      loadError = true
+      console.error('Failed to fetch blog posts:', error)
+    }
   }
 
   return (

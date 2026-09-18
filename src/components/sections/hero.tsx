@@ -96,8 +96,7 @@ const Hero = () => {
               </h1>
 
               <p className="text-lg xl:text-xl leading-relaxed text-muted-foreground font-normal animate-fade-in-up animation-delay-600">
-                I design and develop digital products that connect ideas with people.
-                Combining technical precision with an eye for innovation and impact.
+              CO-founder of Renow AS doing sustainable web-development. 5 years work-experience at Huddly AS. Student at NTNU with an interess for entrepreneurship and coding.
               </p>
 
               <div className="flex flex-row gap-4 pt-2 animate-fade-in-up animation-delay-800">
@@ -167,7 +166,7 @@ const Hero = () => {
 
           {/* Hero image as full-width background with title at bottom */}
           <div className="w-[calc(100%+2rem)] sm:w-[calc(100%+3rem)] -mx-4 sm:-mx-6 mb-0 animate-fade-in-up animation-delay-200">
-            <div className="relative aspect-[4/5] sm:aspect-[3/4] overflow-hidden">
+            <div className="relative aspect-[5/6] sm:aspect-[4/5] overflow-hidden">
               <Image
                 src="/tobias.webp"
                 alt="Tobias Hammer"
@@ -227,7 +226,7 @@ const Hero = () => {
             </div>
             {/* Description under the image */}
             <p className="px-4 sm:px-6 pt-4 sm:pt-5 pb-0 text-sm sm:text-base leading-relaxed text-muted-foreground animate-fade-in-up animation-delay-600">
-              CO-founder of Renow AS doing sustainable web-development. 5 years work-experience at Huddly. Student at NTNU with an interess for entrepreneurship and coding.
+              CO-founder of Renow AS doing sustainable web-development. 5 years work-experience at Huddly AS. Student at NTNU with an interess for entrepreneurship and coding.
             </p>
           </div>
 

@@ -5,7 +5,7 @@ import type {SanityImageSource} from '@sanity/image-url'
 import type {TypedObject} from '@portabletext/types'
 import {notFound} from 'next/navigation'
 
-import {client} from '@/sanity/client'
+import {client, isSanityConfigured} from '@/sanity/client'
 import {urlFor} from '@/sanity/image'
 import {postBySlugQuery} from '@/sanity/queries'
 
@@ -37,6 +37,11 @@ function formatDate(date?: string) {
 
 export default async function BlogPostPage({params}: BlogPostPageProps) {
   const {slug} = await params
+
+  if (!isSanityConfigured) {
+    notFound()
+  }
+
   let post: BlogPost | null = null
   try {
     post = await client.fetch<BlogPost | null>(postBySlugQuery, {slug})
