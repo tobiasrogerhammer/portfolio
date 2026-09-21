@@ -96,7 +96,7 @@ const Hero = () => {
               </h1>
 
               <p className="text-lg xl:text-xl leading-relaxed text-muted-foreground font-normal animate-fade-in-up animation-delay-600">
-              CO-founder of Renow AS doing sustainable web-development. 5 years work-experience at Huddly AS. Student at NTNU with an interess for entrepreneurship and coding.
+              CO-founder of Renow AS doing sustainable web-development. 5 years work-experience at Huddly AS. Student at NTNU with an interess for entrepreneurship, coding, and media production.
               </p>
 
               <div className="flex flex-row gap-4 pt-2 animate-fade-in-up animation-delay-800">
@@ -226,7 +226,7 @@ const Hero = () => {
             </div>
             {/* Description under the image */}
             <p className="px-4 sm:px-6 pt-4 sm:pt-5 pb-0 text-sm sm:text-base leading-relaxed text-muted-foreground animate-fade-in-up animation-delay-600">
-              CO-founder of Renow AS doing sustainable web-development. 5 years work-experience at Huddly AS. Student at NTNU with an interess for entrepreneurship and coding.
+              CO-founder of Renow AS doing sustainable web-development. 5 years work-experience at Huddly AS. Student at NTNU with an interess for entrepreneurship, coding, and media production.
             </p>
           </div>
 

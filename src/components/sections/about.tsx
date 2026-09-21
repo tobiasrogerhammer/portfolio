@@ -60,7 +60,7 @@ const BlogPostCard = ({ post }: { post: FeaturedPost }) => (
         <h4 className="text-sm font-semibold text-gray-900 line-clamp-1 group-hover:text-brand-primary">
           {post.title}
         </h4>
-        <span className="flex-shrink-0 inline-flex items-center gap-1 text-xs font-semibold text-orange-800 whitespace-nowrap group-hover:text-orange-900">
+        <span className="flex-shrink-0 inline-flex items-center gap-1 text-xs font-semibold text-[#003E1F] whitespace-nowrap group-hover:text-[#002814]">
           Read more
           <span
             aria-hidden="true"
@@ -207,7 +207,7 @@ const About = ({ featuredPosts }: AboutProps) => {
               <div className="mt-10 space-y-10">
                 <StatisticsDashboard skills={skills} />
 
-                <div className="relative left-1/2 right-1/2 -mx-[50vw] w-screen bg-orange-800 py-10 sm:py-14">
+                <div className="relative left-1/2 right-1/2 -mx-[50vw] w-screen bg-[#003E1F] py-10 sm:py-14">
                   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex flex-wrap items-center justify-between gap-3">
                       <h3 className="text-xl sm:text-2xl font-semibold text-white">
@@ -215,7 +215,7 @@ const About = ({ featuredPosts }: AboutProps) => {
                       </h3>
                       <Link
                         href="/blog"
-                        className="inline-flex items-center rounded-md bg-white px-4 py-2 text-sm font-semibold text-orange-800 transition hover:bg-white/90"
+                        className="inline-flex items-center rounded-md bg-white px-4 py-2 text-sm font-semibold text-[#003E1F] transition hover:bg-white/90"
                       >
                         See all
                       </Link>
@@ -244,7 +244,7 @@ const About = ({ featuredPosts }: AboutProps) => {
           <StatisticsDashboard skills={skills} />
         </div>
 
-        <div className="lg:hidden relative left-1/2 right-1/2 -mx-[50vw] w-screen bg-orange-800 py-8 sm:py-10">
+        <div className="lg:hidden relative left-1/2 right-1/2 -mx-[50vw] w-screen bg-[#003E1F] py-8 sm:py-10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <h3 className="text-xl sm:text-2xl font-semibold text-white">
@@ -252,7 +252,7 @@ const About = ({ featuredPosts }: AboutProps) => {
               </h3>
               <Link
                 href="/blog"
-                className="inline-flex items-center rounded-md bg-white px-4 py-2 text-sm font-semibold text-orange-800 transition hover:bg-white/90"
+                className="inline-flex items-center rounded-md bg-white px-4 py-2 text-sm font-semibold text-[#003E1F] transition hover:bg-white/90"
               >
                 See all
               </Link>
