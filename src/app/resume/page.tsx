@@ -19,7 +19,7 @@ export default function ResumePage() {
         <div className="mb-6 pb-4 border-b-4 border-[#124D95]">
           <h1 className="text-[#124D95] mb-1">Tobias Hammer</h1>
           <p className="text-slate-600 mb-3">
-            Developer / Tech enthusiast / Entrepreneur
+            Resume
           </p>
           <div className="grid grid-cols-2 gap-x-6 gap-y-1 text-sm text-slate-600">
             <div className="flex items-center gap-2">

@@ -43,20 +43,19 @@ const sourceCode = Source_Code_Pro({
 // const fontMono = Geist_Mono({ variable: "--font-mono", subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
-  title: "Tobias Hammer - Developer & Tech Enthusiast",
-  description: "Tobias Hammer is a passionate developer and tech enthusiast with expertise in full-stack development, Java programming, and user-centered design. Currently pursuing Applied Computer Technology at OsloMet, co-founder of Renow AS, and experienced in creating innovative digital solutions. Explore my projects, and professional journey.",
+  title: "Tobias Hammer - Developer & Entrepreneur",
+  description: "Tobias Hammer is a developer and entrepreneur with experience in web development, full-stack development, and user-centered design. Currently studying Digital businessdevelopment at NTNU, co-founder of Renow AS, and experienced in creating innovative digital solutions.",
   keywords: [
     "Tobias Hammer", 
     "developer", 
     "portfolio", 
     "full-stack developer", 
-    "Java developer", 
     "React", 
     "Next.js", 
     "TypeScript", 
     "web development", 
-    "applied computer technology", 
-    "OsloMet", 
+    "digital business development", 
+    "NTNU", 
     "Renow AS", 
     "entrepreneur", 
     "tech enthusiast", 
@@ -81,15 +80,15 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://tobiasrogerhammer.github.io",
-    title: "Tobias Hammer - Developer & Tech Enthusiast",
-    description: "Passionate developer and tech enthusiast specializing in full-stack development, Java programming, and user-centered design. Currently studying Applied Computer Technology at OsloMet and co-founder of Renow AS.",
+    url: "https://tobiashammer.dev",
+    title: "Tobias Hammer - Developer & Entrepreneur",
+    description: "Developer and entrepreneur, founder of Renow AS. Experienced in web development, full-stack development, and user-centered design. Currently studying Digital businessdevelopment at NTNU.",
     siteName: "Tobias Hammer Portfolio",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Tobias Hammer - Developer & Tech Enthusiast",
-    description: "Passionate developer and tech enthusiast specializing in full-stack development, Java programming, and user-centered design. Currently studying Applied Computer Technology at OsloMet and co-founder of Renow AS.",
+    title: "Tobias Hammer - Developer & Entrepreneur",
+    description: "Developer and entrepreneur, founder of Renow AS. Experienced in web development, full-stack development, and user-centered design. Currently studying Digital businessdevelopment at NTNU.",
     creator: "@tobiasrogerhammer",
   },
   robots: {
