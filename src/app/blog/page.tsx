@@ -1,11 +1,29 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import {ArrowLeft} from 'lucide-react'
+import type {Metadata} from 'next'
 import type {SanityImageSource} from '@sanity/image-url'
 
+import {BlogPostCard} from '@/components/features/blog-post-card'
 import {client, isSanityConfigured} from '@/sanity/client'
 import {urlFor} from '@/sanity/image'
 import {allPostsQuery} from '@/sanity/queries'
+
+export const metadata: Metadata = {
+  title: 'Blog',
+  description: 'Blog posts about me and my interests .',
+  openGraph: {
+    title: 'Blog',
+    description: 'Blog posts about me and my interests.',
+    url: '/blog',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Blog',
+    description: 'Blog posts about me and my interests.',
+  },
+}
 
 type BlogPostListItem = {
   _id: string
@@ -66,14 +84,32 @@ export default async function BlogPage() {
             Ingen innlegg ennå.
           </p>
         ) : (
-          <div className="grid gap-6">
+          <>
+          <div className="grid gap-4 lg:hidden">
+            {posts.map((post) => (
+              <BlogPostCard
+                key={post._id}
+                post={{
+                  title: post.title,
+                  slug: post.slug,
+                  excerpt: post.excerpt,
+                  publishedAt: post.publishedAt,
+                  imageUrl: post.mainImage
+                    ? urlFor(post.mainImage).width(1200).height(675).url()
+                    : null,
+                }}
+              />
+            ))}
+          </div>
+
+          <div className="hidden lg:grid lg:grid-cols-2 gap-6">
             {posts.map((post) => {
               const imageUrl = post.mainImage
                 ? urlFor(post.mainImage).width(1600).height(900).url()
                 : null
 
               return (
-                <article key={post._id} className="overflow-hidden rounded-xl border border-border bg-card">
+                <article key={post._id} className="flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card">
                   {imageUrl ? (
                     <div className="relative aspect-[16/9] w-full">
                       <Image
@@ -81,13 +117,13 @@ export default async function BlogPage() {
                         alt={post.title}
                         fill
                         className="object-cover"
-                        sizes="(max-width: 1024px) 100vw, 896px"
+                        sizes="(max-width: 1024px) 100vw, 512px"
                       />
                     </div>
                   ) : null}
 
-                  <div className="p-5 sm:p-6">
-                    <h2 className="text-2xl font-semibold text-card-foreground">
+                  <div className="flex flex-1 flex-col p-5 sm:p-6">
+                    <h2 className="text-xl font-semibold text-card-foreground sm:text-2xl">
                       <Link href={`/blog/${post.slug}`} className="hover:underline">
                         {post.title}
                       </Link>
@@ -98,12 +134,12 @@ export default async function BlogPage() {
                     ) : null}
 
                     {post.excerpt ? (
-                      <p className="mt-3 leading-relaxed text-muted-foreground">{post.excerpt}</p>
+                      <p className="mt-3 line-clamp-3 leading-relaxed text-muted-foreground">{post.excerpt}</p>
                     ) : null}
 
                     <Link
                       href={`/blog/${post.slug}`}
-                      className="mt-4 inline-block font-medium text-brand-primary hover:underline"
+                      className="mt-auto pt-4 inline-block font-medium text-brand-primary hover:underline"
                     >
                       Les mer
                     </Link>
@@ -112,6 +148,7 @@ export default async function BlogPage() {
               )
             })}
           </div>
+          </>
         )}
       </div>
     </main>

@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import {PortableText} from '@portabletext/react'
+import type {Metadata} from 'next'
 import type {SanityImageSource} from '@sanity/image-url'
 import type {TypedObject} from '@portabletext/types'
 import {notFound} from 'next/navigation'
@@ -26,6 +27,65 @@ type BlogPostPageProps = {
   params: Promise<{slug: string}>
 }
 
+async function getPost(slug: string): Promise<BlogPost | null> {
+  if (!isSanityConfigured) return null
+  try {
+    return await client.fetch<BlogPost | null>(postBySlugQuery, {slug})
+  } catch (error) {
+    console.error(`Failed to fetch blog post for slug "${slug}":`, error)
+    return null
+  }
+}
+
+export async function generateMetadata({params}: BlogPostPageProps): Promise<Metadata> {
+  const {slug} = await params
+  const post = await getPost(slug)
+
+  if (!post) {
+    return {
+      title: 'Post not found',
+    }
+  }
+
+  const title = post.title
+  const description = post.excerpt || `Article by Tobias Hammer: ${post.title}`
+  const imageUrl = post.mainImage
+    ? urlFor(post.mainImage).width(1200).height(630).url()
+    : undefined
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `/blog/${slug}`,
+    },
+    openGraph: {
+      type: 'article',
+      title,
+      description,
+      url: `/blog/${slug}`,
+      publishedTime: post.publishedAt,
+      authors: post.author?.name ? [post.author.name] : ['Tobias Hammer'],
+      images: imageUrl
+        ? [
+            {
+              url: imageUrl,
+              width: 1200,
+              height: 630,
+              alt: title,
+            },
+          ]
+        : undefined,
+    },
+    twitter: {
+      card: imageUrl ? 'summary_large_image' : 'summary',
+      title,
+      description,
+      images: imageUrl ? [imageUrl] : undefined,
+    },
+  }
+}
+
 function formatDate(date?: string) {
   if (!date) return null
   return new Date(date).toLocaleDateString('nb-NO', {
@@ -37,18 +97,7 @@ function formatDate(date?: string) {
 
 export default async function BlogPostPage({params}: BlogPostPageProps) {
   const {slug} = await params
-
-  if (!isSanityConfigured) {
-    notFound()
-  }
-
-  let post: BlogPost | null = null
-  try {
-    post = await client.fetch<BlogPost | null>(postBySlugQuery, {slug})
-  } catch (error) {
-    console.error(`Failed to fetch blog post for slug "${slug}":`, error)
-    notFound()
-  }
+  const post = await getPost(slug)
 
   if (!post) {
     notFound()

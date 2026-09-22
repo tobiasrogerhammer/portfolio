@@ -43,7 +43,11 @@ const sourceCode = Source_Code_Pro({
 // const fontMono = Geist_Mono({ variable: "--font-mono", subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
-  title: "Tobias Hammer - Developer & Entrepreneur",
+  metadataBase: new URL("https://tobiashammer.dev"),
+  title: {
+    default: "Tobias Hammer - Developer & Entrepreneur",
+    template: "%s | Tobias Hammer",
+  },
   description: "Tobias Hammer is a developer and entrepreneur with experience in web development, full-stack development, and user-centered design. Currently studying Digital businessdevelopment at NTNU, co-founder of Renow AS, and experienced in creating innovative digital solutions.",
   keywords: [
     "Tobias Hammer", 
